@@ -1,0 +1,27 @@
+# Configuración para Render (https://render.com): New → Blueprint → elige este repositorio.
+# Los valores con "sync: false" te los pide Render al crear el servicio.
+services:
+  - type: web
+    name: maurg-bot
+    runtime: node
+    plan: free
+    buildCommand: npm ci --omit=dev
+    startCommand: npm start
+    healthCheckPath: /salud
+    envVars:
+      - key: NODE_VERSION
+        value: "22"
+      - key: AI_MODEL
+        value: claude-haiku-5-5
+      - key: AI_EFFORT
+        value: low
+      - key: META_VERIFY_TOKEN
+        generateValue: true
+      - key: ANTHROPIC_API_KEY
+        sync: false
+      - key: ADMIN_PASSWORD
+        sync: false
+      - key: SUPABASE_URL
+        sync: false
+      - key: SUPABASE_SERVICE_ROLE_KEY
+        sync: false

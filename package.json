@@ -1,0 +1,34 @@
+{
+  "name": "genesis-vendedor-ia",
+  "version": "1.0.0",
+  "description": "Asistente de ventas con IA: inventario (Excel/PDF/CSV/URL) + WhatsApp, Instagram y Facebook",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node --watch src/server.js",
+    "test": "node --test test/*.test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/genesisviva11-prog/Genesis-1.git"
+  },
+  "author": "",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/genesisviva11-prog/Genesis-1/issues"
+  },
+  "homepage": "https://github.com/genesisviva11-prog/Genesis-1#readme",
+  "dependencies": {
+    "@anthropic-ai/sdk": "^1.3.0",
+    "@supabase/supabase-js": "^2.118.0",
+    "dotenv": "^18.0.9",
+    "express": "^5.3.0",
+    "multer": "^2.5.0",
+    "xlsx": "^0.18.5"
+  },
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "private": true
+}

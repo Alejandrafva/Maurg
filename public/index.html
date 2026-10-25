@@ -1,0 +1,385 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vendedor IA</title>
+<style>
+  :root { --bg:#f6f7f9; --card:#fff; --text:#1c1f24; --muted:#6b7280; --line:#e5e7eb; --accent:#16a34a; --accent-2:#dcfce7; --warn:#b45309; --bad:#dc2626; }
+  @media (prefers-color-scheme: dark) { :root { --bg:#0f1115; --card:#181b21; --text:#e8eaed; --muted:#9aa0a6; --line:#2a2f37; --accent:#22c55e; --accent-2:#13301e; } }
+  * { box-sizing:border-box; }
+  body { margin:0; font:15px/1.45 system-ui,-apple-system,Segoe UI,Roboto,sans-serif; background:var(--bg); color:var(--text); }
+  header { display:flex; align-items:center; gap:12px; padding:14px 20px; border-bottom:1px solid var(--line); background:var(--card); position:sticky; top:0; z-index:2; flex-wrap:wrap; }
+  header h1 { font-size:18px; margin:0 12px 0 0; }
+  nav { display:flex; gap:4px; flex-wrap:wrap; }
+  nav button { background:none; border:0; padding:8px 12px; border-radius:8px; color:var(--muted); cursor:pointer; font:inherit; }
+  nav button.on { background:var(--accent-2); color:var(--accent); font-weight:600; }
+  main { max-width:1100px; margin:0 auto; padding:20px 16px 60px; }
+  section { display:none; } section.on { display:block; }
+  .card { background:var(--card); border:1px solid var(--line); border-radius:12px; padding:16px; margin-bottom:16px; }
+  h2 { font-size:16px; margin:0 0 10px; } p.hint { color:var(--muted); margin:4px 0 12px; font-size:14px; }
+  input, textarea, select { width:100%; padding:9px 10px; border:1px solid var(--line); border-radius:8px; background:var(--bg); color:var(--text); font:inherit; }
+  textarea { min-height:120px; resize:vertical; }
+  label { display:block; font-size:13px; color:var(--muted); margin:10px 0 4px; }
+  .row { display:flex; gap:10px; flex-wrap:wrap; align-items:end; } .row > * { flex:1; min-width:160px; }
+  button.btn { background:var(--accent); color:#fff; border:0; padding:9px 14px; border-radius:8px; cursor:pointer; font:inherit; font-weight:600; white-space:nowrap; }
+  button.ghost { background:none; color:var(--text); border:1px solid var(--line); }
+  button.danger { background:none; color:var(--bad); border:1px solid var(--line); }
+  button:disabled { opacity:.5; cursor:wait; }
+  table { width:100%; border-collapse:collapse; font-size:14px; }
+  th, td { text-align:left; padding:8px 6px; border-bottom:1px solid var(--line); vertical-align:top; }
+  th { color:var(--muted); font-weight:500; }
+  .table-wrap { overflow-x:auto; }
+  .thumbs { display:flex; gap:4px; flex-wrap:wrap; }
+  .thumbs img { width:44px; height:44px; object-fit:cover; border-radius:6px; border:1px solid var(--line); cursor:pointer; }
+  .pill { display:inline-block; padding:2px 8px; border-radius:99px; font-size:12px; background:var(--accent-2); color:var(--accent); }
+  .pill.off { background:#fee2e2; color:var(--bad); } .pill.warn { background:#fef3c7; color:var(--warn); }
+  .chat { display:flex; flex-direction:column; gap:8px; height:460px; overflow-y:auto; padding:12px; background:var(--bg); border-radius:10px; border:1px solid var(--line); }
+  .msg { max-width:78%; padding:8px 12px; border-radius:12px; white-space:pre-wrap; word-wrap:break-word; }
+  .msg.customer { align-self:flex-end; background:var(--accent); color:#fff; }
+  .msg.assistant { align-self:flex-start; background:var(--card); border:1px solid var(--line); }
+  .msg.owner { align-self:flex-start; background:#dbeafe; color:#1e3a8a; }
+  .msg img { max-width:220px; border-radius:8px; display:block; margin-top:4px; }
+  .msg small { display:block; opacity:.7; font-size:11px; }
+  .conv-list { display:grid; grid-template-columns: 300px 1fr; gap:16px; }
+  @media (max-width:760px) { .conv-list { grid-template-columns:1fr; } }
+  .conv { padding:10px; border-bottom:1px solid var(--line); cursor:pointer; } .conv:hover, .conv.on { background:var(--bg); }
+  .faq { display:grid; grid-template-columns:1fr 1fr auto; gap:8px; margin-bottom:8px; }
+  @media (max-width:600px) { .faq { grid-template-columns:1fr; } }
+  #toast { position:fixed; bottom:20px; left:50%; transform:translateX(-50%); background:#111; color:#fff; padding:10px 16px; border-radius:8px; display:none; z-index:9; max-width:90%; }
+  dialog { border:1px solid var(--line); border-radius:12px; background:var(--card); color:var(--text); width:min(560px,95vw); }
+  dialog::backdrop { background:rgba(0,0,0,.4); }
+  code { background:var(--bg); padding:1px 5px; border-radius:4px; font-size:13px; }
+</style>
+</head>
+<body>
+<header>
+  <h1>🤖 Vendedor IA</h1>
+  <nav id="tabs">
+    <button data-tab="inventario" class="on">Inventario</button>
+    <button data-tab="entrenamiento">Entrenamiento</button>
+    <button data-tab="probar">Probar chat</button>
+    <button data-tab="conversaciones">Conversaciones</button>
+    <button data-tab="conexiones">Conexiones</button>
+  </nav>
+</header>
+<main>
+
+<!-- INVENTARIO -->
+<section id="inventario" class="on">
+  <div class="card">
+    <h2>1. Sube tu inventario</h2>
+    <p class="hint">Excel (.xlsx), CSV, JSON, PDF o TXT. Si las columnas tienen otros nombres o es un catálogo en PDF, la IA lo lee y extrae productos, modelos, precios y stock.</p>
+    <div class="row">
+      <input type="file" id="invFile" accept=".xlsx,.xls,.csv,.tsv,.ods,.json,.pdf,.txt">
+      <label style="flex:1 1 220px;margin:0"><input type="checkbox" id="invReplace" style="width:auto"> Reemplazar todo (borra lo que no venga en el archivo)</label>
+      <button class="btn" id="invUpload" style="flex:0 0 auto">Importar</button>
+    </div>
+  </div>
+  <div class="card">
+    <h2>2. Conecta tu página o tu almacén (sincronización automática)</h2>
+    <p class="hint">Pega la dirección de tu página web (la IA lee los productos, precios y fotos), o el link de un Google Sheet, un CSV/Excel publicado o la URL JSON de tu sistema de inventario. Puedes poner varias páginas, una por línea. Solo se vuelve a leer con IA si la página cambió.</p>
+    <div class="row">
+      <div style="flex:3"><label>Direcciones</label><textarea id="srcUrl" style="min-height:70px" placeholder="https://maurg.shop/"></textarea></div>
+      <div><label>Sincronizar cada (min, 0 = manual)</label><input id="srcMin" type="number" min="0"></div>
+      <button class="btn ghost" id="srcSave" style="flex:0 0 auto">Guardar</button>
+      <button class="btn" id="srcSync" style="flex:0 0 auto">Sincronizar ahora</button>
+    </div>
+  </div>
+  <div class="card">
+    <h2>3. Fotos de productos</h2>
+    <p class="hint">Sube fotos en lote nombradas con el SKU, modelo o nombre del producto (ej. <code>ZAP-042.jpg</code>, <code>ZAP-042_2.jpg</code>). También puedes agregarlas producto por producto en la tabla. Con las fotos la IA reconoce qué producto te preguntan cuando el cliente manda una imagen.</p>
+    <div class="row"><input type="file" id="bulkPhotos" multiple accept="image/*"><button class="btn" id="bulkUpload" style="flex:0 0 auto">Subir fotos</button></div>
+  </div>
+  <div class="card">
+    <div class="row" style="align-items:center;margin-bottom:8px">
+      <h2 style="margin:0">Productos (<span id="pCount">0</span>)</h2>
+      <input id="pFilter" placeholder="Buscar..." style="max-width:260px">
+      <button class="btn" id="pNew" style="flex:0 0 auto">+ Producto</button>
+    </div>
+    <div class="table-wrap"><table>
+      <thead><tr><th>Fotos</th><th>Producto</th><th>Modelo / SKU</th><th>Precio</th><th>Stock</th><th></th></tr></thead>
+      <tbody id="pBody"></tbody>
+    </table></div>
+  </div>
+</section>
+
+<!-- ENTRENAMIENTO -->
+<section id="entrenamiento">
+  <div class="card">
+    <h2>Tu negocio</h2>
+    <div class="row">
+      <div><label>Nombre del negocio</label><input id="sName"></div>
+      <div><label>Moneda</label><input id="sCurrency" placeholder="USD, MXN, COP, ARS..."></div>
+      <div><label>Idioma</label><input id="sLang"></div>
+      <div><label>Email de contacto (aparece en tu política de privacidad)</label><input id="sEmail" type="email"></div>
+    </div>
+    <label>Tono / personalidad</label><input id="sTone">
+    <label>Todo lo que la IA debe saber (horarios, envíos, pagos, garantías, políticas de cambio, ubicación, promociones...)</label>
+    <textarea id="sKnowledge" style="min-height:200px"></textarea>
+  </div>
+  <div class="card">
+    <h2>Preguntas frecuentes</h2>
+    <p class="hint">Respuestas que quieres que la IA dé siempre igual.</p>
+    <div id="faqs"></div>
+    <button class="btn ghost" id="faqAdd">+ Agregar pregunta</button>
+  </div>
+  <button class="btn" id="sSave">Guardar entrenamiento</button>
+</section>
+
+<!-- PROBAR -->
+<section id="probar">
+  <div class="card">
+    <h2>Prueba tu vendedor IA</h2>
+    <p class="hint">Escríbele como si fueras un cliente. También puedes enviarle una foto para ver si reconoce el producto.</p>
+    <div class="chat" id="testChat"></div>
+    <div class="row" style="margin-top:10px">
+      <input id="testText" placeholder="Hola, ¿tienen las zapatillas negras en talla 42? ¿Cuánto cuestan?" style="flex:4">
+      <input type="file" id="testImg" accept="image/*" style="flex:1">
+      <button class="btn" id="testSend" style="flex:0 0 auto">Enviar</button>
+      <button class="btn ghost" id="testReset" style="flex:0 0 auto">Reiniciar</button>
+    </div>
+  </div>
+</section>
+
+<!-- CONVERSACIONES -->
+<section id="conversaciones">
+  <div class="conv-list">
+    <div class="card" style="padding:0;max-height:640px;overflow-y:auto" id="convList"></div>
+    <div class="card" id="convView"><p class="hint">Elige una conversación.</p></div>
+  </div>
+</section>
+
+<!-- CONEXIONES -->
+<section id="conexiones">
+  <div class="card">
+    <h2>Estado</h2>
+    <div id="status"></div>
+  </div>
+  <div class="card">
+    <h2>Cómo conectar WhatsApp, Instagram y Facebook</h2>
+    <ol>
+      <li>Crea una app en <b>developers.facebook.com</b> (tipo "Empresa") y agrega los productos <b>WhatsApp</b>, <b>Messenger</b> e <b>Instagram</b>.</li>
+      <li>En <b>Webhooks</b> configura la URL de devolución: <code id="whUrl"></code> y el token de verificación que pusiste en <code>META_VERIFY_TOKEN</code>.</li>
+      <li>Suscríbete a: <code>messages</code> (WhatsApp), <code>messages</code> de la página (Messenger) y <code>messages</code> de Instagram.</li>
+      <li>Copia los tokens al archivo <code>.env</code> del servidor (ver README) y reinicia.</li>
+    </ol>
+    <p class="hint">Los tokens se guardan en el servidor, nunca en este panel.</p>
+    <p>Para la revisión de Meta usa estas páginas (ya están publicadas):<br>
+      Política de privacidad: <code id="urlPriv"></code><br>
+      Eliminación de datos: <code id="urlDel"></code></p>
+  </div>
+</section>
+</main>
+
+<dialog id="pDialog">
+  <form method="dialog" id="pForm">
+    <h2 id="pTitle">Producto</h2>
+    <label>Nombre</label><input name="name" required>
+    <div class="row"><div><label>Modelo</label><input name="model"></div><div><label>SKU / código</label><input name="sku"></div></div>
+    <div class="row"><div><label>Categoría</label><input name="category"></div><div><label>Precio</label><input name="price" inputmode="decimal"></div><div><label>Stock</label><input name="stock" type="number"></div></div>
+    <label>Descripción</label><textarea name="description" style="min-height:70px"></textarea>
+    <label>Características (una por línea: <code>Color: negro</code>)</label><textarea name="attributes" style="min-height:70px"></textarea>
+    <label>Agregar fotos</label><input type="file" name="photos" multiple accept="image/*">
+    <div class="thumbs" id="pPhotos" style="margin-top:8px"></div>
+    <div class="row" style="margin-top:14px;justify-content:flex-end">
+      <button class="btn ghost" value="cancel" formnovalidate style="flex:0 0 auto">Cancelar</button>
+      <button class="btn" value="ok" style="flex:0 0 auto">Guardar</button>
+    </div>
+  </form>
+</dialog>
+<div id="toast"></div>
+
+<script>
+const $ = (s) => document.querySelector(s);
+const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;" }[c]));
+function toast(t, ms = 3500) { const el = $("#toast"); el.textContent = t; el.style.display = "block"; clearTimeout(toast.t); toast.t = setTimeout(() => (el.style.display = "none"), ms); }
+async function api(path, opts = {}) {
+  const isForm = opts.body instanceof FormData;
+  const res = await fetch("/api" + path, { ...opts, headers: isForm || !opts.body ? {} : { "Content-Type": "application/json" }, body: isForm ? opts.body : opts.body && JSON.stringify(opts.body) });
+  if (res.status === 204) return null;
+  const data = await res.json().catch(() => ({}));
+  if (!res.ok) throw new Error(data.error || res.statusText);
+  return data;
+}
+async function busy(btn, fn) { btn.disabled = true; try { await fn(); } catch (e) { toast("⚠️ " + e.message, 6000); } finally { btn.disabled = false; } }
+
+// Pestañas
+$("#tabs").onclick = (e) => {
+  const t = e.target.dataset.tab; if (!t) return;
+  document.querySelectorAll("nav button").forEach((b) => b.classList.toggle("on", b.dataset.tab === t));
+  document.querySelectorAll("section").forEach((s) => s.classList.toggle("on", s.id === t));
+  if (t === "conversaciones") loadConvs();
+  if (t === "conexiones") loadStatus();
+};
+
+// ---------- Inventario ----------
+let products = [], settings = {};
+async function loadProducts() { products = await api("/products"); renderProducts(); }
+function renderProducts() {
+  const q = $("#pFilter").value.toLowerCase();
+  const list = products.filter((p) => !q || JSON.stringify(p).toLowerCase().includes(q));
+  $("#pCount").textContent = products.length;
+  $("#pBody").innerHTML = list.map((p) => `<tr>
+    <td><div class="thumbs">${p.photos.slice(0, 3).map((f) => `<img src="/media/${esc(f)}" alt="">`).join("") || '<span class="pill warn">sin foto</span>'}</div></td>
+    <td><b>${esc(p.name)}</b><br><small style="color:var(--muted)">${esc(p.category)}</small></td>
+    <td>${esc(p.model)}<br><small style="color:var(--muted)">${esc(p.sku)}</small></td>
+    <td>${p.price == null ? "—" : esc(p.price) + " " + esc(settings.currency || "")}</td>
+    <td>${p.stock == null ? "—" : p.stock > 0 ? p.stock : '<span class="pill off">agotado</span>'}</td>
+    <td style="white-space:nowrap"><button class="btn ghost" data-edit="${p.id}">Editar</button> <button class="btn danger" data-del="${p.id}">✕</button></td></tr>`).join("") ||
+    `<tr><td colspan="6" class="hint">Todavía no hay productos. Sube tu inventario arriba o crea uno.</td></tr>`;
+}
+$("#pFilter").oninput = renderProducts;
+$("#pBody").onclick = async (e) => {
+  if (e.target.dataset.edit) openProduct(products.find((p) => p.id === e.target.dataset.edit));
+  if (e.target.dataset.del && confirm("¿Eliminar este producto?")) { await api("/products/" + e.target.dataset.del, { method: "DELETE" }); loadProducts(); }
+};
+$("#pNew").onclick = () => openProduct(null);
+
+let editing = null;
+function openProduct(p) {
+  editing = p; const f = $("#pForm"); f.reset();
+  $("#pTitle").textContent = p ? "Editar producto" : "Nuevo producto";
+  for (const k of ["name", "model", "sku", "category", "price", "stock", "description"]) f[k].value = p?.[k] ?? "";
+  f.attributes.value = Object.entries(p?.attributes || {}).map(([k, v]) => `${k}: ${v}`).join("\n");
+  renderDialogPhotos();
+  $("#pDialog").showModal();
+}
+function renderDialogPhotos() {
+  $("#pPhotos").innerHTML = (editing?.photos || []).map((f) => `<img src="/media/${esc(f)}" title="Clic para borrar" data-photo="${esc(f)}">`).join("");
+}
+$("#pPhotos").onclick = async (e) => {
+  const f = e.target.dataset.photo; if (!f || !confirm("¿Borrar esta foto?")) return;
+  editing = await api(`/products/${editing.id}/photos/${encodeURIComponent(f)}`, { method: "DELETE" }); renderDialogPhotos(); loadProducts();
+};
+$("#pDialog").addEventListener("close", async () => {
+  if ($("#pDialog").returnValue !== "ok") return;
+  const f = $("#pForm");
+  const attributes = Object.fromEntries(f.attributes.value.split("\n").map((l) => l.split(":")).filter((x) => x.length > 1 && x[0].trim()).map(([k, ...v]) => [k.trim(), v.join(":").trim()]));
+  const body = { name: f.name.value, model: f.model.value, sku: f.sku.value, category: f.category.value, price: f.price.value, stock: f.stock.value, description: f.description.value, attributes };
+  try {
+    const saved = editing ? await api("/products/" + editing.id, { method: "PUT", body }) : await api("/products", { method: "POST", body });
+    if (f.photos.files.length) { const fd = new FormData(); for (const file of f.photos.files) fd.append("photos", file); await api(`/products/${saved.id}/photos`, { method: "POST", body: fd }); }
+    toast("Producto guardado"); loadProducts();
+  } catch (e) { toast("⚠️ " + e.message, 6000); }
+});
+
+$("#invUpload").onclick = (e) => busy(e.target, async () => {
+  const file = $("#invFile").files[0]; if (!file) return toast("Elige un archivo");
+  const fd = new FormData(); fd.append("file", file); fd.append("replace", $("#invReplace").checked);
+  toast("Leyendo inventario... (los PDF pueden tardar un poco)", 60000);
+  const r = await api("/inventory/upload", { method: "POST", body: fd });
+  toast(`✅ ${r.read} leídos: ${r.created} nuevos, ${r.updated} actualizados${r.removed ? `, ${r.removed} eliminados` : ""}${photosMsg(r)}`, 6000); loadProducts();
+});
+const photosMsg = (r) => (r.photos?.downloaded || r.photos?.failed ? `, ${r.photos.downloaded} fotos descargadas${r.photos.failed ? ` (${r.photos.failed} fallaron)` : ""}` : "");
+$("#bulkUpload").onclick = (e) => busy(e.target, async () => {
+  const files = $("#bulkPhotos").files; if (!files.length) return toast("Elige fotos");
+  const fd = new FormData(); for (const f of files) fd.append("photos", f);
+  const r = await api("/photos/bulk", { method: "POST", body: fd });
+  toast(`✅ ${r.matched.length} fotos asignadas.${r.unmatched.length ? " Sin producto: " + r.unmatched.join(", ") : ""}`, 8000); loadProducts();
+});
+$("#srcSave").onclick = (e) => busy(e.target, async () => { settings = await api("/settings", { method: "PUT", body: { inventorySourceUrl: $("#srcUrl").value.trim(), inventorySyncMinutes: Number($("#srcMin").value || 0) } }); toast("Guardado"); });
+$("#srcSync").onclick = (e) => busy(e.target, async () => {
+  await api("/settings", { method: "PUT", body: { inventorySourceUrl: $("#srcUrl").value.trim(), inventorySyncMinutes: Number($("#srcMin").value || 0) } });
+  toast("Leyendo tu página/inventario... puede tardar uno o dos minutos", 180000);
+  const r = await api("/inventory/sync", { method: "POST" });
+  toast(`✅ ${r.read} leídos: ${r.created} nuevos, ${r.updated} actualizados, ${r.removed} eliminados${photosMsg(r)}`, 8000); loadProducts();
+});
+
+// ---------- Entrenamiento ----------
+async function loadSettings() {
+  settings = await api("/settings");
+  $("#sName").value = settings.businessName; $("#sCurrency").value = settings.currency; $("#sLang").value = settings.language; $("#sEmail").value = settings.contactEmail || "";
+  $("#sTone").value = settings.tone; $("#sKnowledge").value = settings.knowledge;
+  $("#srcUrl").value = settings.inventorySourceUrl || ""; $("#srcMin").value = settings.inventorySyncMinutes || 0;
+  $("#faqs").innerHTML = ""; (settings.faqs || []).forEach(addFaq);
+}
+function addFaq(f = { q: "", a: "" }) {
+  const div = document.createElement("div"); div.className = "faq";
+  div.innerHTML = `<input placeholder="Pregunta" value="${esc(f.q)}"><input placeholder="Respuesta" value="${esc(f.a)}"><button class="btn danger">✕</button>`;
+  div.querySelector("button").onclick = () => div.remove(); $("#faqs").append(div);
+}
+$("#faqAdd").onclick = () => addFaq();
+$("#sSave").onclick = (e) => busy(e.target, async () => {
+  const faqs = [...document.querySelectorAll(".faq")].map((d) => { const [q, a] = d.querySelectorAll("input"); return { q: q.value.trim(), a: a.value.trim() }; }).filter((f) => f.q && f.a);
+  settings = await api("/settings", { method: "PUT", body: { businessName: $("#sName").value, contactEmail: $("#sEmail").value.trim(), currency: $("#sCurrency").value, language: $("#sLang").value, tone: $("#sTone").value, knowledge: $("#sKnowledge").value, faqs } });
+  toast("✅ Entrenamiento guardado. Pruébalo en 'Probar chat'."); renderProducts();
+});
+
+// ---------- Probar ----------
+function bubble(box, role, text, img) {
+  const d = document.createElement("div"); d.className = "msg " + role;
+  d.innerHTML = esc(text) + (img ? `<img src="${esc(img)}">` : "");
+  box.append(d); box.scrollTop = box.scrollHeight; return d;
+}
+const fileToB64 = (file) => new Promise((ok, ko) => { const r = new FileReader(); r.onload = () => ok(r.result.split(",")[1]); r.onerror = ko; r.readAsDataURL(file); });
+async function sendTest() {
+  const text = $("#testText").value.trim(); const file = $("#testImg").files[0];
+  if (!text && !file) return;
+  const box = $("#testChat");
+  bubble(box, "customer", text, file && URL.createObjectURL(file));
+  $("#testText").value = ""; $("#testImg").value = "";
+  const typing = bubble(box, "assistant", "escribiendo...");
+  try {
+    const body = { text };
+    if (file) body.image = { data: await fileToB64(file), mediaType: file.type || "image/jpeg" };
+    const r = await api("/chat/test", { method: "POST", body });
+    typing.remove();
+    for (const rep of r.replies) rep.type === "image" ? bubble(box, "assistant", rep.caption, rep.url) : bubble(box, "assistant", rep.text);
+    if (r.handoff) bubble(box, "owner", "🔔 Pasaría a una persona: " + r.handoff);
+  } catch (e) { typing.textContent = "⚠️ " + e.message; }
+}
+$("#testSend").onclick = sendTest;
+$("#testText").onkeydown = (e) => e.key === "Enter" && sendTest();
+$("#testReset").onclick = async () => { await api("/chat/test/reset", { method: "POST" }); $("#testChat").innerHTML = ""; };
+
+// ---------- Conversaciones ----------
+const ICON = { whatsapp: "🟢 WhatsApp", instagram: "🟣 Instagram", facebook: "🔵 Facebook", prueba: "🧪 Prueba" };
+let currentConv = null;
+async function loadConvs() {
+  const list = await api("/conversations");
+  $("#convList").innerHTML = list.map((c) => `<div class="conv ${c.key === currentConv ? "on" : ""}" data-key="${esc(c.key)}">
+    <b>${esc(c.name || c.userId)}</b> ${c.needsHuman ? '<span class="pill warn">atender</span>' : ""} ${c.botEnabled ? "" : '<span class="pill off">IA pausada</span>'}<br>
+    <small style="color:var(--muted)">${ICON[c.channel] || c.channel} · ${esc((c.last?.text || "").slice(0, 50))}</small></div>`).join("") || '<p class="hint" style="padding:12px">Aún no hay conversaciones.</p>';
+}
+$("#convList").onclick = (e) => { const el = e.target.closest(".conv"); if (el) openConv(el.dataset.key); };
+async function openConv(key) {
+  currentConv = key; const c = await api("/conversations/" + encodeURIComponent(key)); loadConvs();
+  const v = $("#convView");
+  v.innerHTML = `<div class="row" style="align-items:center;margin-bottom:10px">
+      <h2 style="margin:0">${esc(c.name || c.userId)} <small style="color:var(--muted)">${ICON[c.channel] || ""}</small></h2>
+      <button class="btn ghost" id="cBot" style="flex:0 0 auto">${c.botEnabled ? "⏸ Pausar IA (atiendo yo)" : "▶️ Reactivar IA"}</button>
+      ${c.needsHuman ? '<button class="btn ghost" id="cDone" style="flex:0 0 auto">✔ Atendido</button>' : ""}
+      <button class="btn danger" id="cDel" style="flex:0 0 auto" title="Borra el historial y las fotos de este cliente">🗑 Borrar datos</button></div>
+    ${c.needsHuman ? `<p class="pill warn" style="display:block;margin-bottom:8px">🔔 ${esc(c.handoffReason || "Necesita atención")}</p>` : ""}
+    <div class="chat" id="cChat"></div>
+    <div class="row" style="margin-top:10px"><input id="cText" placeholder="Responder como persona..." style="flex:4"><button class="btn" id="cSend" style="flex:0 0 auto">Enviar</button></div>`;
+  const box = $("#cChat");
+  for (const m of c.messages) {
+    const img = m.images?.[0] && (m.role === "customer" ? "/api/customer-media/" : "/media/") + m.images[0];
+    bubble(box, m.role, m.text, img);
+  }
+  $("#cBot").onclick = async () => { await api("/conversations/" + encodeURIComponent(key), { method: "PATCH", body: { botEnabled: !c.botEnabled } }); openConv(key); };
+  $("#cDel").onclick = async () => {
+    if (!confirm("¿Borrar toda la conversación y las fotos de este cliente? No se puede deshacer.")) return;
+    await api("/conversations/" + encodeURIComponent(key), { method: "DELETE" });
+    currentConv = null; $("#convView").innerHTML = '<p class="hint">Conversación borrada.</p>'; loadConvs();
+  };
+  if ($("#cDone")) $("#cDone").onclick = async () => { await api("/conversations/" + encodeURIComponent(key), { method: "PATCH", body: { needsHuman: false } }); openConv(key); };
+  $("#cSend").onclick = (e) => busy(e.target, async () => { const text = $("#cText").value.trim(); if (!text) return; await api(`/conversations/${encodeURIComponent(key)}/send`, { method: "POST", body: { text } }); openConv(key); });
+}
+setInterval(() => { if ($("#conversaciones").classList.contains("on")) loadConvs(); }, 10000);
+
+// ---------- Conexiones ----------
+async function loadStatus() {
+  const s = await api("/status");
+  const ok = (b, t) => `<span class="pill ${b ? "" : "off"}">${b ? "✔" : "✕"} ${t}</span>`;
+  $("#status").innerHTML = [ok(s.ai, "IA (ANTHROPIC_API_KEY)"), ok(s.channels.whatsapp, "WhatsApp"), ok(s.channels.instagram, "Instagram"), ok(s.channels.facebook, "Facebook"), ok(s.channels.webhookVerifyToken, "Token de webhook"), ok(s.channels.signatureCheck, "Firma de Meta"), ok(s.channels.publicUrl, "PUBLIC_URL")].join(" ");
+  const base = s.channels.publicUrl || location.origin;
+  $("#whUrl").textContent = base + "/webhook/meta"; $("#urlPriv").textContent = base + "/privacidad"; $("#urlDel").textContent = base + "/eliminar-datos";
+}
+
+loadSettings().then(loadProducts).catch((e) => toast("⚠️ " + e.message));
+</script>
+</body>
+</html>
