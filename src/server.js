@@ -6,7 +6,7 @@ import multer from "multer";
 import * as store from "./store.js";
 import * as files from "./files.js";
 import { handleMessage } from "./agent.js";
-import { parseInventory, fetchInventory } from "./importers.js";
+import { parseInventory, fetchInventory, fetchStoreInfo } from "./importers.js";
 import * as meta from "./channels/meta.js";
 
 // En Render la dirección pública viene en RENDER_EXTERNAL_URL.
@@ -252,6 +252,15 @@ async function runSync({ force = false } = {}) {
   const { inventorySourceUrl, lastSourceHash } = store.getSettings();
   if (!inventorySourceUrl) throw new Error("No hay una URL de inventario configurada");
   const headers = process.env.INVENTORY_SOURCE_AUTH ? { Authorization: process.env.INVENTORY_SOURCE_AUTH } : {};
+  if (/supabase:/i.test(inventorySourceUrl)) {
+    // Además de los productos, los datos de la tienda (pagos, envíos, ubicación).
+    const info = await fetchStoreInfo().catch((e) => console.error("[config]", e.message));
+    if (info?.text) {
+      const patch = { storeInfo: info.text };
+      if (info.name && store.getSettings().businessName === "Mi Tienda") patch.businessName = info.name;
+      store.updateSettings(patch);
+    }
+  }
   const result = await fetchInventory(inventorySourceUrl, headers, force ? "" : lastSourceHash);
   store.updateSettings({ lastSyncAt: Date.now() });
   if (result.unchanged) return { unchanged: true, total: store.listProducts().length };
@@ -285,7 +294,7 @@ api.post("/chat/test", async (req, res) => {
   const images = req.body.image ? [{ data: req.body.image.data, mediaType: req.body.image.mediaType }] : [];
   store.appendMessage(conv, "customer", req.body.text || (images.length ? "[foto]" : ""), { images: await Promise.all(images.map(saveCustomerImage)) });
   const { replies, handoff } = await respond(conv, { text: req.body.text, images });
-  res.json({ replies: replies.map((r) => (r.type === "image" ? { ...r, url: `/media/${r.file}` } : r)), handoff });
+  res.json({ replies: replies.map((r) => (r.type === "image" ? { ...r, url: files.isUrl(r.file) ? r.file : `/media/${r.file}` } : r)), handoff });
 });
 api.post("/chat/test/reset", (_req, res) => {
   store.updateConversation("prueba:panel", { messages: [], needsHuman: false });
@@ -364,6 +373,12 @@ app.use("/", requireAdmin, express.static(path.resolve("public")));
 await files.initCloud();
 await store.init();
 console.log(files.cloudEnabled ? "Datos guardados en Supabase" : `Datos guardados en ${store.DATA_DIR}`);
+// Primera vez con una fuente configurada (p. ej. INVENTORY_SOURCE=supabase:productos): cargar el catálogo ya.
+if (store.getSettings().inventorySourceUrl && !store.listProducts().length) {
+  syncFromSource({ force: true })
+    .then((r) => console.log("[sync inicial]", r))
+    .catch((e) => console.error("[sync inicial]", e.message));
+}
 
 // Render/servidor apagándose: guardar lo pendiente antes de salir.
 for (const sig of ["SIGTERM", "SIGINT"]) {

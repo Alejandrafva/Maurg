@@ -14,12 +14,14 @@ const DEFAULT_DB = {
     tone: "amable, cercano y breve, como un buen vendedor por WhatsApp",
     language: "español",
     // "Entrenamiento": todo lo que el asistente debe saber del negocio.
-    knowledge:
-      "Horario: lunes a sábado de 9:00 a 19:00.\nEnvíos a todo el país.\nMétodos de pago: transferencia, efectivo y tarjeta.",
+    knowledge: "",
     // Preguntas frecuentes que el dueño quiere responder siempre igual.
     faqs: [],
-    inventorySourceUrl: "",
-    inventorySyncMinutes: 0,
+    // Se pueden fijar desde el entorno (p. ej. en Render): INVENTORY_SOURCE=supabase:productos
+    inventorySourceUrl: process.env.INVENTORY_SOURCE || "",
+    inventorySyncMinutes: Number(process.env.INVENTORY_SYNC_MINUTES || 0),
+    // Datos de la tienda leídos automáticamente de la fuente (pagos, envíos...). No se editan a mano.
+    storeInfo: "",
   },
   products: [],
   conversations: {},
@@ -154,6 +156,10 @@ export function importProducts(items, { replace = false } = {}) {
       created++;
     }
     seen.add(target.id);
+    // Fotos por URL que vienen de la fuente (p. ej. tu tabla de Supabase): se usan tal cual, sin descargarlas.
+    if (Array.isArray(raw.photoUrls)) {
+      target.photos = [...target.photos.filter((f) => !/^https?:\/\//i.test(f)), ...raw.photoUrls];
+    }
     for (const url of raw.imageUrls || []) {
       if (!target.photoSources[url]) pendingPhotos.push({ productId: target.id, url });
     }

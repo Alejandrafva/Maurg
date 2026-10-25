@@ -16,7 +16,7 @@ const STATE_PATH = "state/db.json";
 export const cloudEnabled = Boolean(process.env.SUPABASE_URL && process.env.SUPABASE_SERVICE_ROLE_KEY);
 
 let sb = null;
-function cloud() {
+export function cloud() {
   sb ??= createClient(process.env.SUPABASE_URL, process.env.SUPABASE_SERVICE_ROLE_KEY, { auth: { persistSession: false } });
   return sb;
 }
@@ -62,7 +62,11 @@ export async function readFile(kind, name) {
   return buf;
 }
 
+// Una "foto" puede ser un archivo guardado o una URL externa (p. ej. fotos de tu tienda en Shopify).
+export const isUrl = (name) => /^https?:\/\//i.test(String(name));
+
 export function removeFile(kind, name) {
+  if (isUrl(name)) return; // las fotos externas no se borran de su sitio
   fs.rm(localPath(kind, name), { force: true }, () => {});
   if (cloudEnabled) {
     cloud()

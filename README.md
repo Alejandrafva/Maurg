@@ -2,6 +2,7 @@
 
 Asistente de ventas con inteligencia artificial que **responde solo los mensajes de WhatsApp, Instagram y Facebook** usando **tu inventario real**: precios, modelos, stock y fotos.
 
+- **Conecta tu tabla de productos en Supabase** (`supabase:productos`): lee productos, precios, disponibilidad, fotos y los datos de la tienda directo, sin gastar IA.
 - **Conecta tu página web**: pega la dirección de tu tienda (aunque sea HTML puro, por ejemplo en Netlify) y la IA lee productos, precios y fotos; se actualiza sola.
 - **Conecta tu inventario** desde Excel, CSV, JSON, PDF o TXT. Si el archivo no tiene columnas estándar (por ejemplo, un catálogo en PDF), la IA lo lee y extrae los productos.
 - **Conecta tu almacén**: pega el link de un Google Sheet, un CSV/Excel publicado o la URL JSON de tu sistema de inventario, y se sincroniza cada X minutos.

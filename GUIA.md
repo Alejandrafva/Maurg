@@ -13,11 +13,9 @@ Al terminar vas a tener:
 
 ---
 
-## Parte 0 — El código en tu GitHub
+## Parte 0 — El código en tu GitHub ✅ (ya está)
 
-Render instala el programa desde GitHub, así que el código tiene que estar en tu repositorio **Genesis-1**:
-- **Opción A:** conecta la app de Claude en https://claude.ai/connect-github y lo subo yo.
-- **Opción B:** descomprime `vendedor-ia.zip`, entra a tu repositorio en github.com → **Add file → Upload files**, arrastra **el contenido** de la carpeta `Genesis-1` (no la carpeta misma) y pulsa **Commit changes**.
+El programa ya está en **https://github.com/Alejandrafva/Maurg** (rama `main`). Render lo instala desde ahí, y cada vez que se actualice el código en GitHub, Render se actualiza solo.
 
 ---
 
@@ -26,13 +24,13 @@ Render instala el programa desde GitHub, así que el código tiene que estar en 
 | Cuenta | Dónde | Para qué | Costo |
 |---|---|---|---|
 | Anthropic | https://console.anthropic.com | La IA | Prepago; la recarga mínima suele ser unos $5 y con Haiku dura meses |
-| Supabase | https://supabase.com | Guardar productos, conversaciones y fotos | $0 |
+| Supabase | ya la tienes (proyecto **maur**) | Leer tu catálogo y guardar conversaciones | $0 |
 | Render | https://render.com | Tener el programa encendido en internet | $0 |
 | cron-job.org | https://cron-job.org | Que Render no "duerma" tu bot | $0 |
 | Meta for Developers | https://developers.facebook.com | Conectar WhatsApp/IG/FB | $0 |
 | Portafolio comercial de Meta | https://business.facebook.com | Verificar tu negocio | $0 |
 
-Para Render y Supabase puedes entrar con tu cuenta de **GitHub** (botón "Continue with GitHub").
+Para Render entra con la cuenta de **GitHub** que tiene el repositorio **Alejandrafva/Maurg** (botón "Continue with GitHub").
 
 ### 1.1 Anthropic (la IA)
 1. Regístrate en https://console.anthropic.com.
@@ -47,33 +45,32 @@ Para Render y Supabase puedes entrar con tu cuenta de **GitHub** (botón "Contin
 
 ---
 
-## Parte 2 — Supabase: dónde se guardan tus datos (10 min)
+## Parte 2 — Supabase: ya lo tienes (5 min)
 
-1. En https://supabase.com → **Start your project** → entra con GitHub.
-2. **New project:**
-   - **Name:** `maurg-bot`.
-   - **Database password:** genera una y guárdala (este programa no la usa, pero Supabase la pide).
-   - **Region:** la más cercana (por ejemplo East US o São Paulo).
-   - Plan **Free**. **Create new project.** Espera 1–2 minutos.
-3. Ve a **Project Settings → API** (o **Data API / API Keys**) y copia dos cosas:
-   - **Project URL** (algo como `https://abcdxyz.supabase.co`).
-   - La clave **service_role** (puede aparecer como "secret"). **Es secreta:** solo va en Render, nunca en tu página ni en chats.
+Tu tienda ya usa Supabase: el proyecto **maur** tiene la tabla `productos` (44 productos) y la tabla `config` (pagos, envíos, ubicación). El bot usa ese mismo proyecto:
+- **Lee** tus productos y los datos de la tienda directamente, **sin gastar IA**, y se actualiza cada 30 minutos. Cuando cambias algo en tu tienda, el bot lo sabe.
+- **Guarda** sus conversaciones en un espacio privado aparte llamado `vendedor`. **No modifica tus tablas.**
 
-No tienes que crear tablas: el programa crea solo su espacio de almacenamiento (un "bucket" privado llamado `vendedor`) la primera vez que arranca.
+Solo necesitas copiar una clave:
+1. https://supabase.com/dashboard → proyecto **maur** → **Project Settings → API Keys**.
+2. Copia la clave secreta:
+   - **service_role**, que está en la pestaña "Legacy API keys", o
+   - una **Secret key** (`sb_secret_...`).
+   **Es secreta:** solo va en Render, nunca en tu página ni en chats.
 
----
+La dirección del proyecto (**SUPABASE_URL**) es: `https://ojbhytbugkmlilsazjje.supabase.co`
 
 ## Parte 3 — Render: poner el bot en internet (15 min)
 
-1. En https://render.com → **Get Started** → entra con GitHub y dale acceso a tu repositorio **Genesis-1**.
-2. **New + → Blueprint** → elige **Genesis-1**. Render encuentra el archivo `render.yaml` y crea el servicio **maurg-bot** en el plan **Free**.
-   - Si tu código está en otra rama (por ejemplo `claude/nifty-darwin-wpobk1`), elige esa rama.
+1. En https://render.com → **Get Started** → entra con GitHub y dale acceso al repositorio **Maurg**.
+2. **New + → Blueprint** → elige **Maurg**. Render encuentra el archivo `render.yaml` y crea el servicio **maurg-bot** en el plan **Free**.
 3. Te pide estos valores:
    - **ANTHROPIC_API_KEY:** tu clave de la Parte 1.1.
    - **ADMIN_PASSWORD:** una contraseña para tu panel (inventa una segura).
-   - **SUPABASE_URL** y **SUPABASE_SERVICE_ROLE_KEY:** los de la Parte 2.
+   - **SUPABASE_URL:** `https://ojbhytbugkmlilsazjje.supabase.co`
+   - **SUPABASE_SERVICE_ROLE_KEY:** la clave secreta de la Parte 2.
 4. **Apply / Deploy.** Espera a que diga **Live** (2–5 minutos). Arriba aparece tu dirección, por ejemplo `https://maurg-bot.onrender.com`. Esa es **TU-BOT**.
-5. Abre **TU-BOT**. Usuario: `admin`, contraseña: tu ADMIN_PASSWORD.
+5. Abre **TU-BOT**. Usuario: `admin`, contraseña: tu ADMIN_PASSWORD. En **Inventario** ya deben aparecer tus productos con sus fotos; si la lista está vacía, pulsa **Sincronizar ahora**.
 6. En Render → tu servicio → **Environment**, busca **META_VERIFY_TOKEN**: Render ya generó uno. Lo vas a necesitar para Meta.
 
 > Si no te aparece "Blueprint": **New + → Web Service** → elige el repositorio → **Build Command:** `npm ci --omit=dev`, **Start Command:** `npm start`, **Instance type:** Free. Luego en **Environment** agrega las variables de arriba más `AI_MODEL=claude-haiku-5-5` y `META_VERIFY_TOKEN` (inventa un texto largo).
@@ -107,15 +104,19 @@ La dirección de Render funciona perfecto para Meta. Si prefieres `bot.maurg.sho
 
 ---
 
-## Parte 6 — Cargar tu tienda y entrenar la IA (30 min)
+## Parte 6 — Revisar tu catálogo y entrenar la IA (20 min)
 
-1. **Entrenamiento:** nombre del negocio, moneda, tu email de contacto, tono, y todo lo que un vendedor debe saber: envíos, formas de pago, horarios, cambios y devoluciones, garantía, ubicación. Agrega las preguntas frecuentes. **Guardar.**
-2. **Inventario → 2. Conecta tu página:** escribe `https://maurg.shop/`. Si tus productos están en varias páginas (por ejemplo una por categoría), pon cada dirección en una línea. En "Sincronizar cada" pon `60` (una vez por hora). **Sincronizar ahora.**
-   - La IA lee tu página, crea los productos con sus precios y **descarga las fotos**.
-   - Solo vuelve a usar la IA si tu página cambió, así no gasta de más.
-   - **Revisa la tabla de productos.** Si falta algo o un precio está mal, corrígelo en tu página (o con **Editar**).
-3. **Stock:** tu página probablemente no muestra cuántas unidades tienes. Si quieres que la IA sepa qué está agotado, sube un **Excel** con columnas `Producto`, `Modelo` y `Stock` en **1. Sube tu inventario** (sin marcar "Reemplazar todo"). Se combina con lo de la página. Cuando sincroniza, la página manda: los productos que quites de tu página se quitan también del bot.
-4. **Probar chat:** pregúntale como un cliente ("¿cuánto cuesta el bolso beige?", "¿tienen envío?") y mándale una foto de un producto para ver si lo reconoce. Ajusta el **Entrenamiento** hasta que te guste cómo responde.
+1. **Inventario:** ya están tus productos desde Supabase, con el precio al detal en divisas, el precio al mayor, los precios a tasa BCV, los colores, los colores agotados, la disponibilidad y las fotos. Revisa que se vean bien.
+   - Los productos marcados como no disponibles salen como **agotados**, y los de encargo como **por encargo**.
+   - Para cambiar algo, cámbialo en tu tienda (Supabase). El bot lo toma en la siguiente sincronización (cada 30 min) o al pulsar **Sincronizar ahora**.
+2. **Entrenamiento:** arriba verás los **datos leídos automáticamente** de tu tienda: ubicación, agencias de envío, formas de pago, mínimo para precio al mayor y encargos. En el cuadro de abajo agrega lo que falte, por ejemplo:
+   - Qué significa el **precio a tasa BCV** frente al precio en divisas, y cuándo se usa cada uno.
+   - Horario de atención y cómo agendar una cita en el showroom.
+   - Cuánto cuesta el delivery en Valencia.
+   - Cambios, devoluciones y garantía.
+   - Cómo quieres que cierre una venta (por ejemplo: "pide nombre, ciudad y agencia de envío, y pasa a humano para el pago").
+   Agrega también tus **preguntas frecuentes** y pulsa **Guardar**.
+3. **Probar chat:** pregúntale como una clienta ("¿tienen la Coach barril?", "¿cuánto es al mayor?", "¿hacen envíos a Maracaibo?") y mándale una foto de una cartera para ver si la reconoce. Ajusta el **Entrenamiento** hasta que te guste cómo responde.
 
 ---
 
@@ -238,8 +239,8 @@ Un VPS está siempre encendido, sin depender de pings ni de planes gratis. El pr
 3. Entra con `ssh root@TU-IP`, cambia la contraseña con `passwd` y ejecuta:
    ```bash
    apt-get update && apt-get install -y git
-   git clone https://github.com/genesisviva11-prog/Genesis-1.git
-   cd Genesis-1 && sudo bash deploy/instalar.sh
+   git clone https://github.com/Alejandrafva/Maurg.git
+   cd Maurg && sudo bash deploy/instalar.sh
    ```
 4. Te pide el dominio, la clave de Anthropic y la contraseña del panel. Las claves de Meta se ponen en `/etc/vendedor-ia.env` (y luego `sudo systemctl restart vendedor-ia`).
 

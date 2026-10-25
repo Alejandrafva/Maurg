@@ -2,6 +2,7 @@
 import crypto from "node:crypto";
 import * as XLSX from "xlsx";
 import { createMessage, textOf } from "./claude.js";
+import { cloud, cloudEnabled } from "./files.js";
 
 // Nombres de columna que reconocemos (en minúsculas y sin acentos).
 const COLUMN_ALIASES = {
@@ -266,7 +267,96 @@ export const splitUrls = (text) =>
   String(text || "")
     .split(/[\s,]+/)
     .map((u) => u.trim())
-    .filter((u) => /^https?:\/\//i.test(u));
+    .filter((u) => /^(https?:\/\/|supabase:)/i.test(u));
+
+// ---------- Tabla de productos en Supabase ----------
+// "supabase:productos" lee directo la tabla de tu tienda (la misma que usa tu página), sin usar IA.
+const toList = (v) => {
+  if (!v) return [];
+  if (typeof v === "string") {
+    try {
+      return toList(JSON.parse(v));
+    } catch {
+      return v.split(/[\s,]+/);
+    }
+  }
+  if (Array.isArray(v)) return v.flatMap(toList);
+  if (typeof v === "object") return Object.values(v).flatMap(toList);
+  return [];
+};
+
+// Columnas de la tienda MAURG (marca, nombre, codigo, divisa_detal, fotos...).
+export function mapTiendaRow(r) {
+  const attrs = {};
+  const add = (k, v) => {
+    if (v !== null && v !== undefined && String(v).trim() !== "") attrs[k] = String(v).trim();
+  };
+  add("Marca", r.marca);
+  add("Colores", r.colores);
+  add("Colores agotados", r.colores_agotados);
+  add("Precio al mayor (divisas)", r.divisa_mayor);
+  add("Precio al detal a tasa BCV", r.bcv_detal);
+  add("Precio al mayor a tasa BCV", r.bcv_mayor);
+  add("Medidas", [["alto", r.alto], ["ancho", r.ancho], ["fondo", r.fondo], ["asa", r.asa]].filter(([, v]) => v != null).map(([k, v]) => `${k} ${v}`).join(", "));
+  add("Cómo se lleva", r.como_se_lleva && String(r.como_se_lleva).split(",").join(", "));
+  add("Disponibilidad", r.encargo ? "Por encargo" : r.disponible === false ? "Agotado" : "Disponible");
+  return {
+    name: r.nombre,
+    model: "",
+    sku: r.codigo || r.id,
+    category: r.marca || "",
+    price: r.divisa_detal,
+    stock: r.disponible === false && !r.encargo ? 0 : null,
+    description: r.descripcion || "",
+    attributes: attrs,
+    photoUrls: [...new Set([...toList(r.fotos), ...toList(r.fotos_color)].filter((u) => /^https?:\/\//i.test(u)))],
+  };
+}
+
+export async function fetchSupabaseTable(table) {
+  if (!cloudEnabled) throw new Error("Para leer la tabla de Supabase configura SUPABASE_URL y SUPABASE_SERVICE_ROLE_KEY");
+  let res = await cloud().from(table).select("*").order("orden", { ascending: true, nullsFirst: false });
+  if (res.error) res = await cloud().from(table).select("*"); // la tabla no tiene columna "orden"
+  if (res.error) throw new Error(`Supabase (${table}): ${res.error.message}`);
+  return res.data;
+}
+
+// Datos generales de la tienda (tabla "config" de tu página: pagos, envíos, ubicación...).
+// Se guardan aparte del entrenamiento que escribes tú, y se actualizan en cada sincronización.
+export function storeInfoFromConfig(d) {
+  if (!d || typeof d !== "object") return "";
+  const lines = [];
+  const add = (label, v) => {
+    if (v !== null && v !== undefined && String(v).trim() !== "" && v !== 0) lines.push(`${label}: ${String(v).trim().replace(/\n+/g, ", ")}`);
+  };
+  add("Tienda", d.nombreTienda);
+  add("Ubicación y entregas", d.ubicacion);
+  add("Agencias de envío", d.agencias);
+  add("Formas de pago", d.datosPago);
+  if (d.minimoMayor) lines.push(`Precio al mayor: a partir de ${d.minimoMayor} piezas`);
+  add("Productos por encargo", d.notaEncargo);
+  add("Tasa BCV de referencia", d.tasaBCV);
+  add("Instagram", d.instagram);
+  add("WhatsApp", [d.whatsappTexto, d.whatsapp2Texto].filter(Boolean).join(" / "));
+  add("Canal de WhatsApp", d.canalWhatsapp);
+  add("TikTok", d.tiktok);
+  return lines.join("\n");
+}
+
+export async function fetchStoreInfo(table = "config") {
+  if (!cloudEnabled) return null;
+  const { data, error } = await cloud().from(table).select("*").limit(1);
+  if (error || !data?.length) return null;
+  const row = data[0];
+  return { text: storeInfoFromConfig(row.datos ?? row), name: (row.datos ?? row).nombreTienda || "" };
+}
+
+export function supabaseRowsToProducts(rows) {
+  if (!rows.length) return [];
+  if ("nombre" in rows[0] && "divisa_detal" in rows[0]) return rows.map(mapTiendaRow);
+  // Otra estructura: usar el reconocimiento de columnas normal
+  return rowsToProducts(rows.map(flatten)) ?? [];
+}
 
 /**
  * Descarga y lee el inventario de una o varias URLs.
@@ -277,6 +367,12 @@ export async function fetchInventory(sources, headers = {}, previousHash = "") {
   const hash = crypto.createHash("sha256");
   const loaded = [];
   for (const url of splitUrls(sources)) {
+    if (/^supabase:/i.test(url)) {
+      const rows = await fetchSupabaseTable(url.slice("supabase:".length) || "productos");
+      hash.update(JSON.stringify(rows));
+      loaded.push({ products: supabaseRowsToProducts(rows) });
+      continue;
+    }
     const finalUrl = normalizeSourceUrl(url);
     const res = await fetch(finalUrl, { headers });
     if (!res.ok) throw new Error(`No se pudo leer el inventario (${res.status}) desde ${finalUrl}`);
@@ -292,12 +388,16 @@ export async function fetchInventory(sources, headers = {}, previousHash = "") {
     for (const f of extra) hash.update(f.text);
     loaded.push({ buffer, guessed, type, url: res.url || finalUrl, isHtml, extra });
   }
-  if (!loaded.length) throw new Error("No hay ninguna URL válida (deben empezar con https://)");
+  if (!loaded.length) throw new Error("No hay ninguna dirección válida (deben empezar con https:// o ser supabase:tabla)");
   const digest = hash.digest("hex");
   if (previousHash && digest === previousHash) return { unchanged: true, hash: digest };
 
   const products = [];
   for (const l of loaded) {
+    if (l.products) {
+      products.push(...l.products);
+      continue;
+    }
     products.push(...(l.isHtml ? await extractFromHtml(l.buffer.toString("utf8"), l.url, l.extra) : await parseInventory(l.buffer, l.guessed, l.type, l.url)));
   }
   return { unchanged: false, hash: digest, products };

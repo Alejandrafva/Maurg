@@ -15,6 +15,11 @@ services:
         value: claude-haiku-5-5
       - key: AI_EFFORT
         value: low
+      # Lee los productos y los datos de la tienda directo de Supabase cada 30 minutos
+      - key: INVENTORY_SOURCE
+        value: supabase:productos
+      - key: INVENTORY_SYNC_MINUTES
+        value: "30"
       - key: META_VERIFY_TOKEN
         generateValue: true
       - key: ANTHROPIC_API_KEY

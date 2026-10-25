@@ -1,7 +1,7 @@
 // Conexión con WhatsApp Cloud API, Facebook Messenger e Instagram (todas son APIs de Meta).
 // Un solo webhook (/webhook/meta) recibe los mensajes de los tres canales.
 import crypto from "node:crypto";
-import { readFile, mimeOf } from "../files.js";
+import { readFile, mimeOf, isUrl } from "../files.js";
 
 const V = process.env.GRAPH_API_VERSION || "v23.0";
 const GRAPH = `https://graph.facebook.com/${V}`;
@@ -120,6 +120,7 @@ function chunks(text, size) {
 }
 
 function publicPhotoUrl(file) {
+  if (isUrl(file)) return file;
   const base = env("PUBLIC_URL").replace(/\/$/, "");
   if (!base) throw new Error("Configura PUBLIC_URL para poder enviar fotos por Facebook/Instagram");
   return `${base}/media/${encodeURIComponent(file)}`;
@@ -132,6 +133,10 @@ async function sendWhatsApp(to, reply, phoneNumberId) {
     for (const body of chunks(reply.text, 4000)) {
       await graph(url, { token, method: "POST", json: { messaging_product: "whatsapp", to, type: "text", text: { body } } });
     }
+    return;
+  }
+  if (isUrl(reply.file)) {
+    await graph(url, { token, method: "POST", json: { messaging_product: "whatsapp", to, type: "image", image: { link: reply.file, caption: reply.caption } } });
     return;
   }
   // Subimos la foto a WhatsApp (así no hace falta una URL pública).

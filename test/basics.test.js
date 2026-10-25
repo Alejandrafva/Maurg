@@ -71,3 +71,32 @@ test("lee webhooks de WhatsApp, Messenger e Instagram", () => {
   assert.equal(ig[0].channel, "instagram");
   assert.deepEqual(ig[0].imageRefs, [{ url: "https://x/y.jpg" }]);
 });
+
+test("lee la tabla de productos y la config de la tienda en Supabase", async () => {
+  const { mapTiendaRow, storeInfoFromConfig, supabaseRowsToProducts } = await import("../src/importers.js");
+  const row = {
+    id: "coach-1", marca: "Coach", nombre: "Cartera Coach Barril", codigo: "2607", colores: "Negro", colores_agotados: "",
+    descripcion: "Tipo barril", divisa_detal: "25", divisa_mayor: "20", bcv_detal: "32", bcv_mayor: "28", encargo: false,
+    disponible: true, fotos: ["https://cdn.x/a.png", "https://cdn.x/b.jpg"], fotos_color: { negro: "https://cdn.x/c.jpg" },
+    alto: 20, ancho: null, fondo: null, asa: null, como_se_lleva: "mano,hombro", orden: 1,
+  };
+  const p = mapTiendaRow(row);
+  assert.equal(p.name, "Cartera Coach Barril");
+  assert.equal(p.sku, "2607");
+  assert.equal(p.price, "25");
+  assert.equal(p.attributes["Precio al mayor (divisas)"], "20");
+  assert.equal(p.attributes["Medidas"], "alto 20");
+  assert.equal(p.attributes["Disponibilidad"], "Disponible");
+  assert.deepEqual(p.photoUrls, ["https://cdn.x/a.png", "https://cdn.x/b.jpg", "https://cdn.x/c.jpg"]);
+  assert.equal(mapTiendaRow({ ...row, disponible: false }).stock, 0);
+  assert.equal(mapTiendaRow({ ...row, disponible: false, encargo: true }).attributes["Disponibilidad"], "Por encargo");
+  assert.equal(supabaseRowsToProducts([row]).length, 1);
+
+  // Las fotos de la fuente se usan por URL y reemplazan a las anteriores de esa fuente
+  store.importProducts([p]);
+  store.importProducts([{ ...p, photoUrls: ["https://cdn.x/a.png"] }]);
+  assert.deepEqual(store.searchProducts("coach")[0].photos, ["https://cdn.x/a.png"]);
+
+  const info = storeInfoFromConfig({ nombreTienda: "MAURG", datosPago: "Zinli\nBinance", minimoMayor: 3, tasaBCV: 0, tiktok: "" });
+  assert.equal(info, "Tienda: MAURG\nFormas de pago: Zinli, Binance\nPrecio al mayor: a partir de 3 piezas");
+});

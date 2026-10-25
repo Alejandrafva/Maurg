@@ -78,7 +78,7 @@
   </div>
   <div class="card">
     <h2>2. Conecta tu página o tu almacén (sincronización automática)</h2>
-    <p class="hint">Pega la dirección de tu página web (la IA lee los productos, precios y fotos), o el link de un Google Sheet, un CSV/Excel publicado o la URL JSON de tu sistema de inventario. Puedes poner varias páginas, una por línea. Solo se vuelve a leer con IA si la página cambió.</p>
+    <p class="hint">Escribe <code>supabase:productos</code> para leer directo la tabla de productos de tu tienda en Supabase (sin gastar IA), o pega la dirección de tu página web (la IA lee los productos, precios y fotos), o el link de un Google Sheet, un CSV/Excel publicado o la URL JSON de tu sistema de inventario. Puedes poner varias páginas, una por línea. Solo se vuelve a leer con IA si la página cambió.</p>
     <div class="row">
       <div style="flex:3"><label>Direcciones</label><textarea id="srcUrl" style="min-height:70px" placeholder="https://maurg.shop/"></textarea></div>
       <div><label>Sincronizar cada (min, 0 = manual)</label><input id="srcMin" type="number" min="0"></div>
@@ -115,6 +115,7 @@
       <div><label>Email de contacto (aparece en tu política de privacidad)</label><input id="sEmail" type="email"></div>
     </div>
     <label>Tono / personalidad</label><input id="sTone">
+    <div id="storeInfoBox" style="display:none"><label>Datos leídos automáticamente de tu tienda (se actualizan solos)</label><pre id="storeInfo" style="white-space:pre-wrap;background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:10px;margin:0;font:inherit;font-size:14px"></pre></div>
     <label>Todo lo que la IA debe saber (horarios, envíos, pagos, garantías, políticas de cambio, ubicación, promociones...)</label>
     <textarea id="sKnowledge" style="min-height:200px"></textarea>
   </div>
@@ -192,6 +193,7 @@
 
 <script>
 const $ = (s) => document.querySelector(s);
+const photoSrc = (f) => (/^https?:\/\//i.test(f) ? f : "/media/" + encodeURIComponent(f));
 const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;" }[c]));
 function toast(t, ms = 3500) { const el = $("#toast"); el.textContent = t; el.style.display = "block"; clearTimeout(toast.t); toast.t = setTimeout(() => (el.style.display = "none"), ms); }
 async function api(path, opts = {}) {
@@ -221,7 +223,7 @@ function renderProducts() {
   const list = products.filter((p) => !q || JSON.stringify(p).toLowerCase().includes(q));
   $("#pCount").textContent = products.length;
   $("#pBody").innerHTML = list.map((p) => `<tr>
-    <td><div class="thumbs">${p.photos.slice(0, 3).map((f) => `<img src="/media/${esc(f)}" alt="">`).join("") || '<span class="pill warn">sin foto</span>'}</div></td>
+    <td><div class="thumbs">${p.photos.slice(0, 3).map((f) => `<img src="${esc(photoSrc(f))}" alt="" loading="lazy">`).join("") || '<span class="pill warn">sin foto</span>'}</div></td>
     <td><b>${esc(p.name)}</b><br><small style="color:var(--muted)">${esc(p.category)}</small></td>
     <td>${esc(p.model)}<br><small style="color:var(--muted)">${esc(p.sku)}</small></td>
     <td>${p.price == null ? "—" : esc(p.price) + " " + esc(settings.currency || "")}</td>
@@ -246,7 +248,7 @@ function openProduct(p) {
   $("#pDialog").showModal();
 }
 function renderDialogPhotos() {
-  $("#pPhotos").innerHTML = (editing?.photos || []).map((f) => `<img src="/media/${esc(f)}" title="Clic para borrar" data-photo="${esc(f)}">`).join("");
+  $("#pPhotos").innerHTML = (editing?.photos || []).map((f) => `<img src="${esc(photoSrc(f))}" title="Clic para borrar" data-photo="${esc(f)}">`).join("");
 }
 $("#pPhotos").onclick = async (e) => {
   const f = e.target.dataset.photo; if (!f || !confirm("¿Borrar esta foto?")) return;
@@ -291,6 +293,7 @@ async function loadSettings() {
   settings = await api("/settings");
   $("#sName").value = settings.businessName; $("#sCurrency").value = settings.currency; $("#sLang").value = settings.language; $("#sEmail").value = settings.contactEmail || "";
   $("#sTone").value = settings.tone; $("#sKnowledge").value = settings.knowledge;
+  $("#storeInfoBox").style.display = settings.storeInfo ? "block" : "none"; $("#storeInfo").textContent = settings.storeInfo || "";
   $("#srcUrl").value = settings.inventorySourceUrl || ""; $("#srcMin").value = settings.inventorySyncMinutes || 0;
   $("#faqs").innerHTML = ""; (settings.faqs || []).forEach(addFaq);
 }
@@ -356,7 +359,7 @@ async function openConv(key) {
     <div class="row" style="margin-top:10px"><input id="cText" placeholder="Responder como persona..." style="flex:4"><button class="btn" id="cSend" style="flex:0 0 auto">Enviar</button></div>`;
   const box = $("#cChat");
   for (const m of c.messages) {
-    const img = m.images?.[0] && (m.role === "customer" ? "/api/customer-media/" : "/media/") + m.images[0];
+    const img = m.images?.[0] && (m.role === "customer" ? "/api/customer-media/" + m.images[0] : photoSrc(m.images[0]));
     bubble(box, m.role, m.text, img);
   }
   $("#cBot").onclick = async () => { await api("/conversations/" + encodeURIComponent(key), { method: "PATCH", body: { botEnabled: !c.botEnabled } }); openConv(key); };

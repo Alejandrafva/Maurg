@@ -1,6 +1,6 @@
 // El vendedor con IA: responde usando el inventario, el entrenamiento del negocio y las fotos.
 import { createMessage, textOf, CHAT_EFFORT } from "./claude.js";
-import { readFile, mimeOf } from "./files.js";
+import { readFile, mimeOf, isUrl } from "./files.js";
 import * as store from "./store.js";
 
 const MAX_HISTORY = 20; // mensajes previos que se le pasan a la IA como contexto
@@ -94,7 +94,7 @@ Reglas:
 - Si el cliente pide borrar sus datos, usa pasar_a_humano con motivo "borrar datos" y confírmale que se eliminarán.
 - Moneda: ${settings.currency}.
 
-Información del negocio (entrenamiento):
+${settings.storeInfo ? `Datos de la tienda (actualizados automáticamente):\n${settings.storeInfo}\n\n` : ""}Información del negocio (entrenamiento):
 ${settings.knowledge || "(sin información adicional)"}
 
 ${faqs ? `Preguntas frecuentes (responde así):\n${faqs}\n` : ""}
@@ -119,6 +119,10 @@ async function runTool(name, input, ctx) {
         }
         content.push({ type: "text", text: productSummary(p, settings.currency) });
         for (const photo of p.photos.slice(0, 2)) {
+          if (isUrl(photo)) {
+            content.push({ type: "image", source: { type: "url", url: photo } });
+            continue;
+          }
           const buf = await readFile("media", photo);
           if (!buf) continue;
           content.push({ type: "image", source: { type: "base64", media_type: mimeOf(photo), data: buf.toString("base64") } });
