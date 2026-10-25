@@ -373,9 +373,9 @@ app.use("/", requireAdmin, express.static(path.resolve("public")));
 await files.initCloud();
 await store.init();
 console.log(files.cloudEnabled ? "Datos guardados en Supabase" : `Datos guardados en ${store.DATA_DIR}`);
-// Primera vez con una fuente configurada (p. ej. INVENTORY_SOURCE=supabase:productos): cargar el catálogo ya.
-if (store.getSettings().inventorySourceUrl && !store.listProducts().length) {
-  syncFromSource({ force: true })
+// Al arrancar, revisar la fuente del catálogo (si no cambió, no se hace nada ni se gasta IA).
+if (store.getSettings().inventorySourceUrl) {
+  syncFromSource({ force: !store.listProducts().length })
     .then((r) => console.log("[sync inicial]", r))
     .catch((e) => console.error("[sync inicial]", e.message));
 }

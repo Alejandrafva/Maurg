@@ -286,6 +286,9 @@ const toList = (v) => {
 };
 
 // Columnas de la tienda MAURG (marca, nombre, codigo, divisa_detal, fotos...).
+// Si cambia cómo se convierten las filas en productos, subir este número para que se vuelvan a importar.
+const SUPABASE_MAPPING_VERSION = "2";
+
 export function mapTiendaRow(r) {
   const attrs = {};
   const add = (k, v) => {
@@ -369,7 +372,7 @@ export async function fetchInventory(sources, headers = {}, previousHash = "") {
   for (const url of splitUrls(sources)) {
     if (/^supabase:/i.test(url)) {
       const rows = await fetchSupabaseTable(url.slice("supabase:".length) || "productos");
-      hash.update(JSON.stringify(rows));
+      hash.update(SUPABASE_MAPPING_VERSION + JSON.stringify(rows));
       loaded.push({ products: supabaseRowsToProducts(rows) });
       continue;
     }
