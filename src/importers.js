@@ -302,8 +302,8 @@ export function mapTiendaRow(r) {
   add("Disponibilidad", r.encargo ? "Por encargo" : r.disponible === false ? "Agotado" : "Disponible");
   return {
     name: r.nombre,
-    model: "",
-    sku: r.codigo || r.id,
+    model: r.codigo || "", // el código de la tienda puede repetirse entre productos
+    sku: r.id || r.codigo, // el id es único: evita mezclar dos carteras con el mismo código
     category: r.marca || "",
     price: r.divisa_detal,
     stock: r.disponible === false && !r.encargo ? 0 : null,

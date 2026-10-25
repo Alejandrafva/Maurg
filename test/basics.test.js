@@ -82,7 +82,11 @@ test("lee la tabla de productos y la config de la tienda en Supabase", async () 
   };
   const p = mapTiendaRow(row);
   assert.equal(p.name, "Cartera Coach Barril");
-  assert.equal(p.sku, "2607");
+  assert.equal(p.sku, "coach-1");
+  assert.equal(p.model, "2607");
+  // Dos productos con el mismo código no se mezclan
+  const twins = [mapTiendaRow({ ...row, id: "a", nombre: "Coach Teri negra" }), mapTiendaRow({ ...row, id: "b", nombre: "Coach negra" })];
+  assert.equal(store.importProducts(twins).created, 2);
   assert.equal(p.price, "25");
   assert.equal(p.attributes["Precio al mayor (divisas)"], "20");
   assert.equal(p.attributes["Medidas"], "alto 20");
@@ -95,7 +99,7 @@ test("lee la tabla de productos y la config de la tienda en Supabase", async () 
   // Las fotos de la fuente se usan por URL y reemplazan a las anteriores de esa fuente
   store.importProducts([p]);
   store.importProducts([{ ...p, photoUrls: ["https://cdn.x/a.png"] }]);
-  assert.deepEqual(store.searchProducts("coach")[0].photos, ["https://cdn.x/a.png"]);
+  assert.deepEqual(store.listProducts().find((x) => x.sku === "coach-1").photos, ["https://cdn.x/a.png"]);
 
   const info = storeInfoFromConfig({ nombreTienda: "MAURG", datosPago: "Zinli\nBinance", minimoMayor: 3, tasaBCV: 0, tiktok: "" });
   assert.equal(info, "Tienda: MAURG\nFormas de pago: Zinli, Binance\nPrecio al mayor: a partir de 3 piezas");
