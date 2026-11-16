@@ -3,25 +3,26 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>Mobiliario De Oficina · Sillas, escritorios, mesas y comedores</title>
-  <meta name="description" content="Mobiliario De Oficina: distribuidores de mobiliario para oficina y el hogar. Sillas, escritorios, mesas, comedores y tocadores. Showroom en San Diego, Carabobo. Al mayor y al detal, envíos a toda Venezuela.">
-  <meta name="theme-color" content="#3e7ee4">
+  <title>ARKEO · Mobiliario de oficina y hogar</title>
+  <meta name="description" content="ARKEO: mobiliario de oficina y hogar. Sillas presidenciales, ejecutivas y de visitante, escritorios, comedores, espejos y vanity. Al mayor y al detal, envíos a toda Venezuela.">
+  <meta name="theme-color" content="#0b090a">
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Mobiliario De Oficina">
-  <meta property="og:description" content="Sillas, escritorios, mesas, comedores y hogar. Al mayor y al detal. Pide por WhatsApp.">
+  <meta property="og:title" content="ARKEO · Mobiliario de oficina y hogar">
+  <meta property="og:description" content="Sillas, escritorios, comedores, espejos y vanity. Al mayor y al detal. Pide por WhatsApp.">
   <meta property="og:image" content="img/compartir.png">
-    <link rel="icon" href="img/favicon-32.png" sizes="32x32" type="image/png">
+    <link rel="icon" href="img/icono.svg" type="image/svg+xml">
+  <link rel="icon" href="img/favicon-32.png" sizes="32x32" type="image/png">
   <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
   <link rel="manifest" href="manifest.webmanifest">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,600..900&family=Inter+Tight:wght@400;500;600;700&display=swap">
   <link rel="stylesheet" href="css/estilos.css">
 </head>
 <body>
   <header class="cabecera">
     <div class="contenedor">
-      <a class="logo" href="./"><img data-logo src="img/logo.png" alt=""><span data-nombre-tienda>Mobiliario De Oficina</span></a>
+      <a class="logo" href="./"><img data-logo class="oculto" alt=""><span data-nombre-tienda>ARKEO</span></a>
       <nav class="menu" aria-label="Principal">
         <a href="#catalogo">Catálogo</a>
         <a href="pagos.html">Pagos</a>
@@ -48,20 +49,24 @@
   </nav>
 
   <main>
-    <section class="portada contenedor" aria-label="Portada">
-      <h1 class="marca-grande" id="portada-titulo" data-nombre-tienda>Mobiliario De Oficina</h1>
-      <div class="portada-cuerpo">
+    <section class="portada" aria-label="Portada">
+      <div class="contenedor portada-rejilla">
         <div class="portada-texto">
-          <p id="portada-subtitulo">Distribuidores de mobiliario para oficina y el hogar. Showroom en San Diego, Carabobo.</p>
-          <a class="boton" href="#catalogo" id="portada-boton">Ver catálogo
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M6 13l6 6 6-6"/></svg></a>
+          <p class="sobretitulo" id="portada-sobretitulo">Mobiliario de oficina y hogar</p>
+          <h1 class="marca-grande" id="portada-titulo">ARKEO</h1>
+          <p class="subtitulo" id="portada-subtitulo">Sillas presidenciales, ejecutivas y de visitante, escritorios, comedores, espejos y vanity. Al mayor y al detal, con envíos a toda Venezuela.</p>
+          <div class="portada-botones">
+            <a class="boton blanco" href="#catalogo" id="portada-boton">Ver catálogo</a>
+            <a class="boton contorno-claro oculto" data-wa target="_blank" rel="noopener">Cotizar por WhatsApp</a>
+          </div>
+          <div class="portada-datos" id="portada-datos"></div>
         </div>
-        <div class="portada-imagen"><img id="portada-imagen" src="img/sin-foto.svg" alt="" fetchpriority="high"></div>
-        <div class="portada-datos" id="portada-datos"></div>
+        <div class="portada-imagen"><span class="sello" id="portada-sello">Colección</span><img id="portada-imagen" src="img/sin-foto.svg" alt="" fetchpriority="high"></div>
       </div>
     </section>
 
     <section id="catalogo" class="contenedor" aria-label="Catálogo">
+      <div class="titulo-seccion"><div><small>Catálogo</small><h2>Compra por categoría</h2></div></div>
       <div class="categorias" id="categorias" role="toolbar" aria-label="Categorías"></div>
 
       <div class="colecciones oculto" id="colecciones"></div>
@@ -97,13 +102,24 @@
         <a class="ventaja" href="resenas.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1-4.4-4.3 6.1-.9z"/></svg><strong>Clientes felices</strong><span>Lee sus reseñas</span></a>
       </div>
     </section>
+
+    <section class="banda-mayor" aria-label="Ventas al mayor">
+      <div class="contenedor">
+        <div>
+          <small>Empresas y mayoristas</small>
+          <h2>Equipa tu oficina completa</h2>
+          <p id="banda-texto">Precio al mayor desde 6 piezas combinando modelos. Cotiza tu proyecto y te asesoramos.</p>
+        </div>
+        <a class="boton blanco" data-wa target="_blank" rel="noopener">Cotizar por WhatsApp</a>
+      </div>
+    </section>
   </main>
 
   <footer class="pie">
     <div class="contenedor">
       <div>
-        <p class="marca-pie" data-nombre-tienda>Mobiliario De Oficina</p>
-        <p data-eslogan style="margin:0 0 12px">Distribuidores de mobiliario para oficina y el hogar</p>
+        <p class="marca-pie" data-nombre-tienda>ARKEO</p>
+        <p data-eslogan style="margin:0 0 12px">Mobiliario de oficina y hogar</p>
         <a class="boton whatsapp oculto" data-wa target="_blank" rel="noopener" style="display:inline-flex;color:#fff">Escríbenos por WhatsApp</a>
       </div>
       <div>
@@ -119,7 +135,7 @@
         <div id="pie-redes"></div>
       </div>
       <div class="legal">
-        <span>© <span data-anio></span> <span data-nombre-tienda>Mobiliario De Oficina</span>. Todos los derechos reservados.</span>
+        <span>© <span data-anio></span> <span data-nombre-tienda>ARKEO</span>. Todos los derechos reservados.</span>
         <span><a href="politicas.html">Políticas</a> · <a href="privacidad.html">Privacidad</a></span>
       </div>
     </div>

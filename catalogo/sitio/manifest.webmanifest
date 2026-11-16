@@ -1,10 +1,10 @@
 {
-  "name": "Mobiliario De Oficina",
-  "short_name": "Mobiliario",
+  "name": "ARKEO · Mobiliario de oficina y hogar",
+  "short_name": "ARKEO",
   "start_url": "./",
   "display": "standalone",
-  "background_color": "#f5f7fa",
-  "theme_color": "#3e7ee4",
+  "background_color": "#ffffff",
+  "theme_color": "#0b090a",
   "lang": "es",
   "icons": [
     { "src": "img/icono-192.png", "sizes": "192x192", "type": "image/png" },

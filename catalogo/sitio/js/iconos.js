@@ -14,6 +14,9 @@
     decoracion: '<path d="M9 21h6"/><path d="M8.5 21c-1.5-2-2-4-2-6.5C6.5 10 9 7.5 12 7.5s5.5 2.5 5.5 7c0 2.5-.5 4.5-2 6.5"/><path d="M12 7.5V2.5M12 5l3-2M12 5.5 9 3.5"/>',
     exterior: '<path d="M12 2.5v4"/><path d="M3 11c0-3.5 4-6 9-6s9 2.5 9 6z"/><path d="M12 11v10.5"/><path d="M8 21.5h8"/>',
     cocina: '<path d="M4 3v7a2.5 2.5 0 0 0 5 0V3"/><path d="M6.5 3v18.5"/><path d="M17.5 21.5V3c-2 1-3 3.5-3 7s1 4 3 4"/>',
+    presidencial: '<path d="M8.5 1.5h7A1.5 1.5 0 0 1 17 3v9.5H7V3a1.5 1.5 0 0 1 1.5-1.5z"/><path d="M9 4.5h6"/><path d="M4.5 12.5h15V15h-15z"/><path d="M3.5 9.5v5M20.5 9.5v5"/><path d="M12 15v3.5"/><path d="M6.5 22 12 18.5l5.5 3.5M12 18.5V22"/>',
+    visitante: '<path d="M7 3h10v8H7z"/><path d="M5 11h14v2.5H5z"/><path d="M5 9v4.5M19 9v4.5"/><path d="M6 13.5 5 21.5M18 13.5l1 8M8 13.5l-.5 6M16 13.5l.5 6"/>',
+    espejo: '<path d="M6 21.5V9a6 6 0 0 1 12 0v12.5z"/><path d="M9 8.5 12 5.5M9.5 12l5-5"/><path d="M4 21.5h16"/>',
     tocador: '<rect x="7" y="2.5" width="10" height="8" rx="1.5"/><path d="M8.5 4.5h0M15.5 4.5h0M8.5 8.5h0M15.5 8.5h0"/><path d="M3 12.5h18v4H3z"/><path d="M4 16.5V21M20 16.5V21M12 12.5v4"/>',
     taburete: '<ellipse cx="12" cy="5" rx="6" ry="2"/><path d="M6 5v2.5c0 1 2.7 2 6 2s6-1 6-2V5"/><path d="M12 9.5V19"/><path d="M8.5 15h7"/><path d="M8 21.5h8"/>',
     comedor: '<path d="M7 10h10"/><path d="M8.5 10 7.5 20M15.5 10l1 10"/><path d="M2.5 6v14M2.5 14h3v6M21.5 6v14M21.5 14h-3v6"/>',
@@ -65,5 +68,5 @@
     const d = P[nombre] || P.todo;
     return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"' + (clase ? ' class="' + clase + '"' : "") + ">" + d + "</svg>";
   };
-  window.ICONOS_CATEGORIA = ["silla-oficina", "escritorio", "silla", "taburete", "tocador", "comedor", "hogar", "butaca", "sofa", "mesa", "cama", "almacenaje", "lampara", "decoracion", "exterior", "cocina", "todo"];
+  window.ICONOS_CATEGORIA = ["presidencial", "silla-oficina", "visitante", "espejo", "escritorio", "silla", "taburete", "tocador", "comedor", "hogar", "butaca", "sofa", "mesa", "cama", "almacenaje", "lampara", "decoracion", "exterior", "cocina", "todo"];
 })();

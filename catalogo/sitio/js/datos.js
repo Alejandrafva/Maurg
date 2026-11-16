@@ -24,9 +24,9 @@
   // Ajustes por defecto (los reales vienen de la tabla config)
   // ---------------------------------------------------------------------
   T.AJUSTES_BASE = {
-    nombreTienda: "Mobiliario De Oficina",
-    eslogan: "Distribuidores de mobiliario para oficina y el hogar",
-    logo: "img/logo.png",
+    nombreTienda: "ARKEO",
+    eslogan: "Mobiliario de oficina y hogar",
+    logo: "",
     whatsapp: "",
     instagram: "",
     tiktok: "",
@@ -43,7 +43,7 @@
     workerUrl: "",
     notaEncargo: "Producto por encargo: consulta el tiempo de entrega.",
     categorias: [],
-    portada: { titulo: "", subtitulo: "", boton: "Ver catálogo", imagen: "" },
+    portada: { titulo: "", subtitulo: "Sillas presidenciales, ejecutivas y de visitante, escritorios, comedores, espejos y vanity. Al mayor y al detal, con envíos a toda Venezuela.", boton: "Ver catálogo", imagen: "" },
     colecciones: [],
     resenas: [],
     paginas: {},

@@ -1,10 +1,15 @@
-# Catálogo web + Almacén · Mobiliario De Oficina
+# Catálogo web + Almacén · ARKEO
 
-Catálogo online de **Mobiliario De Oficina** (@mobiliariodeoficina · showroom en San Diego, edo. Carabobo): sillas, escritorios, mesas, comedor, tocadores y hogar, **al mayor y al detal**.
+Catálogo online de **ARKEO · Mobiliario de oficina y hogar**, que vende **al mayor y al detal** en Venezuela. Los clientes arman su pedido y lo envían por **WhatsApp** con un **PDF**. El dueño administra todo desde el **Almacén** (`admin.html`).
 
-Ya viene con su marca: logo, azul de la marca (#3E7EE4), nombre, WhatsApp de pedidos 0412-5074777, teléfonos 0424-4343284 · 0412-5074777, Instagram y dirección del showroom. Todo se puede cambiar desde el almacén (Ajustes).
+**Identidad aplicada**
+- Paleta: negro `#0B090A`, grafito `#5A5A5C`, plata `#A8A6A7`, blanco `#FFFFFF` y azul marino `#053359`.
+- Diseño sobrio y corporativo: cabecera y portada negras, letra ancha en mayúsculas para la marca y los títulos, esquinas casi rectas, acentos en azul marino.
+- Categorías: Sillas presidenciales, Sillas ejecutivas, Sillas de visitante, Escritorios, Mesas de reunión, Archivadores, Comedor, Espejos y Vanity (se cambian en Almacén › Categorías).
+- **Logo:** pendiente. Mientras tanto se muestra la palabra **ARKEO**. Cuando llegue el logo se sube en **Almacén › Ajustes › Tienda** (mejor en PNG con fondo transparente, versión blanca porque la cabecera es negra).
+- **Datos de contacto:** vacíos a propósito (WhatsApp, teléfonos, Instagram, dirección). Se llenan en **Almacén › Ajustes**. Sin el WhatsApp no aparece el botón de enviar pedido.
 
-Es un sistema **independiente**: no usa el Vendedor IA del resto de este repositorio. Los clientes arman su pedido y lo envían por **WhatsApp** con un **PDF**. El dueño administra todo desde el **Almacén** (`admin.html`).
+Es un sistema **independiente**: no usa el Vendedor IA del resto de este repositorio.
 
 ## Qué hay en esta carpeta
 

@@ -79,16 +79,23 @@
     h1.classList.toggle("dos-lineas", dos);
     h1.classList.toggle("larga", !dos && titulo.length > 11);
     h1.removeAttribute("data-nombre-tienda");
-    $("#portada-subtitulo").textContent = por.subtitulo || cfg.eslogan || "";
-    $("#portada-boton").firstChild.textContent = (por.boton || "Ver catálogo") + " ";
+    $("#portada-sobretitulo").textContent = cfg.eslogan || "";
+    $("#portada-subtitulo").textContent = por.subtitulo || "";
+    $("#portada-boton").textContent = por.boton || "Ver catálogo";
     let img = por.imagen;
+    let destacado = null;
     if (!img) {
-      const d = visibles().find((p) => p.destacado && T.fotos(p).length) || visibles().find((p) => T.fotos(p).length);
-      img = d ? T.fotoPrincipal(d) : "img/sin-foto.svg";
+      destacado = visibles().find((p) => p.destacado && T.fotos(p).length) || visibles().find((p) => T.fotos(p).length);
+      img = destacado ? T.fotoPrincipal(destacado) : "img/sin-foto.svg";
     }
     const im = $("#portada-imagen");
     if (im.getAttribute("src") !== img) im.src = img;
-    im.alt = cfg.nombreTienda;
+    im.alt = destacado ? destacado.nombre : cfg.nombreTienda;
+    $("#portada-sello").textContent = destacado ? destacado.nombre : "Colección " + new Date().getFullYear();
+    im.parentElement.style.cursor = destacado ? "pointer" : "";
+    im.parentElement.onclick = destacado ? () => abrirFicha(destacado.id) : null;
+    const banda = $("#banda-texto");
+    if (banda) banda.textContent = "Precio al mayor desde " + cfg.minimoMayor + " piezas combinando modelos. Cotiza tu proyecto y te asesoramos.";
     const n = visibles().length;
     const datos = [];
     if (n) datos.push("<div><strong>" + n + "</strong>productos</div>");
@@ -96,7 +103,7 @@
     if (cfg.tasaBCV) datos.push("<div><strong>" + T.numero(cfg.tasaBCV) + "</strong>tasa BCV (Bs/$)</div>");
     $("#portada-datos").innerHTML = datos.join("");
     $("#texto-mayor").textContent = "Precio al mayor desde " + cfg.minimoMayor + " piezas";
-    document.title = cfg.nombreTienda + " · Sillas, escritorios, mesas y comedores";
+    document.title = cfg.nombreTienda + " · Mobiliario de oficina y hogar";
   }
 
   // -------------------------------------------------------------------
@@ -114,12 +121,17 @@
   function iconoPara(c) {
     if (c.icono) return c.icono;
     const n = T.normalizar(c.nombre);
-    if (/oficina|ejecut|gerenc/.test(n) && /silla/.test(n)) return "silla-oficina";
+    if (/president|gerenc/.test(n)) return "presidencial";
+    if (/visit|recep|espera/.test(n)) return "visitante";
+    if (/oficina|ejecut|operativ|ergon/.test(n) && /silla/.test(n)) return "silla-oficina";
+    if (/espejo/.test(n)) return "espejo";
+    if (/reuni|juntas|conferen/.test(n)) return "mesa";
+    if (/archiv/.test(n)) return "almacenaje";
     if (/escritor/.test(n)) return "escritorio";
     if (/butac|poltron/.test(n)) return "butaca";
     if (/sofa|mueble de sala/.test(n)) return "sofa";
     if (/silla|banco|taburete/.test(n)) return "silla";
-    if (/tocador|vanity|peinador/.test(n)) return "tocador";
+    if (/tocador|vanity|peinador|vanit/.test(n)) return "tocador";
     if (/taburet|banqueta|barra/.test(n)) return "taburete";
     if (/comedor/.test(n)) return "comedor";
     if (/mesa/.test(n)) return "mesa";
@@ -613,9 +625,9 @@
     let y = M;
     const texto = (t, x, yy, o) => doc.text(String(t == null ? "" : t), x, yy, o);
 
-    doc.setFillColor(21, 21, 21); doc.rect(0, 0, W, 86, "F");
+    doc.setFillColor(11, 9, 10); doc.rect(0, 0, W, 86, "F"); doc.setFillColor(5, 51, 89); doc.rect(0, 86, W, 4, "F");
     doc.setTextColor(255); doc.setFont("helvetica", "bold"); doc.setFontSize(24);
-    texto(cfg.nombreTienda, M, 50);
+    texto(String(cfg.nombreTienda).toUpperCase(), M, 50, { charSpace: 2 });
     doc.setFont("helvetica", "normal"); doc.setFontSize(10);
     texto([cfg.telefono || cfg.whatsapp, cfg.instagram ? "@" + String(cfg.instagram).replace(/^@/, "") : "", cfg.correo].filter(Boolean).join("   ·   "), M, 68);
     doc.setFontSize(11); doc.setFont("helvetica", "bold");
@@ -637,7 +649,7 @@
     // Tabla
     const col = { foto: M, prod: M + 54, cant: W - M - 200, precio: W - M - 110, sub: W - M };
     const cabecera = () => {
-      doc.setFillColor(246, 244, 240); doc.rect(M, y, W - 2 * M, 24, "F");
+      doc.setFillColor(243, 243, 244); doc.rect(M, y, W - 2 * M, 24, "F");
       doc.setFontSize(9); doc.setTextColor(90); doc.setFont("helvetica", "bold");
       texto("PRODUCTO", col.prod, y + 16); texto("CANT.", col.cant, y + 16, { align: "right" }); texto("PRECIO", col.precio, y + 16, { align: "right" }); texto("SUBTOTAL", col.sub - 4, y + 16, { align: "right" });
       doc.setFont("helvetica", "normal"); doc.setTextColor(21);

@@ -2,7 +2,7 @@
 
 Entra a `https://tu-tienda/admin.html` (o `/almacen`) con el correo y la contraseña del administrador. Funciona en la computadora y en el celular (en el celular las secciones están abajo).
 
-> Primera vez: ve directo a **Ajustes**. Ya vienen cargados el nombre, el logo, el WhatsApp 0412-5074777, los teléfonos, el Instagram y el showroom de San Diego; **revisa que estén bien**, pon la tasa BCV y la dirección del Worker. Después carga productos.
+> Primera vez: ve directo a **Ajustes**: sube el **logo de ARKEO** (PNG blanco con fondo transparente se ve mejor sobre la cabecera negra), escribe el **WhatsApp de pedidos**, teléfonos, Instagram y dirección, pon la tasa BCV y la dirección del Worker. Después carga productos.
 
 ## 5.1 Ajustes (lo primero)
 - **Tienda:** nombre, eslogan y logo (opcional).

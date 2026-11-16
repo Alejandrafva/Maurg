@@ -1,6 +1,6 @@
 /**
  * =====================================================================
- *  MOBILIARIO DE OFICINA · Catálogo · Worker "puente" de fotos (Cloudflare R2)
+ *  ARKEO · Catálogo · Worker "puente" de fotos (Cloudflare R2)
  *
  *  Pega TODO este archivo en Cloudflare > Workers > tu Worker > Edit code.
  *

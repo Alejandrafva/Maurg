@@ -1,5 +1,5 @@
 -- =====================================================================
---  MOBILIARIO DE OFICINA · Catálogo · Base de datos (Supabase)
+--  ARKEO · Catálogo · Base de datos (Supabase)
 --  Archivo 1 de 2: tablas, seguridad (RLS) y funciones.
 --
 --  Cómo usarlo: Supabase > SQL Editor > New query > pega TODO > Run.
@@ -134,15 +134,15 @@ on conflict (id) do nothing;
 
 -- Agrega los ajustes que falten SIN tocar los que ya existen.
 update public.config set datos = jsonb_build_object(
-  'nombreTienda', 'Mobiliario De Oficina',
-  'logo', 'img/logo.png',
-  'eslogan', 'Distribuidores de mobiliario para oficina y el hogar',
-  'whatsapp', '04125074777',
-  'instagram', 'mobiliariodeoficina',
+  'nombreTienda', 'ARKEO',
+  'logo', '',
+  'eslogan', 'Mobiliario de oficina y hogar',
+  'whatsapp', '',
+  'instagram', '',
   'tiktok', '',
   'correo', '',
-  'telefono', '0424-4343284 · 0412-5074777',
-  'direccion', 'Showroom en San Diego, edo. Carabobo',
+  'telefono', '',
+  'direccion', '',
   'horario', 'Lunes a sábado, 9:00 a. m. a 6:00 p. m.',
   'mapa', '',
   'tasaBCV', 0,
@@ -152,17 +152,19 @@ update public.config set datos = jsonb_build_object(
   'workerUrl', '',
   'notaEncargo', 'Producto por encargo: consulta el tiempo de entrega.',
   'categorias', jsonb_build_array(
-    jsonb_build_object('nombre','Sillas de oficina','icono','silla-oficina'),
+    jsonb_build_object('nombre','Sillas presidenciales','icono','presidencial'),
+    jsonb_build_object('nombre','Sillas ejecutivas','icono','silla-oficina'),
+    jsonb_build_object('nombre','Sillas de visitante','icono','visitante'),
     jsonb_build_object('nombre','Escritorios','icono','escritorio'),
-    jsonb_build_object('nombre','Mesas','icono','mesa'),
+    jsonb_build_object('nombre','Mesas de reunión','icono','mesa'),
+    jsonb_build_object('nombre','Archivadores','icono','almacenaje'),
     jsonb_build_object('nombre','Comedor','icono','comedor'),
-    jsonb_build_object('nombre','Tocadores','icono','tocador'),
-    jsonb_build_object('nombre','Taburetes','icono','taburete'),
-    jsonb_build_object('nombre','Hogar','icono','hogar')
+    jsonb_build_object('nombre','Espejos','icono','espejo'),
+    jsonb_build_object('nombre','Vanity','icono','tocador')
   ),
   'portada', jsonb_build_object(
     'titulo', '',
-    'subtitulo', 'Distribuidores de mobiliario para oficina y el hogar. Showroom en San Diego, Carabobo. Al mayor y al detal.',
+    'subtitulo', 'Sillas presidenciales, ejecutivas y de visitante, escritorios, comedores, espejos y vanity. Al mayor y al detal, con envíos a toda Venezuela.',
     'boton', 'Ver catálogo',
     'imagen', ''
   ),
@@ -171,7 +173,7 @@ update public.config set datos = jsonb_build_object(
   'paginas', '{}'::jsonb,
   'datosPago', '',
   'agencias', '',
-  'ubicacion', 'Showroom en San Diego, edo. Carabobo.'
+  'ubicacion', ''
 ) || datos
 where id = 1;
 
