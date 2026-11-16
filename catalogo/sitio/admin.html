@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Almacén</title>
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#151515">
+  <link rel="icon" href="img/icono.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&display=swap">
+  <link rel="stylesheet" href="css/estilos.css">
+  <link rel="stylesheet" href="css/admin.css">
+</head>
+<body class="admin">
+  <!-- Entrada -->
+  <main class="entrada" id="pantalla-entrada">
+    <form class="caja-entrada" id="form-entrada" autocomplete="on">
+      <p class="marca-entrada" data-nombre-tienda>Mobiliario</p>
+      <h1>Almacén</h1>
+      <p class="sub" id="entrada-ayuda">Entra con el correo y la contraseña del administrador.</p>
+      <label class="campo">Correo<input type="email" id="entrada-correo" autocomplete="username" required></label>
+      <label class="campo" id="campo-clave">Contraseña<input type="password" id="entrada-clave" autocomplete="current-password" required></label>
+      <label class="campo oculto" id="campo-clave-nueva">Nueva contraseña (mínimo 8)<input type="password" id="entrada-clave-nueva" autocomplete="new-password" minlength="8"></label>
+      <p class="error-entrada" id="entrada-error" role="alert"></p>
+      <button class="boton ancho" type="submit" id="entrada-boton">Entrar</button>
+      <button class="enlace" type="button" id="olvide">¿Olvidaste tu contraseña?</button>
+      <a class="enlace" href="./">← Volver a la tienda</a>
+    </form>
+  </main>
+
+  <!-- Panel -->
+  <div class="panel oculto" id="pantalla-panel">
+    <aside class="lateral">
+      <a class="logo" href="./" target="_blank" rel="noopener"><span data-nombre-tienda>Mobiliario</span></a>
+      <nav class="pestanas" id="pestanas" aria-label="Secciones">
+        <button data-vista="productos" aria-current="page"><span data-icono="caja"></span><span>Productos</span></button>
+        <button data-vista="pedidos"><span data-icono="pedidos"></span><span>Pedidos</span><b class="globo oculto" id="globo-pedidos"></b></button>
+        <button data-vista="categorias"><span data-icono="todo"></span><span>Categorías</span></button>
+        <button data-vista="pagina"><span data-icono="pagina"></span><span>Página</span></button>
+        <button data-vista="proveedores"><span data-icono="personas"></span><span>Proveedores</span></button>
+        <button data-vista="ajustes"><span data-icono="ajustes"></span><span>Ajustes</span></button>
+      </nav>
+      <div class="lateral-pie">
+        <a class="boton claro ancho" href="./" target="_blank" rel="noopener"><span data-icono="ojo"></span>Ver tienda</a>
+        <button class="boton claro ancho" id="salir"><span data-icono="salir"></span>Salir</button>
+        <small id="usuario-correo"></small>
+      </div>
+    </aside>
+    <section class="area">
+      <header class="barra-superior">
+        <h1 id="titulo-vista">Productos</h1>
+        <button class="tasa-rapida" id="tasa-rapida" title="Cambiar la tasa del día">Tasa BCV <b id="tasa-valor">—</b> <span data-icono="editar"></span></button>
+      </header>
+      <div class="aviso-panel oculto" id="aviso-panel"></div>
+      <div id="vista"></div>
+    </section>
+  </div>
+
+  <!-- Ventana modal -->
+  <div class="modal-fondo oculto" id="modal-fondo">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-titulo" id="modal">
+      <header><h2 id="modal-titulo"></h2><button class="icono-boton" id="modal-cerrar" aria-label="Cerrar"><span data-icono="cerrar"></span></button></header>
+      <div class="modal-cuerpo" id="modal-cuerpo"></div>
+      <footer id="modal-pie"></footer>
+    </div>
+  </div>
+
+  <script src="js/conexion.js"></script>
+  <script src="js/iconos.js"></script>
+  <script src="js/datos.js"></script>
+  <script src="js/admin.js"></script>
+</body>
+</html>

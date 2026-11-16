@@ -1,0 +1,14 @@
+{
+  "name": "Catálogo de mobiliario",
+  "short_name": "Catálogo",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#f6f4f0",
+  "theme_color": "#151515",
+  "lang": "es",
+  "icons": [
+    { "src": "img/icono-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "img/icono-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "img/icono.svg", "sizes": "any", "type": "image/svg+xml" }
+  ]
+}

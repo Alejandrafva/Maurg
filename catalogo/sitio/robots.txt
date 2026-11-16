@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /admin.html
+
+# Cambia TU-DOMINIO por la dirección real de la tienda
+Sitemap: https://TU-DOMINIO/sitemap.xml

@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#a2a2a2"/><stop offset="1" stop-color="#6e6e6e"/></linearGradient><linearGradient id="w" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#9f775a"/><stop offset="1" stop-color="#6b462a"/></linearGradient></defs><ellipse cx="200" cy="362" rx="150" ry="14" fill="#000" opacity=".10"/>
+<rect x="56" y="118" width="288" height="120" rx="26" fill="url(#g)"/>
+<rect x="72" y="128" width="124" height="98" rx="18" fill="#979797"/>
+<rect x="204" y="128" width="124" height="98" rx="18" fill="#979797"/>
+<rect x="30" y="170" width="56" height="128" rx="24" fill="url(#g)"/>
+<rect x="314" y="170" width="56" height="128" rx="24" fill="url(#g)"/>
+<rect x="70" y="226" width="130" height="62" rx="16" fill="#9b9b9b"/>
+<rect x="200" y="226" width="130" height="62" rx="16" fill="#929292"/>
+<rect x="40" y="288" width="320" height="22" rx="8" fill="#717171"/>
+<path d="M66 310 l-8 40 h12 l10 -40z M334 310 l8 40 h-12 l-10 -40z" fill="url(#w)"/></svg>

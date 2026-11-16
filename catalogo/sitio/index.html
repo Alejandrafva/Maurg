@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Catálogo de muebles para casa y oficina</title>
+  <meta name="description" content="Catálogo de mobiliario para casa y oficina en Venezuela. Ventas al mayor y al detal, precios en divisas y a tasa BCV, envíos a todo el país.">
+  <meta name="theme-color" content="#f6f4f0">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Catálogo de muebles para casa y oficina">
+  <meta property="og:description" content="Ventas al mayor y al detal. Pide por WhatsApp.">
+  <meta property="og:image" content="img/compartir.png">
+  <link rel="icon" href="img/icono.svg" type="image/svg+xml">
+  <link rel="icon" href="img/favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&display=swap">
+  <link rel="stylesheet" href="css/estilos.css">
+</head>
+<body>
+  <header class="cabecera">
+    <div class="contenedor">
+      <a class="logo" href="./"><img data-logo class="oculto" alt=""><span data-nombre-tienda>Mobiliario</span></a>
+      <nav class="menu" aria-label="Principal">
+        <a href="#catalogo">Catálogo</a>
+        <a href="pagos.html">Pagos</a>
+        <a href="envios.html">Envíos</a>
+        <a href="resenas.html">Reseñas</a>
+        <a href="contacto.html">Contacto</a>
+      </nav>
+      <div class="acciones-cabecera">
+        <button class="icono-boton solo-movil" id="abrir-menu" aria-label="Menú" aria-expanded="false" aria-controls="menu-movil"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h10"/></svg></button>
+        <button class="boton boton-carrito" id="abrir-carrito" aria-label="Abrir carrito">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 8h14l-1 12.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 6 20.5z"/><path d="M8.5 10V6.5a3.5 3.5 0 0 1 7 0V10"/></svg>
+          <span class="texto">Carrito</span>
+          <span class="contador" id="contador-carrito" data-n="0"></span>
+        </button>
+      </div>
+    </div>
+  </header>
+  <nav class="menu-movil oculto" id="menu-movil" aria-label="Menú móvil">
+    <a href="#catalogo">Catálogo</a>
+    <a href="pagos.html">Métodos de pago</a>
+    <a href="envios.html">Envíos</a>
+    <a href="resenas.html">Reseñas</a>
+    <a href="contacto.html">Contacto</a>
+  </nav>
+
+  <main>
+    <section class="portada contenedor" aria-label="Portada">
+      <h1 class="marca-grande" id="portada-titulo" data-nombre-tienda>Mobiliario</h1>
+      <div class="portada-cuerpo">
+        <div class="portada-texto">
+          <p id="portada-subtitulo">Muebles para tu casa y tu oficina, al mayor y al detal.</p>
+          <a class="boton" href="#catalogo" id="portada-boton">Ver catálogo
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M6 13l6 6 6-6"/></svg></a>
+        </div>
+        <div class="portada-imagen"><img id="portada-imagen" src="img/sin-foto.svg" alt="" fetchpriority="high"></div>
+        <div class="portada-datos" id="portada-datos"></div>
+      </div>
+    </section>
+
+    <section id="catalogo" class="contenedor" aria-label="Catálogo">
+      <div class="categorias" id="categorias" role="toolbar" aria-label="Categorías"></div>
+
+      <div class="colecciones oculto" id="colecciones"></div>
+
+      <div class="herramientas">
+        <h2 id="titulo-lista">Todos los productos</h2>
+        <label class="buscador">
+          <span class="solo-lector">Buscar</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20.5 20.5-4.5-4.5"/></svg>
+          <input type="search" id="buscar" placeholder="Buscar por nombre, código o color" autocomplete="off" enterkeyhint="search">
+        </label>
+        <select class="selector" id="ordenar" aria-label="Ordenar">
+          <option value="destacados">Destacados</option>
+          <option value="nuevos">Novedades</option>
+          <option value="precio-asc">Precio: menor a mayor</option>
+          <option value="precio-desc">Precio: mayor a menor</option>
+          <option value="nombre">Nombre A–Z</option>
+        </select>
+        <div class="chips">
+          <button class="chip" id="filtro-disponibles" aria-pressed="false">Solo disponibles</button>
+          <button class="chip" id="filtro-ofertas" aria-pressed="false">Ofertas</button>
+        </div>
+        <p class="resultado" id="resultado" aria-live="polite"></p>
+      </div>
+
+      <div class="rejilla" id="rejilla" aria-live="polite"></div>
+      <div class="mas-productos oculto" id="mas-productos"><button class="boton claro" id="ver-mas">Ver más productos</button></div>
+
+      <div class="ventajas">
+        <a class="ventaja" href="envios.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 6h11v10h-11z"/><path d="M13.5 9.5h4l3 3.5V16h-7"/><circle cx="6.5" cy="17.5" r="1.8"/><circle cx="17" cy="17.5" r="1.8"/></svg><strong>Envíos nacionales</strong><span>A toda Venezuela</span></a>
+        <a class="ventaja" href="pagos.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="5" width="19" height="14" rx="2"/><path d="M2.5 9.5h19M6 15h4"/></svg><strong>Divisas o bolívares</strong><span>Precio a tasa BCV</span></a>
+        <a class="ventaja" href="#catalogo" id="ventaja-mayor"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7.5 12 3l9 4.5v9L12 21l-9-4.5z"/><path d="M3 7.5 12 12l9-4.5M12 12v9"/></svg><strong>Al mayor y al detal</strong><span id="texto-mayor">Precio especial por cantidad</span></a>
+        <a class="ventaja" href="resenas.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1-4.4-4.3 6.1-.9z"/></svg><strong>Clientes felices</strong><span>Lee sus reseñas</span></a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="pie">
+    <div class="contenedor">
+      <div>
+        <p class="marca-pie" data-nombre-tienda>Mobiliario</p>
+        <p data-eslogan style="margin:0 0 12px">Muebles para tu casa y tu oficina</p>
+        <a class="boton whatsapp oculto" data-wa target="_blank" rel="noopener" style="display:inline-flex;color:#fff">Escríbenos por WhatsApp</a>
+      </div>
+      <div>
+        <h4>Tienda</h4>
+        <a href="#catalogo">Catálogo</a>
+        <a href="pagos.html">Métodos de pago</a>
+        <a href="envios.html">Envíos</a>
+        <a href="resenas.html">Reseñas</a>
+        <a href="contacto.html">Contacto</a>
+      </div>
+      <div>
+        <h4>Contacto</h4>
+        <div id="pie-redes"></div>
+      </div>
+      <div class="legal">
+        <span>© <span data-anio></span> <span data-nombre-tienda>Mobiliario</span>. Todos los derechos reservados.</span>
+        <span><a href="politicas.html">Políticas</a> · <a href="privacidad.html">Privacidad</a></span>
+      </div>
+    </div>
+  </footer>
+
+  <a class="flotante-wa oculto" data-wa target="_blank" rel="noopener" aria-label="Escribir por WhatsApp">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 20.5 5 16a8.5 8.5 0 1 1 3.2 3.2z"/><path d="M9 8.5c0 3.5 3 6.5 6.5 6.5l1.2-1.6-2.2-1-1 .9a5 5 0 0 1-2.8-2.8l.9-1-1-2.2z"/></svg>
+  </a>
+
+  <!-- Ficha de producto -->
+  <div class="velo oculto" id="velo"></div>
+  <section class="ficha oculto" id="ficha" role="dialog" aria-modal="true" aria-labelledby="ficha-nombre"></section>
+
+  <!-- Carrito -->
+  <aside class="carrito oculto" id="carrito" role="dialog" aria-modal="true" aria-labelledby="carrito-titulo">
+    <header>
+      <h2 id="carrito-titulo">Tu pedido</h2>
+      <button class="icono-boton" id="cerrar-carrito" aria-label="Cerrar carrito"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+    </header>
+    <div class="carrito-cuerpo" id="carrito-cuerpo"></div>
+    <footer id="carrito-pie"></footer>
+  </aside>
+
+  <script src="js/conexion.js"></script>
+  <script src="js/iconos.js"></script>
+  <script src="js/datos.js"></script>
+  <script src="js/tienda.js"></script>
+</body>
+</html>
