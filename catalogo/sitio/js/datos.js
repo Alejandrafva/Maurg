@@ -24,9 +24,9 @@
   // Ajustes por defecto (los reales vienen de la tabla config)
   // ---------------------------------------------------------------------
   T.AJUSTES_BASE = {
-    nombreTienda: "Mobiliario",
-    eslogan: "Muebles para tu casa y tu oficina",
-    logo: "",
+    nombreTienda: "Mobiliario De Oficina",
+    eslogan: "Distribuidores de mobiliario para oficina y el hogar",
+    logo: "img/logo.png",
     whatsapp: "",
     instagram: "",
     tiktok: "",

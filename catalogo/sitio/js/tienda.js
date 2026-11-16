@@ -72,8 +72,12 @@
     const cfg = estado.cfg, por = cfg.portada || {};
     const titulo = (por.titulo || cfg.nombreTienda || "").trim();
     const h1 = $("#portada-titulo");
-    h1.textContent = titulo;
-    h1.classList.toggle("larga", titulo.length > 11);
+    const corte = titulo.indexOf(" ");
+    const l1 = corte > 0 ? titulo.slice(0, corte) : titulo, l2 = corte > 0 ? titulo.slice(corte + 1) : "";
+    const dos = !!l2 && l1.length <= 12 && l2.length <= 12;
+    h1.innerHTML = dos ? "<span>" + esc(l1) + '</span><span class="linea-2">' + esc(l2) + "</span>" : esc(titulo);
+    h1.classList.toggle("dos-lineas", dos);
+    h1.classList.toggle("larga", !dos && titulo.length > 11);
     h1.removeAttribute("data-nombre-tienda");
     $("#portada-subtitulo").textContent = por.subtitulo || cfg.eslogan || "";
     $("#portada-boton").firstChild.textContent = (por.boton || "Ver catálogo") + " ";
@@ -92,7 +96,7 @@
     if (cfg.tasaBCV) datos.push("<div><strong>" + T.numero(cfg.tasaBCV) + "</strong>tasa BCV (Bs/$)</div>");
     $("#portada-datos").innerHTML = datos.join("");
     $("#texto-mayor").textContent = "Precio al mayor desde " + cfg.minimoMayor + " piezas";
-    document.title = cfg.nombreTienda + " · Muebles para casa y oficina";
+    document.title = cfg.nombreTienda + " · Sillas, escritorios, mesas y comedores";
   }
 
   // -------------------------------------------------------------------
@@ -115,7 +119,11 @@
     if (/butac|poltron/.test(n)) return "butaca";
     if (/sofa|mueble de sala/.test(n)) return "sofa";
     if (/silla|banco|taburete/.test(n)) return "silla";
-    if (/mesa|comedor/.test(n)) return "mesa";
+    if (/tocador|vanity|peinador/.test(n)) return "tocador";
+    if (/taburet|banqueta|barra/.test(n)) return "taburete";
+    if (/comedor/.test(n)) return "comedor";
+    if (/mesa/.test(n)) return "mesa";
+    if (/hogar|casa/.test(n)) return "hogar";
     if (/cama|colchon|dormit|noche/.test(n)) return "cama";
     if (/estant|bibliot|archiv|closet|almac|gaveter|organiz/.test(n)) return "almacenaje";
     if (/lamp|luz|ilumin/.test(n)) return "lampara";

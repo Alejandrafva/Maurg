@@ -1,5 +1,5 @@
 -- =====================================================================
---  CATÁLOGO DE MOBILIARIO · Archivo 2 de 2: correo del administrador
+--  MOBILIARIO DE OFICINA · Catálogo · Archivo 2 de 2: correo del administrador
 --
 --  1) Cambia  admin@ejemplo.com  por el correo REAL del administrador
 --     (el mismo con el que lo creas en Authentication > Users).

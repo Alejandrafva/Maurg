@@ -1,6 +1,6 @@
 /**
  * =====================================================================
- *  CATÁLOGO DE MOBILIARIO · Worker "puente" de fotos (Cloudflare R2)
+ *  MOBILIARIO DE OFICINA · Catálogo · Worker "puente" de fotos (Cloudflare R2)
  *
  *  Pega TODO este archivo en Cloudflare > Workers > tu Worker > Edit code.
  *

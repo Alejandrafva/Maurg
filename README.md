@@ -1,7 +1,5 @@
 # 🤖 Vendedor IA
 
-> 🛋️ **¿Buscas el catálogo web de mobiliario con almacén (Netlify + Supabase + Cloudflare)?** Está en la carpeta [`catalogo/`](catalogo/LEEME.md).
-
 Asistente de ventas con inteligencia artificial que **responde solo los mensajes de WhatsApp, Instagram y Facebook** usando **tu inventario real**: precios, modelos, stock y fotos.
 
 - **Conecta tu tabla de productos en Supabase** (`supabase:productos`): lee productos, precios, disponibilidad, fotos y los datos de la tienda directo, sin gastar IA.

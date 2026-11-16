@@ -287,7 +287,7 @@ const toList = (v) => {
 
 // Columnas de la tienda MAURG (marca, nombre, codigo, divisa_detal, fotos...).
 // Si cambia cómo se convierten las filas en productos, subir este número para que se vuelvan a importar.
-const SUPABASE_MAPPING_VERSION = "3";
+const SUPABASE_MAPPING_VERSION = "2";
 
 export function mapTiendaRow(r) {
   const attrs = {};
@@ -295,7 +295,7 @@ export function mapTiendaRow(r) {
     if (v !== null && v !== undefined && String(v).trim() !== "") attrs[k] = String(v).trim();
   };
   add("Marca", r.marca);
-  add("Colores", Array.isArray(r.colores) ? r.colores.map((c) => (c && typeof c === "object" ? c.nombre : c)).filter(Boolean).join(", ") : r.colores);
+  add("Colores", r.colores);
   add("Colores agotados", r.colores_agotados);
   add("Precio al mayor (divisas)", r.divisa_mayor);
   add("Precio al detal a tasa BCV", r.bcv_detal);
@@ -309,7 +309,7 @@ export function mapTiendaRow(r) {
     sku: r.id || r.codigo, // el id es único: evita mezclar dos carteras con el mismo código
     category: r.marca || "",
     price: r.divisa_detal,
-    stock: r.disponible === false && !r.encargo ? 0 : typeof r.stock === "number" && !r.encargo ? r.stock : null,
+    stock: r.disponible === false && !r.encargo ? 0 : null,
     description: r.descripcion || "",
     attributes: attrs,
     photoUrls: [...new Set([...toList(r.fotos), ...toList(r.fotos_color)].filter((u) => /^https?:\/\//i.test(u)))],

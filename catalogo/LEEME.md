@@ -1,6 +1,10 @@
-# Catálogo web + Almacén · Mobiliario de oficina y casa
+# Catálogo web + Almacén · Mobiliario De Oficina
 
-Tienda online tipo catálogo para una tienda de muebles en Venezuela que vende **al mayor y al detal**. Los clientes arman su pedido y lo envían por **WhatsApp** con un **PDF**. El dueño administra todo desde el **Almacén** (`admin.html`).
+Catálogo online de **Mobiliario De Oficina** (@mobiliariodeoficina · showroom en San Diego, edo. Carabobo): sillas, escritorios, mesas, comedor, tocadores y hogar, **al mayor y al detal**.
+
+Ya viene con su marca: logo, azul de la marca (#3E7EE4), nombre, WhatsApp de pedidos 0412-5074777, teléfonos 0424-4343284 · 0412-5074777, Instagram y dirección del showroom. Todo se puede cambiar desde el almacén (Ajustes).
+
+Es un sistema **independiente**: no usa el Vendedor IA del resto de este repositorio. Los clientes arman su pedido y lo envían por **WhatsApp** con un **PDF**. El dueño administra todo desde el **Almacén** (`admin.html`).
 
 ## Qué hay en esta carpeta
 
