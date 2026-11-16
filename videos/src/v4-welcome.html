@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><title>Welcome to MAURG</title>
+<link rel="stylesheet" href="base.css">
+<style>
+.lbl{position:absolute;left:0;top:0;font-size:22px;letter-spacing:.32em;font-weight:500;white-space:nowrap}
+.frame{position:absolute;left:0;top:0;overflow:hidden}
+.frame img{width:100%;height:100%;object-fit:cover;display:block;transform-origin:50% 50%}
+.hair{position:absolute;left:0;top:0}
+</style></head>
+<body><div id="stage"><div class="grain"></div></div>
+<script src="lib.js"></script>
+<script>
+// Ritmo: 75 BPM → 1 tiempo = 0.8 s. Cortes en la rejilla musical.
+const DURATION = 20;
+const BEAT = .8;
+const lbl = (txt, color, parent) => { const e = mk('div', 'lbl', txt, parent); e.style.color = color; return e; };
+const hair = (w, h, color, parent) => { const e = mk('div', 'hair', '', parent); e.style.cssText += `width:${w}px;height:${h}px;background:${color}`; return e; };
+// coloca una etiqueta alineada a la izquierda (x = borde izquierdo)
+const setL = (el, x, y, o = 1) => { el.style.transform = `translate(${x}px,${y}px) translateY(-50%)`; el.style.opacity = o; };
+const setR = (el, x, y, o = 1) => { el.style.transform = `translate(${x}px,${y}px) translate(-100%,-50%)`; el.style.opacity = o; };
+
+/* 0–2.4 s · MAURG en rosa sobre chocolate */
+const s1 = scene(0, C.brown);
+const w1 = mk('div', 'txt', 'WELCOME TO', s1.el); w1.style.cssText += `font-size:26px;letter-spacing:.6em;color:${C.rose};font-weight:500`;
+const lg1 = mk('div', 'abs', logoHTML(C.pink, 210), s1.el);
+const est = lbl('VALENCIA — VENEZUELA', C.cream, s1.el);
+s1.draw = lt => {
+  const k = p(lt, .15, 1.6, ease.inOut);
+  set(lg1, { y: 960, s: 1 + lt * .03, o: k, blur: (1 - k) * 14 });
+  set(w1, { y: 815, o: p(lt, .6, 1.4), s: 1 + lt * .02 });
+  set(est, { y: 1790, o: p(lt, 1, 1.8) * .5 });
+};
+
+/* 2.4–4.8 s · Primera cartera, revelado con máscara vertical */
+const s2 = scene(2.4, C.cream, 'vsplit', .7);
+const blk2 = mk('div', 'abs', '', s2.el); blk2.style.cssText += `width:560px;height:980px;background:${C.blush}`;
+const a1 = mk('div', 'txt serif', 'A different way', s2.el); a1.style.cssText += `font-size:96px;color:${C.brown};font-style:italic`;
+const a2 = mk('div', 'txt serif', 'to accessorize.', s2.el); a2.style.cssText += `font-size:96px;color:${C.brown}`;
+const h2 = hair(120, 2, C.pink, s2.el);
+const bag2 = bag('miumiu-058', 780, s2.el);
+const n2 = lbl('N°01 — MIU MIU', C.brown, s2.el), m2 = lbl('MAURG. SELECTION', C.brown, s2.el);
+s2.draw = lt => {
+  set(blk2, { x: 640, y: 1110 });
+  blk2.style.clipPath = `inset(${(1 - p(lt, .2, 1.1, ease.inOut)) * 100}% 0 0 0)`;
+  bag2.style.clipPath = `inset(${(1 - p(lt, .35, 1.3, ease.inOut)) * 100}% 0 0 0)`;
+  set(bag2, { y: 1130, s: 1 + lt * .025 });
+  set(a1, { y: 300, o: p(lt, .5, 1.2), blur: (1 - p(lt, .5, 1.2)) * 8 });
+  set(a2, { y: 410, o: p(lt, .75, 1.45), blur: (1 - p(lt, .75, 1.45)) * 8 });
+  h2.style.transform = `translate(480px,500px) scaleX(${p(lt, 1.1, 1.7, ease.inOut)})`;
+  setL(n2, 80, 1790, p(lt, 1, 1.6)); setR(m2, 1000, 1790, p(lt, 1.1, 1.7));
+};
+
+/* 4.8–8.0 s · Segunda cartera, plano lateral con paneo lento */
+const s3 = scene(4.8, C.blush, 'none');
+s3.el.style.perspective = '1800px';
+const ghost = mk('div', 'txt serif', 'MAURG', s3.el);
+ghost.style.cssText += `font-size:460px;color:transparent;-webkit-text-stroke:2px ${C.rose};font-style:italic`;
+const bag3 = bag('coach-2618', 1060, s3.el);
+const v3 = lbl('N°02 — COACH', C.brown, s3.el);
+const c3 = lbl('THE EVERYDAY ICON', C.brown, s3.el);
+s3.draw = lt => {
+  const k = p(lt, 0, 3.4, ease.inOut);
+  set(ghost, { x: mix(820, 360, k), y: 560, o: .7 });
+  set(bag3, { x: mix(760, 380, k), y: 1160, ry: mix(-26, -8, k), s: mix(1.04, 1, k) });
+  v3.style.transform = `translate(70px,960px) translate(-50%,-50%) rotate(-90deg)`; v3.style.opacity = p(lt, .2, .8);
+  setR(c3, 1000, 1790, p(lt, .5, 1.1));
+};
+
+/* 8.0–11.2 s · Primeros planos de detalles reales, zoom óptico suave */
+const s4 = scene(8.0, C.cream, 'none');
+const pairs = [['miumiu-058', 'coach-patente'], ['dj-8301', 'coach-2618']];
+const frames = pairs.map((pr, pi) => pr.map((n, j) => {
+  const f = mk('div', 'frame', `<img src="../assets/details/${n}.jpg">`, s4.el);
+  f.style.cssText += `width:${j ? 620 : 900}px;height:${j ? 620 : 760}px`;
+  return { f, img: f.querySelector('img'), pi, j };
+}));
+const d1 = lbl('', C.brown, s4.el), d2 = lbl('', C.brown, s4.el);
+const dname = [['DETALLE 01 — HERRAJE DORADO', 'DETALLE 02 — GRABADO'], ['DETALLE 03 — TEXTURA TEJIDA', 'DETALLE 04 — CHARM']];
+s4.draw = lt => {
+  const half = 1.6, pi = lt < half ? 0 : 1, l = lt - pi * half;
+  frames.flat().forEach(o => {
+    const on = o.pi === pi;
+    o.f.style.display = on ? 'block' : 'none';
+    if (!on) return;
+    const a = o.j * .3, kr = p(l, a, a + .55, ease.inOut);
+    const x = o.j ? 610 : 540, y = o.j ? 1390 : 600;
+    set(o.f, { x, y });
+    o.f.style.clipPath = `inset(${(1 - kr) * 100}% 0 0 0)`;
+    o.img.style.transform = `scale(${1.02 + l * .07})`;
+  });
+  d1.textContent = dname[pi][0]; d2.textContent = dname[pi][1];
+  setL(d1, 90, 175, p(l, .3, .7)); setL(d2, 90, 1390, 0);
+  d2.style.transform = `translate(230px,1390px) translate(-50%,-50%) rotate(-90deg)`; d2.style.opacity = p(l, .5, .9);
+};
+
+/* 11.2–15.2 s · Composiciones editoriales, un corte por tiempo musical */
+const comps = [];
+// c1 · retícula 2×2
+{ const s = scene(11.2, C.cream, 'none');
+  const hl = hair(1080, 1.5, C.brown + '55', s.el), vl = hair(1.5, 1240, C.brown + '55', s.el);
+  const g = [['alexmia-0145-beige', 270, 600], ['coach-2619-azul', 810, 600], ['parchita-2606', 270, 1200], ['fashion-3037', 810, 1200]].map(([n, x, y]) => ({ el: bag(n, 400, s.el), x, y }));
+  const t = lbl('N°03 — THE EDIT', C.brown, s.el);
+  s.draw = lt => { set(hl, { y: 900 }); set(vl, { y: 900 }); g.forEach((b, i) => set(b.el, { x: b.x, y: b.y, s: mix(.95, 1, p(lt, i * .05, .5 + i * .05)) })); setL(t, 80, 190); };
+}
+// c2 · bloque rosa
+{ const s = scene(12.0, C.brown, 'none');
+  const r = mk('div', 'abs', '', s.el); r.style.cssText += `width:620px;height:1000px;background:${C.pink}`;
+  const b = bag('dj-8301', 740, s.el);
+  const t = lbl('N°04 — DAVID JONES', C.cream, s.el);
+  s.draw = lt => { set(r, { x: 630, y: 880 }); set(b, { x: 470, y: 1000, s: 1 + lt * .04 }); setL(t, 80, 190); };
+}
+// c3 · trío
+{ const s = scene(12.8, C.blush, 'none');
+  const g = [['coach-teri-roja', 330, 175, 1030], ['miumiu-2509', 480, 540, 960], ['coach-250907', 390, 880, 1000]].map(([n, h, x, y]) => ({ el: bag(n, h, s.el), x, y }));
+  const t = lbl('N°05 — COLOR STORY', C.brown, s.el);
+  s.draw = lt => { g.forEach((b, i) => set(b.el, { x: b.x + (i - 1) * lt * 12, y: b.y })); setL(t, 80, 190); };
+}
+// c4 · protagonista
+{ const s = scene(13.6, C.pink, 'none');
+  const b = bag('bimba', 860, s.el);
+  const big = mk('div', 'txt serif', 'MAURG.', s.el); big.style.cssText += `font-size:250px;color:${C.blush}55;font-style:italic`;
+  const t = lbl('N°06 — BIMBA Y LOLA', C.brown, s.el);
+  s.draw = lt => { set(big, { y: 430 }); set(b, { y: 1000, s: 1.05 - lt * .05 }); setL(t, 80, 190); };
+}
+// c5 · asimétrica
+{ const s = scene(14.4, C.cream, 'none');
+  const big = bag('coach-patente', 1000, s.el), sm = bag('alexmia-9489', 330, s.el);
+  const hl = hair(330, 1.5, C.brown, s.el);
+  const t = lbl('N°07 — COACH', C.brown, s.el);
+  s.draw = lt => { set(big, { x: 400, y: 1080, s: 1 + lt * .03 }); set(sm, { x: 860, y: 470 }); set(hl, { x: 860, y: 680 }); setL(t, 80, 190); };
+}
+// Texto fijo sobre los cortes
+const ov = mk('div', 'abs', `<div class="serif" style="font-size:60px;font-style:italic;color:${C.brown};background:${C.cream};padding:22px 50px;border:1.5px solid ${C.brown}">Carteras al mayor y al detal.</div>`);
+ov.style.zIndex = 100;
+
+/* 15.2–20 s · Logotipo y datos de contacto */
+const s6 = scene(15.2, C.brown, 'fade', .5);
+const lg6 = mk('div', 'abs', `<div class="logo" style="color:${C.pink};font-size:190px">MAUR<i>G</i><b>.</b><sup>©</sup></div>`, s6.el);
+const lgIn = lg6.querySelector('.logo');
+const ln6 = hair(420, 2, C.pink, s6.el);
+const tg6 = mk('div', 'txt serif', 'Carteras al mayor y al detal.', s6.el); tg6.style.cssText += `font-size:50px;color:${C.rose};font-style:italic`;
+const loc = mk('div', 'txt', 'VALENCIA · PARAPARAL', s6.el); loc.style.cssText += `font-size:30px;letter-spacing:.42em;color:${C.cream};font-weight:500`;
+const cta = mk('div', 'abs', `<div style="position:relative;overflow:hidden;border:1.5px solid ${C.pink};color:${C.cream};font-size:38px;letter-spacing:.06em;padding:30px 60px;display:flex;align-items:center;gap:22px;white-space:nowrap">Solicita nuestro catálogo <span style="color:${C.pink};font-size:44px">→</span><i class="shine" style="position:absolute;top:0;bottom:0;width:120px;background:linear-gradient(90deg,transparent,${C.pink}55,transparent)"></i></div>`, s6.el);
+const shine = cta.querySelector('.shine');
+const ct = [['whats', '0412-588 0039'], ['insta', '@maurg0171'], ['globe', 'maurg.shop']].map(([ic, t]) => {
+  const e = mk('div', 'pill', icon(ic, 40, C.pink, 1.6) + t, s6.el); e.style.cssText += `color:${C.cream};font-size:36px;font-weight:400;gap:16px`; return e;
+});
+
+window.DURATION = DURATION;
+window.render = t => {
+  renderScenes(t, DURATION);
+  const ko = io(t, 11.35, 15.2, .35);
+  set(ov, { y: 1660, o: ko, s: mix(.96, 1, p(t, 11.35, 11.8)) });
+  if (t >= 15.2) {
+    const lt = t - 15.2;
+    const k = p(lt, .2, 1.6, ease.inOut);
+    lgIn.style.letterSpacing = mix(.38, .02, k) + 'em';
+    set(lg6, { y: 800, o: k, blur: (1 - k) * 10 });
+    ln6.style.transform = `translate(330px,930px) scaleX(${p(lt, 1.1, 1.8, ease.inOut)})`;
+    set(tg6, { y: 1010, o: p(lt, 1.3, 2.0) });
+    set(loc, { y: 1100, o: p(lt, 1.6, 2.3) });
+    set(cta, { y: 1300, o: p(lt, 2.0, 2.6), s: mix(.95, 1, p(lt, 2.0, 2.6)) });
+    shine.style.left = (mix(-150, 760, ((lt - 2.6) % 1.6) / 1.6 * (lt > 2.6 ? 1 : 0))) + 'px';
+    ct.forEach((e, i) => { const kk = p(lt, 2.5 + i * .15, 3.1 + i * .15); set(e, { x: [270, 810, 540][i], y: i < 2 ? 1560 : 1650, o: kk }); });
+  }
+};
+render(0);
+</script></body></html>

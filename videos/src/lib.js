@@ -113,6 +113,8 @@ function renderScenes(t, D) {
     if (s.enter === 'down' && k < 1) clip = `inset(0 0 ${(1 - k) * 100}% 0)`;
     if (s.enter === 'left' && k < 1) clip = `inset(0 0 0 ${(1 - k) * 100}%)`;
     if (s.enter === 'blinds' && k < 1) clip = `polygon(${[0, 1, 2, 3, 4, 5].map(j => { const x0 = j * W / 6, w = k * W / 6; return `${x0}px 0,${x0 + w}px 0,${x0 + w}px ${H}px,${x0}px ${H}px,${x0}px 0`; }).join(',')})`;
+    if (s.enter === 'vsplit' && k < 1) clip = `inset(0 ${(1 - k) * 50}% 0 ${(1 - k) * 50}%)`;
+    s.el.style.opacity = s.enter === 'fade' ? k : 1;
     s.el.style.clipPath = clip;
     s.el.style.zIndex = i;
     s.draw && s.draw(t - s.start, t);
