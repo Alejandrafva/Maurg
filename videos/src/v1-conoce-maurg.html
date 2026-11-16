@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><title>Conoce MAURG</title>
+<link rel="stylesheet" href="base.css"></head>
+<body><div id="stage"><div class="grain"></div></div>
+<script src="lib.js"></script>
+<script>
+const DURATION = 28;
+const bob = (lt, ph = 0, a = 10) => Math.sin(lt * 2.1 + ph) * a;
+
+/* ---------- 1. Logo ---------- */
+const s1 = scene(0, C.brown);
+const lg = mk('div', 'abs', `<div class="logo" style="color:${C.pink};font-size:210px"><span class="ch">M</span><span class="ch">A</span><span class="ch">U</span><span class="ch">R</span><i class="ch">G</i><span class="ch">.</span><sup>©</sup></div>`, s1.el);
+const lgCh = [...lg.querySelectorAll('.ch')], lgSup = lg.querySelector('sup');
+const line1 = mk('div', 'abs', '', s1.el); line1.style.cssText += `height:3px;background:${C.pink}`;
+const tag1 = mk('div', 'txt', 'CARTERAS &nbsp;·&nbsp; BOLSOS &nbsp;·&nbsp; ESTILO', s1.el);
+tag1.style.cssText += `font-size:30px;letter-spacing:.4em;color:${C.rose};font-weight:500`;
+const sp1 = sparkles(s1.el, 10, C.pink, 3);
+s1.draw = lt => {
+  set(lg, { y: 900, s: 1 + lt * .015 });
+  letters(lgCh, lt, .15, .09, .8, 90);
+  const k = p(lt, 1.0, 1.4, ease.back); lgSup.style.transform = `scale(${k})`;
+  line1.style.width = p(lt, 1.1, 1.8, ease.inOut) * 560 + 'px';
+  set(line1, { y: 1050 });
+  set(tag1, { y: 1130, o: p(lt, 1.5, 2.1), blur: (1 - p(lt, 1.5, 2.1)) * 6 });
+  drawSparkles(sp1, lt, p(lt, .8, 1.6));
+};
+
+/* ---------- 2. ¿Qué es MAURG? ---------- */
+const s2 = scene(2.8, C.pink, 'circle', .7);
+const ring = [0, 1, 2].map(() => { const r = mk('div', 'abs', '', s2.el); r.style.cssText += `width:900px;height:900px;border-radius:50%;border:2px solid ${C.blush}55`; return r; });
+const q1 = mk('div', 'txt serif', '', s2.el); q1.style.cssText += `font-size:150px;color:${C.brown}`;
+const q1c = split(q1, '¿Qué es');
+const q2 = mk('div', 'txt serif', '', s2.el); q2.style.cssText += `font-size:200px;color:${C.cream};font-style:italic`;
+const q2c = split(q2, 'MAURG?');
+const ans = mk('div', 'txt serif', 'Tu tienda de carteras', s2.el); ans.style.cssText += `font-size:78px;color:${C.brown}`;
+const ans2 = mk('div', 'txt', 'CON ESTILO PARA CADA MOMENTO', s2.el); ans2.style.cssText += `font-size:30px;letter-spacing:.3em;color:${C.cream};font-weight:600`;
+const b2 = [['coach-teri-roja', 330, 200, 1420, -12], ['miumiu-058', 520, 560, 1380, 0], ['alexmia-0145-beige', 420, 890, 1440, 9]]
+  .map(([n, h, x, y, r], i) => ({ el: bag(n, h, s2.el), x, y, r, i }));
+s2.draw = lt => {
+  ring.forEach((r, i) => set(r, { y: 760, s: .6 + i * .35 + Math.sin(lt * 1.5 + i) * .03, o: p(lt, .3 + i * .15, 1) }));
+  const up = p(lt, 1.6, 2.2, ease.inOut);
+  set(q1, { y: mix(620, 420, up), s: mix(1, .75, up) });
+  set(q2, { y: mix(820, 580, up), s: mix(1, .8, up) });
+  letters(q1c, lt, .35, .05, .5, 70);
+  letters(q2c, lt, .6, .06, .6, 90);
+  set(ans, { y: 790, o: p(lt, 2.0, 2.5), blur: (1 - p(lt, 2.0, 2.5)) * 10 });
+  set(ans2, { y: 885, o: p(lt, 2.3, 2.8) });
+  b2.forEach(b => {
+    const k = p(lt, 1.9 + b.i * .18, 2.6 + b.i * .18, ease.back);
+    set(b.el, { x: b.x, y: b.y + bob(lt, b.i) + (1 - k) * 200, s: k, r: b.r * k + Math.sin(lt * 1.3 + b.i) * 2, o: clamp(k * 2) });
+  });
+};
+
+/* ---------- 3. Vendemos ---------- */
+const s3 = scene(5.8, C.cream, 'up', .6);
+const glow = mk('div', 'abs', '', s3.el); glow.style.cssText += `width:760px;height:760px;border-radius:50%;background:radial-gradient(${C.blush},${C.cream} 70%)`;
+const v1 = mk('div', 'txt serif', '', s3.el); v1.style.cssText += `font-size:120px;color:${C.brown}`;
+const v1c = split(v1, 'Vendemos');
+const slot = mk('div', 'abs', '', s3.el); slot.style.cssText += `width:1000px;height:190px;overflow:hidden`;
+const words = ['carteras', 'bolsos', 'bandoleros', 'morrales'];
+const wEls = words.map(w => { const e = mk('div', 'serif', w, slot); e.style.cssText += `position:absolute;left:0;right:0;top:0;text-align:center;font-size:150px;line-height:190px;font-style:italic;color:${C.pink}`; return e; });
+const vb = ['coach-patente', 'dj-8301', 'bandolero-yzj60', 'bimba'].map(n => bag(n, 660, s3.el));
+const pill3 = mk('div', 'pill', icon('bag', 44, C.cream, 1.8) + 'Al detal y al mayor', s3.el);
+pill3.style.cssText += `background:${C.brown};color:${C.cream};font-size:40px;padding:26px 46px`;
+s3.draw = lt => {
+  set(glow, { y: 1230, s: 1 + Math.sin(lt * 2) * .03 });
+  set(v1, { y: 360 }); letters(v1c, lt, .3, .05, .5, 70);
+  set(slot, { y: 545 });
+  const w0 = .7, dw = .85;
+  wEls.forEach((e, i) => {
+    const a = w0 + i * dw, b = i === words.length - 1 ? 99 : a + dw;
+    const kin = p(lt, a, a + .4, ease.out), kout = p(lt, b, b + .4, ease.inOut);
+    e.style.transform = `translateY(${(1 - kin) * 190 - kout * 190}px)`;
+    e.style.opacity = lt < a ? 0 : 1;
+  });
+  vb.forEach((el, i) => {
+    const a = w0 + i * dw, b = i === vb.length - 1 ? 99 : a + dw;
+    const kin = p(lt, a, a + .5, ease.back), kout = p(lt, b, b + .4, ease.in);
+    set(el, { x: 540 + (1 - kin) * 700 - kout * 800, y: 1240 + bob(lt, i, 12), s: .7 + .3 * kin, r: (1 - kin) * 14 - kout * 14, o: lt < a ? 0 : 1 });
+  });
+  set(pill3, { y: 1730, s: p(lt, 3.3, 3.8, ease.back), o: p(lt, 3.3, 3.5) });
+};
+
+/* ---------- 4. Marcas ---------- */
+const s4 = scene(9.8, C.brown, 'blinds', .6);
+const m1 = mk('div', 'txt serif', `Marcas que <i style="color:${C.pink}">amas</i>`, s4.el); m1.style.cssText += `font-size:110px;color:${C.cream}`;
+const brands = ['Coach', 'Miu Miu', 'Alex&amp;Mia', 'David Jones', 'Parchita', 'Bimba y Lola'];
+const bp = brands.map(b => { const e = mk('div', 'pill', b, s4.el); e.style.cssText += `border:2px solid ${C.rose};color:${C.cream};font-size:42px;padding:22px 44px;font-weight:500`; return e; });
+const row = ['miumiu-2509', 'coach-2619-negro', 'alexmia-9489', 'coach-250907', 'parchita-2606', 'dj-cm8364', 'coach-2618', 'fashion-3037'].map(n => bag(n, 400, s4.el));
+const more = mk('div', 'txt', '+ MUCHOS MODELOS MÁS', s4.el); more.style.cssText += `font-size:30px;letter-spacing:.3em;color:${C.rose};font-weight:600`;
+s4.draw = lt => {
+  set(m1, { y: 340, o: p(lt, .3, .8), s: mix(.9, 1, p(lt, .3, 1)), blur: (1 - p(lt, .3, .8)) * 10 });
+  bp.forEach((e, i) => {
+    const k = p(lt, .6 + i * .12, 1.1 + i * .12, ease.back);
+    set(e, { x: i % 2 ? 770 : 310, y: 560 + Math.floor(i / 2) * 130, s: k, o: clamp(k * 3) });
+  });
+  const gap = 430, total = gap * row.length;
+  row.forEach((el, i) => {
+    let x = 1300 + i * gap - lt * 330;
+    x = ((x + 400) % total + total) % total - 400;
+    set(el, { x, y: 1360 + bob(lt, i, 8), o: p(lt, .5, 1) });
+  });
+  set(more, { y: 1720, o: p(lt, 1.6, 2.1) });
+};
+
+/* ---------- 5. Ubicación ---------- */
+const s5 = scene(13.1, C.pink, 'circle', .7, [540, 820]);
+const u1 = mk('div', 'txt serif', '', s5.el); u1.style.cssText += `font-size:120px;color:${C.cream}`;
+const u1c = split(u1, '¿Dónde');
+const u2 = mk('div', 'txt serif', '', s5.el); u2.style.cssText += `font-size:140px;color:${C.brown};font-style:italic`;
+const u2c = split(u2, 'estamos?');
+const ripples = [0, 1, 2].map(() => { const r = mk('div', 'abs', '', s5.el); r.style.cssText += `width:200px;height:70px;border-radius:50%;border:4px solid ${C.cream}`; return r; });
+const pin = mk('div', 'abs', icon('pin', 230, C.brown, 1.5), s5.el);
+const city = mk('div', 'txt serif', '', s5.el); city.style.cssText += `font-size:160px;color:${C.brown}`;
+const cityc = split(city, 'Valencia');
+const zone = mk('div', 'txt', 'ZONA PARAPARAL · VENEZUELA', s5.el); zone.style.cssText += `font-size:36px;letter-spacing:.2em;color:${C.cream};font-weight:600`;
+const card = (ic, txt, sub, parent) => {
+  const e = mk('div', 'pill', `<div style="width:96px;height:96px;border-radius:50%;background:${C.pink};display:flex;align-items:center;justify-content:center">${icon(ic, 54, C.cream, 1.7)}</div><div><div style="font-size:42px">${txt}</div><div style="font-size:28px;font-weight:500;opacity:.75;margin-top:6px">${sub}</div></div>`, parent);
+  e.style.cssText += `background:${C.cream};color:${C.brown};padding:22px 50px 22px 22px;border-radius:40px;gap:30px;width:880px`;
+  return e;
+};
+const c1 = card('calendar', 'Showroom con cita', 'Escríbenos y agenda tu visita', s5.el);
+const c2 = card('moto', 'Delivery en Valencia', 'Con costo adicional', s5.el);
+s5.draw = lt => {
+  set(u1, { y: 300 }); letters(u1c, lt, .3, .05, .5, 70);
+  set(u2, { y: 440 }); letters(u2c, lt, .5, .05, .5, 70);
+  const land = 1.2;
+  const kd = p(lt, .6, land, ease.in);
+  const sq = lt > land ? Math.exp(-(lt - land) * 7) * Math.sin((lt - land) * 22) : 0;
+  set(pin, { y: mix(-200, 760, kd) - Math.abs(sq) * 40, sy: 1 - sq * .12, sx: 1 + sq * .12 });
+  ripples.forEach((r, i) => {
+    const ph = ((lt - land - i * .45) % 1.35 + 1.35) % 1.35 / 1.35;
+    set(r, { y: 880, s: .4 + ph * 3, o: lt > land + i * .45 ? (1 - ph) * .8 : 0 });
+  });
+  set(city, { y: 1060 }); letters(cityc, lt, 1.3, .06, .6, 80);
+  set(zone, { y: 1180, o: p(lt, 1.8, 2.3) });
+  set(c1, { x: mix(-500, 540, p(lt, 2.1, 2.7, ease.expo)), y: 1420 });
+  set(c2, { x: mix(1600, 540, p(lt, 2.4, 3.0, ease.expo)), y: 1600 });
+};
+
+/* ---------- 6. Envíos ---------- */
+const s6 = scene(16.8, C.cream, 'left', .6);
+const e1 = mk('div', 'txt serif', 'Envíos a toda', s6.el); e1.style.cssText += `font-size:105px;color:${C.brown}`;
+const e2 = mk('div', 'txt serif', '', s6.el); e2.style.cssText += `font-size:160px;color:${C.pink};font-style:italic`;
+const e2c = split(e2, 'Venezuela');
+const road = mk('div', 'abs', '', s6.el); road.style.cssText += `height:6px;width:1000px;background:repeating-linear-gradient(90deg,${C.brown} 0 40px,transparent 40px 70px)`;
+const speed = [0, 1, 2].map(() => { const s = mk('div', 'abs', '', s6.el); s.style.cssText += `height:6px;border-radius:3px;background:${C.pink}`; return s; });
+const truck = mk('div', 'abs', icon('truck', 260, C.brown, 1.3), s6.el);
+const ag = ['Zoom', 'Tealca', 'MRW'].map(a => { const e = mk('div', 'pill', a, s6.el); e.style.cssText += `background:${C.brown};color:${C.cream};font-size:44px;padding:24px 52px`; return e; });
+const cod = mk('div', 'pill', `<div style="width:60px;height:60px;border-radius:50%;background:${C.pink};display:flex;align-items:center;justify-content:center">${icon('check', 38, C.cream, 2.4)}</div>Cobro en destino`, s6.el);
+cod.style.cssText += `color:${C.brown};font-size:46px`;
+const b6 = [['dj-8255', -14, 220], ['coach-2618', 10, 830]].map(([n, r, x]) => ({ el: bag(n, 420, s6.el), r, x }));
+s6.draw = lt => {
+  set(e1, { y: 340, o: p(lt, .3, .8), blur: (1 - p(lt, .3, .8)) * 8 });
+  set(e2, { y: 490 }); letters(e2c, lt, .5, .05, .5, 80);
+  road.style.clipPath = `inset(0 ${(1 - p(lt, .7, 1.5, ease.inOut)) * 100}% 0 0)`;
+  set(road, { y: 960 });
+  const kt = p(lt, .9, 2.0, ease.expo);
+  const tx = mix(-250, 540, kt), vib = Math.sin(lt * 40) * 2 * (1 - kt * .7);
+  set(truck, { x: tx, y: 830 + vib });
+  speed.forEach((s, i) => { s.style.width = (1 - kt) * 160 + 20 + 'px'; set(s, { x: tx - 200 - i * 30, y: 780 + i * 45, o: (1 - kt) * .9 }); });
+  ag.forEach((e, i) => { const k = p(lt, 1.8 + i * .14, 2.3 + i * .14, ease.back); set(e, { x: 240 + i * 300, y: 1150, s: k, o: clamp(k * 3) }); });
+  set(cod, { y: 1320, o: p(lt, 2.4, 2.9), s: mix(.9, 1, p(lt, 2.4, 2.9, ease.back)) });
+  b6.forEach((b, i) => { const k = p(lt, 1.2 + i * .2, 2.0 + i * .2, ease.back); set(b.el, { x: b.x, y: mix(2200, 1690, k) + bob(lt, i), r: b.r }); });
+};
+
+/* ---------- 7. Pagos + mayor ---------- */
+const s7 = scene(20.1, C.brown, 'up', .6);
+const f1 = mk('div', 'txt serif', 'Formas de', s7.el); f1.style.cssText += `font-size:100px;color:${C.cream}`;
+const f2 = mk('div', 'txt serif', '', s7.el); f2.style.cssText += `font-size:170px;color:${C.pink};font-style:italic`;
+const f2c = split(f2, 'pago');
+const pays = [['wallet', 'Zinli'], ['phone', 'Pago Móvil'], ['tag', 'Binance']].map(([ic, t]) => {
+  const e = mk('div', 'pill', `${icon(ic, 56, C.rose, 1.6)}<span style="flex:1">${t}</span><span class="ok" style="width:62px;height:62px;border-radius:50%;background:${C.pink};display:flex;align-items:center;justify-content:center">${icon('check', 38, C.cream, 2.6)}</span>`, s7.el);
+  e.style.cssText += `width:780px;background:${C.brown2};border:2px solid ${C.rose}66;color:${C.cream};font-size:48px;padding:30px 34px 30px 44px;border-radius:34px;gap:30px`;
+  return e;
+});
+const stamp = mk('div', 'abs', `<div style="width:400px;height:400px;border-radius:50%;background:${C.pink};display:flex;flex-direction:column;align-items:center;justify-content:center;color:${C.brown};box-shadow:0 0 0 14px ${C.brown},0 0 0 17px ${C.pink}">
+  <div style="font-size:30px;letter-spacing:.3em;font-weight:700">AL MAYOR</div>
+  <div class="serif" style="font-size:96px;font-style:italic;line-height:1.05;color:${C.cream}">desde 3</div>
+  <div style="font-size:34px;letter-spacing:.3em;font-weight:700">PIEZAS</div></div>`, s7.el);
+const sp7 = sparkles(s7.el, 8, C.rose, 11);
+s7.draw = lt => {
+  set(f1, { y: 300, o: p(lt, .3, .8) });
+  set(f2, { y: 450 }); letters(f2c, lt, .45, .07, .5, 80);
+  pays.forEach((e, i) => {
+    const k = p(lt, .7 + i * .18, 1.3 + i * .18, ease.expo);
+    set(e, { y: 700 + i * 170 + (1 - k) * 120, o: k });
+    const ok = e.querySelector('.ok'); ok.style.transform = `scale(${p(lt, 1.2 + i * .18, 1.6 + i * .18, ease.back)})`;
+  });
+  const ks = p(lt, 1.8, 2.3, ease.back);
+  set(stamp, { y: 1460, s: mix(2.2, 1, ks), r: mix(-40, -8, ks) + Math.sin(lt * 1.5) * 2, o: clamp(ks * 3) });
+  drawSparkles(sp7, lt, p(lt, 2, 2.5));
+};
+
+/* ---------- 8. Cierre ---------- */
+const s8 = scene(23.1, C.brown, 'circle', .8);
+const halo = mk('div', 'abs', '', s8.el); halo.style.cssText += `width:1100px;height:1100px;border-radius:50%;background:radial-gradient(${C.cocoa},${C.brown} 65%)`;
+const fan = [['coach-2619-azul', 300, 150, 780, -16], ['dj-8301', 320, 930, 780, 14], ['alexmia-0145-beige', 340, 310, 600, -8], ['coach-patente', 340, 770, 600, 8], ['miumiu-058', 390, 540, 520, 0]]
+  .map(([n, h, x, y, r], i) => ({ el: bag(n, h, s8.el), x, y, r, i }));
+const lg8 = mk('div', 'abs', `<div class="logo" style="color:${C.pink};font-size:190px"><span class="ch">M</span><span class="ch">A</span><span class="ch">U</span><span class="ch">R</span><i class="ch">G</i><span class="ch">.</span><sup>©</sup></div>`, s8.el);
+const lg8c = [...lg8.querySelectorAll('.ch')];
+const rows = [['globe', 'maurg.shop'], ['insta', '@maurg0171'], ['whats', '0412-588 0039']].map(([ic, t]) => {
+  const e = mk('div', 'pill', icon(ic, 54, C.pink, 1.7) + t, s8.el);
+  e.style.cssText += `color:${C.cream};font-size:50px;font-weight:500;gap:26px`;
+  return e;
+});
+const city8 = mk('div', 'txt', 'VALENCIA · VENEZUELA', s8.el); city8.style.cssText += `font-size:28px;letter-spacing:.35em;color:${C.rose};font-weight:600`;
+const sp8 = sparkles(s8.el, 12, C.pink, 7);
+s8.draw = lt => {
+  set(halo, { y: 700, s: 1 + Math.sin(lt * 1.6) * .03 });
+  fan.forEach(b => { const k = p(lt, .5 + b.i * .12, 1.2 + b.i * .12, ease.back); set(b.el, { x: b.x, y: b.y + bob(lt, b.i, 9) + (1 - k) * 150, s: k, r: b.r * k, o: clamp(k * 3) }); });
+  set(lg8, { y: 1090 }); letters(lg8c, lt, 1.1, .07, .6, 70);
+  rows.forEach((e, i) => { const k = p(lt, 1.8 + i * .2, 2.4 + i * .2, ease.expo); set(e, { x: mix(380, 540, k), y: 1330 + i * 115, o: k }); });
+  set(city8, { y: 1740, o: p(lt, 2.6, 3.1) });
+  drawSparkles(sp8, lt, p(lt, 1, 2));
+};
+
+window.DURATION = DURATION;
+window.render = t => renderScenes(t, DURATION);
+render(0);
+</script></body></html>

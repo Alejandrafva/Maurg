@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><title>Regalos MAURG</title>
+<link rel="stylesheet" href="base.css"></head>
+<body><div id="stage"><div class="grain"></div></div>
+<script src="lib.js"></script>
+<script>
+const DURATION = 19;
+const bob = (lt, ph = 0, a = 10) => Math.sin(lt * 2.1 + ph) * a;
+
+/* ---------- 1. Cinta de regalo ---------- */
+const s1 = scene(0, C.brown);
+const rh = mk('div', 'abs', '', s1.el); rh.style.cssText += `width:1080px;height:46px;background:linear-gradient(${C.rose},${C.pink} 40%,#A9505F)`;
+const rv = mk('div', 'abs', '', s1.el); rv.style.cssText += `width:46px;height:1920px;background:linear-gradient(90deg,${C.rose},${C.pink} 40%,#A9505F)`;
+const t1 = mk('div', 'txt serif', '', s1.el); t1.style.cssText += `font-size:170px;color:${C.cream}`;
+const t1c = split(t1, 'Regala');
+const t2 = mk('div', 'abs', logoHTML(C.pink, 170), s1.el);
+const knot = mk('div', 'abs', `<svg width="220" height="140" viewBox="0 0 220 140"><path d="M110 70C70 10 10 10 20 60s70 20 90 10z" fill="${C.pink}" stroke="#A9505F" stroke-width="4"/><path d="M110 70c40-60 100-60 90-10s-70 20-90 10z" fill="${C.pink}" stroke="#A9505F" stroke-width="4"/><circle cx="110" cy="70" r="20" fill="${C.rose}" stroke="#A9505F" stroke-width="4"/></svg>`, s1.el);
+const card = mk('div', 'abs', `<div style="position:relative;width:420px;background:${C.cream};border-radius:14px;padding:46px 40px 40px;color:${C.brown};box-shadow:0 20px 40px rgba(0,0,0,.35)">
+  <div style="position:absolute;top:16px;left:50%;width:22px;height:22px;margin-left:-11px;border-radius:50%;border:3px solid ${C.brown}"></div>
+  <div style="display:flex;align-items:center;gap:12px;font-size:30px;font-weight:700;letter-spacing:.15em;margin-top:14px">${icon('heart', 34, C.pink, 2)}GUARDA ESTE VIDEO</div>
+  <div style="font-size:24px;line-height:1.45;margin-top:16px;font-weight:500">Ideas de regalo para esta temporada, con todo el estilo MAURG.</div></div>`, s1.el);
+const str = mk('div', 'abs', '', s1.el); str.style.cssText += `width:3px;height:120px;background:${C.cream};transform-origin:top`;
+[rh,rv].forEach(e=>e.style.zIndex=1);[t1,t2].forEach(e=>e.style.zIndex=2);knot.style.zIndex=3;str.style.zIndex=4;card.style.zIndex=5;
+s1.draw = lt => {
+  set(t1, { y: 640 }); letters(t1c, lt, .2, .07, .55, 90);
+  set(t2, { y: 1620, o: p(lt, .6, 1.1), blur: (1 - p(lt, .6, 1.1)) * 10 });
+  const open = p(lt, 2.9, 3.5, ease.in);
+  rh.style.clipPath = `inset(0 ${(1 - p(lt, .3, 1.0, ease.inOut)) * 100}% 0 0)`;
+  rv.style.clipPath = `inset(0 0 ${(1 - p(lt, .5, 1.2, ease.inOut)) * 100}% 0)`;
+  set(rh, { y: 1000, x: 540 + open * 1100 });
+  set(rv, { y: 960, x: 540, }); rv.style.transform += ` translateY(${open * 1950}px)`;
+  const kk = p(lt, 1.1, 1.5, ease.back);
+  set(knot, { x: 540, y: 1000, s: kk * (1 - open), r: Math.sin(lt * 3) * 3 });
+  // tarjeta colgando y balanceándose (péndulo amortiguado)
+  const ang = p(lt, 1.3, 1.4) * 28 * Math.exp(-(lt - 1.3) * 1.2) * Math.cos((lt - 1.3) * 4.2) + 6;
+  const cx = 540, cy = 1000, L = 120, a = ang * Math.PI / 180;
+  const ex = cx + Math.sin(a) * L, ey = cy + Math.cos(a) * L;
+  const kc = p(lt, 1.3, 1.8, ease.back), out = 1 - open;
+  str.style.transform = `translate(${cx}px,${cy}px) rotate(${-ang}deg)`; str.style.opacity = kc * out;
+  set(card, { x: ex - Math.sin(a) * -10, y: ey + 110, r: -ang, s: kc, o: clamp(kc * 3) * out });
+  card.style.transformOrigin = '50% 0';
+};
+
+/* ---------- 2. Guía de regalos ---------- */
+const s2 = scene(3.3, C.brown2, 'circle', .7, [540, 1000]);
+const panels = mk('div', 'abs', '', s2.el);
+panels.style.cssText += `width:1080px;height:1920px;background:repeating-linear-gradient(90deg,transparent 0 120px,rgba(0,0,0,.18) 120px 124px,rgba(255,255,255,.04) 124px 128px,transparent 128px 270px)`;
+const floor = mk('div', 'abs', '', s2.el); floor.style.cssText += `width:1080px;height:260px;background:linear-gradient(${C.brown},#2A150E)`;
+const g1 = mk('div', 'txt serif', 'Regalos', s2.el); g1.style.cssText += `font-size:150px;color:${C.blush}`;
+const g2 = mk('div', 'txt serif', 'que enamoran', s2.el); g2.style.cssText += `font-size:96px;color:${C.pink};font-style:italic`;
+const g3 = mk('div', 'txt', 'ELIGE TU FAVORITA', s2.el); g3.style.cssText += `font-size:28px;letter-spacing:.35em;color:${C.rose};font-weight:600`;
+const pages = [
+  [['coach-patente', 'Coach Patente'], ['miumiu-058', 'Miu Miu Hobo'], ['dj-8301', 'David Jones'], ['coach-teri-roja', 'Coach Teri']],
+  [['alexmia-0145-beige', 'Alex&amp;Mia Ejecutiva'], ['coach-2619-azul', 'Coach 2619'], ['parchita-2606', 'Parchita'], ['bimba', 'Bimba y Lola']],
+];
+const slots = [[300, 760, 400, -6], [790, 880, 380, 6], [300, 1300, 380, 5], [790, 1440, 380, -5]];
+const items = pages.flatMap((pg, pi) => pg.map(([n, name], j) => {
+  const [x, y, h, r] = slots[j];
+  const el = bag(n, h, s2.el);
+  const num = String(pi * 4 + j + 1).padStart(2, '0');
+  const lb = mk('div', 'abs', `<div style="display:flex;align-items:center;gap:16px;white-space:nowrap"><span class="serif" style="font-size:50px;font-style:italic;color:${C.pink}">${num}</span><span style="width:40px;height:2px;background:${C.rose}"></span><span style="font-size:32px;font-weight:600;color:${C.cream}">${name}</span></div>`, s2.el);
+  return { el, lb, x, y, r, pi, j };
+}));
+const snow = sparkles(s2.el, 16, C.rose, 21);
+const PG = 4.4; // duración de cada página
+s2.draw = lt => {
+  set(panels, {}); set(floor, { y: 1790 });
+  set(g1, { y: 230, o: p(lt, .5, 1), blur: (1 - p(lt, .5, 1)) * 10 });
+  set(g2, { y: 360, o: p(lt, .7, 1.2) });
+  set(g3, { y: 455, o: p(lt, 1, 1.5) });
+  items.forEach(it => {
+    const a = .9 + it.pi * PG + it.j * .15;
+    const kin = p(lt, a, a + .7, ease.back);
+    const kout = it.pi === 0 ? p(lt, PG + .5 + it.j * .06, PG + 1.0 + it.j * .06, ease.in) : 0;
+    const x = it.x - kout * 1200 + (it.pi ? (1 - p(lt, a, a + .7, ease.expo)) * 1100 : 0);
+    const y = it.y + bob(lt, it.j + it.pi, 9) - (it.pi ? 0 : (1 - kin) * 700);
+    set(it.el, { x, y, s: it.pi ? 1 : kin, r: it.r + Math.sin(lt * 1.4 + it.j) * 1.5, o: lt < a ? 0 : 1 });
+    const kl = p(lt, a + .4, a + .9, ease.out);
+    const lx = it.x;
+    set(it.lb, { x: lx - kout * 1200 + 0, y: it.y + 245, o: kl * (1 - kout) }); it.lb.style.transform += ` translateY(${(1 - kl) * 30}px)`;
+  });
+  drawSparkles(snow, lt, p(lt, .8, 1.6) * .8);
+};
+
+/* ---------- 3. Cierre ---------- */
+const s3 = scene(3.3 + .9 + PG * 2 + .2, C.pink, 'blinds', .6);
+const gift = mk('div', 'abs', `<div style="width:200px;height:200px;border-radius:50%;background:${C.brown};display:flex;align-items:center;justify-content:center">${icon('gift', 110, C.blush, 1.5)}</div>`, s3.el);
+const c1 = mk('div', 'txt serif', 'Aparta tu', s3.el); c1.style.cssText += `font-size:110px;color:${C.brown}`;
+const c2 = mk('div', 'txt serif', 'regalo hoy', s3.el); c2.style.cssText += `font-size:140px;color:${C.cream};font-style:italic`;
+const rows = [['whats', '0412-588 0039'], ['insta', '@maurg0171'], ['truck', 'Envíos a toda Venezuela']].map(([ic, t]) => {
+  const e = mk('div', 'pill', `<div style="width:84px;height:84px;border-radius:50%;background:${C.brown};display:flex;align-items:center;justify-content:center">${icon(ic, 46, C.blush, 1.7)}</div>${t}`, s3.el);
+  e.style.cssText += `color:${C.brown};font-size:46px;gap:26px;width:820px`; return e;
+});
+const lg3 = mk('div', 'abs', logoHTML(C.brown, 120), s3.el);
+const web = mk('div', 'txt', 'MAURG.SHOP', s3.el); web.style.cssText += `font-size:30px;letter-spacing:.4em;color:${C.cream};font-weight:600`;
+s3.draw = lt => {
+  const kg = p(lt, .3, .8, ease.back);
+  set(gift, { y: 380, s: kg, r: (1 - kg) * 40 + Math.sin(lt * 5) * 4 * p(lt, .8, 1) });
+  set(c1, { y: 600, o: p(lt, .5, 1) });
+  set(c2, { y: 740, o: p(lt, .7, 1.2), s: mix(1.15, 1, p(lt, .7, 1.3)) });
+  rows.forEach((e, i) => { const k = p(lt, 1.1 + i * .18, 1.7 + i * .18, ease.expo); set(e, { x: mix(-400, 540, k), y: 1000 + i * 135 }); });
+  set(lg3, { y: 1560, o: p(lt, 1.8, 2.3) });
+  set(web, { y: 1700, o: p(lt, 2.1, 2.6) });
+};
+
+window.DURATION = DURATION;
+window.render = t => renderScenes(t, DURATION);
+render(0);
+</script></body></html>

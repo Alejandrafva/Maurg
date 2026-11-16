@@ -1,0 +1,18 @@
+@import url('fonts.css');
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:1080px;height:1920px;overflow:hidden;background:#381D14}
+#stage{position:relative;width:1080px;height:1920px;overflow:hidden;font-family:'Montserrat',sans-serif}
+.scene{position:absolute;inset:0;overflow:hidden}
+.abs,.bag,.txt,.logo-wrap{position:absolute;left:0;top:0;will-change:transform}
+.bag{aspect-ratio:auto}
+.bag img{height:100%;display:block;position:relative;z-index:1;filter:drop-shadow(0 18px 22px rgba(30,10,5,.28))}
+.bag .shadow{position:absolute;left:12%;right:12%;bottom:-3%;height:7%;border-radius:50%;background:radial-gradient(closest-side,rgba(25,8,4,.45),rgba(25,8,4,0));z-index:0}
+.serif{font-family:'Playfair Display',serif}
+.txt{white-space:nowrap;text-align:center;line-height:1}
+.ch{display:inline-block}
+.logo{font-family:'Playfair Display',serif;font-weight:400;letter-spacing:.02em;line-height:1;white-space:nowrap;position:relative}
+.logo i{font-style:italic}
+.logo b{font-weight:400}
+.logo sup{position:absolute;font-size:.22em;right:-.15em;top:-.35em;font-family:'Montserrat',sans-serif;font-weight:400}
+.pill{position:absolute;left:0;top:0;white-space:nowrap;border-radius:999px;display:flex;align-items:center;gap:18px;font-weight:600}
+.grain{position:absolute;inset:0;pointer-events:none;z-index:999;opacity:.07;mix-blend-mode:overlay;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}

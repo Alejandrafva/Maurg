@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><title>Nuevos ingresos</title>
+<link rel="stylesheet" href="base.css"></head>
+<body><div id="stage"><div class="grain"></div></div>
+<script src="lib.js"></script>
+<script>
+const DURATION = 20.5;
+const bob = (lt, ph = 0, a = 10) => Math.sin(lt * 2.1 + ph) * a;
+
+/* ---------- Intro ---------- */
+const s1 = scene(0, C.brown);
+const i1 = mk('div', 'txt serif', '', s1.el); i1.style.cssText += `font-size:190px;color:${C.cream}`;
+const i1c = split(i1, 'Llegó');
+const i2 = mk('div', 'txt serif', '', s1.el); i2.style.cssText += `font-size:190px;color:${C.pink};font-style:italic`;
+const i2c = split(i2, 'lo nuevo');
+const ib = mk('div', 'abs', `<div style="width:170px;height:170px;border-radius:50%;background:${C.pink};display:flex;align-items:center;justify-content:center">${icon('bag', 92, C.brown, 1.6)}</div>`, s1.el);
+const sp1 = sparkles(s1.el, 12, C.pink, 5);
+s1.draw = lt => {
+  const k = p(lt, .1, .6, ease.back);
+  set(ib, { y: 640, s: k, r: (1 - k) * -90 + Math.sin(lt * 3) * 5 });
+  set(i1, { y: 900 }); letters(i1c, lt, .35, .07, .55, 90);
+  set(i2, { y: 1100 }); letters(i2c, lt, .65, .06, .55, 90);
+  drawSparkles(sp1, lt, p(lt, .5, 1.2));
+};
+
+/* ---------- Carrusel ---------- */
+const items = [
+  ['coach-patente', 'Coach', 'Patente'], ['miumiu-058', 'Miu Miu', 'Hobo'], ['alexmia-0145-beige', 'Alex&amp;Mia', 'Ejecutiva'],
+  ['coach-teri-roja', 'Coach', 'Teri'], ['dj-8301', 'David Jones', '8301'], ['parchita-2606', 'Parchita', '2606'],
+  ['coach-2619-azul', 'Coach', '2619'], ['fashion-3037', 'Fashion', '3037'], ['bimba', 'Bimba y Lola', 'Morral'],
+  ['dj-cm8364', 'David Jones', 'De mano'], ['coach-250907', 'Coach', '250907'], ['miumiu-2509', 'Miu Miu', '2509'],
+];
+const s2 = scene(2.2, C.cream, 'circle', .7, [540, 1000]);
+const hd = mk('div', 'txt', 'NUEVOS INGRESOS', s2.el); hd.style.cssText += `font-size:64px;letter-spacing:.12em;color:${C.brown};font-weight:700`;
+const hd2 = mk('div', 'txt serif', 'en <i>MAURG.</i>', s2.el); hd2.style.cssText += `font-size:52px;color:${C.pink}`;
+const disc = mk('div', 'abs', '', s2.el); disc.style.cssText += `width:720px;height:720px;border-radius:50%;background:${C.blush}`;
+const bags = items.map(([n]) => bag(n, 640, s2.el));
+const lbls = items.map(([, b, m]) => {
+  const e = mk('div', 'txt', `<div style="font-size:30px;letter-spacing:.35em;color:${C.pink};font-weight:700">${b.toUpperCase()}</div><div class="serif" style="font-size:84px;color:${C.brown};margin-top:18px">${m}</div>`, s2.el);
+  return e;
+});
+const cnt = mk('div', 'txt', '', s2.el); cnt.style.cssText += `font-size:30px;letter-spacing:.2em;color:${C.brown};font-weight:600`;
+const bar = mk('div', 'abs', '', s2.el); bar.style.cssText += `width:600px;height:4px;background:${C.blush}`;
+const barIn = mk('div', '', '', bar); barIn.style.cssText = `height:100%;background:${C.pink}`;
+const av = mk('div', 'pill', `<span style="width:16px;height:16px;border-radius:50%;background:${C.pink}"></span>Disponibles en maurg.shop`, s2.el);
+av.style.cssText += `background:${C.brown};color:${C.cream};font-size:36px;padding:24px 44px;font-weight:500`;
+const T0 = .9, STEP = 1.12;
+s2.draw = lt => {
+  set(hd, { y: 230, o: p(lt, .3, .8), sx: mix(1.2, 1, p(lt, .3, 1)), blur: (1 - p(lt, .3, .8)) * 8 });
+  set(hd2, { y: 320, o: p(lt, .6, 1.1) });
+  const u = Math.max(0, (lt - T0) / STEP);
+  const fi = Math.floor(u), fr = u - fi;
+  const pos = Math.min(items.length - 1, fi + ease.inOut(clamp((fr - .62) / .38)));
+  const moving = fr > .62 && fi < items.length - 1;
+  set(disc, { y: 960, s: 1 + Math.sin(lt * 2) * .02 - (moving ? Math.sin((fr - .62) / .38 * Math.PI) * .08 : 0), o: p(lt, .4, .9) });
+  const appear = p(lt, .5, 1.2, ease.expo);
+  bags.forEach((el, i) => {
+    const d = i - pos, ad = Math.abs(d);
+    const s = mix(1, .38, clamp(ad));
+    const x = 540 + Math.sign(d) * (ad < 1 ? ad * 470 : 470 + (ad - 1) * 260);
+    set(el, { x: x + (1 - appear) * 900, y: 960 + (1 - s) * 220 + (ad < .5 ? bob(lt, 0, 10) : 0), s, o: clamp(2.6 - ad), blur: moving && ad < 2 ? 2 : 0 });
+    el.style.zIndex = 100 - Math.round(ad * 10);
+  });
+  lbls.forEach((e, i) => {
+    const d = i - pos, ad = Math.abs(d);
+    set(e, { y: 1440 + d * -60, o: clamp(1 - ad * 2.2) * appear });
+  });
+  const cur = Math.round(pos) + 1;
+  cnt.textContent = String(cur).padStart(2, '0') + ' / ' + items.length;
+  set(cnt, { y: 1600, o: appear });
+  barIn.style.width = (pos / (items.length - 1)) * 100 + '%';
+  set(bar, { y: 1650, o: appear });
+  set(av, { y: 1770, s: p(lt, 1.2, 1.7, ease.back) });
+};
+
+/* ---------- Cierre ---------- */
+const s3 = scene(2.2 + T0 + STEP * items.length + .5, C.brown, 'up', .6);
+const stack = [['coach-patente', -12, 250], ['miumiu-2509', 0, 540], ['coach-2619-azul', 12, 830]].map(([n, r, x], i) => ({ el: bag(n, 360, s3.el), r, x, i }));
+const lg = mk('div', 'abs', logoHTML(C.pink, 170), s3.el);
+const t3 = mk('div', 'txt serif', 'Aparta la tuya&nbsp;<i style="color:' + C.pink + '">hoy</i>', s3.el); t3.style.cssText += `font-size:76px;color:${C.cream}`;
+const rows = [['whats', '0412-588 0039'], ['insta', '@maurg0171'], ['globe', 'maurg.shop']].map(([ic, t]) => {
+  const e = mk('div', 'pill', icon(ic, 52, C.pink, 1.7) + t, s3.el); e.style.cssText += `color:${C.cream};font-size:48px;font-weight:500;gap:24px`; return e;
+});
+const sp3 = sparkles(s3.el, 10, C.pink, 9);
+s3.draw = lt => {
+  stack.forEach(b => { const k = p(lt, .3 + b.i * .12, .9 + b.i * .12, ease.back); set(b.el, { x: b.x, y: 560 + bob(lt, b.i) + (1 - k) * 200, s: k, r: b.r, o: clamp(k * 3) }); });
+  set(lg, { y: 970, o: p(lt, .7, 1.2), s: mix(1.2, 1, p(lt, .7, 1.3)), blur: (1 - p(lt, .7, 1.2)) * 12 });
+  set(t3, { y: 1150, o: p(lt, 1.1, 1.6) });
+  rows.forEach((e, i) => { const k = p(lt, 1.4 + i * .18, 2 + i * .18, ease.expo); set(e, { y: 1340 + i * 110 + (1 - k) * 60, o: k }); });
+  drawSparkles(sp3, lt, p(lt, .5, 1.5));
+};
+
+window.DURATION = DURATION;
+window.render = t => renderScenes(t, DURATION);
+render(0);
+</script></body></html>
