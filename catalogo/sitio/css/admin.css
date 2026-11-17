@@ -179,3 +179,5 @@ body.admin { background: var(--fondo); }
 .lateral .logo span { font-family: var(--letra-marca); font-weight: 900; letter-spacing: .04em; }
 .marca-entrada { font-family: var(--letra-marca); font-weight: 900; letter-spacing: .04em; }
 .aviso-panel { color: var(--acento); }
+.ambiente-foto { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--tinta-2); }
+.ambiente-foto input { accent-color: var(--acento); }

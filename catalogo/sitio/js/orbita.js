@@ -47,7 +47,8 @@
   }
 
   function elegir(productos) {
-    const conFoto = productos.filter((p) => p.disponible !== false && T.fotos(p).some((f) => !T.esVideo(f)));
+    // Las fotos de ambiente van en la portada; aquí lucen las fotos recortadas
+    const conFoto = productos.filter((p) => p.disponible !== false && T.fotos(p).some((f) => !T.esVideo(f)) && !T.esAmbiente(p));
     const dest = conFoto.filter((p) => p.destacado);
     const lista = dest.length >= 2 ? dest : conFoto;
     return lista.slice(0, MAX);
@@ -76,6 +77,7 @@
       '<div class="orbita-platos">' +
       items.map((p, i) => '<button class="orbita-plato" data-abrir-orbita="' + i + '" tabindex="-1" aria-hidden="true"><img src="' + esc(T.fotoPrincipal(p)) + '" alt="' + esc(p.nombre) + '" draggable="false"' + (i > 1 ? ' loading="lazy"' : "") + "></button>").join("") +
       "</div>" +
+      '<div class="orbita-contador" aria-hidden="true"><b>01</b><span>/ ' + String(n).padStart(2, "0") + "</span></div>" +
       '<div class="orbita-texto"><p class="orbita-ceja"></p><h2 class="orbita-titulo"><span class="t1"></span><span class="t2"></span></h2>' +
       '<div class="orbita-acciones"><button class="orbita-link" data-orbita="ver">' + icono("ojo") + "Ver ficha</button>" +
       '<button class="orbita-link" data-orbita="agregar">' + icono("bolsa") + "Agregar al pedido</button></div></div>" +
@@ -116,6 +118,14 @@
     S.escena.addEventListener("keydown", (e) => {
       if (e.key === "ArrowRight") { e.preventDefault(); paso(1); }
       if (e.key === "ArrowLeft") { e.preventDefault(); paso(-1); }
+    });
+    // Pasar por un acabado muestra su nombre
+    raiz.addEventListener("mouseover", (e) => {
+      const sp = e.target.closest(".orbita-colores span");
+      if (!sp) return;
+      sp.parentElement.querySelectorAll("span").forEach((x) => x.classList.toggle("activo", x === sp));
+      const et = raiz.querySelector(".orbita-etiqueta");
+      if (et) et.textContent = sp.title;
     });
     S.caja.addEventListener("pointerdown", (e) => { S.toque = { x: e.clientX, y: e.clientY }; });
     S.caja.addEventListener("pointerup", (e) => {
@@ -293,9 +303,11 @@
   }
 
   function pintarTexto(p, i) {
-    S.texto.querySelector(".orbita-ceja").textContent = "Destacado " + String(i + 1).padStart(2, "0") + " / " + String(S.n).padStart(2, "0");
+    S.texto.querySelector(".orbita-ceja").textContent = "Destacados · " + (p.categoria || "Colección");
+    const cont = S.raiz.querySelector(".orbita-contador b");
+    if (cont) { cont.textContent = String(i + 1).padStart(2, "0"); cont.animate && cont.animate([{ opacity: 0, transform: "translateY(12px)" }, { opacity: 1, transform: "none" }], { duration: 500, easing: "ease-out" }); }
     const t1 = S.texto.querySelector(".t1"), t2 = S.texto.querySelector(".t2");
-    t1.textContent = p.categoria || p.marca || "Colección";
+    t1.textContent = p.marca && p.marca !== "ARKEO" ? p.marca : (p.material ? p.material.split(",")[0] : p.categoria || "Colección");
     t2.textContent = p.nombre;
     t2.classList.toggle("larga", p.nombre.length > 18);
   }
@@ -311,8 +323,9 @@
       (T.tieneMayor(p) && m < d ? "<div><small>Al mayor · " + cfg.minimoMayor + "+</small><strong>" + T.dinero(m) + "</strong></div>" : "") + "</div>" +
       '<p class="orbita-estado ' + st.tipo + '">' + estados[st.tipo] + (p.codigo ? " · " + esc(p.codigo) : "") + "</p>" +
       (p.descripcion ? '<p class="orbita-desc">' + esc(p.descripcion) + "</p>" : "") +
-      (colores.length ? '<div class="orbita-colores">' + colores.slice(0, 6).map((c) => '<span title="' + esc(c.nombre) + '" style="background:' + esc(c.hex || "#ccc") + '"></span>').join("") +
-        "<small>" + colores.length + (colores.length === 1 ? " color" : " colores") + "</small></div>" : "");
+      (colores.length ? '<div class="orbita-acabados"><small>Acabados disponibles</small><div class="orbita-colores">' +
+        colores.slice(0, 6).map((c, k) => '<span class="' + (k === 0 ? "activo" : "") + '" title="' + esc(c.nombre) + '" style="background:' + esc(c.hex || "#ccc") + '"></span>').join("") +
+        '</div><em class="orbita-etiqueta">' + esc(colores[0].nombre) + "</em></div>" : "");
   }
 
   window.Orbita = { pintar };

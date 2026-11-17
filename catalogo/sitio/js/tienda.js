@@ -54,6 +54,7 @@
   function pintarTodo() {
     T.pintarComun(estado.cfg);
     pintarPortada();
+    pintarTarjetasCategoria();
     pintarCategorias();
     pintarColecciones();
     pintarLista();
@@ -78,42 +79,112 @@
   // -------------------------------------------------------------------
   // Portada
   // -------------------------------------------------------------------
+  // -------------------------------------------------------------------
+  // Portada: carrusel de fotos de ambiente (productos destacados)
+  // -------------------------------------------------------------------
+  const heroe = { slides: [], i: 0, t: null, firma: "" };
+  const INTERVALO = 6500;
+
   function pintarPortada() {
     const cfg = estado.cfg, por = cfg.portada || {};
-    const titulo = (por.titulo || cfg.nombreTienda || "").trim();
-    const h1 = $("#portada-titulo");
-    const corte = titulo.indexOf(" ");
-    const l1 = corte > 0 ? titulo.slice(0, corte) : titulo, l2 = corte > 0 ? titulo.slice(corte + 1) : "";
-    const dos = !!l2 && l1.length <= 12 && l2.length <= 12;
-    h1.innerHTML = dos ? "<span>" + esc(l1) + '</span><span class="linea-2">' + esc(l2) + "</span>" : esc(titulo);
-    h1.classList.toggle("dos-lineas", dos);
-    h1.classList.toggle("larga", !dos && titulo.length > 11);
-    h1.removeAttribute("data-nombre-tienda");
-    $("#portada-subtitulo").textContent = por.subtitulo || cfg.eslogan || "";
-    $("#portada-boton").firstChild.textContent = (por.boton || "Ver catálogo") + " ";
-    let img = por.imagen;
-    let destacado = null;
-    if (!img) {
-      // La vitrina empieza por el primer destacado; la portada muestra otro para no repetir
-      const dest = visibles().filter((p) => p.destacado && T.fotos(p).length);
-      destacado = dest[1] || dest[0] || visibles().find((p) => T.fotos(p).length);
-      img = destacado ? T.fotoPrincipal(destacado) : "img/sin-foto.svg";
-    }
-    const im = $("#portada-imagen");
-    if (im.getAttribute("src") !== img) im.src = img;
-    im.alt = destacado ? destacado.nombre : cfg.nombreTienda;
-    im.parentElement.style.cursor = destacado ? "pointer" : "";
-    im.parentElement.onclick = destacado ? () => abrirFicha(destacado.id) : null;
+    if (por.titulo) $("#portada-titulo").textContent = por.titulo;
+    if (por.subtitulo) $("#portada-subtitulo").textContent = por.subtitulo;
+    $("#portada-boton").textContent = por.boton || "Ver catálogo";
+    $("#heroe-ceja").textContent = cfg.eslogan || "";
     const banda = $("#banda-texto");
     if (banda) banda.textContent = "Precio al mayor desde " + cfg.minimoMayor + " piezas combinando modelos. Cotiza tu proyecto y te asesoramos.";
-    const n = visibles().length;
-    const datos = [];
-    if (n) datos.push("<div><strong>" + n + "</strong>productos</div>");
-    if (cfg.minimoMayor) datos.push("<div><strong>" + cfg.minimoMayor + "+</strong>piezas al mayor</div>");
-    if (cfg.tasaBCV) datos.push("<div><strong>" + T.numero(cfg.tasaBCV) + "</strong>tasa BCV (Bs/$)</div>");
-    $("#portada-datos").innerHTML = datos.join("");
     $("#texto-mayor").textContent = "Precio al mayor desde " + cfg.minimoMayor + " piezas";
     document.title = cfg.nombreTienda + " · Mobiliario de oficina y hogar";
+
+    // Diapositivas: destacados con foto de ambiente; si no hay, la imagen de portada o cualquier foto de ambiente
+    let slides = visibles().filter((p) => p.destacado && T.esAmbiente(p)).map((p) => ({ p, img: T.fotoPrincipal(p) }));
+    if (!slides.length) slides = visibles().filter((p) => T.esAmbiente(p)).slice(0, 5).map((p) => ({ p, img: T.fotoPrincipal(p) }));
+    if (por.imagen) slides.unshift({ p: null, img: por.imagen });
+    if (!slides.length) {
+      const d = visibles().find((p) => T.fotos(p).length);
+      slides = [{ p: d || null, img: d ? T.fotoPrincipal(d) : "img/sin-foto.svg", recorte: true }];
+    }
+    slides = slides.slice(0, 6);
+    const firma = slides.map((x) => x.img).join("|");
+    if (firma === heroe.firma) return;
+    heroe.firma = firma;
+    heroe.slides = slides;
+    heroe.i = 0;
+    $("#heroe-fondos").innerHTML = slides.map((x, k) =>
+      '<div class="heroe-foto' + (x.recorte ? " recorte" : "") + '">' +
+      '<img class="borroso" src="' + esc(x.img) + '" alt="" aria-hidden="true"' + (k ? ' loading="lazy"' : "") + ">" +
+      '<img class="nitido" src="' + esc(x.img) + '" alt="' + esc(x.p ? x.p.nombre : cfg.nombreTienda) + '"' + (k ? ' loading="lazy"' : ' fetchpriority="high"') + "></div>").join("");
+    $("#heroe-total").textContent = String(slides.length).padStart(2, "0");
+    $("#heroe-panel").classList.toggle("solo", slides.length < 2);
+    mostrarSlide(0);
+  }
+
+  function mostrarSlide(k) {
+    const n = heroe.slides.length;
+    if (!n) return;
+    heroe.i = ((k % n) + n) % n;
+    const fotos = document.querySelectorAll(".heroe-foto");
+    fotos.forEach((f, j) => f.classList.toggle("activa", j === heroe.i));
+    $("#heroe-num").textContent = String(heroe.i + 1).padStart(2, "0");
+    const barra = $("#heroe-barra");
+    barra.style.transition = "none"; barra.style.width = (heroe.i / Math.max(1, n)) * 100 + "%";
+    requestAnimationFrame(() => requestAnimationFrame(() => {
+      barra.style.transition = "width " + INTERVALO + "ms linear";
+      barra.style.width = ((heroe.i + 1) / n) * 100 + "%";
+    }));
+    const tarjeta = (x, clase) => {
+      if (!x || !x.p) return "";
+      const pr = T.precio(x.p, "detal", "divisas");
+      return '<button class="heroe-tarjeta ' + clase + '" data-abrir="' + x.p.id + '">' +
+        '<img src="' + esc(T.fotoPrincipal(x.p)) + '" alt="" loading="lazy">' +
+        (clase === "actual" ? "<span><b>" + esc(x.p.nombre) + "</b><small>" + esc(x.p.categoria || "") + "</small><em>Desde " + T.dinero(pr) + "</em><i>Ver producto</i></span>" : "") + "</button>";
+    };
+    const act = heroe.slides[heroe.i], sig = heroe.slides[(heroe.i + 1) % n];
+    const cont = $("#heroe-tarjetas");
+    cont.innerHTML = tarjeta(act, "actual") + (n > 1 ? tarjeta(sig, "siguiente") : "");
+    cont.classList.remove("entra"); void cont.offsetWidth; cont.classList.add("entra");
+    $("#heroe-mini").src = act.img;
+    clearTimeout(heroe.t);
+    if (n > 1 && !reducido()) heroe.t = setTimeout(() => { if (!document.hidden) mostrarSlide(heroe.i + 1); else mostrarSlide(heroe.i); }, INTERVALO);
+  }
+  const reducido = () => window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  // -------------------------------------------------------------------
+  // Tarjetas de categoría ("Compra por espacio")
+  // -------------------------------------------------------------------
+  const TINTES = ["#efe7dc", "#e3e8ef", "#e9e9ea", "#e8eef4", "#f1ece6", "#e6e9ec"];
+  function pintarTarjetasCategoria() {
+    const cont = $("#cats-tarjetas");
+    if (!cont) return;
+    const cats = listaCategorias();
+    $("#categorias-vitrina").classList.toggle("oculto", cats.length < 2);
+    cont.innerHTML = cats.slice(0, 8).map((c, k) => {
+      const prods = visibles().filter((p) => p.categoria === c.nombre && T.fotos(p).length);
+      const recorte = prods.find((p) => !T.esAmbiente(p));
+      const amb = prods.find((p) => T.esAmbiente(p));
+      const elegido = recorte || amb;
+      const img = elegido ? T.fotoPrincipal(elegido) : "";
+      return '<button class="cat-tarjeta revelar" style="--tinte:' + TINTES[k % TINTES.length] + ";--d:" + (k % 4) * 80 + 'ms" data-cat-tarjeta="' + esc(c.nombre) + '">' +
+        (img ? '<span class="cat-foto' + (elegido && T.esAmbiente(elegido) ? " ambiente" : "") + '"><img src="' + esc(img) + '" alt="" loading="lazy"></span>' : '<span class="cat-foto">' + icono(iconoPara(c)) + "</span>") +
+        '<span class="cat-texto"><b>' + esc(c.nombre) + "</b><small>" + c.n + (c.n === 1 ? " producto" : " productos") + "</small></span>" +
+        '<span class="cat-ir">' + icono("flecha") + "</span></button>";
+    }).join("");
+    observarRevelar();
+  }
+
+  // -------------------------------------------------------------------
+  // Aparición suave al hacer scroll
+  // -------------------------------------------------------------------
+  let observador = null;
+  function observarRevelar() {
+    const els = document.querySelectorAll(".revelar:not(.visible)");
+    if (!("IntersectionObserver" in window) || reducido()) { els.forEach((e) => e.classList.add("visible")); return; }
+    if (!observador) {
+      observador = new IntersectionObserver((entradas) => {
+        entradas.forEach((en) => { if (en.isIntersecting) { en.target.classList.add("visible"); observador.unobserve(en.target); } });
+      }, { rootMargin: "0px 0px -8% 0px", threshold: 0.08 });
+    }
+    els.forEach((e) => observador.observe(e));
   }
 
   // -------------------------------------------------------------------
@@ -221,6 +292,7 @@
       return;
     }
     $("#rejilla").innerHTML = lista.slice(0, estado.mostrar).map(tarjeta).join("");
+    observarRevelar();
     $("#mas-productos").classList.toggle("oculto", lista.length <= estado.mostrar);
   }
 
@@ -247,8 +319,8 @@
     const antes = Number(p.precio_antes) > dd ? "<s>" + T.dinero(p.precio_antes) + "</s>" : "";
     const colores = T.colores(p);
     const puntos = colores.length > 1 ? '<div class="puntos">' + colores.slice(0, 6).map((c) => '<span class="punto" title="' + esc(c.nombre) + '" style="background:' + esc(c.hex || "#ccc") + '"></span>').join("") + "</div>" : "";
-    const cubrir = /\.(jpe?g)(\?|$)/i.test(foto) && p.foto_cubrir ? " cubrir" : "";
-    return '<article class="producto' + (st.tipo === "agotado" ? " agotado" : "") + '"><div class="marco">' +
+    const cubrir = T.esAmbiente(p) ? " cubrir" : "";
+    return '<article class="producto revelar' + (st.tipo === "agotado" ? " agotado" : "") + '" style="--d:' + ((tarjeta.k = (tarjeta.k || 0) + 1) % 4) * 70 + 'ms"><div class="marco">' +
       '<button class="foto" data-abrir="' + p.id + '" aria-label="Ver ' + esc(p.nombre) + '">' +
       '<span class="etiquetas">' + etiquetasDe(p, st) + "</span>" +
       '<img src="' + esc(foto) + '" alt="' + esc(p.nombre) + '" loading="lazy" decoding="async" class="' + cubrir + '"></button>' +
@@ -302,7 +374,7 @@
     const media = fotos.length
       ? fotos.map((f, i) => T.esVideo(f)
         ? '<video src="' + esc(f.url) + '" controls playsinline preload="metadata"></video>'
-        : '<img src="' + esc(f.url) + '" alt="' + esc(p.nombre + (f.color ? " – " + f.color : "")) + '"' + (i ? ' loading="lazy"' : "") + ' decoding="async">').join("")
+        : '<img src="' + esc(f.url) + '" alt="' + esc(p.nombre + (f.color ? " – " + f.color : "")) + '"' + (i ? ' loading="lazy"' : "") + (f.ambiente ? ' class="cubrir"' : "") + ' decoding="async">').join("")
       : '<img src="img/sin-foto.svg" alt="">';
     const minis = fotos.length > 1
       ? '<div class="miniaturas">' + fotos.map((f, i) => '<button data-mini="' + i + '" aria-label="Foto ' + (i + 1) + '" aria-current="' + (i === 0) + '">' + (T.esVideo(f) ? '<span class="es-video">VIDEO</span>' : '<img src="' + esc(f.url) + '" alt="" loading="lazy">') + "</button>").join("") + "</div>"
@@ -355,7 +427,8 @@
       (p.codigo ? '<div class="codigo">Código ' + esc(p.codigo) + "</div>" : "") + antes + "</div>" +
       precios + aviso + selColores + comprar + preguntar +
       (p.descripcion ? '<div class="descripcion">' + esc(p.descripcion) + "</div>" : "") +
-      (datos.length ? '<dl class="datos-ficha">' + datos.map((d) => "<dt>" + esc(d[0]) + "</dt><dd>" + esc(d[1]) + "</dd>").join("") + "</dl>" : "") +
+      (datos.length ? '<div class="specs">' + datos.map((d) => "<div><small>" + esc(d[0]) + "</small><span>" + esc(d[1]) + "</span></div>").join("") + "</div>" : "") +
+      combinaCon(p) +
       '<p class="nota-pequena">Precio al mayor desde ' + cfg.minimoMayor + " piezas en total (puedes combinar modelos).</p>" +
       "</div></div>";
 
@@ -366,6 +439,14 @@
         document.querySelectorAll("[data-mini]").forEach((b) => b.setAttribute("aria-current", String(Number(b.dataset.mini) === i)));
       }, { passive: true });
     }
+  }
+
+  function combinaCon(p) {
+    const cols = p.colecciones || [];
+    const rel = visibles().filter((q) => q.id !== p.id && T.fotos(q).length && (q.categoria === p.categoria || (q.colecciones || []).some((c) => cols.includes(c))));
+    if (!rel.length) return "";
+    return '<div class="combina"><p>Combina con</p><div>' + rel.slice(0, 4).map((q) =>
+      '<button data-abrir="' + q.id + '" title="' + esc(q.nombre) + '"><img src="' + esc(T.fotoPrincipal(q)) + '" alt="' + esc(q.nombre) + '" loading="lazy"' + (T.esAmbiente(q) ? ' class="cubrir"' : "") + "><span>" + esc(q.nombre) + "</span></button>").join("") + "</div></div>";
   }
 
   function enlaceProducto(p) {
@@ -788,6 +869,14 @@
         $("#titulo-lista").scrollIntoView({ behavior: "smooth", block: "start" });
         return;
       }
+      if (d.catTarjeta !== undefined) {
+        estado.categoria = d.catTarjeta; estado.coleccion = ""; estado.mostrar = POR_PAGINA;
+        document.querySelectorAll("[data-categoria]").forEach((b) => b.setAttribute("aria-pressed", b.dataset.categoria === d.catTarjeta));
+        pintarLista();
+        $("#titulo-lista").scrollIntoView({ behavior: "smooth", block: "start" });
+        return;
+      }
+      if (d.heroe) { mostrarSlide(heroe.i + Number(d.heroe)); return; }
       if (d.abrir) { abrirFicha(d.abrir); return; }
       if (d.rapido) {
         const p = estado.productos.find((x) => String(x.id) === d.rapido);

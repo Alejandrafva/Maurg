@@ -1,9 +1,10 @@
 /* Datos de ejemplo para el MODO DEMOSTRACIÓN (cuando conexion.js no está lleno).
    No se usan cuando la tienda está conectada a Supabase. */
 (function () {
-  const H = { Negro: "#1d1b1c", Grafito: "#5a5a5c", Plata: "#a8a6a7", Blanco: "#f2f1ef", Azul: "#053359", Nogal: "#6e4a2e", Roble: "#c49a6c", Rosa: "#e3c4bd" };
+  const H = { Negro: "#1d1b1c", Grafito: "#5a5a5c", Plata: "#a8a6a7", Blanco: "#f2f1ef", Azul: "#053359", Nogal: "#6e4a2e", Roble: "#c49a6c", Rosa: "#e3c4bd", Multicolor: "#c0703a" };
   const ARCHIVO = { Negro: "negro", Grafito: "grafito", Plata: "plata", Blanco: "blanco", Azul: "marino", Nogal: "nogal", Roble: "roble", Rosa: "rosa" };
   const img = (base, color) => ({ url: "img/demo/" + base + "-" + ARCHIVO[color] + ".svg", color: color, tipo: "foto" });
+  const real = (n) => ({ url: "img/fotos/" + n + ".webp", color: "", tipo: "foto", ambiente: true });
   let id = 100;
   const p = (o) => {
     const colores = (o.colores || []).map((c) => ({ nombre: c, hex: H[c] || "#999999" }));
@@ -13,7 +14,7 @@
       id: id--, marca: "ARKEO", codigo: "", descripcion: "", divisa_detal: null, divisa_mayor: null, bcv_detal: null, bcv_mayor: null,
       precio_antes: null, disponible: true, encargo: false, destacado: false, nuevo: false, colecciones: [], orden: 0,
       material: "", alto: "", ancho: "", fondo: "",
-    }, o, { colores, stock_color, stock, fotos: (o.colores || []).map((c) => img(o.base, c)) });
+    }, o, { colores, stock_color, stock, fotos: o.reales ? o.reales.map(real) : (o.colores || []).map((c) => img(o.base, c)) });
   };
   window.DEMO = {
     config: {
@@ -40,13 +41,14 @@
         { nombre: "Mesas de reunión", icono: "mesa" },
         { nombre: "Archivadores", icono: "almacenaje" },
         { nombre: "Comedor", icono: "comedor" },
+        { nombre: "Sillas de barra", icono: "taburete" },
         { nombre: "Espejos", icono: "espejo" },
         { nombre: "Vanity", icono: "tocador" },
       ],
-      portada: { titulo: "", subtitulo: "Sillas presidenciales, ejecutivas y de visitante, escritorios, comedores, espejos y vanity. Al mayor y al detal, con envíos a toda Venezuela.", boton: "Ver catálogo", imagen: "" },
+      portada: { titulo: "", subtitulo: "Sillas, escritorios, comedores, barras, espejos y vanity. Al mayor y al detal, con envíos a toda Venezuela.", boton: "Ver catálogo", imagen: "" },
       colecciones: [
-        { nombre: "Oficina ejecutiva", descripcion: "Presidenciales, escritorios y reunión", imagen: "img/demo/escritorio-nogal.svg" },
-        { nombre: "Hogar", descripcion: "Comedores, espejos y vanity", imagen: "img/demo/vanity-blanco.svg" },
+        { nombre: "Oficina ejecutiva", descripcion: "Presidenciales, escritorios y reunión", imagen: "img/fotos/taburete-velvet-m.webp" },
+        { nombre: "Hogar", descripcion: "Comedor, barra, espejos y vanity", imagen: "img/fotos/silla-velvet-negra-m.webp" },
       ],
       resenas: [
         { nombre: "Grupo Andino C.A.", ciudad: "Valencia", estrellas: 5, texto: "Equipamos toda la gerencia con ARKEO. Calidad impecable y entrega a tiempo." },
@@ -60,6 +62,12 @@
     },
     proveedores: [{ id: 1, nombre: "Proveedor de ejemplo C.A.", telefono: "0212-000-0000", contacto: "Carlos", correo: "", direccion: "", notas: "" }],
     productos: [
+      p({ nombre: "Silla Velvet Concha", codigo: "CO-210", categoria: "Comedor", reales: ["silla-velvet-negra"], colores: ["Negro", "Grafito", "Plata"], stock_color: { Negro: 12, Grafito: 6, Plata: 4 }, divisa_detal: 85, divisa_mayor: 68, bcv_detal: 94, bcv_mayor: 75, destacado: true, nuevo: true, colecciones: ["Hogar"], material: "Terciopelo, patas cromadas", alto: "82 cm", ancho: "56 cm", fondo: "55 cm", descripcion: "Silla tapizada en terciopelo con respaldo acanalado y patas de acero cromado. Ideal para comedor, recepción o tocador.", orden: -6 }),
+      p({ nombre: "Taburete Velvet Capitoné", codigo: "BA-330", categoria: "Sillas de barra", reales: ["taburete-velvet"], colores: ["Blanco", "Grafito", "Negro", "Plata"], stock_color: { Blanco: 8, Grafito: 10, Negro: 6, Plata: 2 }, divisa_detal: 70, divisa_mayor: 55, bcv_detal: 77, bcv_mayor: 60, destacado: true, colecciones: ["Hogar"], material: "Terciopelo capitoné, estructura de acero negro", alto: "100 cm", descripcion: "Taburete alto con asiento envolvente capitoné y reposapiés. Perfecto para barras, cocinas y cafés.", orden: -5 }),
+      p({ nombre: "Silla de Barra Nórdica", codigo: "BA-120", categoria: "Sillas de barra", reales: ["silla-barra-nordica"], colores: ["Plata", "Blanco", "Negro"], stock_color: { Plata: 9, Blanco: 7, Negro: 11 }, divisa_detal: 65, divisa_mayor: 52, bcv_detal: 72, bcv_mayor: 57, destacado: true, colecciones: ["Hogar"], material: "Polipropileno, base cromada con pistón", alto: "Regulable 84-105 cm", descripcion: "Silla de barra giratoria con altura regulable a gas, asiento ergonómico y aro reposapiés.", orden: -4 }),
+      p({ nombre: "Taburete Concha Ejecutivo", codigo: "BA-150", categoria: "Sillas de barra", reales: ["taburete-concha"], colores: ["Negro", "Grafito"], stock_color: { Negro: 5, Grafito: 3 }, divisa_detal: 95, divisa_mayor: 78, bcv_detal: 105, bcv_mayor: 86, nuevo: true, material: "Semicuero acanalado, base cromada", alto: "Regulable 88-110 cm", descripcion: "Taburete con respaldo acanalado tipo concha, giro 360° y pistón a gas.", orden: -3 }),
+      p({ nombre: "Silla Patchwork", codigo: "CO-404", categoria: "Comedor", reales: ["silla-patchwork"], colores: ["Multicolor"], stock_color: { Multicolor: 2 }, divisa_detal: 75, divisa_mayor: 60, bcv_detal: 83, bcv_mayor: 66, material: "Tela patchwork, patas de haya", alto: "80 cm", descripcion: "Silla con brazos tapizada en patchwork y patas de madera de haya con refuerzo metálico.", orden: -2 }),
+      p({ nombre: "Vanity Hollywood + Silla Pétalo", codigo: "VN-140", categoria: "Vanity", reales: ["vanity-petalo"], colores: ["Blanco"], stock_color: { Blanco: 3 }, divisa_detal: 420, divisa_mayor: 370, bcv_detal: 465, bcv_mayor: 405, destacado: true, colecciones: ["Hogar"], material: "MDF lacado, espejo con 12 bombillos LED, silla en terciopelo", alto: "140 cm", ancho: "120 cm", descripcion: "Tocador con seis gavetas y espejo iluminado, con silla giratoria tipo pétalo en terciopelo rosa.", orden: -1 }),
       p({ nombre: "Silla Presidencial Imperium", codigo: "PR-900", categoria: "Sillas presidenciales", base: "presidencial", colores: ["Negro", "Azul", "Grafito"], stock_color: { Negro: 8, Azul: 3, Grafito: 0 }, divisa_detal: 390, divisa_mayor: 335, bcv_detal: 430, bcv_mayor: 370, destacado: true, nuevo: true, colecciones: ["Oficina ejecutiva"], material: "Cuero sintético premium, base de aluminio pulido", alto: "125-135 cm", ancho: "68 cm", fondo: "72 cm", descripcion: "Espaldar alto capitoné, mecanismo basculante con bloqueo, apoyabrazos acolchados y base de aluminio.", orden: 1 }),
       p({ nombre: "Silla Ejecutiva Vértice", codigo: "EJ-520", categoria: "Sillas ejecutivas", base: "ejecutiva", colores: ["Negro", "Grafito", "Azul"], stock_color: { Negro: 15, Grafito: 6, Azul: 2 }, divisa_detal: 185, divisa_mayor: 150, bcv_detal: 205, bcv_mayor: 165, destacado: true, colecciones: ["Oficina ejecutiva"], material: "Malla y tela, base de nylon", alto: "110-120 cm", descripcion: "Soporte lumbar ajustable, altura regulable y apoyabrazos 2D. Ideal para jornadas largas.", orden: 2 }),
       p({ nombre: "Silla de Visitante Cantilever", codigo: "VI-210", destacado: true, categoria: "Sillas de visitante", base: "visitante", colores: ["Negro", "Grafito"], stock_color: { Negro: 24, Grafito: 12 }, divisa_detal: 78, divisa_mayor: 60, bcv_detal: 86, bcv_mayor: 66, material: "Estructura cromada, tapizado en cuero sintético", alto: "86 cm", descripcion: "Silla tipo trineo con apoyabrazos, perfecta para salas de espera y despachos.", orden: 3 }),

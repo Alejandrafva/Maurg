@@ -10,6 +10,7 @@
   <meta property="og:title" content="ARKEO · Mobiliario de oficina y hogar">
   <meta property="og:description" content="Sillas, escritorios, comedores, espejos y vanity. Al mayor y al detal. Pide por WhatsApp.">
   <meta property="og:image" content="img/compartir.png">
+  <link rel="preload" as="image" href="img/fotos/silla-velvet-negra.webp">
     <link rel="icon" href="img/favicon-32.png" sizes="32x32" type="image/png">
   <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
   <link rel="manifest" href="manifest.webmanifest">
@@ -48,17 +49,42 @@
   </nav>
 
   <main>
-    <section class="portada contenedor" aria-label="Portada">
-      <h1 class="marca-grande" id="portada-titulo">ARKEO</h1>
-      <div class="portada-cuerpo">
-        <div class="portada-texto">
-          <p id="portada-subtitulo">Sillas presidenciales, ejecutivas y de visitante, escritorios, comedores, espejos y vanity. Al mayor y al detal.</p>
-          <a class="boton" href="#catalogo" id="portada-boton">Ver catálogo
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M6 13l6 6 6-6"/></svg></a>
+    <section class="heroe" aria-label="Portada">
+      <div class="heroe-marco" id="heroe">
+        <div class="heroe-fondos" id="heroe-fondos"></div>
+        <div class="heroe-velo"></div>
+        <div class="heroe-contenido">
+          <p class="heroe-ceja" id="heroe-ceja">Mobiliario de oficina y hogar</p>
+          <h1 class="heroe-titulo" id="portada-titulo">Encuentra el equilibrio perfecto entre <b>confort y estilo</b>.</h1>
+          <p class="heroe-sub" id="portada-subtitulo">Sillas, escritorios, comedores, barras, espejos y vanity. Al mayor y al detal, con envíos a toda Venezuela.</p>
+          <div class="heroe-botones">
+            <a class="boton blanco" href="#catalogo" id="portada-boton">Ver catálogo</a>
+            <a class="boton vidrio oculto" data-wa target="_blank" rel="noopener">Cotizar por WhatsApp</a>
+          </div>
         </div>
-        <div class="portada-imagen"><img id="portada-imagen" src="img/sin-foto.svg" alt="" fetchpriority="high"></div>
-        <div class="portada-datos" id="portada-datos"></div>
+        <a class="heroe-circulo" href="#categorias-vitrina"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg><span>Explorar<br>espacios</span></a>
+        <div class="heroe-panel" id="heroe-panel">
+          <div class="heroe-progreso"><span id="heroe-num">01</span><i><b id="heroe-barra"></b></i><span id="heroe-total">01</span></div>
+          <div class="heroe-tarjetas" id="heroe-tarjetas"></div>
+          <div class="heroe-flechas">
+            <button class="heroe-flecha" data-heroe="-1" aria-label="Anterior"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></button>
+            <button class="heroe-flecha llena" data-heroe="1" aria-label="Siguiente"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+          </div>
+        </div>
+        <span class="heroe-raton" aria-hidden="true"><i></i></span>
       </div>
+      <div class="contenedor heroe-pie">
+        <a class="heroe-avatar" href="#catalogo" aria-label="Ver catálogo"><img id="heroe-mini" src="img/sin-foto.svg" alt=""><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></span></a>
+        <p>Eleva tus espacios con mobiliario moderno para tu casa y tu oficina.</p>
+        <i class="heroe-raya" aria-hidden="true"></i>
+        <img class="heroe-marca" src="img/marca-silla-negra.png" alt="" width="44" height="64">
+        <p class="grande">Piezas atemporales para cada espacio de tu hogar y oficina.</p>
+      </div>
+    </section>
+
+    <section class="contenedor cats-seccion" id="categorias-vitrina" aria-label="Categorías">
+      <div class="titulo-bloque revelar"><div><small>Explora</small><h2>Compra por espacio</h2></div><a class="enlace-flecha" href="#catalogo">Ver todo el catálogo <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></a></div>
+      <div class="cats-tarjetas" id="cats-tarjetas"></div>
     </section>
 
     <section class="orbita" id="orbita" aria-label="Productos destacados" hidden></section>

@@ -682,7 +682,7 @@
     else if (esCopia && original._priv) priv = original._priv;
     const ed = {
       colores: T.colores(p).map((c) => ({ nombre: c.nombre, hex: c.hex || "#999999", stock: (p.stock_color || {})[c.nombre] != null ? p.stock_color[c.nombre] : "" })),
-      fotos: T.fotos(p).map((f) => ({ url: f.url, color: f.color || "", tipo: f.tipo || (T.esVideo(f) ? "video" : "foto") })),
+      fotos: T.fotos(p).map((f) => ({ url: f.url, color: f.color || "", tipo: f.tipo || (T.esVideo(f) ? "video" : "foto"), ambiente: !!f.ambiente })),
       subidas: [], quitadas: [], subiendo: 0, guardado: false,
     };
     const cats = todasCategorias();
@@ -718,6 +718,7 @@
       '<div id="ed-colores" class="lista-orden"></div>' +
       '<div class="rejilla-campos">' + campo("Stock total", "stock", p.stock || 0, { attrs: ' inputmode="numeric" id="ed-stock"' }) + "</div></div>" +
       '<div class="seccion-form"><h3>Fotos y videos <small class="ayuda">Se aligeran solas (máx. 900 px)</small></h3>' +
+      '<p class="ayuda">Fotos recortadas con fondo blanco o transparente: lucen flotando con sombra. Fotos <b>de ambiente</b> (el mueble en una sala, cocina…): marca «Ambiente» para que llenen la tarjeta. Si el producto es <b>Destacado</b> y su primera foto es de ambiente, sale en el carrusel grande de la portada.</p>' +
       '<div class="fotos-editor" id="ed-fotos"></div>' +
       '<div style="display:flex;gap:8px;flex-wrap:wrap"><button type="button" class="boton claro pequeno" id="ed-enlace">' + icono("mas") + "Agregar por enlace</button></div>" +
       '<input type="file" id="ed-archivo" accept="image/*,video/mp4,video/webm,video/quicktime" multiple hidden></div>' +
@@ -782,6 +783,7 @@
         '<div class="foto-editor" data-i="' + i + '">' + (i === 0 ? '<span class="principal">Principal</span>' : "") +
         (f.tipo === "video" ? '<video src="' + esc(f.url) + '" muted playsinline preload="metadata"></video>' : '<img src="' + esc(f.url) + '" alt="">') +
         '<select data-color-foto aria-label="Color de esta foto">' + opciones.replace('value="' + esc(f.color) + '"', 'value="' + esc(f.color) + '" selected') + "</select>" +
+        (f.tipo === "video" ? "" : '<label class="ambiente-foto" title="Foto con fondo (una sala, una cocina…): llena toda la tarjeta y puede salir en el carrusel de portada"><input type="checkbox" data-ambiente' + (f.ambiente ? " checked" : "") + "> Ambiente</label>") +
         '<div class="botones-foto"><button type="button" data-f="-1" aria-label="Mover a la izquierda">' + icono("izquierda") + '</button><button type="button" data-f="x" aria-label="Quitar">' + icono("basura") + '</button><button type="button" data-f="1" aria-label="Mover a la derecha">' + icono("derecha") + "</button></div></div>"
       ).join("") +
         '<label class="zona-subir" id="ed-zona">' + icono("subir") + "<span>" + (ed.subiendo ? "Subiendo… (" + ed.subiendo + ")" : "Toca para subir fotos o videos<br><small>o arrástralos aquí</small>") + "</span></label>";
@@ -793,6 +795,7 @@
     }
     $("#ed-fotos").addEventListener("change", (e) => {
       if (e.target.matches("[data-color-foto]")) ed.fotos[Number(e.target.closest("[data-i]").dataset.i)].color = e.target.value;
+      if (e.target.matches("[data-ambiente]")) ed.fotos[Number(e.target.closest("[data-i]").dataset.i)].ambiente = e.target.checked;
     });
     $("#ed-fotos").addEventListener("click", (e) => {
       const b = e.target.closest("[data-f]");
@@ -853,7 +856,7 @@
         disponible: v.disponible, encargo: v.encargo, destacado: v.destacado, nuevo: v.nuevo,
         colores: colores.map((c) => ({ nombre: c.nombre.trim(), hex: c.hex })),
         stock_color, stock: ent(v.stock),
-        fotos: ed.fotos.map((f) => ({ url: f.url, color: f.color || "", tipo: f.tipo || "foto" })),
+        fotos: ed.fotos.map((f) => Object.assign({ url: f.url, color: f.color || "", tipo: f.tipo || "foto" }, f.ambiente ? { ambiente: true } : {})),
         colecciones: cols.filter((c) => v["col::" + c]),
         orden: parseInt(v.orden, 10) || 0,
       };

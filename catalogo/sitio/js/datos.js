@@ -43,7 +43,7 @@
     workerUrl: "",
     notaEncargo: "Producto por encargo: consulta el tiempo de entrega.",
     categorias: [],
-    portada: { titulo: "", subtitulo: "Sillas presidenciales, ejecutivas y de visitante, escritorios, comedores, espejos y vanity. Al mayor y al detal, con envíos a toda Venezuela.", boton: "Ver catálogo", imagen: "" },
+    portada: { titulo: "", subtitulo: "Sillas, escritorios, comedores, barras, espejos y vanity. Al mayor y al detal, con envíos a toda Venezuela.", boton: "Ver catálogo", imagen: "" },
     colecciones: [],
     resenas: [],
     paginas: {},
@@ -83,6 +83,10 @@
     if (!demoListo) {
       demoListo = T.cargarScript("js/demo.js").then(() => {
         const D = window.DEMO;
+        if (T.demoLeer("version") !== 3) {
+          ["config", "productos", "pedidos", "proveedores", "privado"].forEach((k) => { try { localStorage.removeItem("demo:" + k); } catch (e) { /* nada */ } });
+          T.demoGuardar("version", 3);
+        }
         if (!T.demoLeer("config")) T.demoGuardar("config", D.config);
         if (!T.demoLeer("productos")) T.demoGuardar("productos", D.productos);
         if (!T.demoLeer("pedidos")) T.demoGuardar("pedidos", []);
@@ -217,6 +221,16 @@
     return f.map((x) => (typeof x === "string" ? { url: x, color: "", tipo: "" } : x)).filter((x) => x && x.url);
   };
   T.esVideo = (f) => f.tipo === "video" || /\.(mp4|webm|mov)(\?|$)/i.test(f.url || "");
+
+  /** Foto "de ambiente": tiene fondo (una sala, una cocina…) y debe llenar la tarjeta */
+  T.fotoObj = function (p, color) {
+    const fs = T.fotos(p).filter((f) => !T.esVideo(f));
+    return (color && fs.find((f) => f.color === color)) || fs[0] || null;
+  };
+  T.esAmbiente = function (p, color) {
+    const f = T.fotoObj(p, color);
+    return !!(f && f.ambiente);
+  };
 
   T.fotoPrincipal = function (p, color) {
     const fs = T.fotos(p).filter((f) => !T.esVideo(f));

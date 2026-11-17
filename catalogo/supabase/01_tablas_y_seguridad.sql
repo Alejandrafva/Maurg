@@ -159,12 +159,13 @@ update public.config set datos = jsonb_build_object(
     jsonb_build_object('nombre','Mesas de reunión','icono','mesa'),
     jsonb_build_object('nombre','Archivadores','icono','almacenaje'),
     jsonb_build_object('nombre','Comedor','icono','comedor'),
+    jsonb_build_object('nombre','Sillas de barra','icono','taburete'),
     jsonb_build_object('nombre','Espejos','icono','espejo'),
     jsonb_build_object('nombre','Vanity','icono','tocador')
   ),
   'portada', jsonb_build_object(
     'titulo', '',
-    'subtitulo', 'Sillas presidenciales, ejecutivas y de visitante, escritorios, comedores, espejos y vanity. Al mayor y al detal, con envíos a toda Venezuela.',
+    'subtitulo', 'Sillas, escritorios, comedores, barras, espejos y vanity. Al mayor y al detal, con envíos a toda Venezuela.',
     'boton', 'Ver catálogo',
     'imagen', ''
   ),
