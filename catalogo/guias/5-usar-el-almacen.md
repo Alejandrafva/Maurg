@@ -25,6 +25,7 @@ Entra a `https://tu-tienda/admin.html` (o `/almacen`) con el correo y la contras
   - *Detal · a tasa BCV* y *Mayor · a tasa BCV*: pagando en bolívares (se muestra en Bs con la tasa).
   - Deja vacío lo que no uses. *Precio anterior* muestra la oferta tachada con el %.
 - **Estado:** Visible en la tienda · Por encargo (se puede pedir aunque no haya stock) · Destacado (sale primero) · Nuevo.
+  - **Vitrina en órbita:** los productos marcados como **Destacado** (con foto) aparecen en la vitrina animada debajo de la portada: al bajar la página, cada mueble sale girando y entra el siguiente, y el arco de fondo toma el color del producto. Se muestran hasta 8; si no hay al menos 2 destacados, se usan los primeros productos con foto. Para que se vea mejor, usa fotos con fondo blanco o transparente.
 - **Colores y stock:** toca **+ Color**, elige el **tono**, escribe el **nombre** y el **stock** de ese color. El total se calcula solo. Si no tiene colores, escribe el stock total.
 - **Fotos y videos:** toca el recuadro o arrastra los archivos. Las fotos **se aligeran solas** (máx. 900 px, WebP) antes de subir. En cada foto elige **de qué color es**: en la tienda, al tocar un color, se muestran sus fotos. La primera foto es la principal (muévela con las flechas).
 - **Datos internos** (solo tú los ves): proveedor, costo, notas, posición.

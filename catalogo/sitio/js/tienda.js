@@ -58,6 +58,16 @@
     pintarColecciones();
     pintarLista();
     pintarContador();
+    if (window.Orbita) {
+      window.Orbita.pintar(visibles(), estado.cfg, {
+        abrir: (id) => abrirFicha(id),
+        agregar: (p) => {
+          const cols = T.colores(p);
+          if (cols.length > 1 || T.estado(p, estado.cfg).tipo === "agotado") abrirFicha(p.id);
+          else agregar(p.id, (cols[0] || {}).nombre || "", 1);
+        },
+      });
+    }
     if (!$("#carrito").classList.contains("oculto")) pintarCarrito();
   }
 
