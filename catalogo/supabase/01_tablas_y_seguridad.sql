@@ -169,6 +169,7 @@ update public.config set datos = jsonb_build_object(
     'boton', 'Ver catálogo',
     'imagen', ''
   ),
+  'inicio', '{}'::jsonb,
   'colecciones', '[]'::jsonb,
   'resenas', '[]'::jsonb,
   'paginas', '{}'::jsonb,

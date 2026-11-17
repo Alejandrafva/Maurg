@@ -1157,13 +1157,29 @@
     const cfg = JSON.parse(JSON.stringify(E.cfg));
     const cols = cfg.colecciones.slice();
     const res = cfg.resenas.slice();
+    const ini = Object.assign({}, cfg.inicio || {});
     const PAGS = [["pagos", "Métodos de pago"], ["envios", "Envíos"], ["resenas", "Reseñas (texto de introducción)"], ["contacto", "Contacto (texto de introducción)"], ["politicas", "Políticas"], ["privacidad", "Privacidad"]];
     $("#vista").innerHTML = '<form id="f-pag" class="tarjetas-admin">' +
-      '<div class="tarjeta-admin"><h3>Portada</h3><div class="rejilla-campos">' +
-      campo("Título grande", "titulo", cfg.portada.titulo, { placeholder: cfg.nombreTienda, ayuda: "Vacío = el nombre de la tienda." }) +
+      '<div class="tarjeta-admin"><h3>Portada (carrusel grande)</h3>' +
+      '<p class="ayuda">Las <b>fotos del carrusel</b> son los productos marcados como <b>Destacado</b> cuya primera foto es <b>de ambiente</b> (se cambian en Productos). Aquí puedes agregar además una foto fija al inicio del carrusel. La frase pequeña de arriba es el <b>eslogan</b> (Ajustes › Tienda).</p>' +
+      '<div class="rejilla-campos">' +
+      campo("Título grande", "titulo", cfg.portada.titulo, { doble: true, placeholder: "Encuentra el equilibrio perfecto entre **confort y estilo**.", ayuda: "Escribe **así** para poner palabras en negrita. Vacío = texto de fábrica." }) +
       campo("Texto del botón", "boton", cfg.portada.boton) +
       campo("Subtítulo", "subtitulo", cfg.portada.subtitulo, { tipo: "area", doble: true, filas: 2 }) +
-      "</div>" + bloqueImagen("portada-img", cfg.portada.imagen, "Imagen de portada (mejor un mueble con fondo transparente o blanco). Vacío = foto del producto destacado.") + "</div>" +
+      "</div>" + bloqueImagen("portada-img", cfg.portada.imagen, "Foto extra al inicio del carrusel (opcional). Mejor horizontal y de ambiente.") + "</div>" +
+      '<div class="tarjeta-admin"><h3>Textos de la página de inicio</h3><p class="ayuda">Deja vacío para usar el texto de fábrica (el que ves en gris).</p><div class="rejilla-campos">' +
+      campo("Franja bajo la portada · texto corto", "ini_franja1", ini.franja1, { placeholder: "Eleva tus espacios con mobiliario moderno para tu casa y tu oficina." }) +
+      campo("Franja bajo la portada · texto grande", "ini_franja2", ini.franja2, { placeholder: "Piezas atemporales para cada espacio de tu hogar y oficina." }) +
+      campo("Categorías · palabra pequeña", "ini_catsCeja", ini.catsCeja, { placeholder: "Explora" }) +
+      campo("Categorías · título", "ini_catsTitulo", ini.catsTitulo, { placeholder: "Compra por espacio" }) +
+      campo("Banda azul · palabra pequeña", "ini_bandaCeja", ini.bandaCeja, { placeholder: "Empresas y mayoristas" }) +
+      campo("Banda azul · título", "ini_bandaTitulo", ini.bandaTitulo, { placeholder: "Equipa tu oficina completa" }) +
+      campo("Banda azul · texto", "ini_bandaTexto", ini.bandaTexto, { tipo: "area", doble: true, filas: 2, placeholder: "Precio al mayor desde 6 piezas combinando modelos. Cotiza tu proyecto y te asesoramos." }) +
+      "</div>" + bloqueImagen("banda-img", ini.bandaFoto, "Foto de fondo de la banda azul (opcional, horizontal).") +
+      '<div class="rejilla-campos">' + [["Envíos nacionales", "A toda Venezuela"], ["Divisas o bolívares", "Precio a tasa BCV"], ["Al mayor y al detal", "Precio al mayor desde N piezas"], ["Clientes felices", "Lee sus reseñas"]].map(([t, d], k) =>
+        campo("Ventaja " + (k + 1) + " · título", "ini_vt_" + k, (ini.ventajas && ini.ventajas[k] || {}).titulo, { placeholder: t }) +
+        campo("Ventaja " + (k + 1) + " · texto", "ini_vd_" + k, (ini.ventajas && ini.ventajas[k] || {}).texto, { placeholder: d })).join("") +
+      "</div></div>" +
       '<div class="tarjeta-admin"><h3>Colecciones <button type="button" class="boton claro pequeno" id="col-agregar">' + icono("mas") + 'Colección</button></h3><p class="ayuda">Grupos especiales (ej.: «Oficina en casa»). Marca los productos de cada colección en su ficha.</p><div id="col-lista" class="lista-orden"></div></div>' +
       '<div class="tarjeta-admin"><h3>Reseñas <button type="button" class="boton claro pequeno" id="res-agregar">' + icono("mas") + 'Reseña</button></h3><div id="res-lista" class="lista-orden"></div></div>' +
       '<div class="tarjeta-admin"><h3>Páginas informativas</h3><p class="ayuda">Deja un cuadro vacío para usar el texto de fábrica. Formato sencillo: una línea que empiece con <b>## </b> es un título; con <b>- </b> es una lista; <b>**texto**</b> va en negrita.</p>' +
@@ -1203,8 +1219,8 @@
       const caja = inp.closest(".bloque-img");
       $(".progreso", caja).textContent = "Subiendo…";
       try {
-        const blob = await aligerar(inp.files[0], clave === "portada-img" ? 1400 : 1000);
-        const url = await F.subir(blob, clave === "portada-img" ? "portada" : clave.startsWith("res") ? "resenas" : "colecciones", clave);
+        const blob = await aligerar(inp.files[0], 900);
+        const url = await F.subir(blob, clave === "portada-img" || clave === "banda-img" ? "portada" : clave.startsWith("res") ? "resenas" : "colecciones", clave);
         ponerImagen(clave, url);
       } catch (ex) { falla(ex); $(".progreso", caja).textContent = ""; }
       inp.value = "";
@@ -1215,6 +1231,7 @@
     };
     function ponerImagen(clave, url) {
       if (clave === "portada-img") cfg.portada.imagen = url;
+      else if (clave === "banda-img") ini.bandaFoto = url;
       else if (clave.startsWith("col-img-")) cols[Number(clave.slice(8))].imagen = url;
       else if (clave.startsWith("res-img-")) res[Number(clave.slice(8))].foto = url;
       const caja = $('[data-bloque="' + clave + '"]');
@@ -1233,6 +1250,11 @@
           colecciones: cols.filter((c) => (c.nombre || "").trim()).map((c) => ({ nombre: c.nombre.trim(), descripcion: (c.descripcion || "").trim(), imagen: c.imagen || "" })),
           resenas: res.filter((r) => (r.texto || "").trim()).map((r) => ({ nombre: (r.nombre || "").trim(), ciudad: (r.ciudad || "").trim(), estrellas: Number(r.estrellas) || 5, texto: r.texto.trim(), foto: r.foto || "" })),
           paginas,
+          inicio: {
+            franja1: v.ini_franja1.trim(), franja2: v.ini_franja2.trim(), catsCeja: v.ini_catsCeja.trim(), catsTitulo: v.ini_catsTitulo.trim(),
+            bandaCeja: v.ini_bandaCeja.trim(), bandaTitulo: v.ini_bandaTitulo.trim(), bandaTexto: v.ini_bandaTexto.trim(), bandaFoto: ini.bandaFoto || "",
+            ventajas: [0, 1, 2, 3].map((k) => ({ titulo: (v["ini_vt_" + k] || "").trim(), texto: (v["ini_vd_" + k] || "").trim() })),
+          },
         });
         await D.guardarConfig(nuevo);
         // Renombrar colección en los productos si cambió de nombre: se maneja marcándola de nuevo en la ficha.

@@ -87,13 +87,25 @@
 
   function pintarPortada() {
     const cfg = estado.cfg, por = cfg.portada || {};
-    if (por.titulo) $("#portada-titulo").textContent = por.titulo;
+    if (por.titulo) $("#portada-titulo").innerHTML = T.negritas(por.titulo);
+    const ini = cfg.inicio || {};
+    const poner = (sel, v) => { const el = $(sel); if (el && v) el.textContent = v; };
+    poner("#franja-1", ini.franja1); poner("#franja-2", ini.franja2);
+    poner("#cats-ceja", ini.catsCeja); poner("#cats-titulo", ini.catsTitulo);
+    poner("#banda-ceja", ini.bandaCeja); poner("#banda-titulo", ini.bandaTitulo);
+    if (ini.bandaFoto) $("#banda-mayor").style.backgroundImage = "linear-gradient(90deg, rgba(5,51,89,.96) 0%, rgba(5,51,89,.86) 50%, rgba(5,51,89,.35) 100%), url('" + ini.bandaFoto.replace(/'/g, "%27") + "')";
+    (ini.ventajas || []).forEach((v, k) => {
+      if (!v) return;
+      const t = document.querySelector('[data-ventaja-t="' + k + '"]'), d = document.querySelector('[data-ventaja-d="' + k + '"]');
+      if (t && v.titulo) t.textContent = v.titulo;
+      if (d && v.texto) d.textContent = v.texto;
+    });
     if (por.subtitulo) $("#portada-subtitulo").textContent = por.subtitulo;
     $("#portada-boton").textContent = por.boton || "Ver catálogo";
     $("#heroe-ceja").textContent = cfg.eslogan || "";
     const banda = $("#banda-texto");
-    if (banda) banda.textContent = "Precio al mayor desde " + cfg.minimoMayor + " piezas combinando modelos. Cotiza tu proyecto y te asesoramos.";
-    $("#texto-mayor").textContent = "Precio al mayor desde " + cfg.minimoMayor + " piezas";
+    if (banda) banda.textContent = ini.bandaTexto || "Precio al mayor desde " + cfg.minimoMayor + " piezas combinando modelos. Cotiza tu proyecto y te asesoramos.";
+    if (!(ini.ventajas && ini.ventajas[2] && ini.ventajas[2].texto)) $("#texto-mayor").textContent = "Precio al mayor desde " + cfg.minimoMayor + " piezas";
     document.title = cfg.nombreTienda + " · Mobiliario de oficina y hogar";
 
     // Diapositivas: destacados con foto de ambiente; si no hay, la imagen de portada o cualquier foto de ambiente

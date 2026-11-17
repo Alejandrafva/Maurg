@@ -54,11 +54,24 @@ Los pedidos que nadie atiende se borran solos a los días indicados en Ajustes (
 ## 5.4 Categorías
 Ordena con ▲▼ (ese es el orden de la barra de categorías en la tienda), cambia nombres (los productos se actualizan solos) y elige un icono. Las categorías sin productos no aparecen en la tienda. **Guardar categorías.**
 
-## 5.5 Página
-- **Portada:** título grande (vacío = nombre de la tienda), subtítulo, texto del botón e imagen (mejor un mueble con fondo blanco o transparente).
-- **Colecciones:** grupos como "Oficina en casa" con foto. Luego marca la colección en la ficha de cada producto.
-- **Reseñas:** nombre, ciudad, estrellas, opinión y foto opcional.
-- **Páginas informativas:** pagos, envíos, políticas, privacidad… Si dejas un cuadro vacío se usa el texto de fábrica. Formato: `## Título`, `- elemento de lista`, `**negrita**`.
+## 5.5 Página (todo lo que se ve en la página de inicio)
+| Parte de la página | Dónde se cambia |
+|---|---|
+| **Fotos del carrusel grande** | Productos: marca el producto como **Destacado** y su primera foto como **Ambiente**. Opcional: Página › Portada › una foto extra al inicio. |
+| **Frase pequeña** de la portada | Ajustes › Tienda › Eslogan |
+| **Título grande**, subtítulo y botón | Página › Portada. Escribe `**así**` para poner palabras en negrita. |
+| **Franja** bajo la portada (dos textos) | Página › Textos de la página de inicio |
+| **"Compra por espacio"** (título) | Página › Textos de la página de inicio |
+| **Tarjetas de categoría** (nombre, orden, icono) | Categorías. La foto de cada tarjeta es la del primer producto de esa categoría. |
+| **Vitrina en órbita** | Productos **Destacados** con foto recortada (sin marcar Ambiente) |
+| **Colecciones** (las dos fotos grandes) | Página › Colecciones |
+| **Las 4 ventajas** (envíos, pagos…) | Página › Textos de la página de inicio |
+| **Banda azul** (título, texto y foto) | Página › Textos de la página de inicio |
+| **Reseñas** | Página › Reseñas |
+| **Pagos, envíos, políticas, privacidad** | Página › Páginas informativas |
+| **Logo, WhatsApp, teléfonos, Instagram, dirección** (cabecera, pie y contacto) | Ajustes |
+
+Si dejas un cuadro vacío se usa el texto de fábrica (el que aparece en gris). Toca **Guardar página** al terminar.
 
 ## 5.6 Proveedores
 Lista privada con contacto, teléfono (botón de WhatsApp), correo y notas. Se asignan en la ficha de cada producto.

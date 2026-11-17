@@ -44,6 +44,7 @@
     notaEncargo: "Producto por encargo: consulta el tiempo de entrega.",
     categorias: [],
     portada: { titulo: "", subtitulo: "Sillas, escritorios, comedores, barras, espejos y vanity. Al mayor y al detal, con envíos a toda Venezuela.", boton: "Ver catálogo", imagen: "" },
+    inicio: {},
     colecciones: [],
     resenas: [],
     paginas: {},
@@ -57,6 +58,7 @@
     d.portada = Object.assign({}, T.AJUSTES_BASE.portada, (datos && datos.portada) || {});
     ["categorias", "colecciones", "resenas"].forEach((k) => { if (!Array.isArray(d[k])) d[k] = []; });
     if (!d.paginas || typeof d.paginas !== "object") d.paginas = {};
+    if (!d.inicio || typeof d.inicio !== "object") d.inicio = {};
     d.tasaBCV = Number(d.tasaBCV) || 0;
     d.minimoMayor = Math.max(1, parseInt(d.minimoMayor, 10) || 6);
     d.pocasUnidades = Math.max(0, parseInt(d.pocasUnidades, 10) || 0);
@@ -318,6 +320,8 @@
   };
 
   // Texto simple -> HTML (## Título, - lista, párrafos). Para las páginas editables.
+  T.negritas = (txt) => T.esc(txt).replace(/\*\*(.+?)\*\*/g, "<b>$1</b>");
+
   T.textoAHtml = function (txt) {
     const lineas = String(txt || "").replace(/\r/g, "").split("\n");
     let html = "", lista = false, parrafo = [];
