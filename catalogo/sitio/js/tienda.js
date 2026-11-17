@@ -627,9 +627,11 @@
 
     doc.setFillColor(11, 9, 10); doc.rect(0, 0, W, 86, "F"); doc.setFillColor(5, 51, 89); doc.rect(0, 86, W, 4, "F");
     doc.setTextColor(255); doc.setFont("helvetica", "bold"); doc.setFontSize(24);
-    texto(String(cfg.nombreTienda).toUpperCase(), M, 50, { charSpace: 2 });
+    const logo = cfg.logo ? await imagenComoDato(cfg.logo).catch(() => null) : null;
+    if (logo) doc.addImage(logo.dato, "PNG", M, 18, 50 * logo.proporcion, 50);
+    else texto(String(cfg.nombreTienda).toUpperCase(), M, 50, { charSpace: 2 });
     doc.setFont("helvetica", "normal"); doc.setFontSize(10);
-    texto([cfg.telefono || cfg.whatsapp, cfg.instagram ? "@" + String(cfg.instagram).replace(/^@/, "") : "", cfg.correo].filter(Boolean).join("   ·   "), M, 68);
+    texto([cfg.telefono || cfg.whatsapp, cfg.instagram ? "@" + String(cfg.instagram).replace(/^@/, "") : "", cfg.correo].filter(Boolean).join("   ·   "), logo ? W - M : M, logo ? 76 : 68, logo ? { align: "right" } : undefined);
     doc.setFontSize(11); doc.setFont("helvetica", "bold");
     texto("PEDIDO " + p.codigo, W - M, 46, { align: "right" });
     doc.setFont("helvetica", "normal"); doc.setFontSize(9.5);
@@ -686,6 +688,27 @@
     doc.splitTextToSize("Pedido sujeto a confirmación de disponibilidad. Precios en dólares estadounidenses" + (p.total_bs ? "; el monto en bolívares se calcula a la tasa BCV del día de pago." : "."), W - 2 * M)
       .forEach((s, k) => texto(s, M, H - 46 + k * 11));
     return doc.output("blob");
+  }
+
+  // Logo (PNG con transparencia) para el encabezado del PDF
+  function imagenComoDato(url) {
+    return new Promise((ok, mal) => {
+      const img = new Image();
+      img.crossOrigin = "anonymous";
+      const t = setTimeout(() => mal(new Error("tiempo")), 5000);
+      img.onload = () => {
+        clearTimeout(t);
+        try {
+          const c = document.createElement("canvas");
+          const alto = 200;
+          c.height = alto; c.width = Math.round(img.width * (alto / img.height));
+          c.getContext("2d").drawImage(img, 0, 0, c.width, c.height);
+          ok({ dato: c.toDataURL("image/png"), proporcion: c.width / c.height });
+        } catch (e) { mal(e); }
+      };
+      img.onerror = () => { clearTimeout(t); mal(new Error("no carga")); };
+      img.src = url;
+    });
   }
 
   // Miniatura JPEG pequeña para el PDF (si la foto lo permite)

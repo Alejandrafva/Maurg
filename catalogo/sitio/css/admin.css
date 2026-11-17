@@ -179,9 +179,9 @@ body.admin { background: var(--fondo); }
 /* Tema ARKEO */
 body.admin { background: #f6f6f7; }
 .caja-entrada, .tarjeta-admin, .pedido, .tabla, .modal, .vacio-admin, .item-orden, .bloque-lista, .foto-editor, .zona-subir { border-radius: 8px; }
-.marca-entrada, .lateral .logo span { font-family: var(--letra-marca); font-stretch: 125%; text-transform: uppercase; letter-spacing: .14em; font-weight: 800; }
+.marca-entrada, .lateral .logo span { font-family: var(--letra-marca); text-transform: uppercase; letter-spacing: .14em; font-weight: 800; }
 .lateral .logo { color: var(--tinta); }
-.caja-entrada h1, .barra-superior h1 { font-family: var(--letra-marca); font-stretch: 112%; text-transform: uppercase; letter-spacing: .01em; }
+.caja-entrada h1, .barra-superior h1 { font-family: var(--letra-marca); text-transform: uppercase; letter-spacing: .01em; }
 .tasa-rapida, .pestanas button { border-radius: 6px; }
 .globo { background: var(--marino); }
 .lateral .boton { text-transform: none; letter-spacing: 0; }

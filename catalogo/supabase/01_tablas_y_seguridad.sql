@@ -135,14 +135,14 @@ on conflict (id) do nothing;
 -- Agrega los ajustes que falten SIN tocar los que ya existen.
 update public.config set datos = jsonb_build_object(
   'nombreTienda', 'ARKEO',
-  'logo', '',
-  'eslogan', 'Mobiliario de oficina y hogar',
-  'whatsapp', '',
-  'instagram', '',
+  'logo', 'img/logo-arkeo-blanco.png',
+  'eslogan', 'Home & Office · Mobiliario de oficina y hogar',
+  'whatsapp', '04125074777',
+  'instagram', 'mobiliariodeoficina',
   'tiktok', '',
   'correo', '',
-  'telefono', '',
-  'direccion', '',
+  'telefono', '0424-4343284 · 0412-5074777',
+  'direccion', 'Showroom en San Diego, edo. Carabobo',
   'horario', 'Lunes a sábado, 9:00 a. m. a 6:00 p. m.',
   'mapa', '',
   'tasaBCV', 0,
@@ -173,7 +173,7 @@ update public.config set datos = jsonb_build_object(
   'paginas', '{}'::jsonb,
   'datosPago', '',
   'agencias', '',
-  'ubicacion', ''
+  'ubicacion', 'Retiro en nuestro showroom en San Diego, edo. Carabobo.'
 ) || datos
 where id = 1;
 

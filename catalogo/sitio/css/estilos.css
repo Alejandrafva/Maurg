@@ -30,7 +30,7 @@
   --sombra-fuerte: 0 24px 60px rgba(11, 9, 10, 0.22);
   --ancho: 1280px;
   --letra: "Inter Tight", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-  --letra-marca: "Archivo", "Inter Tight", system-ui, sans-serif;
+  --letra-marca: "Raleway", "Inter Tight", system-ui, sans-serif;
   color-scheme: light;
 }
 
@@ -493,7 +493,7 @@ body.bloqueado { overflow: hidden; }
 .cabecera { background: var(--negro); color: #fff; backdrop-filter: none; -webkit-backdrop-filter: none; border-bottom: 1px solid #1d1b1c; }
 .cabecera.con-borde { border-bottom-color: #2a2829; }
 .logo { color: #fff; }
-.logo span { font-family: var(--letra-marca); font-stretch: 125%; font-weight: 800; letter-spacing: .14em; font-size: 22px; text-transform: uppercase; }
+.logo span { font-family: var(--letra-marca); font-weight: 800; letter-spacing: .14em; font-size: 22px; text-transform: uppercase; }
 .logo img { border-radius: 0; width: auto; height: 34px; object-fit: contain; }
 .logo img:not(.oculto) + span { display: none; }
 .menu a { color: var(--plata); text-transform: uppercase; font-size: 12.5px; letter-spacing: .12em; font-weight: 600; }
@@ -512,7 +512,7 @@ body.bloqueado { overflow: hidden; }
 .sobretitulo { margin: 0 0 18px; color: var(--plata); font-size: 12px; letter-spacing: .24em; white-space: nowrap; text-transform: uppercase; font-weight: 600; display: flex; align-items: center; gap: 14px; }
 .sobretitulo::before { content: ""; width: 34px; height: 1px; background: var(--plata); }
 .portada .marca-grande, .portada .marca-grande.larga, .portada .marca-grande.dos-lineas {
-  font-family: var(--letra-marca); font-stretch: 125%; font-weight: 900; text-transform: uppercase;
+  font-family: var(--letra-marca); font-weight: 900; text-transform: uppercase;
   letter-spacing: .02em; line-height: .9; font-size: clamp(64px, 11.5vw, 168px); text-align: left; color: #fff; margin: 0; white-space: normal;
 }
 .portada .marca-grande.larga { font-size: clamp(42px, 6.4vw, 96px); }
@@ -521,7 +521,7 @@ body.bloqueado { overflow: hidden; }
 .portada-texto p.subtitulo { color: #cfcdce; font-size: clamp(16px, 1.4vw, 19px); max-width: 44ch; margin: 22px 0 30px; text-align: left; }
 .portada-botones { display: flex; flex-wrap: wrap; gap: 10px; }
 .portada-datos { display: flex; gap: clamp(20px, 3vw, 44px); margin-top: 44px; padding-top: 26px; border-top: 1px solid #2a2829; text-align: left; justify-self: start; color: var(--plata); font-size: 12px; letter-spacing: .08em; text-transform: uppercase; }
-.portada-datos strong { color: #fff; font-family: var(--letra-marca); font-stretch: 112%; font-size: 30px; letter-spacing: 0; font-weight: 800; margin-bottom: 2px; }
+.portada-datos strong { color: #fff; font-family: var(--letra-marca); font-size: 30px; letter-spacing: 0; font-weight: 800; margin-bottom: 2px; }
 .portada-imagen { position: relative; aspect-ratio: 4 / 4.4; background: linear-gradient(180deg, #f3f3f4, #e4e3e4); border-radius: var(--radio); overflow: hidden; display: grid; place-items: center; }
 .portada-imagen::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 6px; background: var(--marino); }
 .portada-imagen img { width: 86%; height: 86%; object-fit: contain; mix-blend-mode: multiply; filter: none; }
@@ -537,7 +537,7 @@ body.bloqueado { overflow: hidden; }
 /* Encabezados de sección */
 .titulo-seccion { display: flex; align-items: end; justify-content: space-between; gap: 16px; margin: 56px 0 20px; }
 .titulo-seccion small { display: block; color: var(--suave); font-size: 12px; letter-spacing: .28em; text-transform: uppercase; font-weight: 600; margin-bottom: 8px; }
-.titulo-seccion h2, .herramientas h2 { font-family: var(--letra-marca); font-stretch: 112%; text-transform: uppercase; letter-spacing: .02em; font-weight: 800; font-size: clamp(22px, 3vw, 34px); margin: 0; }
+.titulo-seccion h2, .herramientas h2 { font-family: var(--letra-marca); text-transform: uppercase; letter-spacing: .02em; font-weight: 800; font-size: clamp(22px, 3vw, 34px); margin: 0; }
 
 /* Categorías */
 .categorias { margin-top: 0; border-radius: var(--radio); border-color: var(--linea); }
@@ -550,7 +550,7 @@ body.bloqueado { overflow: hidden; }
 /* Tarjetas de producto */
 .producto .foto { border-radius: var(--radio); aspect-ratio: 1 / 1.12; }
 .producto h3 { font-size: 14.5px; font-weight: 600; }
-.precio { font-family: var(--letra-marca); font-stretch: 105%; font-weight: 800; font-size: 15.5px; }
+.precio { font-family: var(--letra-marca); font-weight: 800; font-size: 15.5px; }
 .etiqueta { border-radius: 2px; text-transform: uppercase; letter-spacing: .08em; font-size: 10px; padding: 5px 8px; box-shadow: none; }
 .etiqueta.oscura { background: var(--marino); }
 .etiqueta.oferta { background: var(--negro); color: #fff; }
@@ -564,7 +564,7 @@ body.bloqueado { overflow: hidden; }
 
 /* Colecciones */
 .coleccion { border-radius: var(--radio); min-height: 240px; }
-.coleccion strong { font-family: var(--letra-marca); font-stretch: 112%; letter-spacing: .06em; }
+.coleccion strong { font-family: var(--letra-marca); letter-spacing: .06em; }
 
 /* Ventajas */
 .ventajas { gap: 0; border: 1px solid var(--linea); border-radius: var(--radio); overflow: hidden; margin: 40px 0 0; }
@@ -578,13 +578,13 @@ body.bloqueado { overflow: hidden; }
 .banda-mayor { background: var(--marino); color: #fff; margin-top: 64px; }
 .banda-mayor .contenedor { display: grid; grid-template-columns: 1.4fr auto; gap: 24px; align-items: center; padding: clamp(36px, 5vw, 64px) 0; }
 .banda-mayor small { color: #b9c7d6; font-size: 12px; letter-spacing: .28em; text-transform: uppercase; font-weight: 600; }
-.banda-mayor h2 { font-family: var(--letra-marca); font-stretch: 112%; text-transform: uppercase; font-size: clamp(24px, 3.4vw, 42px); line-height: 1.05; margin: 10px 0 10px; font-weight: 800; }
+.banda-mayor h2 { font-family: var(--letra-marca); text-transform: uppercase; font-size: clamp(24px, 3.4vw, 42px); line-height: 1.05; margin: 10px 0 10px; font-weight: 800; }
 .banda-mayor p { margin: 0; color: #d6dee7; max-width: 60ch; }
 @media (max-width: 720px) { .banda-mayor .contenedor { grid-template-columns: 1fr; } }
 
 /* Pie */
 .pie { background: var(--negro); margin-top: 0; }
-.pie .marca-pie { font-family: var(--letra-marca); font-stretch: 125%; text-transform: uppercase; letter-spacing: .14em; font-size: 28px; }
+.pie .marca-pie { font-family: var(--letra-marca); text-transform: uppercase; letter-spacing: .14em; font-size: 28px; }
 .pie h4 { color: var(--plata); }
 .pie .boton.whatsapp { background: #fff; border-color: #fff; color: var(--negro) !important; }
 
@@ -593,24 +593,24 @@ body.bloqueado { overflow: hidden; }
 @media (min-width: 900px) { .ficha { border-radius: 8px; } }
 .galeria { background: var(--tarjeta); }
 .miniaturas button { border-radius: var(--radio-s); }
-.ficha-info h2 { font-family: var(--letra-marca); font-stretch: 108%; letter-spacing: -0.01em; font-weight: 800; }
+.ficha-info h2 { font-family: var(--letra-marca); letter-spacing: -0.01em; font-weight: 800; }
 .caja-precio { border-radius: var(--radio-s); background: var(--tarjeta); }
-.caja-precio strong { font-family: var(--letra-marca); font-stretch: 108%; font-weight: 800; }
+.caja-precio strong { font-family: var(--letra-marca); font-weight: 800; }
 .caja-precio.activa { border-color: var(--marino); box-shadow: inset 0 0 0 1px var(--marino); }
 .aviso { border-radius: var(--radio-s); }
 .aviso.pocas { background: var(--acento-suave); color: var(--marino); }
-.carrito header h2 { font-family: var(--letra-marca); font-stretch: 112%; text-transform: uppercase; letter-spacing: .04em; }
+.carrito header h2 { font-family: var(--letra-marca); text-transform: uppercase; letter-spacing: .04em; }
 .linea-carrito img { border-radius: var(--radio-s); }
-.totales .total span:last-child { font-family: var(--letra-marca); font-stretch: 108%; }
+.totales .total span:last-child { font-family: var(--letra-marca); }
 .listo .circulo { border-radius: var(--radio); background: var(--marino); }
 .flotante-wa { background: var(--marino); border-radius: var(--radio); }
 .tostada { border-radius: var(--radio-s); background: var(--negro); }
 .boton.whatsapp:hover { background: var(--acento-oscuro); }
 
 /* Páginas informativas */
-.pagina-cabeza h1 { font-family: var(--letra-marca); font-stretch: 112%; text-transform: uppercase; letter-spacing: 0; font-weight: 900; }
+.pagina-cabeza h1 { font-family: var(--letra-marca); text-transform: uppercase; letter-spacing: 0; font-weight: 900; }
 .prosa, .resena, .contacto-lista a, .contacto-lista div, .prosa .tarjeta, .pagina-indice a { border-radius: var(--radio-s); }
-.prosa h2 { font-family: var(--letra-marca); font-stretch: 108%; text-transform: uppercase; font-size: 18px; letter-spacing: .03em; }
+.prosa h2 { font-family: var(--letra-marca); text-transform: uppercase; font-size: 18px; letter-spacing: .03em; }
 .resena .estrellas { color: var(--marino); }
 .pagina-indice a[aria-current="page"] { background: var(--negro); color: #fff; }
 @media (max-width: 600px) {
@@ -618,3 +618,11 @@ body.bloqueado { overflow: hidden; }
   .sobretitulo::before { display: none; }
   .portada-botones .boton { flex: 1 1 100%; }
 }
+
+/* Logo ARKEO (imagen) */
+.logo img { height: 40px; width: auto; }
+.pie .marca-pie img { height: 58px; width: auto; display: block; }
+.portada .marca-grande, .portada .marca-grande.larga, .portada .marca-grande.dos-lineas { font-weight: 900; letter-spacing: .01em; }
+.portada-marca { display: block; width: clamp(54px, 6vw, 84px); height: auto; margin-bottom: 18px; }
+@media (max-width: 820px) { .logo img { height: 34px; } }
+.portada .portada-texto .sobretitulo { color: var(--plata); }
