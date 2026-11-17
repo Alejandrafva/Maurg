@@ -26,7 +26,7 @@
   T.AJUSTES_BASE = {
     nombreTienda: "ARKEO",
     eslogan: "Home & Office · Mobiliario de oficina y hogar",
-    logo: "img/logo-arkeo-blanco.png",
+    logo: "img/logo-arkeo-negro.png",
     whatsapp: "",
     instagram: "",
     tiktok: "",

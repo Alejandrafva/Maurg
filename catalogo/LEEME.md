@@ -4,9 +4,9 @@ Catálogo online de **ARKEO · Mobiliario de oficina y hogar**, que vende **al m
 
 **Identidad aplicada**
 - Paleta: negro `#0B090A`, grafito `#5A5A5C`, plata `#A8A6A7`, blanco `#FFFFFF` y azul marino `#053359`.
-- Diseño sobrio y corporativo: cabecera y portada negras, letra ancha en mayúsculas para la marca y los títulos, esquinas casi rectas, acentos en azul marino.
 - Categorías: Sillas presidenciales, Sillas ejecutivas, Sillas de visitante, Escritorios, Mesas de reunión, Archivadores, Comedor, Espejos y Vanity (se cambian en Almacén › Categorías).
-- **Logo:** ARKEO Home & Office en blanco con fondo transparente (`sitio/img/logo-arkeo-blanco.png`), en la cabecera, el pie, el PDF del pedido y la imagen para compartir. La silla sola (`marca-silla-blanca.png`) se usa en la portada y en los iconos. Los títulos usan Raleway, la misma letra del logo.
+- **Diseño:** fondo claro, cabecera blanca, el nombre ARKEO gigante en la portada, tarjetas redondeadas y botones en azul marino. Vitrina en órbita con los destacados.
+- **Logo:** ARKEO Home & Office con fondo transparente: versión oscura (`sitio/img/logo-arkeo-negro.png`) en la cabecera y el PDF, versión blanca (`logo-arkeo-blanco.png`) en el pie negro. Los títulos grandes usan Raleway, la misma letra del logo.
 - **Contacto:** WhatsApp de pedidos 0412-5074777 · teléfonos 0424-4343284 y 0412-5074777 · Instagram @mobiliariodeoficina · showroom en San Diego, edo. Carabobo. Todo editable en **Almacén › Ajustes**.
 
 Es un sistema **independiente**: no usa el Vendedor IA del resto de este repositorio.

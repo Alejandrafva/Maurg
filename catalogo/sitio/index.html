@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>ARKEO · Mobiliario de oficina y hogar</title>
   <meta name="description" content="ARKEO: mobiliario de oficina y hogar. Sillas presidenciales, ejecutivas y de visitante, escritorios, comedores, espejos y vanity. Al mayor y al detal, envíos a toda Venezuela.">
-  <meta name="theme-color" content="#0b090a">
+  <meta name="theme-color" content="#f6f6f7">
   <meta property="og:type" content="website">
   <meta property="og:title" content="ARKEO · Mobiliario de oficina y hogar">
   <meta property="og:description" content="Sillas, escritorios, comedores, espejos y vanity. Al mayor y al detal. Pide por WhatsApp.">
@@ -21,7 +21,7 @@
 <body>
   <header class="cabecera">
     <div class="contenedor">
-      <a class="logo" href="./"><img data-logo src="img/logo-arkeo-blanco.png" alt="ARKEO Home &amp; Office"><span data-nombre-tienda>ARKEO</span></a>
+      <a class="logo" href="./"><img data-logo src="img/logo-arkeo-negro.png" alt="ARKEO Home &amp; Office"><span data-nombre-tienda>ARKEO</span></a>
       <nav class="menu" aria-label="Principal">
         <a href="#catalogo">Catálogo</a>
         <a href="pagos.html">Pagos</a>
@@ -48,27 +48,22 @@
   </nav>
 
   <main>
-    <section class="portada" aria-label="Portada">
-      <div class="contenedor portada-rejilla">
+    <section class="portada contenedor" aria-label="Portada">
+      <h1 class="marca-grande" id="portada-titulo">ARKEO</h1>
+      <div class="portada-cuerpo">
         <div class="portada-texto">
-          <img class="portada-marca" src="img/marca-silla-blanca.png" alt="" width="84" height="122">
-          <p class="sobretitulo" id="portada-sobretitulo">Mobiliario de oficina y hogar</p>
-          <h1 class="marca-grande" id="portada-titulo">ARKEO</h1>
-          <p class="subtitulo" id="portada-subtitulo">Sillas presidenciales, ejecutivas y de visitante, escritorios, comedores, espejos y vanity. Al mayor y al detal, con envíos a toda Venezuela.</p>
-          <div class="portada-botones">
-            <a class="boton blanco" href="#catalogo" id="portada-boton">Ver catálogo</a>
-            <a class="boton contorno-claro oculto" data-wa target="_blank" rel="noopener">Cotizar por WhatsApp</a>
-          </div>
-          <div class="portada-datos" id="portada-datos"></div>
+          <p id="portada-subtitulo">Sillas presidenciales, ejecutivas y de visitante, escritorios, comedores, espejos y vanity. Al mayor y al detal.</p>
+          <a class="boton" href="#catalogo" id="portada-boton">Ver catálogo
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M6 13l6 6 6-6"/></svg></a>
         </div>
-        <div class="portada-imagen"><span class="sello" id="portada-sello">Colección</span><img id="portada-imagen" src="img/sin-foto.svg" alt="" fetchpriority="high"></div>
+        <div class="portada-imagen"><img id="portada-imagen" src="img/sin-foto.svg" alt="" fetchpriority="high"></div>
+        <div class="portada-datos" id="portada-datos"></div>
       </div>
     </section>
 
     <section class="orbita" id="orbita" aria-label="Productos destacados" hidden></section>
 
     <section id="catalogo" class="contenedor" aria-label="Catálogo">
-      <div class="titulo-seccion"><div><small>Catálogo</small><h2>Compra por categoría</h2></div></div>
       <div class="categorias" id="categorias" role="toolbar" aria-label="Categorías"></div>
 
       <div class="colecciones oculto" id="colecciones"></div>

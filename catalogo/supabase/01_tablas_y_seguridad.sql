@@ -135,7 +135,7 @@ on conflict (id) do nothing;
 -- Agrega los ajustes que falten SIN tocar los que ya existen.
 update public.config set datos = jsonb_build_object(
   'nombreTienda', 'ARKEO',
-  'logo', 'img/logo-arkeo-blanco.png',
+  'logo', 'img/logo-arkeo-negro.png',
   'eslogan', 'Home & Office · Mobiliario de oficina y hogar',
   'whatsapp', '04125074777',
   'instagram', 'mobiliariodeoficina',

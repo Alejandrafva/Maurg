@@ -89,19 +89,19 @@
     h1.classList.toggle("dos-lineas", dos);
     h1.classList.toggle("larga", !dos && titulo.length > 11);
     h1.removeAttribute("data-nombre-tienda");
-    $("#portada-sobretitulo").textContent = cfg.eslogan || "";
-    $("#portada-subtitulo").textContent = por.subtitulo || "";
-    $("#portada-boton").textContent = por.boton || "Ver catálogo";
+    $("#portada-subtitulo").textContent = por.subtitulo || cfg.eslogan || "";
+    $("#portada-boton").firstChild.textContent = (por.boton || "Ver catálogo") + " ";
     let img = por.imagen;
     let destacado = null;
     if (!img) {
-      destacado = visibles().find((p) => p.destacado && T.fotos(p).length) || visibles().find((p) => T.fotos(p).length);
+      // La vitrina empieza por el primer destacado; la portada muestra otro para no repetir
+      const dest = visibles().filter((p) => p.destacado && T.fotos(p).length);
+      destacado = dest[1] || dest[0] || visibles().find((p) => T.fotos(p).length);
       img = destacado ? T.fotoPrincipal(destacado) : "img/sin-foto.svg";
     }
     const im = $("#portada-imagen");
     if (im.getAttribute("src") !== img) im.src = img;
     im.alt = destacado ? destacado.nombre : cfg.nombreTienda;
-    $("#portada-sello").textContent = destacado ? destacado.nombre : "Colección " + new Date().getFullYear();
     im.parentElement.style.cursor = destacado ? "pointer" : "";
     im.parentElement.onclick = destacado ? () => abrirFicha(destacado.id) : null;
     const banda = $("#banda-texto");
@@ -635,8 +635,8 @@
     let y = M;
     const texto = (t, x, yy, o) => doc.text(String(t == null ? "" : t), x, yy, o);
 
-    doc.setFillColor(11, 9, 10); doc.rect(0, 0, W, 86, "F"); doc.setFillColor(5, 51, 89); doc.rect(0, 86, W, 4, "F");
-    doc.setTextColor(255); doc.setFont("helvetica", "bold"); doc.setFontSize(24);
+    doc.setFillColor(246, 246, 247); doc.rect(0, 0, W, 86, "F"); doc.setFillColor(5, 51, 89); doc.rect(0, 86, W, 4, "F");
+    doc.setTextColor(11, 9, 10); doc.setFont("helvetica", "bold"); doc.setFontSize(24);
     const logo = cfg.logo ? await imagenComoDato(cfg.logo).catch(() => null) : null;
     if (logo) doc.addImage(logo.dato, "PNG", M, 18, 50 * logo.proporcion, 50);
     else texto(String(cfg.nombreTienda).toUpperCase(), M, 50, { charSpace: 2 });

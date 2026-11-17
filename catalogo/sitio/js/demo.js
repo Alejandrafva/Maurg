@@ -19,7 +19,7 @@
     config: {
       nombreTienda: "ARKEO",
       eslogan: "Home & Office · Mobiliario de oficina y hogar",
-      logo: "img/logo-arkeo-blanco.png",
+      logo: "img/logo-arkeo-negro.png",
       whatsapp: "04125074777",
       instagram: "mobiliariodeoficina",
       correo: "",
