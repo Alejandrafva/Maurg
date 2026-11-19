@@ -14,8 +14,8 @@
    (productos de ejemplo guardados solo en tu navegador).
    ===================================================================== */
 window.CONEXION = {
-  SUPABASE_URL: "PEGA_AQUI_LA_PROJECT_URL",
-  SUPABASE_KEY: "PEGA_AQUI_LA_CLAVE_PUBLICA",
+  SUPABASE_URL: "https://sgtqpermnrazxbatcyix.supabase.co",
+  SUPABASE_KEY: "sb_publishable_Ipyxf2FDO55xQ5ZX7vGCTg_JdAcA3uO",
 
   // Opcional: dirección del Worker de Cloudflare. Es mejor ponerla en
   // el almacén (Ajustes > Fotos), pero si la pones aquí también funciona.
