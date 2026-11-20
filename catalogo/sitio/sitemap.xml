@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Cambia TU-DOMINIO por la dirección real de la tienda (ver guía 4) -->
+<!-- Dominio de la tienda -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://TU-DOMINIO/</loc><changefreq>daily</changefreq><priority>1.0</priority></url>
-  <url><loc>https://TU-DOMINIO/pagos.html</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
-  <url><loc>https://TU-DOMINIO/envios.html</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
-  <url><loc>https://TU-DOMINIO/resenas.html</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
-  <url><loc>https://TU-DOMINIO/contacto.html</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
-  <url><loc>https://TU-DOMINIO/politicas.html</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
-  <url><loc>https://TU-DOMINIO/privacidad.html</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://arkeohome.com/</loc><changefreq>daily</changefreq><priority>1.0</priority></url>
+  <url><loc>https://arkeohome.com/pagos.html</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://arkeohome.com/envios.html</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://arkeohome.com/resenas.html</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://arkeohome.com/contacto.html</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://arkeohome.com/politicas.html</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://arkeohome.com/privacidad.html</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
 </urlset>
