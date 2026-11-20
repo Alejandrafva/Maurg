@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>ARKEO · Mobiliario de oficina y hogar</title>
+  <meta name="description" content="ARKEO: mobiliario de oficina y hogar. Sillas presidenciales, ejecutivas y de visitante, escritorios, comedores, espejos y vanity. Al mayor y al detal, envíos a toda Venezuela.">
+  <meta name="theme-color" content="#f6f6f7">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="ARKEO · Mobiliario de oficina y hogar">
+  <meta property="og:description" content="Sillas, escritorios, comedores, espejos y vanity. Al mayor y al detal. Pide por WhatsApp.">
+  <meta property="og:image" content="img/compartir.png">
+  <link rel="preload" as="image" href="img/fotos/silla-velvet-negra.webp">
+    <link rel="icon" href="img/favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;700;800;900&family=Inter+Tight:wght@400;500;600;700&display=swap">
+  <link rel="stylesheet" href="css/estilos.css">
+</head>
+<body>
+  <header class="cabecera">
+    <div class="contenedor">
+      <a class="logo" href="./"><img data-logo src="img/logo-arkeo-negro.png" alt="ARKEO Home &amp; Office"><span data-nombre-tienda>ARKEO</span></a>
+      <nav class="menu" aria-label="Principal">
+        <a href="#catalogo">Catálogo</a>
+        <a href="pagos.html">Pagos</a>
+        <a href="envios.html">Envíos</a>
+        <a href="resenas.html">Reseñas</a>
+        <a href="contacto.html">Contacto</a>
+      </nav>
+      <div class="acciones-cabecera">
+        <button class="icono-boton solo-movil" id="abrir-menu" aria-label="Menú" aria-expanded="false" aria-controls="menu-movil"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h10"/></svg></button>
+        <button class="boton boton-carrito" id="abrir-carrito" aria-label="Abrir carrito">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 8h14l-1 12.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 6 20.5z"/><path d="M8.5 10V6.5a3.5 3.5 0 0 1 7 0V10"/></svg>
+          <span class="texto">Carrito</span>
+          <span class="contador" id="contador-carrito" data-n="0"></span>
+        </button>
+      </div>
+    </div>
+  </header>
+  <nav class="menu-movil oculto" id="menu-movil" aria-label="Menú móvil">
+    <a href="#catalogo">Catálogo</a>
+    <a href="pagos.html">Métodos de pago</a>
+    <a href="envios.html">Envíos</a>
+    <a href="resenas.html">Reseñas</a>
+    <a href="contacto.html">Contacto</a>
+  </nav>
+
+  <main>
+    <section class="heroe" aria-label="Portada">
+      <div class="heroe-marco" id="heroe">
+        <div class="heroe-fondos" id="heroe-fondos"></div>
+        <div class="heroe-velo"></div>
+        <div class="heroe-contenido">
+          <p class="heroe-ceja" id="heroe-ceja">Mobiliario de oficina y hogar</p>
+          <h1 class="heroe-titulo" id="portada-titulo">Encuentra el equilibrio perfecto entre <b>confort y estilo</b>.</h1>
+          <p class="heroe-sub" id="portada-subtitulo">Sillas, escritorios, comedores, barras, espejos y vanity. Al mayor y al detal, con envíos a toda Venezuela.</p>
+          <div class="heroe-botones">
+            <a class="boton blanco" href="#catalogo" id="portada-boton">Ver catálogo</a>
+            <a class="boton vidrio oculto" data-wa target="_blank" rel="noopener">Cotizar por WhatsApp</a>
+          </div>
+        </div>
+        <a class="heroe-circulo" href="#categorias-vitrina"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg><span>Explorar<br>espacios</span></a>
+        <div class="heroe-panel" id="heroe-panel">
+          <div class="heroe-progreso"><span id="heroe-num">01</span><i><b id="heroe-barra"></b></i><span id="heroe-total">01</span></div>
+          <div class="heroe-tarjetas" id="heroe-tarjetas"></div>
+          <div class="heroe-flechas">
+            <button class="heroe-flecha" data-heroe="-1" aria-label="Anterior"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></button>
+            <button class="heroe-flecha llena" data-heroe="1" aria-label="Siguiente"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+          </div>
+        </div>
+        <span class="heroe-raton" aria-hidden="true"><i></i></span>
+      </div>
+      <div class="contenedor heroe-pie">
+        <a class="heroe-avatar" href="#catalogo" aria-label="Ver catálogo"><img id="heroe-mini" src="img/sin-foto.svg" alt=""><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></span></a>
+        <p id="franja-1">Eleva tus espacios con mobiliario moderno para tu casa y tu oficina.</p>
+        <i class="heroe-raya" aria-hidden="true"></i>
+        <img class="heroe-marca" src="img/marca-silla-negra.png" alt="" width="44" height="64">
+        <p class="grande" id="franja-2">Piezas atemporales para cada espacio de tu hogar y oficina.</p>
+      </div>
+    </section>
+
+    <section class="contenedor cats-seccion" id="categorias-vitrina" aria-label="Categorías">
+      <div class="titulo-bloque revelar"><div><small id="cats-ceja">Explora</small><h2 id="cats-titulo">Compra por espacio</h2></div><a class="enlace-flecha" href="#catalogo">Ver todo el catálogo <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></a></div>
+      <div class="cats-tarjetas" id="cats-tarjetas"></div>
+    </section>
+
+    <section class="orbita" id="orbita" aria-label="Productos destacados" hidden></section>
+
+    <section id="catalogo" class="contenedor" aria-label="Catálogo">
+      <div class="categorias" id="categorias" role="toolbar" aria-label="Categorías"></div>
+
+      <div class="colecciones oculto" id="colecciones"></div>
+
+      <div class="herramientas">
+        <h2 id="titulo-lista">Todos los productos</h2>
+        <label class="buscador">
+          <span class="solo-lector">Buscar</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20.5 20.5-4.5-4.5"/></svg>
+          <input type="search" id="buscar" placeholder="Buscar por nombre, código o color" autocomplete="off" enterkeyhint="search">
+        </label>
+        <select class="selector" id="ordenar" aria-label="Ordenar">
+          <option value="destacados">Destacados</option>
+          <option value="nuevos">Novedades</option>
+          <option value="precio-asc">Precio: menor a mayor</option>
+          <option value="precio-desc">Precio: mayor a menor</option>
+          <option value="nombre">Nombre A–Z</option>
+        </select>
+        <div class="chips">
+          <button class="chip" id="filtro-disponibles" aria-pressed="false">Solo disponibles</button>
+          <button class="chip" id="filtro-ofertas" aria-pressed="false">Ofertas</button>
+        </div>
+        <p class="resultado" id="resultado" aria-live="polite"></p>
+      </div>
+
+      <div class="rejilla" id="rejilla" aria-live="polite"></div>
+      <div class="mas-productos oculto" id="mas-productos"><button class="boton claro" id="ver-mas">Ver más productos</button></div>
+
+      <div class="ventajas">
+        <a class="ventaja" href="envios.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 6h11v10h-11z"/><path d="M13.5 9.5h4l3 3.5V16h-7"/><circle cx="6.5" cy="17.5" r="1.8"/><circle cx="17" cy="17.5" r="1.8"/></svg><strong data-ventaja-t="0">Envíos nacionales</strong><span data-ventaja-d="0">A toda Venezuela</span></a>
+        <a class="ventaja" href="pagos.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="5" width="19" height="14" rx="2"/><path d="M2.5 9.5h19M6 15h4"/></svg><strong data-ventaja-t="1">Divisas o bolívares</strong><span data-ventaja-d="1">Precio a tasa BCV</span></a>
+        <a class="ventaja" href="#catalogo" id="ventaja-mayor"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7.5 12 3l9 4.5v9L12 21l-9-4.5z"/><path d="M3 7.5 12 12l9-4.5M12 12v9"/></svg><strong data-ventaja-t="2">Al mayor y al detal</strong><span id="texto-mayor" data-ventaja-d="2">Precio especial por cantidad</span></a>
+        <a class="ventaja" href="resenas.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1-4.4-4.3 6.1-.9z"/></svg><strong data-ventaja-t="3">Clientes felices</strong><span data-ventaja-d="3">Lee sus reseñas</span></a>
+      </div>
+    </section>
+
+    <section class="banda-mayor" id="banda-mayor" aria-label="Ventas al mayor">
+      <div class="contenedor">
+        <div>
+          <small id="banda-ceja">Empresas y mayoristas</small>
+          <h2 id="banda-titulo">Equipa tu oficina completa</h2>
+          <p id="banda-texto">Precio al mayor desde 6 piezas combinando modelos. Cotiza tu proyecto y te asesoramos.</p>
+        </div>
+        <a class="boton blanco" data-wa target="_blank" rel="noopener">Cotizar por WhatsApp</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="pie">
+    <div class="contenedor">
+      <div>
+        <p class="marca-pie"><img src="img/logo-arkeo-blanco.png" alt="ARKEO Home &amp; Office" width="180" height="59" loading="lazy"></p>
+        <p data-eslogan style="margin:0 0 12px">Mobiliario de oficina y hogar</p>
+        <a class="boton whatsapp oculto" data-wa target="_blank" rel="noopener" style="display:inline-flex;color:#fff">Escríbenos por WhatsApp</a>
+      </div>
+      <div>
+        <h4>Tienda</h4>
+        <a href="#catalogo">Catálogo</a>
+        <a href="pagos.html">Métodos de pago</a>
+        <a href="envios.html">Envíos</a>
+        <a href="resenas.html">Reseñas</a>
+        <a href="contacto.html">Contacto</a>
+      </div>
+      <div>
+        <h4>Contacto</h4>
+        <div id="pie-redes"></div>
+      </div>
+      <div class="legal">
+        <span>© <span data-anio></span> <span data-nombre-tienda>ARKEO</span>. Todos los derechos reservados.</span>
+        <span><a href="politicas.html">Políticas</a> · <a href="privacidad.html">Privacidad</a></span>
+      </div>
+    </div>
+  </footer>
+
+  <a class="flotante-wa oculto" data-wa target="_blank" rel="noopener" aria-label="Escribir por WhatsApp">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 20.5 5 16a8.5 8.5 0 1 1 3.2 3.2z"/><path d="M9 8.5c0 3.5 3 6.5 6.5 6.5l1.2-1.6-2.2-1-1 .9a5 5 0 0 1-2.8-2.8l.9-1-1-2.2z"/></svg>
+  </a>
+
+  <!-- Ficha de producto -->
+  <div class="velo oculto" id="velo"></div>
+  <section class="ficha oculto" id="ficha" role="dialog" aria-modal="true" aria-labelledby="ficha-nombre"></section>
+
+  <!-- Carrito -->
+  <aside class="carrito oculto" id="carrito" role="dialog" aria-modal="true" aria-labelledby="carrito-titulo">
+    <header>
+      <h2 id="carrito-titulo">Tu pedido</h2>
+      <button class="icono-boton" id="cerrar-carrito" aria-label="Cerrar carrito"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+    </header>
+    <div class="carrito-cuerpo" id="carrito-cuerpo"></div>
+    <footer id="carrito-pie"></footer>
+  </aside>
+
+  <script src="js/conexion.js"></script>
+  <script src="js/iconos.js"></script>
+  <script src="js/datos.js"></script>
+  <script src="js/orbita.js"></script>
+  <script src="js/tienda.js"></script>
+</body>
+</html>
