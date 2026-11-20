@@ -19,6 +19,7 @@ Es un sistema **independiente**: no usa el Vendedor IA del resto de este reposit
 | `sitio/js/conexion.js` | El **único** archivo que hay que editar: dirección y clave pública de Supabase | Va dentro de `sitio/` |
 | `supabase/01_tablas_y_seguridad.sql` | Crea las tablas, la seguridad y las funciones | Se pega en **Supabase › SQL Editor**. *No va en Netlify* |
 | `supabase/02_correo_administrador.sql` | Define el correo del administrador | Se pega en **Supabase › SQL Editor**. *No va en Netlify* |
+| `supabase/03_productos_de_ejemplo.sql` | (Opcional) Carga los productos de ejemplo de la demostración | Se pega en **Supabase › SQL Editor** |
 | `cloudflare/worker.js` | El "puente" de las fotos (sube, muestra y borra) | Se pega en **Cloudflare › Workers**. *No va en Netlify* |
 | `guias/` | Guías paso a paso | Para ti y para el cliente |
 

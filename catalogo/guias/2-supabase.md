@@ -17,6 +17,11 @@
 
 > Puedes volver a ejecutar estos archivos cuando quieras (por ejemplo, si te entrego una versión nueva): **no borran productos, pedidos ni ajustes**. Para cambiar el correo del administrador, ejecuta de nuevo solo el archivo 2 con el correo nuevo.
 
+### (Opcional) Cargar los productos de ejemplo
+Para que la tienda real arranque igual que la demostración (fotos reales de sillas, muebles de oficina ilustrados, colecciones y reseñas): **New query** → pega `supabase/03_productos_de_ejemplo.sql` → **Run**. Debe mostrar `productos_en_la_tienda: 16`.
+- Solo agrega productos si la tienda está vacía; ejecutarlo de nuevo no duplica nada.
+- Los nombres, precios, medidas y stock son **de ejemplo**: cámbialos en el almacén antes de vender, o bórralos y carga los reales.
+
 ## 2.3 Crear el usuario administrador
 1. Menú izquierdo → **Authentication** → **Users** → **Add user** → **Create new user**.
 2. **Email:** el mismo correo del archivo 2. **Password:** una contraseña segura (mínimo 8 caracteres).
