@@ -1,0 +1,60 @@
+<!doctype html><html><head><meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Montserrat:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{width:1080px;height:1350px;font-family:Montserrat,sans-serif;background:#5a0a14;overflow:hidden}
+.post{position:relative;width:1080px;height:1350px;background:radial-gradient(ellipse at 50% 30%,#8e1424 0%,#5a0a14 55%,#33050c 100%);color:#fff;padding:56px 64px;display:flex;flex-direction:column;align-items:center}
+.snow{position:absolute;inset:0;pointer-events:none}
+.border{position:absolute;inset:22px;border:3px solid #d8b25a;border-radius:28px;pointer-events:none}
+.border:after{content:"";position:absolute;inset:10px;border:1px solid rgba(216,178,90,.45);border-radius:20px}
+.brand{font-family:'Playfair Display';font-weight:900;font-size:46px;letter-spacing:10px;color:#f3d891;margin-top:18px}
+.brand small{display:block;text-align:center;font-family:Montserrat;font-size:15px;letter-spacing:6px;font-weight:600;color:#f6e7c1;margin-top:2px}
+.tag{margin-top:26px;background:#d8b25a;color:#4a0710;font-weight:900;font-size:30px;letter-spacing:5px;padding:12px 34px;border-radius:50px;box-shadow:0 6px 0 #9c7a2e}
+.all{margin-top:30px;font-family:'Playfair Display';font-style:italic;font-size:46px;color:#fff}
+.price{display:flex;align-items:flex-start;line-height:.82;margin-top:6px;color:#fff;text-shadow:0 10px 0 rgba(0,0,0,.25)}
+.price .d{font-size:120px;font-weight:900;margin-top:28px;color:#f3d891}
+.price .n{font-size:300px;font-weight:900;letter-spacing:-12px}
+.each{font-size:40px;font-weight:900;letter-spacing:8px;margin-top:12px}
+.sub{margin-top:14px;font-size:24px;font-weight:600;color:#f6e7c1;letter-spacing:1px}
+.sub b{color:#fff;background:rgba(255,255,255,.12);padding:4px 12px;border-radius:8px}
+.bags{display:flex;gap:26px;margin-top:30px}
+.bags svg{width:120px;height:120px}
+.info{margin-top:30px;width:100%;display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.card{background:rgba(255,255,255,.08);border:1.5px solid rgba(216,178,90,.55);border-radius:18px;padding:18px 20px;display:flex;align-items:center;gap:16px}
+.card svg{flex:none;width:48px;height:48px}
+.card h4{font-size:22px;font-weight:800;color:#f3d891;letter-spacing:.5px}
+.card p{font-size:19px;font-weight:500;color:#fff;margin-top:2px}
+.cta{margin-top:30px;background:#fff;color:#5a0a14;border-radius:20px;padding:20px 40px;text-align:center;width:100%}
+.cta .l1{font-size:32px;font-weight:900;letter-spacing:1px}
+.cta .l2{font-size:22px;font-weight:600;margin-top:4px;color:#7a1020}
+.urgent{position:absolute;top:200px;right:70px;transform:rotate(12deg);background:#f3d891;color:#4a0710;width:170px;height:170px;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;font-weight:900;text-align:center;font-size:20px;line-height:1.1;box-shadow:0 8px 20px rgba(0,0,0,.35);border:4px dashed #9c7a2e}
+.foot{margin-top:24px;display:flex;gap:30px;white-space:nowrap;font-size:18px;font-weight:700;color:#f6e7c1}.foot i{font-style:normal;color:#f3d891;margin-right:6px}
+.urgent span{font-size:34px}
+</style></head><body>
+<div class="post">
+  <svg class="snow" viewBox="0 0 1080 1350"><g fill="#fff" opacity=".22">
+  <circle cx="90" cy="120" r="5"/><circle cx="210" cy="300" r="3"/><circle cx="980" cy="110" r="4"/><circle cx="880" cy="420" r="3"/><circle cx="140" cy="560" r="4"/><circle cx="960" cy="640" r="5"/><circle cx="70" cy="820" r="3"/><circle cx="1010" cy="900" r="3"/><circle cx="300" cy="160" r="2"/><circle cx="760" cy="200" r="3"/><circle cx="60" cy="380" r="2"/><circle cx="1020" cy="300" r="2"/></g>
+  <g stroke="#f3d891" stroke-width="3" opacity=".5" stroke-linecap="round"><g transform="translate(130 250)"><path d="M0-22V22M-19-11 19 11M-19 11 19-11"/></g><g transform="translate(950 560) scale(.8)"><path d="M0-22V22M-19-11 19 11M-19 11 19-11"/></g><g transform="translate(110 700) scale(.6)"><path d="M0-22V22M-19-11 19 11M-19 11 19-11"/></g></g></svg>
+  <div class="border"></div>
+  <div class="brand">MAURG<small>MAURG.SHOP · CARTERAS</small></div>
+  <div class="tag">PROMO NAVIDEÑA</div>
+  <div class="urgent">HASTA<span>AGOTAR</span>STOCK</div>
+  <div class="all">Toda la tienda a</div>
+  <div class="price"><span class="d">$</span><span class="n">25</span></div>
+  <div class="each">CADA CARTERA</div>
+  <div class="sub">Todos los modelos · <b>Pago solo en divisas</b></div>
+  <div class="bags">
+    <svg viewBox="0 0 100 100"><path d="M30 38c0-14 40-14 40 0" fill="none" stroke="#f3d891" stroke-width="5"/><rect x="14" y="36" width="72" height="50" rx="10" fill="#f3d891"/><rect x="44" y="50" width="12" height="9" rx="2" fill="#5a0a14"/></svg>
+    <svg viewBox="0 0 100 100"><path d="M22 40 50 14 78 40" fill="none" stroke="#fff" stroke-width="4"/><path d="M14 40h72l-8 46H22z" fill="#fff"/><circle cx="50" cy="56" r="5" fill="#8e1424"/></svg>
+    <svg viewBox="0 0 100 100"><path d="M36 34c0-18 28-18 28 0" fill="none" stroke="#f3d891" stroke-width="5"/><path d="M18 34h64l6 52H12z" fill="#f3d891"/><path d="M12 54h76" stroke="#5a0a14" stroke-width="3"/></svg>
+    <svg viewBox="0 0 100 100"><path d="M20 36C20 10 80 10 80 36" fill="none" stroke="#fff" stroke-width="3"/><rect x="18" y="36" width="64" height="40" rx="20" fill="#fff"/><path d="M18 52h64" stroke="#8e1424" stroke-width="3"/></svg>
+  </div>
+  <div class="info">
+    <div class="card"><svg viewBox="0 0 24 24" fill="none" stroke="#f3d891" stroke-width="2"><path d="M12 22s7-7 7-12a7 7 0 0 0-14 0c0 5 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/></svg><div><h4>UBICACIÓN</h4><p>Los Guayos, Paraparal</p></div></div>
+    <div class="card"><svg viewBox="0 0 24 24" fill="none" stroke="#f3d891" stroke-width="2"><path d="M3 11 12 3l9 8v10H3z"/><path d="M9 21v-6h6v6"/></svg><div><h4>SHOWROOM</h4><p>Ven a verlas en persona</p></div></div>
+    <div class="card"><svg viewBox="0 0 24 24" fill="none" stroke="#f3d891" stroke-width="2"><circle cx="6" cy="17" r="3"/><circle cx="18" cy="17" r="3"/><path d="M9 17h6l-3-8h-3M15 9h3l2 8"/></svg><div><h4>DELIVERY</h4><p>Te la llevamos</p></div></div>
+    <div class="card"><svg viewBox="0 0 24 24" fill="none" stroke="#f3d891" stroke-width="2"><path d="M3 7l9-4 9 4v10l-9 4-9-4z"/><path d="M3 7l9 4 9-4M12 11v10"/></svg><div><h4>ENVÍOS</h4><p>A toda Venezuela</p></div></div>
+  </div>
+  <div class="cta"><div class="l1">ESCRÍBENOS Y APARTA LA TUYA</div><div class="l2">Maurg.shop · Cuando se acaban, se acaban</div></div>
+  <div class="foot"><span><i>✓</i>Precio final, sin sorpresas</span><span><i>✓</i>Todos los modelos</span><span><i>✓</i>Hasta agotar existencia</span></div>
+</div></body></html>
