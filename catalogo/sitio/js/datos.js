@@ -35,6 +35,8 @@
     direccion: "",
     horario: "Lunes a sábado, 9:00 a. m. a 6:00 p. m.",
     mapa: "",
+    fotosPaginas: {},
+    galeria: [],
     tasaBCV: 0,
     tasaFecha: "",
     minimoMayor: 6,
@@ -70,6 +72,8 @@
     ["categorias", "colecciones", "resenas"].forEach((k) => { if (!Array.isArray(d[k])) d[k] = []; });
     if (!d.paginas || typeof d.paginas !== "object") d.paginas = {};
     if (!d.inicio || typeof d.inicio !== "object") d.inicio = {};
+    if (!d.fotosPaginas || typeof d.fotosPaginas !== "object") d.fotosPaginas = {};
+    d.galeria = (Array.isArray(d.galeria) ? d.galeria : []).filter((g) => g && g.foto);
     d.tasaBCV = Number(d.tasaBCV) || 0;
     d.minimoMayor = Math.max(1, parseInt(d.minimoMayor, 10) || 6);
     d.ventaMayor = d.ventaMayor === true;
@@ -398,8 +402,8 @@
     document.querySelectorAll("[data-wa]").forEach((el) => {
       if (wa) { el.href = wa; el.classList.remove("oculto"); } else el.classList.add("oculto");
     });
-    const redes = document.getElementById("pie-redes");
-    if (redes) {
+    document.querySelectorAll("[data-horario]").forEach((el) => { if (cfg.horario) el.textContent = "Showroom abierto · " + cfg.horario; });
+    document.querySelectorAll("[data-pie-redes]").forEach((redes) => {
       const r = [];
       if (cfg.whatsapp) r.push('<a href="' + wa + '" target="_blank" rel="noopener">WhatsApp</a>');
       if (cfg.instagram) r.push('<a href="https://instagram.com/' + T.esc(String(cfg.instagram).replace(/^@|https?:\/\/(www\.)?instagram\.com\//g, "").replace(/\/$/, "")) + '" target="_blank" rel="noopener">Instagram</a>');
@@ -407,23 +411,20 @@
       if (cfg.correo) r.push('<a href="mailto:' + T.esc(cfg.correo) + '">' + T.esc(cfg.correo) + "</a>");
       if (cfg.direccion) r.push("<span>" + T.esc(cfg.direccion) + "</span>");
       redes.innerHTML = r.join("") || "<span>Escríbenos por nuestras redes.</span>";
-    }
+    });
     if (T.demo && !document.querySelector(".banda-demo")) {
       const b = document.createElement("div");
       b.className = "banda-demo";
       b.innerHTML = 'Modo demostración: productos de ejemplo. Para conectar la tienda llena <b>js/conexion.js</b> (ver guías).';
       document.body.prepend(b);
     }
-    // Menú móvil
-    const btnMenu = document.getElementById("abrir-menu");
-    const menuMovil = document.getElementById("menu-movil");
-    if (btnMenu && menuMovil && !btnMenu.dataset.listo) {
-      btnMenu.dataset.listo = "1";
-      btnMenu.addEventListener("click", () => {
-        const abierto = menuMovil.classList.toggle("oculto") === false;
-        btnMenu.setAttribute("aria-expanded", abierto ? "true" : "false");
-      });
+    if (!document.getElementById("contador-carrito")) {
+      const n = (T.leerMemoria("carrito") || []).reduce((t, x) => t + (Number(x.cantidad) || 0), 0);
+      document.querySelectorAll(".contador-nav").forEach((c) => { c.textContent = n ? String(n) : ""; c.dataset.n = String(n); });
     }
+    pintarMenus(cfg);
+    pintarUbicacion(cfg);
+    pintarGaleria(cfg);
     const cab = document.querySelector(".cabecera");
     if (cab && !cab.dataset.listo) {
       cab.dataset.listo = "1";
@@ -432,4 +433,140 @@
       f();
     }
   };
+
+  // ---------------------------------------------------------------------
+  // Menú de lujo (celular), categorías desplegables (computadora),
+  // ubicación en el pie y galería de Instagram. Se usan en todas las páginas.
+  // ---------------------------------------------------------------------
+  const FOTOS_FABRICA = ["silla-velvet-negra", "taburete-velvet", "silla-barra-nordica", "vanity-petalo", "silla-patchwork", "taburete-concha"];
+  T.FOTO_PAGINA = { pagos: "taburete-velvet", envios: "silla-barra-nordica", resenas: "vanity-petalo", contacto: "silla-patchwork", politicas: "taburete-concha", privacidad: "silla-velvet-negra", catalogo: "taburete-velvet" };
+  T.fotoDePagina = function (cfg, slug) {
+    return (cfg.fotosPaginas && cfg.fotosPaginas[slug]) || "img/fotos/" + (T.FOTO_PAGINA[slug] || FOTOS_FABRICA[0]) + ".webp";
+  };
+  T.instagramUsuario = (cfg) => String(cfg.instagram || "").replace(/^@|https?:\/\/(www\.)?instagram\.com\//g, "").replace(/\/.*$/, "");
+  T.enlaceMapa = function (cfg) {
+    if (cfg.mapa) return cfg.mapa;
+    if (!cfg.direccion) return "";
+    return "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(cfg.direccion + (/venezuela/i.test(cfg.direccion) ? "" : ", Venezuela"));
+  };
+  const ic = (n) => (window.icono ? window.icono(n) : "");
+
+  // Categorías con productos (usa el catálogo guardado en el teléfono) y una foto de cada una
+  function categoriasMenu(cfg) {
+    const prods = ((T.demo ? T.demoLeer && T.demoLeer("productos") : T.leerMemoria("productos")) || []).filter((p) => p && p.disponible !== false);
+    const base = (cfg.categorias || []).map((c) => (typeof c === "string" ? { nombre: c } : c)).filter((c) => c && c.nombre);
+    const nombres = base.map((c) => c.nombre);
+    prods.forEach((p) => { if (p.categoria && !nombres.includes(p.categoria)) { nombres.push(p.categoria); base.push({ nombre: p.categoria }); } });
+    return base.map((c) => {
+      const de = prods.filter((p) => p.categoria === c.nombre);
+      const conFoto = de.find((p) => T.fotos(p).length);
+      return { nombre: c.nombre, icono: c.icono || "silla", n: de.length, foto: conFoto ? T.fotoPrincipal(conFoto) : "" };
+    }).filter((c) => !prods.length || c.n > 0);
+  }
+
+  function pintarMenus(cfg) {
+    const cats = categoriasMenu(cfg);
+    const enlaceCat = (c) => "catalogo.html?cat=" + encodeURIComponent(c.nombre);
+    const ig = T.instagramUsuario(cfg);
+    const wa = cfg.whatsapp ? T.enlaceWa(cfg.whatsapp, "Hola, vengo de la página web 👋") : "";
+    const mapa = T.enlaceMapa(cfg);
+    const actual = document.body.dataset.pagina;
+
+    // Desplegable de categorías (computadora)
+    const mega = document.querySelector("[data-mega]");
+    if (mega) {
+      const foto = (cfg.portada && cfg.portada.imagen) || "img/fotos/taburete-velvet.webp";
+      mega.innerHTML = '<div class="mega-cats">' + cats.map((c) =>
+        '<a href="' + enlaceCat(c) + '"><span class="mega-img">' + (c.foto ? '<img src="' + T.esc(c.foto) + '" alt="" loading="lazy">' : ic(c.icono)) + "</span><span><b>" + T.esc(c.nombre) + "</b>" + (c.n ? "<small>" + c.n + (c.n === 1 ? " producto" : " productos") + "</small>" : "") + "</span></a>").join("") + "</div>" +
+        '<a class="mega-destacado" href="catalogo.html" style="background-image:linear-gradient(180deg,rgba(5,51,89,.05),rgba(3,36,65,.85)),url(\'' + T.esc(foto) + '\')"><small>Colección ' + new Date().getFullYear() + "</small><b>Ver todo el catálogo</b><span>" + ic("flecha") + "</span></a>";
+      const btn = document.getElementById("menu-cats-boton");
+      const caja = btn && btn.parentElement;
+      if (btn && !btn.dataset.listo) {
+        btn.dataset.listo = "1";
+        let t = null;
+        const abrir = (si) => { clearTimeout(t); caja.classList.toggle("abierto", si); btn.setAttribute("aria-expanded", si ? "true" : "false"); };
+        btn.addEventListener("click", () => abrir(!caja.classList.contains("abierto")));
+        caja.addEventListener("mouseenter", () => { if (matchMedia("(hover: hover)").matches) abrir(true); });
+        caja.addEventListener("mouseleave", () => { t = setTimeout(() => abrir(false), 180); });
+        document.addEventListener("keydown", (e) => { if (e.key === "Escape") abrir(false); });
+        document.addEventListener("click", (e) => { if (!caja.contains(e.target)) abrir(false); });
+      }
+    }
+
+    // Categorías en el pie
+    document.querySelectorAll("[data-pie-cats]").forEach((pieCats) => { pieCats.innerHTML = cats.slice(0, 7).map((c) => '<a href="' + enlaceCat(c) + '">' + T.esc(c.nombre) + "</a>").join(""); });
+
+    // Menú de lujo (pantalla completa en el celular)
+    const ml = document.querySelector("[data-menu-lujo]");
+    if (!ml) return;
+    const num = (n) => "<small>" + String(n).padStart(2, "0") + "</small>";
+    const item = (n, href, texto, slug) => '<a class="ml-enlace" href="' + href + '"' + (slug === actual ? ' aria-current="page"' : "") + ' style="--i:' + n + '">' + num(n) + "<span>" + texto + "</span>" + ic("flecha") + "</a>";
+    const abierto = ml.classList.contains("abierto");
+    ml.innerHTML = '<div class="ml-fondo" data-cerrar-menu></div><div class="ml-panel" role="dialog" aria-modal="true" aria-label="Menú">' +
+      '<div class="ml-cabeza"><img src="img/logo-arkeo-blanco.png" alt="ARKEO Home &amp; Office"><button class="ml-cerrar" data-cerrar-menu aria-label="Cerrar menú">' + ic("cerrar") + "</button></div>" +
+      '<nav class="ml-enlaces">' + item(1, "./", "Inicio", "inicio") +
+      '<button type="button" class="ml-enlace ml-desplegar" aria-expanded="false" style="--i:2">' + num(2) + "<span>Categorías</span>" + '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></button>' +
+      '<div class="ml-cats"><div>' + cats.map((c) => '<a href="' + enlaceCat(c) + '">' + (c.foto ? '<img src="' + T.esc(c.foto) + '" alt="" loading="lazy">' : '<i>' + ic(c.icono) + "</i>") + "<span>" + T.esc(c.nombre) + "</span></a>").join("") +
+        '<a class="ml-todo" href="catalogo.html"><i>' + ic("flecha") + "</i><span>Ver todo</span></a></div></div>" +
+      item(3, "catalogo.html", "Catálogo", "catalogo") + item(4, "pagos.html", "Métodos de pago", "pagos") + item(5, "envios.html", "Envíos", "envios") +
+      item(6, "resenas.html", "Reseñas", "resenas") + item(7, "contacto.html", "Contacto", "contacto") + "</nav>" +
+      '<div class="ml-pie">' +
+        (wa ? '<a class="boton blanco ml-wa" href="' + wa + '" target="_blank" rel="noopener">' + ic("whatsapp") + "Escríbenos por WhatsApp</a>" : "") +
+        '<div class="ml-datos">' +
+          (ig ? '<a href="https://instagram.com/' + T.esc(ig) + '" target="_blank" rel="noopener">' + ic("instagram") + "<span>@" + T.esc(ig) + "</span></a>" : "") +
+          (cfg.direccion ? '<a href="' + T.esc(mapa) + '" target="_blank" rel="noopener">' + ic("ubicacion") + "<span>" + T.esc(cfg.direccion) + "</span></a>" : "") +
+          (cfg.telefono ? '<span class="ml-tel">' + ic("telefono") + "<span>" + T.esc(cfg.telefono) + "</span></span>" : "") +
+        "</div></div></div>";
+    if (abierto) ml.classList.add("abierto");
+    const btn = document.getElementById("abrir-menu");
+    const abrir = (si) => {
+      ml.classList.toggle("abierto", si);
+      ml.setAttribute("aria-hidden", si ? "false" : "true");
+      document.body.classList.toggle("menu-abierto", si);
+      if (btn) btn.setAttribute("aria-expanded", si ? "true" : "false");
+    };
+    if (btn && !btn.dataset.listo) {
+      btn.dataset.listo = "1";
+      btn.addEventListener("click", () => abrir(!ml.classList.contains("abierto")));
+      document.addEventListener("keydown", (e) => { if (e.key === "Escape" && ml.classList.contains("abierto")) abrir(false); });
+    }
+    ml.onclick = (e) => {
+      if (e.target.closest("[data-cerrar-menu]")) { abrir(false); return; }
+      const d = e.target.closest(".ml-desplegar");
+      if (d) { const si = d.getAttribute("aria-expanded") !== "true"; d.setAttribute("aria-expanded", si); d.nextElementSibling.classList.toggle("abierta", si); return; }
+      if (e.target.closest("a")) abrir(false);
+    };
+  }
+
+  function pintarUbicacion(cfg) {
+    const el = document.getElementById("pie-ubicacion");
+    if (!el) return;
+    if (!cfg.direccion) { el.classList.add("oculto"); return; }
+    const q = encodeURIComponent(cfg.direccion + (/venezuela/i.test(cfg.direccion) ? "" : ", Venezuela"));
+    const clave = cfg.direccion;
+    el.classList.remove("oculto");
+    if (el.dataset.dir === clave) return; // no recargar el mapa
+    el.dataset.dir = clave;
+    el.innerHTML = '<div class="ubi-texto"><small>Ubicación</small><h2>Visita nuestro showroom</h2><p class="ubi-dir">' + ic("ubicacion") + "<span>" + T.esc(cfg.direccion) + "</span></p>" +
+      (cfg.horario ? '<p class="ubi-hora">' + ic("reloj") + "<span>" + T.esc(cfg.horario) + "</span></p>" : "") +
+      '<a class="boton blanco" href="' + T.esc(T.enlaceMapa(cfg)) + '" target="_blank" rel="noopener">Cómo llegar ' + ic("flecha") + "</a></div>" +
+      '<div class="ubi-mapa"><iframe title="Mapa de ' + T.esc(cfg.nombreTienda || "la tienda") + '" src="https://www.google.com/maps?q=' + q + '&amp;z=15&amp;output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></div>';
+  }
+
+  function pintarGaleria(cfg) {
+    const el = document.querySelector("[data-galeria]");
+    if (!el) return;
+    const ig = T.instagramUsuario(cfg);
+    const perfil = ig ? "https://instagram.com/" + ig : "";
+    let fotos = (cfg.galeria || []).slice(0, 12);
+    if (!fotos.length) fotos = FOTOS_FABRICA.map((f) => ({ foto: "img/fotos/" + f + "-m.webp", enlace: "" }));
+    if (!perfil && !fotos.some((f) => f.enlace)) { el.classList.add("oculto"); return; }
+    el.classList.remove("oculto");
+    el.innerHTML = '<div class="titulo-bloque"><div><small>Instagram</small><h2>' + (ig ? "@" + T.esc(ig) : "Síguenos") + "</h2></div>" +
+      (perfil ? '<a class="boton" href="' + perfil + '" target="_blank" rel="noopener">' + ic("instagram") + "Seguir en Instagram</a>" : "") + "</div>" +
+      '<div class="galeria-rejilla">' + fotos.map((f, i) => {
+        const href = f.enlace || perfil;
+        return '<a href="' + T.esc(href) + '" target="_blank" rel="noopener" style="--i:' + i + '"><img src="' + T.esc(f.foto) + '" alt="Foto de Instagram ' + (i + 1) + '" loading="lazy"><span>' + ic("instagram") + "</span></a>";
+      }).join("") + "</div>";
+  }
 })();

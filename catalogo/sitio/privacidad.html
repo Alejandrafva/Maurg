@@ -19,6 +19,10 @@
     <div class="contenedor">
       <a class="logo" href="./"><img data-logo src="img/logo-arkeo-blanco.png" alt="ARKEO Home &amp; Office"><span data-nombre-tienda>ARKEO</span></a>
       <nav class="menu" aria-label="Principal">
+        <div class="menu-cats">
+          <button type="button" class="menu-cats-boton" id="menu-cats-boton" aria-expanded="false" aria-controls="mega">Categorías <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button>
+          <div class="mega" id="mega" data-mega></div>
+        </div>
         <a href="catalogo.html">Catálogo</a>
         <a href="pagos.html">Pagos</a>
         <a href="envios.html">Envíos</a>
@@ -26,10 +30,14 @@
         <a href="contacto.html">Contacto</a>
       </nav>
       <div class="acciones-cabecera">
-        <a class="boton" href="catalogo.html">Ver catálogo</a>
+        <a class="icono-boton solo-pc boton-lupa" href="catalogo.html#buscar" aria-label="Buscar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20.5 20.5-4.5-4.5"/></svg></a>
+        <a class="boton boton-carrito" href="catalogo.html#carrito" aria-label="Ver carrito"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 8h14l-1 12.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 6 20.5z"/><path d="M8.5 10V6.5a3.5 3.5 0 0 1 7 0V10"/></svg><span class="texto">Carrito</span><span class="contador contador-nav" data-n="0"></span></a>
+        <button class="icono-boton boton-menu" id="abrir-menu" aria-label="Menú" aria-expanded="false" aria-controls="menu-movil"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h10"/></svg></button>
       </div>
     </div>
   </header>
+  <div class="menu-lujo" id="menu-movil" aria-hidden="true" data-menu-lujo></div>
+
   <main class="pagina contenedor">
     <div class="pagina-cabeza"><small data-nombre-tienda>ARKEO</small><h1>Política de privacidad</h1></div>
     <div class="pagina-rejilla">
@@ -47,27 +55,26 @@
 <p>Para pedir que borremos tus datos, escríbenos por WhatsApp o correo.</p>
 </article>
     </div>
+    <section class="galeria-insta contenedor oculto" data-galeria aria-label="Instagram"></section>
   </main>
-  <footer class="pie">
-    <div class="contenedor">
-      <div>
-        <p class="marca-pie"><img src="img/logo-arkeo-blanco.png" alt="ARKEO Home &amp; Office" width="180" height="59" loading="lazy"></p>
-        <p data-eslogan style="margin:0 0 12px"></p>
+  <section class="ubicacion contenedor oculto" id="pie-ubicacion" aria-label="Ubicación"></section>
+  <footer class="pie pie-marca">
+    <div class="contenedor pie-arriba">
+      <div class="pie-intro">
+        <img class="pie-logo" src="img/logo-arkeo-negro.png" alt="ARKEO Home &amp; Office" width="170" height="56" loading="lazy">
+        <p class="pie-desc" data-eslogan>Mobiliario de oficina y hogar</p>
+        <p class="pie-estado"><i aria-hidden="true"></i><span data-horario>Showroom abierto de lunes a sábado</span></p>
+        <a class="boton pie-wa oculto" data-wa target="_blank" rel="noopener">Escríbenos por WhatsApp</a>
       </div>
-      <div>
-        <h4>Tienda</h4>
-        <a href="catalogo.html">Catálogo</a>
-        <a href="pagos.html">Pagos</a><a href="envios.html">Envíos</a><a href="resenas.html">Reseñas</a><a href="contacto.html">Contacto</a>
-      </div>
-      <div>
-        <h4>Contacto</h4>
-        <div id="pie-redes"></div>
-      </div>
-      <div class="legal">
-        <span>© <span data-anio></span> <span data-nombre-tienda>ARKEO</span>. Todos los derechos reservados.</span>
-        <span><a href="politicas.html">Políticas</a> · <a href="privacidad.html">Privacidad</a></span>
-      </div>
+      <nav class="pie-columnas" aria-label="Pie de página"><div><p class="pie-col-titulo">Tienda</p><div class="pie-col-enlaces"><a href="catalogo.html">Catálogo</a><a href="pagos.html">Métodos de pago</a><a href="envios.html">Envíos</a><a href="resenas.html">Reseñas</a><a href="contacto.html">Contacto</a></div></div><div><p class="pie-col-titulo">Categorías</p><div class="pie-col-enlaces"><span data-pie-cats></span></div></div><div><p class="pie-col-titulo">Contacto</p><div class="pie-col-enlaces"><span data-pie-redes></span></div></div></nav>
+      <nav class="pie-columnas-movil" aria-label="Pie de página"><details class="pie-plegable"><summary><span>Tienda</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></summary><div class="pie-col-enlaces"><a href="catalogo.html">Catálogo</a><a href="pagos.html">Métodos de pago</a><a href="envios.html">Envíos</a><a href="resenas.html">Reseñas</a><a href="contacto.html">Contacto</a></div></details><details class="pie-plegable"><summary><span>Categorías</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></summary><div class="pie-col-enlaces"><span data-pie-cats></span></div></details><details class="pie-plegable"><summary><span>Contacto</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></summary><div class="pie-col-enlaces"><span data-pie-redes></span></div></details></nav>
     </div>
+    <div class="contenedor pie-legal">
+      <p>© <span data-anio></span> <span data-nombre-tienda>ARKEO</span> · Home &amp; Office</p>
+      <a href="politicas.html">Políticas</a>
+      <a href="privacidad.html">Privacidad</a>
+    </div>
+    <p class="pie-wordmark" aria-hidden="true">ARKEO</p>
   </footer>
   <a class="flotante-wa oculto" data-wa target="_blank" rel="noopener" aria-label="Escribir por WhatsApp"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 20.5 5 16a8.5 8.5 0 1 1 3.2 3.2z"/><path d="M9 8.5c0 3.5 3 6.5 6.5 6.5l1.2-1.6-2.2-1-1 .9a5 5 0 0 1-2.8-2.8l.9-1-1-2.2z"/></svg></a>
   <nav class="barra-inferior" aria-label="Navegación">

@@ -67,6 +67,11 @@ Ordena con ▲▼ (ese es el orden de la barra de categorías en la tienda), cam
 | **Las 4 ventajas** (envíos, pagos…) | Página › Textos de la página de inicio |
 | **Banda azul** (título, texto y foto) | Página › Textos de la página de inicio |
 | **Reseñas** | Página › Reseñas |
+| **Foto grande de cada página del menú** (Pagos, Envíos, Reseñas, Contacto, Políticas, Privacidad) | Página › Fotos de las páginas del menú |
+| **Galería de Instagram** (fotos que llevan a tu Instagram o a una publicación) | Página › Galería de Instagram (hasta 12 fotos; pega el enlace de la publicación si quieres) |
+| **Menú** (categorías desplegables en la computadora y menú de pantalla completa en el celular) | Sale solo con tus Categorías (las que tienen productos, con la foto del primer producto) |
+| **Ubicación con mapa** (antes del pie de página) | Ajustes › Contacto: dirección, horario y enlace de Google Maps (opcional; si no lo pones, el botón «Cómo llegar» busca la dirección) |
+| **Pie de página** (columnas y el nombre ARKEO grande) | Sale solo: eslogan, horario, categorías y contacto de Ajustes |
 | **Pagos, envíos, políticas, privacidad** | Página › Páginas informativas |
 | **Logo, WhatsApp, teléfonos, Instagram, dirección** (cabecera, pie y contacto) | Ajustes |
 

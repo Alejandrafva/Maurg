@@ -1177,6 +1177,8 @@
     const cols = cfg.colecciones.slice();
     const res = cfg.resenas.slice();
     const ini = Object.assign({}, cfg.inicio || {});
+    const fotosPag = Object.assign({}, cfg.fotosPaginas || {});
+    const gal = (cfg.galeria || []).map((g) => Object.assign({}, g));
     const PAGS = [["pagos", "Métodos de pago"], ["envios", "Envíos"], ["resenas", "Reseñas (texto de introducción)"], ["contacto", "Contacto (texto de introducción)"], ["politicas", "Políticas"], ["privacidad", "Privacidad"]];
     $("#vista").innerHTML = '<form id="f-pag" class="tarjetas-admin">' +
       '<div class="tarjeta-admin"><h3>Portada (carrusel grande)</h3>' +
@@ -1201,6 +1203,9 @@
       "</div></div>" +
       '<div class="tarjeta-admin"><h3>Colecciones <button type="button" class="boton claro pequeno" id="col-agregar">' + icono("mas") + 'Colección</button></h3><p class="ayuda">Grupos especiales (ej.: «Oficina en casa»). Marca los productos de cada colección en su ficha.</p><div id="col-lista" class="lista-orden"></div></div>' +
       '<div class="tarjeta-admin"><h3>Reseñas <button type="button" class="boton claro pequeno" id="res-agregar">' + icono("mas") + 'Reseña</button></h3><div id="res-lista" class="lista-orden"></div></div>' +
+      '<div class="tarjeta-admin"><h3>Fotos de las páginas del menú</h3><p class="ayuda">La foto grande de arriba de cada página (Pagos, Envíos, Reseñas, Contacto…). Si no subes una, se usa una foto de fábrica. Mejor horizontal.</p><div class="rejilla-campos">' +
+        PAGS.map(([k, t]) => '<div class="campo"><b>' + t.replace(/ \(.*\)$/, "") + "</b>" + bloqueImagen("pagfoto-" + k, fotosPag[k], "") + "</div>").join("") + "</div></div>" +
+      '<div class="tarjeta-admin"><h3>Galería de Instagram <button type="button" class="boton claro pequeno" id="gal-agregar">' + icono("mas") + 'Foto</button></h3><p class="ayuda">Fotos que salen en la sección «Instagram» (inicio y páginas del menú). Al tocarlas llevan a tu Instagram. Si pegas el enlace de una publicación, esa foto lleva a esa publicación. Hasta 12 fotos; se ven mejor cuadradas. Si no agregas ninguna se usan las fotos de fábrica.</p><div id="gal-lista" class="lista-orden"></div></div>' +
       '<div class="tarjeta-admin"><h3>Páginas informativas</h3><p class="ayuda">Deja un cuadro vacío para usar el texto de fábrica. Formato sencillo: una línea que empiece con <b>## </b> es un título; con <b>- </b> es una lista; <b>**texto**</b> va en negrita.</p>' +
       PAGS.map(([k, t]) => campo(t, "pag::" + k, cfg.paginas[k] || "", { tipo: "area", filas: 5 })).join("") + "</div>" +
       '<div style="display:flex;justify-content:flex-end"><button type="button" class="boton" id="pag-guardar">Guardar página</button></div></form>';
@@ -1217,7 +1222,19 @@
         '<label class="campo doble">Opinión<textarea data-res="texto" rows="2">' + esc(r.texto || "") + "</textarea></label></div>" +
         bloqueImagen("res-img-" + i, r.foto, "Foto opcional (del cliente con su mueble).") + "</div>").join("") || '<p class="ayuda">Sin reseñas.</p>';
     }
-    pintarCols(); pintarRes();
+    function pintarGal() {
+      $("#gal-lista").innerHTML = gal.map((g, i) => '<div class="bloque-lista" data-i="' + i + '"><div class="encabezado"><span>Foto ' + (i + 1) + '</span><span><button type="button" class="icono-boton" data-gal-m="-1" aria-label="Subir">' + icono("arriba") + '</button> <button type="button" class="icono-boton" data-gal-x aria-label="Quitar">' + icono("basura") + "</button></span></div>" +
+        bloqueImagen("gal-img-" + i, g.foto, "") +
+        '<label class="campo">Enlace de la publicación (opcional)<input data-gal="enlace" value="' + esc(g.enlace || "") + '" placeholder="https://www.instagram.com/p/…"></label></div>').join("") || '<p class="ayuda">Sin fotos: se muestran las de fábrica.</p>';
+    }
+    pintarCols(); pintarRes(); pintarGal();
+    $("#gal-agregar").onclick = () => { if (gal.length >= 12) { T.tostada("Máximo 12 fotos"); return; } gal.push({ foto: "", enlace: "" }); pintarGal(); };
+    $("#gal-lista").addEventListener("input", (e) => { const f = e.target.closest("[data-i]"); if (f && e.target.dataset.gal) gal[Number(f.dataset.i)][e.target.dataset.gal] = e.target.value.trim(); });
+    $("#gal-lista").addEventListener("click", (e) => {
+      const f = e.target.closest("[data-i]"); if (!f) return; const i = Number(f.dataset.i);
+      if (e.target.closest("[data-gal-x]")) { gal.splice(i, 1); pintarGal(); }
+      if (e.target.closest("[data-gal-m]") && i > 0) { const t = gal[i]; gal[i] = gal[i - 1]; gal[i - 1] = t; pintarGal(); }
+    });
     $("#col-agregar").onclick = () => { cols.push({ nombre: "", descripcion: "", imagen: "" }); pintarCols(); };
     $("#res-agregar").onclick = () => { res.push({ nombre: "", ciudad: "", estrellas: 5, texto: "" }); pintarRes(); };
     $("#col-lista").addEventListener("input", (e) => { const f = e.target.closest("[data-i]"); if (f && e.target.dataset.col) cols[Number(f.dataset.i)][e.target.dataset.col] = e.target.value; });
@@ -1239,7 +1256,7 @@
       $(".progreso", caja).textContent = "Subiendo…";
       try {
         const blob = await aligerar(inp.files[0], 900);
-        const url = await F.subir(blob, clave === "portada-img" || clave === "banda-img" ? "portada" : clave.startsWith("res") ? "resenas" : "colecciones", clave);
+        const url = await F.subir(blob, clave === "portada-img" || clave === "banda-img" || clave.startsWith("pagfoto-") || clave.startsWith("gal-img-") ? "portada" : clave.startsWith("res") ? "resenas" : "colecciones", clave);
         ponerImagen(clave, url);
       } catch (ex) { falla(ex); $(".progreso", caja).textContent = ""; }
       inp.value = "";
@@ -1253,6 +1270,8 @@
       else if (clave === "banda-img") ini.bandaFoto = url;
       else if (clave.startsWith("col-img-")) cols[Number(clave.slice(8))].imagen = url;
       else if (clave.startsWith("res-img-")) res[Number(clave.slice(8))].foto = url;
+      else if (clave.startsWith("pagfoto-")) fotosPag[clave.slice(8)] = url;
+      else if (clave.startsWith("gal-img-")) gal[Number(clave.slice(8))].foto = url;
       const caja = $('[data-bloque="' + clave + '"]');
       if (caja) caja.outerHTML = bloqueImagen(clave, url, caja.dataset.ayuda || "");
     }
@@ -1269,6 +1288,8 @@
           colecciones: cols.filter((c) => (c.nombre || "").trim()).map((c) => ({ nombre: c.nombre.trim(), descripcion: (c.descripcion || "").trim(), imagen: c.imagen || "" })),
           resenas: res.filter((r) => (r.texto || "").trim()).map((r) => ({ nombre: (r.nombre || "").trim(), ciudad: (r.ciudad || "").trim(), estrellas: Number(r.estrellas) || 5, texto: r.texto.trim(), foto: r.foto || "" })),
           paginas,
+          fotosPaginas: fotosPag,
+          galeria: gal.filter((g) => g.foto).map((g) => ({ foto: g.foto, enlace: /^https?:\/\//i.test(g.enlace || "") ? g.enlace : "" })),
           inicio: {
             franja1: v.ini_franja1.trim(), franja2: v.ini_franja2.trim(), catsCeja: v.ini_catsCeja.trim(), catsTitulo: v.ini_catsTitulo.trim(),
             bandaCeja: v.ini_bandaCeja.trim(), bandaTitulo: v.ini_bandaTitulo.trim(), bandaTexto: v.ini_bandaTexto.trim(), bandaFoto: ini.bandaFoto || "",
@@ -1433,7 +1454,9 @@
         const usadas = new Set();
         E.productos.forEach((p) => T.fotos(p).forEach((f) => usadas.add(f.url)));
         const cf = E.cfg;
-        [cf.logo, cf.portada.imagen].concat(cf.colecciones.map((x) => x.imagen), cf.resenas.map((x) => x.foto)).forEach((u) => u && usadas.add(u));
+        // Toda dirección que aparezca en los ajustes (logo, portada, banda, colecciones, reseñas, fotos de páginas, galería…) está en uso
+        const recorrer = (v) => { if (typeof v === "string") { if (/^https?:\/\//.test(v)) usadas.add(v); } else if (v && typeof v === "object") Object.values(v).forEach(recorrer); };
+        recorrer(cf);
         E.pedidos.forEach((p) => p.pdf_url && usadas.add(p.pdf_url));
         const todos = await F.listar("");
         const hace1h = Date.now() - 3600e3;

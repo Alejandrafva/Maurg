@@ -9,6 +9,11 @@
   function pintar(cfg) {
     T.pintarComun(cfg);
     document.title = document.querySelector("h1").textContent + " · " + cfg.nombreTienda;
+    const cabeza = document.querySelector(".pagina-cabeza");
+    if (cabeza) {
+      cabeza.classList.add("con-foto");
+      cabeza.style.setProperty("--foto", "url('" + new URL(T.fotoDePagina(cfg, slug), location.href).href.replace(/'/g, "%27") + "')");
+    }
     const propio = cfg.paginas && cfg.paginas[slug];
     const cont = document.getElementById("contenido");
     cont.innerHTML = original;

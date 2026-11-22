@@ -467,10 +467,21 @@
       '<button class="foto" data-abrir="' + p.id + '" aria-label="Ver ' + esc(p.nombre) + '">' +
       '<span class="etiquetas">' + etiquetasDe(p, st) + "</span>" +
       '<img src="' + esc(foto) + '" alt="' + esc(p.nombre) + '" loading="lazy" decoding="async" class="' + cubrir + '"></button>' +
-      (st.tipo !== "agotado" ? '<button class="agregar-rapido" data-rapido="' + p.id + '" aria-label="Agregar ' + esc(p.nombre) + ' al carrito">' + icono("mas") + "</button>" : "") + "</div>" +
+      "</div>" +
       '<div class="info"><div class="fila"><h3><button data-abrir="' + p.id + '">' + esc(p.nombre) + '</button></h3><span class="precio">' + antes + T.dinero(dd) + "</span></div>" +
       '<div class="detalle"><span>' + esc(p.codigo || p.marca || p.categoria || "") + "</span>" + (T.tieneMayor(p) && dm < dd ? "<span>Mayor " + T.dinero(dm) + "</span>" : bsTarjeta ? '<span class="precio-bs">' + T.bs(bsTarjeta) + "</span>" : "") + "</div>" +
-      puntos + "</div></article>";
+      puntos + "</div>" + accionesTarjeta(p, st) + "</article>";
+  }
+
+  // Botones debajo de cada producto: Añadir al carrito y Pedir
+  function accionesTarjeta(p, st) {
+    if (st.tipo === "agotado") {
+      const wa = estado.cfg.whatsapp ? T.enlaceWa(estado.cfg.whatsapp, "Hola, quisiera saber cuándo vuelve a estar disponible: " + p.nombre + (p.codigo ? " [" + p.codigo + "]" : "")) : "";
+      return '<div class="acciones-tarjeta"><button class="boton-tarjeta claro" disabled>Agotado</button>' +
+        (wa ? '<a class="boton-tarjeta" href="' + esc(wa) + '" target="_blank" rel="noopener">Consultar</a>' : "") + "</div>";
+    }
+    return '<div class="acciones-tarjeta"><button class="boton-tarjeta claro" data-anadir="' + p.id + '" aria-label="Añadir ' + esc(p.nombre) + ' al carrito">' + icono("bolsa") + "<span>Añadir</span></button>" +
+      '<button class="boton-tarjeta" data-pedir="' + p.id + '" aria-label="Pedir ' + esc(p.nombre) + '">Pedir</button></div>';
   }
 
   // -------------------------------------------------------------------
@@ -551,7 +562,8 @@
     const puedeComprar = st.tipo !== "agotado";
     const comprar = puedeComprar
       ? '<div class="comprar"><div class="cantidad"><button data-cant="-1" aria-label="Menos">' + icono("menos") + '</button><input id="ficha-cantidad" type="number" inputmode="numeric" min="1" max="' + max + '" value="' + ficha.cantidad + '" aria-label="Cantidad"><button data-cant="1" aria-label="Más">' + icono("mas") + "</button></div>" +
-        '<button class="boton" id="ficha-agregar">' + icono("bolsa") + "Agregar al pedido</button></div>"
+        '<button class="boton claro" id="ficha-agregar">' + icono("bolsa") + "Añadir al carrito</button>" +
+        '<button class="boton ancho" id="ficha-pedir">Pedir ahora</button></div>'
       : "";
     const preguntar = estado.cfg.whatsapp
       ? '<a class="boton ' + (puedeComprar ? "claro" : "whatsapp") + ' ancho" target="_blank" rel="noopener" href="' + T.enlaceWa(estado.cfg.whatsapp, "Hola, me interesa: " + p.nombre + (p.codigo ? " (" + p.codigo + ")" : "") + (color ? ", color " + color : "") + "\n" + enlaceProducto(p)) + '">' + icono("whatsapp") + "Preguntar por WhatsApp</a>"
@@ -1074,6 +1086,17 @@
       if (d.nav === "buscar") { e.preventDefault(); $("#buscar").scrollIntoView({ behavior: "smooth", block: "center" }); setTimeout(() => $("#buscar").focus({ preventScroll: true }), 450); return; }
       if (d.nav === "inicio") { e.preventDefault(); window.scrollTo({ top: 0, behavior: "smooth" }); return; }
       if (d.abrir) { abrirFicha(d.abrir); return; }
+      if (d.anadir || d.pedir) {
+        const id = d.anadir || d.pedir;
+        const p = estado.productos.find((x) => String(x.id) === String(id));
+        if (!p) return;
+        const cols = T.colores(p);
+        if (cols.length > 1) { abrirFicha(p.id); if (ficha) ficha.pedir = !!d.pedir; T.tostada("Elige el color"); return; }
+        const antes = unidadesCarrito();
+        agregar(p.id, (cols[0] || {}).nombre || "", 1);
+        if (d.pedir && unidadesCarrito() >= antes) abrirCarrito();
+        return;
+      }
       if (d.rapido) {
         const p = estado.productos.find((x) => String(x.id) === d.rapido);
         if (p && T.colores(p).length > 1) abrirFicha(p.id);
@@ -1089,9 +1112,14 @@
         inp.value = ficha.cantidad;
         return;
       }
-      if (t.id === "ficha-agregar" && ficha) {
+      if ((t.id === "ficha-agregar" || t.id === "ficha-pedir") && ficha) {
         ficha.cantidad = Math.max(1, Number($("#ficha-cantidad").value) || 1);
+        const antes = unidadesCarrito();
         agregar(ficha.p.id, ficha.color, ficha.cantidad);
+        if (t.id === "ficha-pedir" || ficha.pedir) {
+          if (unidadesCarrito() > antes || estado.carrito.some((x) => String(x.id) === String(ficha.p.id))) { cerrarFicha(); setTimeout(abrirCarrito, 60); }
+          return;
+        }
         pintarFicha();
         return;
       }
@@ -1154,7 +1182,6 @@
         e.target.value = ficha.cantidad;
       }
     });
-    document.querySelectorAll('.menu-movil a').forEach((a) => a.addEventListener("click", () => $("#menu-movil").classList.add("oculto")));
   }
 
   iniciar();
