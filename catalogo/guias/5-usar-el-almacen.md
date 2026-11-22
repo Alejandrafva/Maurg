@@ -24,9 +24,8 @@ Entra a `https://tu-tienda/admin.html` (o `/almacen`) con el correo y la contras
 - **Datos:** nombre (obligatorio), código, marca, categoría (elige una o escribe una nueva), material, medidas y descripción.
 - **Precio:** escribe solo el **precio en divisas**. Debajo verás cuánto queda en bolívares. *Precio anterior* muestra la oferta tachada con el %.
 - **Estado:** Visible en la tienda · Por encargo (se puede pedir aunque no haya stock) · Destacado (sale primero) · Nuevo.
-  - **Vitrina en órbita:** los productos marcados como **Destacado** (con foto) aparecen en la vitrina animada debajo de la portada: al bajar la página, cada mueble sale girando y entra el siguiente, y el arco de fondo toma el color del producto. Se muestran hasta 8; si no hay al menos 2 destacados, se usan los primeros productos con foto. Para que se vea mejor, usa fotos con fondo blanco o transparente.
 - **Colores y stock:** toca **+ Color**, elige el **tono**, escribe el **nombre** y el **stock** de ese color. El total se calcula solo. Si no tiene colores, escribe el stock total.
-- **Fotos de ambiente:** si la foto muestra el mueble en un espacio (sala, cocina, showroom), marca **Ambiente** debajo de la foto: llena toda la tarjeta. Los productos **Destacados** con foto de ambiente salen en el **carrusel grande de la portada**; los destacados con foto recortada (fondo blanco o transparente) salen en la **vitrina en órbita**.
+- **Fotos de ambiente:** si la foto muestra el mueble en un espacio (sala, cocina, showroom), marca **Ambiente** debajo de la foto: llena toda la tarjeta. Los productos **Destacados** con foto de ambiente salen en el **carrusel grande de la portada**. Al abrir el producto se muestra primero la foto con fondo blanco.
 - **Fotos y videos:** toca el recuadro o arrastra los archivos. Las fotos **se aligeran solas** (máx. 900 px, WebP) antes de subir. En cada foto elige **de qué color es**: en la tienda, al tocar un color, se muestran sus fotos. La primera foto es la principal (muévela con las flechas).
 - **Datos internos** (solo tú los ves): proveedor, costo, notas, posición.
 - **Guardar.**
@@ -62,7 +61,8 @@ Ordena con ▲▼ (ese es el orden de la barra de categorías en la tienda), cam
 | **Franja** bajo la portada (dos textos) | Página › Textos de la página de inicio |
 | **"Compra por espacio"** (título) | Página › Textos de la página de inicio |
 | **Tarjetas de categoría** (nombre, orden, icono) | Categorías. La foto de cada tarjeta es la del primer producto de esa categoría. |
-| **Vitrina en órbita** | Productos **Destacados** con foto recortada (sin marcar Ambiente) |
+| **Fila "Nuestros productos"** (con flechas) | Sale sola: los primeros 16 productos según el orden ▲▼ de Productos (los Destacados primero) |
+| **Página de Catálogo** (`catalogo.html`) | Sale sola con todos los productos visibles. Los filtros (categoría, precio, material, color, disponibilidad) se arman solos con los datos de cada producto: llena bien **Categoría**, **Material** y **Colores** |
 | **Colecciones** (las dos fotos grandes) | Página › Colecciones |
 | **Las 4 ventajas** (envíos, pagos…) | Página › Textos de la página de inicio |
 | **Banda azul** (título, texto y foto) | Página › Textos de la página de inicio |

@@ -6,13 +6,21 @@
   const $ = (s, el) => (el || document).querySelector(s);
   const esc = T.esc;
   const POR_PAGINA = 24;
+  const EN_CATALOGO = document.body.dataset.pagina === "catalogo";
+  const EN_FILA = 16; // productos en la fila del inicio
+  const URLP = new URLSearchParams(location.search);
 
   const estado = {
     cfg: T.unirAjustes(T.leerMemoria("config")),
     productos: T.leerMemoria("productos") || [],
-    categoria: "",
-    coleccion: "",
-    texto: "",
+    categoria: URLP.get("cat") || "",
+    coleccion: URLP.get("col") || "",
+    texto: URLP.get("q") || "",
+    precioMin: null,
+    precioMax: null,
+    materiales: [],
+    coloresSel: [],
+    dispSel: [],
     orden: "destacados",
     disponibles: false,
     ofertas: false,
@@ -50,14 +58,16 @@
       }
     }
     abrirDesdeEnlace();
+    if (EN_CATALOGO && location.hash === "#buscar" && $("#buscar")) setTimeout(() => $("#buscar").focus(), 300);
   }
 
   function pintarTodo() {
     T.pintarComun(estado.cfg);
-    pintarPortada();
-    pintarTarjetasCategoria();
-    pintarCategorias();
-    pintarColecciones();
+    if ($("#heroe")) pintarPortada();
+    if ($("#cats-tarjetas")) pintarTarjetasCategoria();
+    if ($("#categorias")) pintarCategorias();
+    if ($("#colecciones")) pintarColecciones();
+    if ($("#filtros")) pintarFiltros();
     pintarLista();
     pintarContador();
     if (window.Orbita) {
@@ -272,6 +282,17 @@
       if (estado.coleccion && !(p.colecciones || []).includes(estado.coleccion)) return false;
       if (estado.disponibles && T.estado(p, estado.cfg).tipo === "agotado") return false;
       if (estado.ofertas && !(Number(p.precio_antes) > T.precio(p, "detal", "divisas"))) return false;
+      const pr = T.precio(p, "detal", "divisas");
+      if (estado.precioMin != null && pr < estado.precioMin) return false;
+      if (estado.precioMax != null && pr > estado.precioMax) return false;
+      if (estado.materiales.length && !estado.materiales.includes(materialDe(p))) return false;
+      if (estado.coloresSel.length && !T.colores(p).some((c) => estado.coloresSel.includes(c.nombre))) return false;
+      if (estado.dispSel.length) {
+        const t = T.estado(p, estado.cfg).tipo;
+        const oferta = Number(p.precio_antes) > pr;
+        const ok = estado.dispSel.some((d) => (d === "disponible" && (t === "ok" || t === "pocas")) || (d === "encargo" && t === "encargo") || (d === "oferta" && oferta));
+        if (!ok) return false;
+      }
       if (palabras.length) {
         const texto = T.normalizar([p.nombre, p.marca, p.codigo, p.categoria, p.material, p.descripcion, T.colores(p).map((c) => c.nombre).join(" ")].join(" "));
         return palabras.every((w) => texto.includes(w));
@@ -293,19 +314,129 @@
   function pintarLista() {
     const lista = filtrar();
     const titulo = estado.coleccion || estado.categoria || (estado.texto ? "Resultados" : "Todos los productos");
-    $("#titulo-lista").textContent = titulo;
-    $("#resultado").textContent = lista.length ? "Mostrando " + Math.min(lista.length, estado.mostrar) + " de " + lista.length + " productos" : "";
+    if ($("#titulo-lista") && EN_CATALOGO) $("#titulo-lista").textContent = titulo;
+    if ($("#resultado")) $("#resultado").textContent = EN_CATALOGO ? lista.length + (lista.length === 1 ? " producto" : " productos") : "";
+    if (!EN_CATALOGO) {
+      $("#rejilla").innerHTML = lista.slice(0, EN_FILA).map(tarjeta).join("") +
+        (lista.length ? '<a class="producto ver-todo-tarjeta" href="catalogo.html"><span>' + icono("flecha") + "</span><b>Ver todo el catálogo</b><small>" + lista.length + " productos</small></a>" : "");
+      observarRevelar();
+      flechasFila();
+      return;
+    }
+    pintarActivos();
     if (!lista.length) {
       $("#rejilla").innerHTML = estado.cargado
-        ? '<div class="vacio"><strong>No encontramos productos</strong>' + (estado.productos.length ? "Prueba con otra búsqueda o categoría." : "Pronto agregaremos productos al catálogo.") + "</div>"
+        ? '<div class="vacio"><strong>No encontramos productos</strong>' + (estado.productos.length ? "Prueba con otra búsqueda o categoría." : "Pronto agregaremos productos al catálogo.") + (EN_CATALOGO && hayFiltros() ? '<br><br><button class="boton claro" data-limpiar-filtros>Limpiar filtros</button>' : "") + "</div>"
         : "";
-      $("#mas-productos").classList.add("oculto");
+      if ($("#mas-productos")) $("#mas-productos").classList.add("oculto");
       return;
     }
     $("#rejilla").innerHTML = lista.slice(0, estado.mostrar).map(tarjeta).join("");
     observarRevelar();
-    $("#mas-productos").classList.toggle("oculto", lista.length <= estado.mostrar);
+    if ($("#mas-productos")) $("#mas-productos").classList.toggle("oculto", lista.length <= estado.mostrar);
   }
+
+  // Flechas para correr la fila del inicio
+  function flechasFila() {
+    const f = $("#rejilla");
+    const izq = document.querySelector('[data-fila="-1"]'), der = document.querySelector('[data-fila="1"]');
+    if (!izq || !der) return;
+    const act = () => {
+      izq.disabled = f.scrollLeft < 8;
+      der.disabled = f.scrollLeft + f.clientWidth > f.scrollWidth - 8;
+    };
+    f.onscroll = act;
+    act();
+  }
+
+  // -------------------------------------------------------------------
+  // Página de catálogo: filtros
+  // -------------------------------------------------------------------
+  const materialDe = (p) => {
+    const m = String(p.material || "").split(/[,;]| y /)[0].trim();
+    return m ? m.charAt(0).toUpperCase() + m.slice(1) : "";
+  };
+  const precioDe = (p) => T.precio(p, "detal", "divisas");
+  function limitesPrecio() {
+    const ps = visibles().map(precioDe).filter((x) => x > 0);
+    const max = ps.length ? Math.ceil(Math.max(...ps) / 10) * 10 : 100;
+    return { min: 0, max };
+  }
+
+  function pintarFiltros() {
+    const cont = $("#filtros-cuerpo");
+    if (!cont) return;
+    const vis = visibles();
+    const cats = listaCategorias();
+    const lim = limitesPrecio();
+    const pmin = estado.precioMin != null ? estado.precioMin : lim.min;
+    const pmax = estado.precioMax != null ? estado.precioMax : lim.max;
+    const contar = (fn) => vis.filter(fn).length;
+    const mats = [...new Set(vis.map(materialDe).filter(Boolean))].sort((a, b) => a.localeCompare(b, "es"));
+    const colMap = new Map();
+    vis.forEach((p) => T.colores(p).forEach((c) => { if (!colMap.has(c.nombre)) colMap.set(c.nombre, c.hex || "#ccc"); }));
+    const chip = (attr, val, texto, activo, extra) => '<button class="chip-filtro" ' + attr + '="' + esc(val) + '" aria-pressed="' + !!activo + '">' + (extra || "") + esc(texto) + "</button>";
+    const tramos = [[0, 100, "Menos de $100"], [100, 300, "$100 – $300"], [300, null, "Más de $300"]];
+    cont.innerHTML =
+      '<div class="grupo-filtro"><h3>Categoría</h3><div class="chips-filtro">' + chip("data-f-cat", "", "Todas", !estado.categoria) +
+        cats.map((c) => chip("data-f-cat", c.nombre, c.nombre + " · " + c.n, estado.categoria === c.nombre)).join("") + "</div></div>" +
+      '<div class="grupo-filtro"><h3>Rango de precio</h3><p class="rango-texto" id="rango-texto">' + T.dinero(pmin) + " – " + T.dinero(pmax) + "</p>" +
+        '<div class="rango-doble" style="--a:' + (pmin / lim.max) * 100 + "%;--b:" + (pmax / lim.max) * 100 + '%"><i></i>' +
+        '<input type="range" id="rango-min" min="' + lim.min + '" max="' + lim.max + '" step="5" value="' + pmin + '" aria-label="Precio mínimo">' +
+        '<input type="range" id="rango-max" min="' + lim.min + '" max="' + lim.max + '" step="5" value="' + pmax + '" aria-label="Precio máximo"></div>' +
+        '<div class="chips-filtro">' + tramos.map(([a, b, t]) => chip("data-f-tramo", a + "-" + (b == null ? "" : b), t, estado.precioMin === a && estado.precioMax === b)).join("") + "</div></div>" +
+      (mats.length ? '<div class="grupo-filtro"><h3>Material</h3><div class="chips-filtro">' + mats.map((m) => chip("data-f-mat", m, m, estado.materiales.includes(m))).join("") + "</div></div>" : "") +
+      (colMap.size ? '<div class="grupo-filtro"><h3>Color</h3><div class="chips-filtro">' + [...colMap].map(([n, h]) => chip("data-f-col", n, n, estado.coloresSel.includes(n), '<i style="background:' + esc(h) + '"></i>')).join("") + "</div></div>" : "") +
+      '<div class="grupo-filtro"><h3>Disponibilidad</h3><div class="chips-filtro">' +
+        chip("data-f-disp", "disponible", "Disponible · " + contar((p) => ["ok", "pocas"].includes(T.estado(p, estado.cfg).tipo)), estado.dispSel.includes("disponible")) +
+        chip("data-f-disp", "encargo", "Por encargo · " + contar((p) => p.encargo), estado.dispSel.includes("encargo")) +
+        chip("data-f-disp", "oferta", "En oferta · " + contar((p) => Number(p.precio_antes) > precioDe(p)), estado.dispSel.includes("oferta")) + "</div></div>";
+    const rmin = $("#rango-min"), rmax = $("#rango-max");
+    const alMover = () => {
+      let a = Number(rmin.value), b = Number(rmax.value);
+      if (a > b) { if (document.activeElement === rmin) { a = b; rmin.value = a; } else { b = a; rmax.value = b; } }
+      estado.precioMin = a <= lim.min ? null : a;
+      estado.precioMax = b >= lim.max ? null : b;
+      $("#rango-texto").textContent = T.dinero(a) + " – " + T.dinero(b);
+      rmin.parentElement.style.setProperty("--a", (a / lim.max) * 100 + "%");
+      rmin.parentElement.style.setProperty("--b", (b / lim.max) * 100 + "%");
+      estado.mostrar = POR_PAGINA;
+      pintarLista();
+    };
+    rmin.oninput = alMover; rmax.oninput = alMover;
+  }
+
+  function hayFiltros() {
+    return !!(estado.categoria || estado.coleccion || estado.texto || estado.precioMin != null || estado.precioMax != null || estado.materiales.length || estado.coloresSel.length || estado.dispSel.length);
+  }
+  function pintarActivos() {
+    const el = $("#filtros-activos");
+    if (!el) return;
+    const a = [];
+    if (estado.categoria) a.push(["cat", estado.categoria]);
+    if (estado.coleccion) a.push(["colec", estado.coleccion]);
+    if (estado.texto) a.push(["q", "“" + estado.texto + "”"]);
+    if (estado.precioMin != null || estado.precioMax != null) a.push(["precio", T.dinero(estado.precioMin || 0) + " – " + (estado.precioMax != null ? T.dinero(estado.precioMax) : "más")]);
+    estado.materiales.forEach((m) => a.push(["mat:" + m, m]));
+    estado.coloresSel.forEach((c) => a.push(["col:" + c, c]));
+    estado.dispSel.forEach((d) => a.push(["disp:" + d, { disponible: "Disponible", encargo: "Por encargo", oferta: "En oferta" }[d]]));
+    el.innerHTML = a.map(([k, t]) => '<button class="chip-activo" data-quitar-filtro="' + esc(k) + '">' + esc(t) + " " + icono("cerrar") + "</button>").join("") +
+      (a.length > 1 ? '<button class="chip-activo limpiar" data-limpiar-filtros>Limpiar todo</button>' : "");
+    const n = a.length;
+    document.querySelectorAll(".n-filtros").forEach((x) => { x.textContent = n ? String(n) : ""; });
+    const ver = $("#ver-resultados");
+    if (ver) ver.textContent = "Ver " + filtrar().length + " productos";
+  }
+  function quitarFiltro(k) {
+    if (k === "cat") estado.categoria = "";
+    else if (k === "colec") estado.coleccion = "";
+    else if (k === "q") { estado.texto = ""; if ($("#buscar")) $("#buscar").value = ""; }
+    else if (k === "precio") { estado.precioMin = null; estado.precioMax = null; }
+    else if (k.startsWith("mat:")) estado.materiales = estado.materiales.filter((x) => x !== k.slice(4));
+    else if (k.startsWith("col:")) estado.coloresSel = estado.coloresSel.filter((x) => x !== k.slice(4));
+    else if (k.startsWith("disp:")) estado.dispSel = estado.dispSel.filter((x) => x !== k.slice(5));
+  }
+  const alternar = (lista, v) => (lista.includes(v) ? lista.filter((x) => x !== v) : lista.concat(v));
 
   function pintarEsqueleto() {
     $("#rejilla").innerHTML = Array.from({ length: 8 }, () => '<div class="producto cargando"><div class="foto"></div><div class="linea"></div><div class="linea" style="width:40%"></div></div>').join("");
@@ -863,14 +994,22 @@
   // -------------------------------------------------------------------
   function enlazarEventos() {
     let tBuscar;
-    $("#buscar").addEventListener("input", (e) => {
+    const en = (sel, ev, fn) => { const el = $(sel); if (el) el.addEventListener(ev, fn); };
+    if ($("#buscar") && estado.texto) $("#buscar").value = estado.texto;
+    en("#buscar", "input", (e) => {
       clearTimeout(tBuscar);
-      tBuscar = setTimeout(() => { estado.texto = e.target.value; estado.mostrar = POR_PAGINA; pintarColecciones(); pintarLista(); }, 150);
+      tBuscar = setTimeout(() => { estado.texto = e.target.value; estado.mostrar = POR_PAGINA; if ($("#colecciones")) pintarColecciones(); pintarLista(); }, 150);
     });
-    $("#ordenar").addEventListener("change", (e) => { estado.orden = e.target.value; pintarLista(); });
-    $("#filtro-disponibles").addEventListener("click", (e) => { estado.disponibles = !estado.disponibles; e.currentTarget.setAttribute("aria-pressed", estado.disponibles); pintarLista(); });
-    $("#filtro-ofertas").addEventListener("click", (e) => { estado.ofertas = !estado.ofertas; e.currentTarget.setAttribute("aria-pressed", estado.ofertas); pintarLista(); });
-    $("#ver-mas").addEventListener("click", () => { estado.mostrar += POR_PAGINA; pintarLista(); });
+    en("#ordenar", "change", (e) => { estado.orden = e.target.value; pintarLista(); });
+    en("#filtro-disponibles", "click", (e) => { estado.disponibles = !estado.disponibles; e.currentTarget.setAttribute("aria-pressed", estado.disponibles); pintarLista(); });
+    en("#filtro-ofertas", "click", (e) => { estado.ofertas = !estado.ofertas; e.currentTarget.setAttribute("aria-pressed", estado.ofertas); pintarLista(); });
+    en("#ver-mas", "click", () => { estado.mostrar += POR_PAGINA; pintarLista(); });
+    // Filtros del catálogo (en celular se abren como panel)
+    const panel = $("#filtros");
+    const abrirPanel = (si) => { if (!panel) return; panel.classList.toggle("abierto", si); document.body.classList.toggle("bloqueado", si); };
+    en("#abrir-filtros", "click", () => abrirPanel(true));
+    en("#cerrar-filtros", "click", () => abrirPanel(false));
+    en("#ver-resultados", "click", () => { abrirPanel(false); $("#rejilla").scrollIntoView({ behavior: "smooth", block: "start" }); });
     $("#abrir-carrito").addEventListener("click", abrirCarrito);
     const c2 = $("#abrir-carrito-2");
     if (c2) c2.addEventListener("click", abrirCarrito);
@@ -903,6 +1042,26 @@
         $("#titulo-lista").scrollIntoView({ behavior: "smooth", block: "start" });
         return;
       }
+      if (d.fila) { const f = $("#rejilla"); f.scrollBy({ left: f.clientWidth * 0.85 * Number(d.fila), behavior: "smooth" }); return; }
+      if (d.fCat !== undefined) { estado.categoria = d.fCat; estado.coleccion = ""; estado.mostrar = POR_PAGINA; pintarFiltros(); pintarLista(); return; }
+      if (d.fTramo !== undefined) {
+        const [a, b] = d.fTramo.split("-");
+        const mismo = estado.precioMin === Number(a) && estado.precioMax === (b === "" ? null : Number(b));
+        estado.precioMin = mismo ? null : Number(a); estado.precioMax = mismo || b === "" ? null : Number(b);
+        if (!mismo && estado.precioMin === 0) estado.precioMin = 0;
+        pintarFiltros(); pintarLista(); return;
+      }
+      if (d.fMat !== undefined) { estado.materiales = alternar(estado.materiales, d.fMat); pintarFiltros(); pintarLista(); return; }
+      if (d.fCol !== undefined) { estado.coloresSel = alternar(estado.coloresSel, d.fCol); pintarFiltros(); pintarLista(); return; }
+      if (d.fDisp !== undefined) { estado.dispSel = alternar(estado.dispSel, d.fDisp); pintarFiltros(); pintarLista(); return; }
+      if (d.quitarFiltro !== undefined) { quitarFiltro(d.quitarFiltro); pintarFiltros(); pintarLista(); return; }
+      if (d.limpiarFiltros !== undefined) {
+        Object.assign(estado, { categoria: "", coleccion: "", texto: "", precioMin: null, precioMax: null, materiales: [], coloresSel: [], dispSel: [] });
+        if ($("#buscar")) $("#buscar").value = "";
+        pintarFiltros(); pintarLista(); return;
+      }
+      if (d.catTarjeta !== undefined && !EN_CATALOGO) { location.href = "catalogo.html?cat=" + encodeURIComponent(d.catTarjeta); return; }
+      if (d.coleccion !== undefined && !EN_CATALOGO) { location.href = "catalogo.html?col=" + encodeURIComponent(d.coleccion); return; }
       if (d.catTarjeta !== undefined) {
         estado.categoria = d.catTarjeta; estado.coleccion = ""; estado.mostrar = POR_PAGINA;
         document.querySelectorAll("[data-categoria]").forEach((b) => b.setAttribute("aria-pressed", b.dataset.categoria === d.catTarjeta));
@@ -911,6 +1070,7 @@
         return;
       }
       if (d.heroe) { mostrarSlide(heroe.i + Number(d.heroe)); return; }
+      if (d.nav === "buscar" && !$("#buscar")) { e.preventDefault(); location.href = "catalogo.html#buscar"; return; }
       if (d.nav === "buscar") { e.preventDefault(); $("#buscar").scrollIntoView({ behavior: "smooth", block: "center" }); setTimeout(() => $("#buscar").focus({ preventScroll: true }), 450); return; }
       if (d.nav === "inicio") { e.preventDefault(); window.scrollTo({ top: 0, behavior: "smooth" }); return; }
       if (d.abrir) { abrirFicha(d.abrir); return; }

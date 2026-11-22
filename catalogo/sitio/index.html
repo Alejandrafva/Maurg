@@ -19,12 +19,12 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;700;800;900&family=Inter+Tight:wght@400;500;600;700&display=swap">
   <link rel="stylesheet" href="css/estilos.css">
 </head>
-<body>
+<body data-pagina="inicio">
   <header class="cabecera">
     <div class="contenedor">
       <a class="logo" href="./"><img data-logo src="img/logo-arkeo-blanco.png" alt="ARKEO Home &amp; Office"><span data-nombre-tienda>ARKEO</span></a>
       <nav class="menu" aria-label="Principal">
-        <a href="#catalogo">Catálogo</a>
+        <a href="catalogo.html">Catálogo</a>
         <a href="pagos.html">Pagos</a>
         <a href="envios.html">Envíos</a>
         <a href="resenas.html">Reseñas</a>
@@ -41,7 +41,7 @@
     </div>
   </header>
   <nav class="menu-movil oculto" id="menu-movil" aria-label="Menú móvil">
-    <a href="#catalogo">Catálogo</a>
+    <a href="catalogo.html">Catálogo</a>
     <a href="pagos.html">Métodos de pago</a>
     <a href="envios.html">Envíos</a>
     <a href="resenas.html">Reseñas</a>
@@ -58,7 +58,7 @@
           <h1 class="heroe-titulo" id="portada-titulo">Encuentra el equilibrio perfecto entre <b>confort y estilo</b>.</h1>
           <p class="heroe-sub" id="portada-subtitulo">Sillas, escritorios, comedores, barras, espejos y vanity. Precios en divisas y en bolívares, con envíos a toda Venezuela.</p>
           <div class="heroe-botones">
-            <a class="boton blanco" href="#catalogo" id="portada-boton">Ver catálogo</a>
+            <a class="boton blanco" href="catalogo.html" id="portada-boton">Ver catálogo</a>
             <a class="boton vidrio oculto" data-wa target="_blank" rel="noopener">Cotizar por WhatsApp</a>
           </div>
         </div>
@@ -74,7 +74,7 @@
         <span class="heroe-raton" aria-hidden="true"><i></i></span>
       </div>
       <div class="contenedor heroe-pie">
-        <a class="heroe-avatar" href="#catalogo" aria-label="Ver catálogo"><img id="heroe-mini" src="img/sin-foto.svg" alt=""><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></span></a>
+        <a class="heroe-avatar" href="catalogo.html" aria-label="Ver catálogo"><img id="heroe-mini" src="img/sin-foto.svg" alt=""><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></span></a>
         <p id="franja-1">Eleva tus espacios con mobiliario moderno para tu casa y tu oficina.</p>
         <i class="heroe-raya" aria-hidden="true"></i>
         <img class="heroe-marca" src="img/marca-silla-negra.png" alt="" width="44" height="64">
@@ -83,40 +83,21 @@
     </section>
 
     <section class="contenedor cats-seccion" id="categorias-vitrina" aria-label="Categorías">
-      <div class="titulo-bloque revelar"><div><small id="cats-ceja">Explora</small><h2 id="cats-titulo">Compra por espacio</h2></div><a class="enlace-flecha" href="#catalogo">Ver todo el catálogo <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></a></div>
+      <div class="titulo-bloque revelar"><div><small id="cats-ceja">Explora</small><h2 id="cats-titulo">Compra por espacio</h2></div><a class="enlace-flecha" href="catalogo.html">Ver todo el catálogo <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></a></div>
       <div class="cats-tarjetas" id="cats-tarjetas"></div>
     </section>
 
-    <section class="orbita" id="orbita" aria-label="Productos destacados" hidden></section>
-
-    <section id="catalogo" class="contenedor" aria-label="Catálogo">
-      <div class="categorias" id="categorias" role="toolbar" aria-label="Categorías"></div>
-
-      <div class="colecciones oculto" id="colecciones"></div>
-
-      <div class="herramientas">
-        <h2 id="titulo-lista">Todos los productos</h2>
-        <label class="buscador">
-          <span class="solo-lector">Buscar</span>
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20.5 20.5-4.5-4.5"/></svg>
-          <input type="search" id="buscar" placeholder="Buscar por nombre, código o color" autocomplete="off" enterkeyhint="search">
-        </label>
-        <select class="selector" id="ordenar" aria-label="Ordenar">
-          <option value="destacados">Destacados</option>
-          <option value="nuevos">Novedades</option>
-          <option value="precio-asc">Precio: menor a mayor</option>
-          <option value="precio-desc">Precio: mayor a menor</option>
-          <option value="nombre">Nombre A–Z</option>
-        </select>
-        <div class="chips">
-          <button class="chip" id="filtro-disponibles" aria-pressed="false">Solo disponibles</button>
-          <button class="chip" id="filtro-ofertas" aria-pressed="false">Ofertas</button>
+    <section id="catalogo" class="contenedor fila-seccion" aria-label="Catálogo">
+      <div class="titulo-bloque revelar">
+        <div><small>Catálogo</small><h2 id="titulo-lista">Nuestros productos</h2></div>
+        <div class="fila-controles">
+          <a class="enlace-flecha" href="catalogo.html">Ver todo <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+          <button class="fila-flecha" data-fila="-1" aria-label="Ver anteriores"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></svg></button>
+          <button class="fila-flecha llena" data-fila="1" aria-label="Ver siguientes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></button>
         </div>
-        <p class="resultado" id="resultado" aria-live="polite"></p>
       </div>
-
-      <div class="rejilla" id="rejilla" aria-live="polite"></div>
-      <div class="mas-productos oculto" id="mas-productos"><button class="boton claro" id="ver-mas">Ver más productos</button></div>
+      <div class="fila-productos" id="rejilla" aria-live="polite"></div>
+      <p class="resultado oculto" id="resultado"></p>
 
       <div class="ventajas">
         <a class="ventaja" href="envios.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 6h11v10h-11z"/><path d="M13.5 9.5h4l3 3.5V16h-7"/><circle cx="6.5" cy="17.5" r="1.8"/><circle cx="17" cy="17.5" r="1.8"/></svg><strong data-ventaja-t="0">Envíos nacionales</strong><span data-ventaja-d="0">A toda Venezuela</span></a>
@@ -147,7 +128,7 @@
       </div>
       <div>
         <h4>Tienda</h4>
-        <a href="#catalogo">Catálogo</a>
+        <a href="catalogo.html">Catálogo</a>
         <a href="pagos.html">Métodos de pago</a>
         <a href="envios.html">Envíos</a>
         <a href="resenas.html">Reseñas</a>
@@ -184,7 +165,7 @@
 
   <nav class="barra-inferior" aria-label="Navegación">
     <a href="#" data-nav="inicio"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11 12 3.5 21 11"/><path d="M5 9.5V21h14V9.5"/><path d="M10 21v-6h4v6"/></svg><span>Inicio</span></a>
-    <a href="#catalogo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7.5" height="7.5" rx="1.5"/><rect x="13.5" y="3" width="7.5" height="7.5" rx="1.5"/><rect x="3" y="13.5" width="7.5" height="7.5" rx="1.5"/><rect x="13.5" y="13.5" width="7.5" height="7.5" rx="1.5"/></svg><span>Catálogo</span></a>
+    <a href="catalogo.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7.5" height="7.5" rx="1.5"/><rect x="13.5" y="3" width="7.5" height="7.5" rx="1.5"/><rect x="3" y="13.5" width="7.5" height="7.5" rx="1.5"/><rect x="13.5" y="13.5" width="7.5" height="7.5" rx="1.5"/></svg><span>Catálogo</span></a>
     <button type="button" class="nav-carrito" id="abrir-carrito-2" aria-label="Abrir carrito"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 8h14l-1 12.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 6 20.5z"/><path d="M8.5 10V6.5a3.5 3.5 0 0 1 7 0V10"/></svg><b class="contador contador-nav" data-n="0"></b></i><span>Carrito</span></button>
     <button type="button" data-nav="buscar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20.5 20.5-4.5-4.5"/></svg><span>Buscar</span></button>
     <a data-wa target="_blank" rel="noopener" class="oculto-wa"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 20.5 5 16a8.5 8.5 0 1 1 3.2 3.2z"/><path d="M9 8.5c0 3.5 3 6.5 6.5 6.5l1.2-1.6-2.2-1-1 .9a5 5 0 0 1-2.8-2.8l.9-1-1-2.2z"/></svg><span>WhatsApp</span></a>
@@ -192,7 +173,6 @@
   <script src="js/conexion.js"></script>
   <script src="js/iconos.js"></script>
   <script src="js/datos.js"></script>
-  <script src="js/orbita.js"></script>
   <script src="js/tienda.js"></script>
 </body>
 </html>
