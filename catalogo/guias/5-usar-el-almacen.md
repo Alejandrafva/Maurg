@@ -7,11 +7,13 @@ Entra a `https://tu-tienda/admin.html` (o `/almacen`) con el correo y la contras
 ## 5.1 Ajustes (lo primero)
 - **Tienda:** nombre, eslogan y logo (opcional).
 - **Contacto:** **WhatsApp de pedidos** (obligatorio; ahí llegan los pedidos, puede ser `0414-1234567`), teléfono, Instagram, TikTok, correo, horario, dirección y enlace de Google Maps.
-- **Ventas:**
-  - **Tasa BCV:** bolívares por dólar. La tienda muestra los precios "a tasa BCV" también en Bs.
-  - **Mínimo de piezas para precio al mayor** (ej. 6). Se cuenta el total del carrito, combinando modelos.
-  - **Aviso «¡Pocas unidades!» desde** (ej. 3).
-  - Texto para productos por encargo, datos para pagar, agencias de envío, retiro.
+- **Precios en bolívares:**
+  - **Tasa BCV:** bolívares por dólar.
+  - **Brecha cambiaria (%):** por ejemplo `25`. Cada producto tiene **un solo precio, en divisas**. El precio en bolívares se calcula solo: `precio en divisas + 25 %`, multiplicado por la tasa BCV. Ejemplo: $100 → $125 → con tasa 45,50 = **Bs 5.687,50**.
+  - Al cambiar la brecha o la tasa y tocar **Guardar ajustes**, se actualizan los precios en Bs de **toda la tienda** al instante.
+  - «Vender también al mayor» está apagado: la tienda vende solo al detal.
+- **Métodos de pago:** activa los que quieras mostrar (por ahora Zelle, Binance y Banesco Panamá). En «Datos» puedes escribir el correo de Zelle, el ID de Binance, etc. Aparecen en el carrito y en la página de pagos. Puedes agregar más con «+ Método» (por ejemplo, Pago móvil en bolívares).
+- Aviso «¡Pocas unidades!», texto para productos por encargo, agencias de envío y retiro.
 - **Fotos (Cloudflare):** pega la **dirección del Worker** (Paso 3.5) y toca **Probar conexión** → debe decir *Conectado*.
 - Toca **Guardar ajustes**.
 
@@ -20,10 +22,7 @@ Entra a `https://tu-tienda/admin.html` (o `/almacen`) con el correo y la contras
 ## 5.2 Productos
 **Nuevo producto** → completa:
 - **Datos:** nombre (obligatorio), código, marca, categoría (elige una o escribe una nueva), material, medidas y descripción.
-- **Precios en dólares:**
-  - *Detal · en divisas* y *Mayor · en divisas*: pagando en dólares/Zelle.
-  - *Detal · a tasa BCV* y *Mayor · a tasa BCV*: pagando en bolívares (se muestra en Bs con la tasa).
-  - Deja vacío lo que no uses. *Precio anterior* muestra la oferta tachada con el %.
+- **Precio:** escribe solo el **precio en divisas**. Debajo verás cuánto queda en bolívares. *Precio anterior* muestra la oferta tachada con el %.
 - **Estado:** Visible en la tienda · Por encargo (se puede pedir aunque no haya stock) · Destacado (sale primero) · Nuevo.
   - **Vitrina en órbita:** los productos marcados como **Destacado** (con foto) aparecen en la vitrina animada debajo de la portada: al bajar la página, cada mueble sale girando y entra el siguiente, y el arco de fondo toma el color del producto. Se muestran hasta 8; si no hay al menos 2 destacados, se usan los primeros productos con foto. Para que se vea mejor, usa fotos con fondo blanco o transparente.
 - **Colores y stock:** toca **+ Color**, elige el **tono**, escribe el **nombre** y el **stock** de ese color. El total se calcula solo. Si no tiene colores, escribe el stock total.

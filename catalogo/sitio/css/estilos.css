@@ -803,3 +803,145 @@ body.bloqueado { overflow: hidden; }
 @media (min-width: 900px) { .ficha .galeria { position: sticky; top: 0; align-self: start; } }
 .specs { gap: 0; background: var(--superficie); }
 .specs div { box-shadow: 0 0 0 .5px var(--linea); }
+
+/* =====================================================================
+   ARKEO · azul protagonista, cabecera ovalada y barra inferior tipo app
+   ===================================================================== */
+:root {
+  --fondo: #eef3f8;
+  --tarjeta: #e3ebf4;
+  --tarjeta-2: #d6e2ee;
+  --linea: #d4dee9;
+  --acento-suave: #dce7f3;
+  --azul-claro: #2f6ea8;
+  --azul-medio: #0b4677;
+}
+body { background: linear-gradient(180deg, #eef3f8 0%, #e8eff7 100%) fixed; }
+
+/* Cabecera: píldora azul flotante */
+.cabecera { background: transparent !important; border: 0 !important; padding: 10px 14px 0; -webkit-backdrop-filter: none; backdrop-filter: none; }
+.cabecera .contenedor {
+  width: min(100%, var(--ancho)); height: 64px; padding: 0 10px 0 22px; border-radius: 999px;
+  background: linear-gradient(120deg, #053359 0%, #0b4677 100%); color: #fff;
+  box-shadow: 0 16px 34px -18px rgba(5, 51, 89, .75);
+}
+.cabecera.con-borde .contenedor { box-shadow: 0 18px 40px -16px rgba(5, 51, 89, .85); }
+.logo { color: #fff; }
+.logo img { height: 34px; }
+.menu a { color: rgba(255,255,255,.78); }
+.menu a:hover, .menu a[aria-current="page"] { color: #fff; text-decoration: none; }
+.cabecera .boton, .cabecera .boton-carrito { background: #fff; border-color: #fff; color: var(--marino); }
+.cabecera .boton:hover { background: #dce7f3; border-color: #dce7f3; }
+.cabecera .icono-boton { background: rgba(255,255,255,.12); border-color: rgba(255,255,255,.25); color: #fff; }
+.contador { background: var(--marino); color: #fff; }
+.menu-movil { inset: 82px 14px auto 14px; border-radius: 24px; background: #053359; border: 0; box-shadow: 0 24px 50px -20px rgba(5,51,89,.8); }
+.menu-movil a { color: #fff; border-bottom-color: rgba(255,255,255,.12); }
+.banda-demo { background: #032441; }
+@media (max-width: 820px) {
+  .cabecera { padding: 8px 10px 0; }
+  .cabecera .contenedor { height: 58px; padding: 0 8px 0 16px; }
+  .cabecera .boton-carrito { display: none; }
+  .logo img { height: 30px; }
+}
+
+/* Barra inferior (solo celular) */
+.barra-inferior { display: none; }
+@media (max-width: 820px) {
+  body { padding-bottom: calc(96px + env(safe-area-inset-bottom)); }
+  .barra-inferior {
+    display: grid; grid-template-columns: repeat(5, 1fr); align-items: end;
+    position: fixed; left: 10px; right: 10px; bottom: calc(10px + env(safe-area-inset-bottom)); z-index: 50;
+    height: 68px; padding: 0 6px 8px; border-radius: 26px;
+    background: linear-gradient(120deg, #053359 0%, #0b4677 100%);
+    box-shadow: 0 20px 40px -14px rgba(5,51,89,.75), inset 0 1px 0 rgba(255,255,255,.08);
+  }
+  .barra-inferior > a, .barra-inferior > button {
+    border: 0; background: none; color: rgba(255,255,255,.72); text-decoration: none; font: inherit; padding: 0;
+    display: grid; justify-items: center; gap: 3px; font-size: 10.5px; font-weight: 600; letter-spacing: .02em;
+  }
+  .barra-inferior svg { width: 23px; height: 23px; }
+  .barra-inferior > a:active, .barra-inferior > button:active { color: #fff; transform: scale(.95); }
+  .barra-inferior .nav-carrito { color: #fff; }
+  .barra-inferior .nav-carrito i {
+    position: relative; width: 58px; height: 58px; margin-top: -26px; border-radius: 999px; background: #fff; color: var(--marino);
+    display: grid; place-items: center; box-shadow: 0 14px 26px -10px rgba(5,51,89,.65), 0 0 0 5px rgba(238,243,248,.9);
+    transition: transform .25s;
+  }
+  .barra-inferior .nav-carrito i svg { width: 26px; height: 26px; }
+  .barra-inferior .nav-carrito .contador { position: absolute; top: -2px; right: -2px; background: #2f6ea8; color: #fff; box-shadow: 0 0 0 2px #fff; }
+  .flotante-wa { display: none !important; }
+  .tostada { bottom: calc(96px + env(safe-area-inset-bottom)); }
+  .carrito footer { padding-bottom: calc(14px + env(safe-area-inset-bottom)); }
+}
+
+/* Portada con velo azul */
+.heroe-velo { background: linear-gradient(90deg, rgba(3,36,65,.88) 0%, rgba(5,51,89,.55) 40%, rgba(5,51,89,.05) 70%), linear-gradient(0deg, rgba(3,36,65,.6) 0%, rgba(3,36,65,0) 42%) !important; }
+@media (max-width: 860px) { .heroe-velo { background: linear-gradient(180deg, rgba(3,36,65,.82) 0%, rgba(5,51,89,.3) 45%, rgba(3,36,65,.8) 100%) !important; } }
+.heroe-marco { box-shadow: 0 40px 80px -36px rgba(5,51,89,.7); }
+.heroe-avatar span { background: var(--marino); }
+.heroe-pie p.grande { color: var(--marino); }
+
+/* Tarjetas de categoría en tonos azules */
+.cat-tarjeta:nth-child(6n+1) { --tinte: #dce7f3 !important; }
+.cat-tarjeta:nth-child(6n+2) { --tinte: #cfdeee !important; }
+.cat-tarjeta:nth-child(6n+3) { --tinte: #e4ecf5 !important; }
+.cat-tarjeta:nth-child(6n+4) { --tinte: #d3e1ef !important; }
+.cat-tarjeta:nth-child(6n+5) { --tinte: #e8eff7 !important; }
+.cat-tarjeta:nth-child(6n+6) { --tinte: #d8e4f1 !important; }
+.cat-ir { background: var(--marino); color: #fff; }
+.cat-ir::after { border-top-color: rgba(5,51,89,.45); border-right-color: rgba(5,51,89,.45); }
+.titulo-bloque small, .orbita-ceja { color: var(--azul-claro); }
+.titulo-bloque h2 { color: var(--marino); }
+
+/* Vitrina sobre azul claro, con fotos reales */
+.orbita, .orbita-escena { background: linear-gradient(180deg, #e3ecf6 0%, #d4e2f0 100%) !important; }
+.orbita-arco path { fill: var(--marino) !important; opacity: .14 !important; }
+.orbita-contador b { color: var(--marino); }
+.orbita-plato.real { overflow: hidden; border-radius: 34px; box-shadow: 0 40px 60px -30px rgba(5,51,89,.6); }
+.orbita-plato.real img { object-fit: cover; mix-blend-mode: normal; filter: none; }
+.orbita-mini.real img { object-fit: cover; mix-blend-mode: normal; border-radius: 12px; }
+.orbita-precios div + div strong { color: var(--azul-claro); }
+.orbita-link[data-orbita="agregar"] { background: var(--marino); border-color: var(--marino); }
+
+/* Productos: precio azul y precio en Bs */
+.precio { color: var(--marino); }
+.producto .detalle .precio-bs { color: var(--azul-claro); font-weight: 700; }
+.producto .foto { background: radial-gradient(circle at 50% 38%, #ffffff 0%, #e1eaf4 74%); }
+.categorias { border-color: var(--linea); }
+.categoria[aria-pressed="true"] { background: var(--marino); color: #fff; }
+.categoria[aria-pressed="true"] svg { color: #fff; }
+.categoria[aria-pressed="true"]::after { display: none; }
+.categoria[aria-pressed="true"] .num { color: rgba(255,255,255,.7); }
+
+/* Ficha: precio en divisas y en bolívares */
+.tabla-precios.dos-monedas .caja-precio.activa { background: var(--marino); border-color: var(--marino); color: #fff; box-shadow: none; }
+.tabla-precios.dos-monedas .caja-precio.activa small, .tabla-precios.dos-monedas .caja-precio.activa span { color: rgba(255,255,255,.75); }
+.tabla-precios.dos-monedas .caja-precio:not(.activa) { background: var(--acento-suave); }
+.tabla-precios.dos-monedas .caja-precio:not(.activa) strong { color: var(--marino); }
+.specs { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+@media (max-width: 520px) { .specs { grid-template-columns: 1fr; } }
+
+/* Carrito: métodos de pago */
+.metodos-pago { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 8px; }
+.metodos-pago button { border: 1px solid var(--linea); background: var(--superficie); border-radius: 14px; padding: 10px 12px; text-align: left; display: grid; gap: 2px; transition: border-color .2s, background .2s; }
+.metodos-pago button b { font-size: 14px; }
+.metodos-pago button small { font-size: 11.5px; color: var(--suave); }
+.metodos-pago button[aria-pressed="true"] { background: var(--marino); border-color: var(--marino); color: #fff; }
+.metodos-pago button[aria-pressed="true"] small { color: rgba(255,255,255,.75); }
+
+/* Página de pagos */
+.metodos-lista { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; margin: 12px 0 20px; }
+.metodo { background: linear-gradient(135deg, #053359, #0b4677); color: #fff; border-radius: 18px; padding: 18px; display: grid; gap: 4px; box-shadow: 0 18px 30px -20px rgba(5,51,89,.7); }
+.metodo b { font-size: 18px; letter-spacing: -0.01em; }
+.metodo span { font-size: 12px; opacity: .75; text-transform: uppercase; letter-spacing: .12em; }
+.metodo small { font-size: 13px; opacity: .9; margin-top: 4px; word-break: break-word; }
+
+/* Ventajas, banda y pie en azul */
+.ventajas { background: var(--superficie); }
+.ventaja svg { width: 44px; height: 44px; padding: 10px; border-radius: 14px; background: var(--marino); color: #fff; }
+.banda-mayor { background: linear-gradient(90deg, rgba(3,36,65,.96) 0%, rgba(5,51,89,.86) 50%, rgba(11,70,119,.4) 100%), url("../img/fotos/taburete-velvet-m.webp") center 40% / cover; }
+.pie { background: linear-gradient(180deg, #053359 0%, #032441 100%); }
+.pie .boton.whatsapp { background: #fff; border-color: #fff; color: var(--marino) !important; }
+.pagina-indice a[aria-current="page"] { background: var(--marino); color: #fff; }
+.boton.whatsapp { background: var(--marino); border-color: var(--marino); }
+.boton.whatsapp:hover { background: var(--acento-oscuro); border-color: var(--acento-oscuro); }

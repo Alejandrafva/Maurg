@@ -19,6 +19,7 @@
     mostrar: POR_PAGINA,
     carrito: leerCarrito(),
     pago: T.leerMemoria("pago") || "divisas",
+    metodo: T.leerMemoria("metodo") || "",
     cliente: T.leerMemoria("cliente") || {},
     cargado: false,
   };
@@ -100,17 +101,16 @@
       if (t && v.titulo) t.textContent = v.titulo;
       if (d && v.texto) d.textContent = v.texto;
     });
-    if (por.subtitulo) $("#portada-subtitulo").textContent = por.subtitulo;
+    if (por.subtitulo && !/Al mayor y al detal/i.test(por.subtitulo)) $("#portada-subtitulo").textContent = por.subtitulo;
     $("#portada-boton").textContent = por.boton || "Ver catálogo";
     $("#heroe-ceja").textContent = cfg.eslogan || "";
     const banda = $("#banda-texto");
-    if (banda) banda.textContent = ini.bandaTexto || "Precio al mayor desde " + cfg.minimoMayor + " piezas combinando modelos. Cotiza tu proyecto y te asesoramos.";
-    if (!(ini.ventajas && ini.ventajas[2] && ini.ventajas[2].texto)) $("#texto-mayor").textContent = "Precio al mayor desde " + cfg.minimoMayor + " piezas";
+    if (banda && ini.bandaTexto) banda.textContent = ini.bandaTexto;
     document.title = cfg.nombreTienda + " · Mobiliario de oficina y hogar";
 
     // Diapositivas: destacados con foto de ambiente; si no hay, la imagen de portada o cualquier foto de ambiente
-    let slides = visibles().filter((p) => p.destacado && T.esAmbiente(p)).map((p) => ({ p, img: T.fotoPrincipal(p) }));
-    if (!slides.length) slides = visibles().filter((p) => T.esAmbiente(p)).slice(0, 5).map((p) => ({ p, img: T.fotoPrincipal(p) }));
+    let slides = visibles().filter((p) => p.destacado && T.fotoAmbiente(p)).map((p) => ({ p, img: T.fotoAmbiente(p) }));
+    if (!slides.length) slides = visibles().filter((p) => T.fotoAmbiente(p)).slice(0, 5).map((p) => ({ p, img: T.fotoAmbiente(p) }));
     if (por.imagen) slides.unshift({ p: null, img: por.imagen });
     if (!slides.length) {
       const d = visibles().find((p) => T.fotos(p).length);
@@ -149,7 +149,7 @@
       const pr = T.precio(x.p, "detal", "divisas");
       return '<button class="heroe-tarjeta ' + clase + '" data-abrir="' + x.p.id + '">' +
         '<img src="' + esc(T.fotoPrincipal(x.p)) + '" alt="" loading="lazy">' +
-        (clase === "actual" ? "<span><b>" + esc(x.p.nombre) + "</b><small>" + esc(x.p.categoria || "") + "</small><em>Desde " + T.dinero(pr) + "</em><i>Ver producto</i></span>" : "") + "</button>";
+        (clase === "actual" ? "<span><b>" + esc(x.p.nombre) + "</b><small>" + esc(x.p.categoria || "") + "</small><em>" + T.dinero(pr) + (T.precioBs(x.p) ? " · " + T.bs(T.precioBs(x.p)) : "") + "</em><i>Ver producto</i></span>" : "") + "</button>";
     };
     const act = heroe.slides[heroe.i], sig = heroe.slides[(heroe.i + 1) % n];
     const cont = $("#heroe-tarjetas");
@@ -172,12 +172,11 @@
     $("#categorias-vitrina").classList.toggle("oculto", cats.length < 2);
     cont.innerHTML = cats.slice(0, 8).map((c, k) => {
       const prods = visibles().filter((p) => p.categoria === c.nombre && T.fotos(p).length);
-      const recorte = prods.find((p) => !T.esAmbiente(p));
-      const amb = prods.find((p) => T.esAmbiente(p));
-      const elegido = recorte || amb;
-      const img = elegido ? T.fotoPrincipal(elegido) : "";
+      const amb = prods.find((p) => T.fotoAmbiente(p));
+      const elegido = amb || prods[0];
+      const img = amb ? T.fotoAmbiente(amb) : elegido ? T.fotoPrincipal(elegido) : "";
       return '<button class="cat-tarjeta revelar" style="--tinte:' + TINTES[k % TINTES.length] + ";--d:" + (k % 4) * 80 + 'ms" data-cat-tarjeta="' + esc(c.nombre) + '">' +
-        (img ? '<span class="cat-foto' + (elegido && T.esAmbiente(elegido) ? " ambiente" : "") + '"><img src="' + esc(img) + '" alt="" loading="lazy"></span>' : '<span class="cat-foto">' + icono(iconoPara(c)) + "</span>") +
+        (img ? '<span class="cat-foto' + (amb ? " ambiente" : "") + '"><img src="' + esc(img) + '" alt="" loading="lazy"></span>' : '<span class="cat-foto">' + icono(iconoPara(c)) + "</span>") +
         '<span class="cat-texto"><b>' + esc(c.nombre) + "</b><small>" + c.n + (c.n === 1 ? " producto" : " productos") + "</small></span>" +
         '<span class="cat-ir">' + icono("flecha") + "</span></button>";
     }).join("");
@@ -328,6 +327,7 @@
     const foto = T.fotoPrincipal(p);
     const dd = T.precio(p, "detal", "divisas");
     const dm = T.precio(p, "mayor", "divisas");
+    const bsTarjeta = T.precioBs(p);
     const antes = Number(p.precio_antes) > dd ? "<s>" + T.dinero(p.precio_antes) + "</s>" : "";
     const colores = T.colores(p);
     const puntos = colores.length > 1 ? '<div class="puntos">' + colores.slice(0, 6).map((c) => '<span class="punto" title="' + esc(c.nombre) + '" style="background:' + esc(c.hex || "#ccc") + '"></span>').join("") + "</div>" : "";
@@ -338,7 +338,7 @@
       '<img src="' + esc(foto) + '" alt="' + esc(p.nombre) + '" loading="lazy" decoding="async" class="' + cubrir + '"></button>' +
       (st.tipo !== "agotado" ? '<button class="agregar-rapido" data-rapido="' + p.id + '" aria-label="Agregar ' + esc(p.nombre) + ' al carrito">' + icono("mas") + "</button>" : "") + "</div>" +
       '<div class="info"><div class="fila"><h3><button data-abrir="' + p.id + '">' + esc(p.nombre) + '</button></h3><span class="precio">' + antes + T.dinero(dd) + "</span></div>" +
-      '<div class="detalle"><span>' + esc(p.codigo || p.marca || p.categoria || "") + "</span>" + (T.tieneMayor(p) && dm < dd ? "<span>Mayor " + T.dinero(dm) + "</span>" : "") + "</div>" +
+      '<div class="detalle"><span>' + esc(p.codigo || p.marca || p.categoria || "") + "</span>" + (T.tieneMayor(p) && dm < dd ? "<span>Mayor " + T.dinero(dm) + "</span>" : bsTarjeta ? '<span class="precio-bs">' + T.bs(bsTarjeta) + "</span>" : "") + "</div>" +
       puntos + "</div></article>";
   }
 
@@ -365,12 +365,13 @@
 
   function fotosParaColor(p, color) {
     const todas = T.fotos(p);
-    if (!color) return todas;
+    if (!color) return blancoPrimero(todas);
     const propias = todas.filter((f) => f.color === color);
     const neutras = todas.filter((f) => !f.color);
     const lista = propias.concat(neutras);
-    return lista.length ? lista : todas;
+    return blancoPrimero(lista.length ? lista : todas);
   }
+  const blancoPrimero = (l) => l.filter((f) => !f.ambiente).concat(l.filter((f) => f.ambiente));
 
   function pintarFicha() {
     const { p, color } = ficha;
@@ -398,8 +399,11 @@
       const lineaBcv = T.tieneBcv(p) && cfg.tasaBCV ? "<span>A tasa BCV: " + T.dinero(b) + " · " + T.bs(b * cfg.tasaBCV) + "</span>" : T.tieneBcv(p) && b !== d ? "<span>A tasa BCV: " + T.dinero(b) + "</span>" : "";
       return '<div class="caja-precio' + (tipoActual === tipo ? " activa" : "") + '"><small>' + etiqueta + "</small><strong>" + T.dinero(d) + "</strong>" + lineaBcv + "</div>";
     };
-    const precios = '<div class="tabla-precios">' + cajaPrecio("detal", "Al detal") +
-      (T.tieneMayor(p) ? cajaPrecio("mayor", "Al mayor · " + cfg.minimoMayor + "+ piezas") : "") + "</div>";
+    const precioBs = T.precioBs(p);
+    const precios = cfg.ventaMayor
+      ? '<div class="tabla-precios">' + cajaPrecio("detal", "Al detal") + (T.tieneMayor(p) ? cajaPrecio("mayor", "Al mayor · " + cfg.minimoMayor + "+ piezas") : "") + "</div>"
+      : '<div class="tabla-precios dos-monedas"><div class="caja-precio activa"><small>En divisas</small><strong>' + T.dinero(T.precio(p, "detal", "divisas")) + "</strong><span>" + esc(T.metodosActivos().filter((m) => m.moneda === "divisas").map((m) => m.nombre).join(" · ") || "Efectivo y pagos en dólares") + "</span></div>" +
+        '<div class="caja-precio"><small>En bolívares</small><strong>' + (precioBs ? T.bs(precioBs) : "Consultar") + "</strong><span>" + (cfg.tasaBCV ? "Tasa BCV " + T.numero(cfg.tasaBCV) + " Bs/$" : "Según la tasa BCV del día") + "</span></div></div>";
     const antes = Number(p.precio_antes) > T.precio(p, "detal", "divisas") ? '<div class="codigo">Antes <s>' + T.dinero(p.precio_antes) + "</s></div>" : "";
 
     let aviso = "";
@@ -423,12 +427,10 @@
       : "";
 
     const datos = [];
-    if (p.marca) datos.push(["Marca", p.marca]);
+    if (p.categoria) datos.push(["Categoría", p.categoria]);
     if (p.material) datos.push(["Material", p.material]);
     const medidas = [["Alto", p.alto], ["Ancho", p.ancho], ["Fondo", p.fondo]].filter((x) => x[1]).map((x) => x[0] + " " + x[1]).join(" · ");
     if (medidas) datos.push(["Medidas", medidas]);
-    if (p.categoria) datos.push(["Categoría", p.categoria]);
-    if (!p.encargo && st.tipo !== "agotado") datos.push(["Disponibles", String(stock)]);
 
     $("#ficha").innerHTML =
       '<button class="icono-boton cerrar" data-cerrar-ficha aria-label="Cerrar">' + icono("cerrar") + "</button>" +
@@ -441,7 +443,7 @@
       (p.descripcion ? '<div class="descripcion">' + esc(p.descripcion) + "</div>" : "") +
       (datos.length ? '<div class="specs">' + datos.map((d) => "<div><small>" + esc(d[0]) + "</small><span>" + esc(d[1]) + "</span></div>").join("") + "</div>" : "") +
       combinaCon(p) +
-      '<p class="nota-pequena">Precio al mayor desde ' + cfg.minimoMayor + " piezas en total (puedes combinar modelos).</p>" +
+      (cfg.ventaMayor ? '<p class="nota-pequena">Precio al mayor desde ' + cfg.minimoMayor + " piezas en total (puedes combinar modelos).</p>" : "") +
       "</div></div>";
 
     const gal = $("#galeria");
@@ -528,6 +530,7 @@
     const el = $("#contador-carrito");
     el.textContent = n ? String(n) : "";
     el.dataset.n = String(n);
+    document.querySelectorAll(".contador-nav").forEach((c) => { c.textContent = n ? String(n) : ""; c.dataset.n = String(n); });
   }
 
   function agregar(id, color, cantidad) {
@@ -574,6 +577,7 @@
       pie.innerHTML = '<button class="boton claro ancho" data-cerrar-carrito>Seguir viendo el catálogo</button>';
       return;
     }
+    elegirMetodo(T.metodosActivos());
     const lineas = lineasCarrito();
     if (!lineas.length) {
       cuerpo.innerHTML = '<div class="listo"><div class="circulo" style="background:var(--tarjeta);color:var(--tinta)">' + icono("bolsa") + "</div><h3>Tu pedido está vacío</h3><p>Agrega productos desde el catálogo.</p></div>";
@@ -581,9 +585,10 @@
       return;
     }
     const cfg = estado.cfg;
+    const metodos = T.metodosActivos();
     const unidades = unidadesCarrito();
     const tipo = tipoPrecio(unidades);
-    const total = lineas.reduce((a, l) => a + l.subtotal, 0);
+    const total = lineasCarrito().reduce((a, l) => a + l.subtotal, 0);
     const faltan = cfg.minimoMayor - unidades;
     const hayMayor = lineas.some((l) => T.tieneMayor(l.p));
     const progreso = hayMayor
@@ -600,7 +605,9 @@
     ).join("") +
       '<div class="formulario" id="form-pedido">' +
       "<h3>¿Cómo vas a pagar?</h3>" +
-      '<div class="segmentado" role="group" aria-label="Forma de pago"><button data-pago="divisas" aria-pressed="' + (estado.pago === "divisas") + '">En divisas</button><button data-pago="bcv" aria-pressed="' + (estado.pago === "bcv") + '">Bolívares (tasa BCV)</button></div>' +
+      (metodos.length
+        ? '<div class="metodos-pago" role="group" aria-label="Forma de pago">' + metodos.map((m) => '<button data-metodo="' + esc(m.nombre) + '" aria-pressed="' + (estado.metodo === m.nombre) + '"><b>' + esc(m.nombre) + "</b><small>" + (m.moneda === "bs" ? "En bolívares" : "En divisas") + "</small></button>").join("") + "</div>"
+        : '<div class="segmentado" role="group" aria-label="Forma de pago"><button data-pago="divisas" aria-pressed="' + (estado.pago === "divisas") + '">En divisas</button><button data-pago="bcv" aria-pressed="' + (estado.pago === "bcv") + '">En bolívares</button></div>') +
       "<h3>Tus datos</h3>" +
       campo("nombre", "Nombre y apellido *", c.nombre, "text", "name") +
       '<div class="dos-columnas">' + campo("telefono", "Teléfono / WhatsApp *", c.telefono, "tel", "tel") + campo("cedula", "Cédula o RIF", c.cedula, "text", "off") + "</div>" +
@@ -609,14 +616,25 @@
       '<label class="campo">Nota (opcional)<textarea data-cliente="nota" rows="2" placeholder="Ej.: factura a nombre de la empresa">' + esc(c.nota || "") + "</textarea></label>" +
       "</div>";
 
-    const bs = estado.pago === "bcv" && cfg.tasaBCV ? '<div class="bs"><span>Equivale a (tasa ' + T.numero(cfg.tasaBCV) + ")</span><span>" + T.bs(total * cfg.tasaBCV) + "</span></div>" : "";
-    pie.innerHTML = '<div class="totales"><div><span>' + unidades + " pieza" + (unidades === 1 ? "" : "s") + " · precio " + (tipo === "mayor" ? "al mayor" : "al detal") + '</span></div><div class="total"><span>Total</span><span>' + T.dinero(total) + "</span></div>" + bs + "</div>" +
+    const enBs = estado.pago === "bcv";
+    const totalBs = cfg.tasaBCV ? total * cfg.tasaBCV : 0;
+    pie.innerHTML = '<div class="totales"><div><span>' + unidades + " pieza" + (unidades === 1 ? "" : "s") + (cfg.ventaMayor ? " · precio " + (tipo === "mayor" ? "al mayor" : "al detal") : "") + (estado.metodo ? " · " + esc(estado.metodo) : "") + "</span></div>" +
+      (enBs && totalBs
+        ? '<div class="total"><span>Total</span><span>' + T.bs(totalBs) + '</span></div><div class="bs"><span>Tasa BCV ' + T.numero(cfg.tasaBCV) + " Bs/$</span><span>Ref. " + T.dinero(total) + "</span></div>"
+        : '<div class="total"><span>Total</span><span>' + T.dinero(total) + "</span></div>" + (enBs ? '<div class="bs"><span>En bolívares a la tasa BCV del día</span></div>' : "")) + "</div>" +
       (cfg.whatsapp || T.demo ? '<button class="boton whatsapp ancho" id="enviar-pedido">' + icono("whatsapp") + "Enviar pedido por WhatsApp</button>" : '<p class="nota-pequena" style="color:var(--peligro)">La tienda aún no configuró su WhatsApp.</p>') +
       '<p class="nota-pequena">Te confirmaremos disponibilidad y envío por WhatsApp.</p>';
 
     function campo(k, etiqueta, v, tipoCampo, auto) {
       return '<label class="campo">' + etiqueta + '<input data-cliente="' + k + '" type="' + tipoCampo + '" autocomplete="' + auto + '" value="' + esc(v || "") + '"></label>';
     }
+  }
+
+  function elegirMetodo(metodos) {
+    if (!metodos.length) { estado.metodo = ""; return; }
+    let m = metodos.find((x) => x.nombre === estado.metodo);
+    if (!m) { m = metodos[0]; estado.metodo = m.nombre; }
+    estado.pago = m.moneda === "bs" ? "bcv" : "divisas";
   }
 
   const lineaClave = (x) => esc(x.id + "|" + (x.color || ""));
@@ -632,6 +650,7 @@
     const c = estado.cliente;
     if (!c.nombre || c.nombre.trim().length < 3) return marcarError("nombre", "Escribe tu nombre");
     if (String(c.telefono || "").replace(/\D/g, "").length < 7) return marcarError("telefono", "Escribe un teléfono válido");
+    elegirMetodo(T.metodosActivos());
     const lineas = lineasCarrito();
     const exceso = lineas.find((l) => l.x.cantidad > l.max);
     if (exceso) { T.tostada("Ajusta la cantidad de " + exceso.p.nombre + " (hay " + exceso.max + ")"); return; }
@@ -658,7 +677,7 @@
       cliente: { nombre: c.nombre.trim(), telefono: (c.telefono || "").trim(), cedula: (c.cedula || "").trim(), ciudad: (c.ciudad || "").trim(), entrega: (c.entrega || "").trim() },
       items: lineas.map((l) => ({ id: l.p.id, nombre: l.p.nombre, codigo: l.p.codigo || "", color: l.x.color || "", cantidad: l.x.cantidad, precio: round2(l.precio), subtotal: round2(l.subtotal), foto: T.fotoPrincipal(l.p, l.x.color) })),
       tipo_precio: tipo,
-      forma_pago: estado.pago,
+      forma_pago: estado.metodo ? estado.metodo + (estado.pago === "bcv" ? " (Bs)" : " (divisas)") : estado.pago === "bcv" ? "Bolívares" : "Divisas",
       total: round2(total),
       total_bs: estado.pago === "bcv" && cfg.tasaBCV ? round2(total * cfg.tasaBCV) : null,
       nota: (c.nota || "").trim() || null,
@@ -705,8 +724,8 @@
     L.push("");
     p.items.forEach((i) => L.push("• " + i.cantidad + " × " + i.nombre + (i.codigo ? " [" + i.codigo + "]" : "") + (i.color ? " (" + i.color + ")" : "") + " — " + T.dinero(i.subtotal)));
     L.push("");
-    L.push("*Total: " + T.dinero(p.total) + "* (precio " + (p.tipo_precio === "mayor" ? "al mayor" : "al detal") + ")");
-    L.push("Pago: " + (p.forma_pago === "bcv" ? "bolívares a tasa BCV" + (p.total_bs ? " ≈ " + T.bs(p.total_bs) + " (tasa " + T.numero(cfg.tasaBCV) + ")" : "") : "divisas"));
+    L.push(p.total_bs ? "*Total: " + T.bs(p.total_bs) + "* (ref. " + T.dinero(p.total) + ")" : "*Total: " + T.dinero(p.total) + "*" + (cfg.ventaMayor ? " (precio " + (p.tipo_precio === "mayor" ? "al mayor" : "al detal") + ")" : ""));
+    L.push("Pago: " + p.forma_pago + (p.total_bs ? " · " + T.bs(p.total_bs) + " (tasa BCV " + T.numero(cfg.tasaBCV) + ")" : ""));
     L.push("");
     L.push("*Cliente:* " + p.cliente.nombre + (p.cliente.cedula ? " · " + p.cliente.cedula : ""));
     L.push("Teléfono: " + p.cliente.telefono);
@@ -730,7 +749,8 @@
 
     doc.setFillColor(246, 246, 247); doc.rect(0, 0, W, 86, "F"); doc.setFillColor(5, 51, 89); doc.rect(0, 86, W, 4, "F");
     doc.setTextColor(11, 9, 10); doc.setFont("helvetica", "bold"); doc.setFontSize(24);
-    const logo = cfg.logo ? await imagenComoDato(cfg.logo).catch(() => null) : null;
+    const logoPdf = !cfg.logo || /logo-arkeo-(blanco|negro)\.png$/.test(cfg.logo) ? "img/logo-arkeo-negro.png" : cfg.logo;
+    const logo = await imagenComoDato(logoPdf).catch(() => null);
     if (logo) doc.addImage(logo.dato, "PNG", M, 18, 50 * logo.proporcion, 50);
     else texto(String(cfg.nombreTienda).toUpperCase(), M, 50, { charSpace: 2 });
     doc.setFont("helvetica", "normal"); doc.setFontSize(10);
@@ -745,7 +765,7 @@
     doc.setFontSize(9); doc.setTextColor(110); texto("CLIENTE", M, y); texto("CONDICIONES", W / 2 + 10, y);
     doc.setTextColor(21); doc.setFontSize(11);
     const cli = [p.cliente.nombre, p.cliente.cedula && "C.I./RIF: " + p.cliente.cedula, "Tel.: " + p.cliente.telefono, p.cliente.ciudad, p.cliente.entrega].filter(Boolean);
-    const cond = ["Precio " + (p.tipo_precio === "mayor" ? "al mayor" : "al detal"), "Pago: " + (p.forma_pago === "bcv" ? "bolívares a tasa BCV" : "divisas"), p.total_bs ? "Tasa BCV: " + T.numero(cfg.tasaBCV) + " Bs/$" : ""].filter(Boolean);
+    const cond = [cfg.ventaMayor ? "Precio " + (p.tipo_precio === "mayor" ? "al mayor" : "al detal") : "", "Pago: " + p.forma_pago, p.total_bs ? "Tasa BCV: " + T.numero(cfg.tasaBCV) + " Bs/$" : ""].filter(Boolean);
     let y1 = y + 16, y2 = y + 16;
     cli.forEach((l) => { doc.splitTextToSize(l, W / 2 - M - 10).forEach((s) => { texto(s, M, y1); y1 += 15; }); });
     cond.forEach((l) => { texto(l, W / 2 + 10, y2); y2 += 15; });
@@ -852,6 +872,8 @@
     $("#filtro-ofertas").addEventListener("click", (e) => { estado.ofertas = !estado.ofertas; e.currentTarget.setAttribute("aria-pressed", estado.ofertas); pintarLista(); });
     $("#ver-mas").addEventListener("click", () => { estado.mostrar += POR_PAGINA; pintarLista(); });
     $("#abrir-carrito").addEventListener("click", abrirCarrito);
+    const c2 = $("#abrir-carrito-2");
+    if (c2) c2.addEventListener("click", abrirCarrito);
     $("#cerrar-carrito").addEventListener("click", cerrarCarrito);
     $("#velo").addEventListener("click", () => { if (ficha) cerrarFicha(); else cerrarCarrito(); });
     document.addEventListener("keydown", (e) => {
@@ -889,6 +911,8 @@
         return;
       }
       if (d.heroe) { mostrarSlide(heroe.i + Number(d.heroe)); return; }
+      if (d.nav === "buscar") { e.preventDefault(); $("#buscar").scrollIntoView({ behavior: "smooth", block: "center" }); setTimeout(() => $("#buscar").focus({ preventScroll: true }), 450); return; }
+      if (d.nav === "inicio") { e.preventDefault(); window.scrollTo({ top: 0, behavior: "smooth" }); return; }
       if (d.abrir) { abrirFicha(d.abrir); return; }
       if (d.rapido) {
         const p = estado.productos.find((x) => String(x.id) === d.rapido);
@@ -940,6 +964,7 @@
         return;
       }
       if (d.pago) { estado.pago = d.pago; T.guardarMemoria("pago", d.pago); pintarCarrito(); return; }
+      if (d.metodo !== undefined) { estado.metodo = d.metodo; T.guardarMemoria("metodo", d.metodo); pintarCarrito(); return; }
       if (d.cerrarCarrito !== undefined) { cerrarCarrito(); return; }
       if (t.id === "enviar-pedido") { enviarPedido(); return; }
     });

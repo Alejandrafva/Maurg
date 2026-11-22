@@ -181,3 +181,9 @@ body.admin { background: var(--fondo); }
 .aviso-panel { color: var(--acento); }
 .ambiente-foto { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--tinta-2); }
 .ambiente-foto input { accent-color: var(--acento); }
+
+.vista-bs { margin: 0; font-size: 13.5px; color: var(--tinta-2); background: var(--acento-suave); border-radius: 10px; padding: 10px 12px; }
+.vista-bs:empty { display: none; }
+.fila-metodo { display: grid; grid-template-columns: auto 1.2fr 150px 1.4fr 40px; gap: 8px; align-items: center; background: var(--superficie); border: 1px solid var(--linea); border-radius: 12px; padding: 8px; }
+.fila-metodo input:not([type=checkbox]), .fila-metodo select { min-height: 40px; border: 1px solid var(--linea); border-radius: 10px; padding: 0 10px; background: var(--superficie); width: 100%; }
+@media (max-width: 760px) { .fila-metodo { grid-template-columns: 1fr 1fr; } .fila-metodo .icono-boton { justify-self: end; } }

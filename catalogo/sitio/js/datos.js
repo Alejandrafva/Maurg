@@ -26,7 +26,7 @@
   T.AJUSTES_BASE = {
     nombreTienda: "ARKEO",
     eslogan: "Home & Office · Mobiliario de oficina y hogar",
-    logo: "img/logo-arkeo-negro.png",
+    logo: "img/logo-arkeo-blanco.png",
     whatsapp: "",
     instagram: "",
     tiktok: "",
@@ -38,12 +38,23 @@
     tasaBCV: 0,
     tasaFecha: "",
     minimoMayor: 6,
+    ventaMayor: false,
+    brecha: 25,
+    precioBsAutomatico: true,
+    metodosPago: [
+      { nombre: "Zelle", moneda: "divisas", detalle: "", activo: true },
+      { nombre: "Binance", moneda: "divisas", detalle: "", activo: true },
+      { nombre: "Banesco Panamá", moneda: "divisas", detalle: "", activo: true },
+      { nombre: "Bizum", moneda: "divisas", detalle: "", activo: false },
+      { nombre: "Efectivo en tienda", moneda: "divisas", detalle: "", activo: false },
+      { nombre: "Pago móvil / transferencia en Bs", moneda: "bs", detalle: "", activo: false },
+    ],
     pocasUnidades: 3,
     diasPedidos: 30,
     workerUrl: "",
     notaEncargo: "Producto por encargo: consulta el tiempo de entrega.",
     categorias: [],
-    portada: { titulo: "", subtitulo: "Sillas, escritorios, comedores, barras, espejos y vanity. Al mayor y al detal, con envíos a toda Venezuela.", boton: "Ver catálogo", imagen: "" },
+    portada: { titulo: "", subtitulo: "Sillas, escritorios, comedores, barras, espejos y vanity. Precios en divisas y en bolívares, con envíos a toda Venezuela.", boton: "Ver catálogo", imagen: "" },
     inicio: {},
     colecciones: [],
     resenas: [],
@@ -61,8 +72,14 @@
     if (!d.inicio || typeof d.inicio !== "object") d.inicio = {};
     d.tasaBCV = Number(d.tasaBCV) || 0;
     d.minimoMayor = Math.max(1, parseInt(d.minimoMayor, 10) || 6);
+    d.ventaMayor = d.ventaMayor === true;
+    d.brecha = Math.max(0, Number(d.brecha) || 0);
+    d.precioBsAutomatico = d.precioBsAutomatico !== false;
+    if (!Array.isArray(d.metodosPago) || !d.metodosPago.length) d.metodosPago = T.AJUSTES_BASE.metodosPago.map((m) => Object.assign({}, m));
+    d.metodosPago = d.metodosPago.filter((m) => m && m.nombre).map((m) => ({ nombre: String(m.nombre), moneda: m.moneda === "bs" ? "bs" : "divisas", detalle: m.detalle || "", activo: m.activo !== false }));
     d.pocasUnidades = Math.max(0, parseInt(d.pocasUnidades, 10) || 0);
     d.workerUrl = String(d.workerUrl || C.WORKER_URL || "").trim().replace(/\/+$/, "");
+    T.ajustes = d;
     return d;
   };
 
@@ -85,9 +102,9 @@
     if (!demoListo) {
       demoListo = T.cargarScript("js/demo.js").then(() => {
         const D = window.DEMO;
-        if (T.demoLeer("version") !== 3) {
+        if (T.demoLeer("version") !== 4) {
           ["config", "productos", "pedidos", "proveedores", "privado"].forEach((k) => { try { localStorage.removeItem("demo:" + k); } catch (e) { /* nada */ } });
-          T.demoGuardar("version", 3);
+          T.demoGuardar("version", 4);
         }
         if (!T.demoLeer("config")) T.demoGuardar("config", D.config);
         if (!T.demoLeer("productos")) T.demoGuardar("productos", D.productos);
@@ -188,15 +205,34 @@
   const num = (v) => (v === null || v === undefined || v === "" || isNaN(Number(v)) ? null : Number(v));
 
   /** precio(p, "detal"|"mayor", "divisas"|"bcv") en dólares */
+  /**
+   * precio(p, "detal"|"mayor", "divisas"|"bcv") en dólares.
+   * "bcv" = pagando en bolívares: precio en divisas + la brecha (%) de Ajustes,
+   * que luego se multiplica por la tasa BCV para mostrarlo en Bs.
+   */
   T.precio = function (p, tipo, pago) {
+    const cfg = T.ajustes || {};
+    if (!cfg.ventaMayor) tipo = "detal";
     const dd = num(p.divisa_detal), dm = num(p.divisa_mayor), bd = num(p.bcv_detal), bm = num(p.bcv_mayor);
-    const detal = pago === "bcv" ? (bd != null ? bd : dd) : (dd != null ? dd : bd);
-    const mayor = pago === "bcv" ? (bm != null ? bm : dm) : (dm != null ? dm : bm);
-    if (tipo === "mayor") return mayor != null ? mayor : detal != null ? detal : 0;
-    return detal != null ? detal : 0;
+    const divisa = tipo === "mayor" ? (dm != null ? dm : dd) : dd;
+    if (pago === "bcv") {
+      if (cfg.precioBsAutomatico !== false) {
+        const base = divisa != null ? divisa : (tipo === "mayor" ? (bm != null ? bm : bd) : bd);
+        return base == null ? 0 : Math.round(base * (1 + (Number(cfg.brecha) || 0) / 100) * 100) / 100;
+      }
+      const b = tipo === "mayor" ? (bm != null ? bm : bd) : bd;
+      return b != null ? b : divisa != null ? divisa : 0;
+    }
+    return divisa != null ? divisa : (bd != null ? bd : 0);
   };
-  T.tieneMayor = (p) => num(p.divisa_mayor) != null || num(p.bcv_mayor) != null;
-  T.tieneBcv = (p) => num(p.bcv_detal) != null || num(p.bcv_mayor) != null;
+  /** Precio en bolívares (0 si no hay tasa cargada) */
+  T.precioBs = function (p, tipo) {
+    const tasa = Number((T.ajustes || {}).tasaBCV) || 0;
+    return tasa ? Math.round(T.precio(p, tipo || "detal", "bcv") * tasa * 100) / 100 : 0;
+  };
+  T.tieneMayor = (p) => !!(T.ajustes && T.ajustes.ventaMayor) && (num(p.divisa_mayor) != null || num(p.bcv_mayor) != null);
+  T.tieneBcv = (p) => ((T.ajustes || {}).precioBsAutomatico !== false) || num(p.bcv_detal) != null || num(p.bcv_mayor) != null;
+  T.metodosActivos = () => ((T.ajustes || {}).metodosPago || []).filter((m) => m.activo);
 
   T.stockDe = function (p, color) {
     const sc = p.stock_color && typeof p.stock_color === "object" ? p.stock_color : {};
@@ -224,23 +260,28 @@
   };
   T.esVideo = (f) => f.tipo === "video" || /\.(mp4|webm|mov)(\?|$)/i.test(f.url || "");
 
-  /** Foto "de ambiente": tiene fondo (una sala, una cocina…) y debe llenar la tarjeta */
+  /**
+   * Fotos "de ambiente" (con fondo: sala, cocina, showroom) van en los carruseles.
+   * En la tarjeta y la ficha del producto se prefiere la foto de fondo blanco.
+   */
+  const soloFotos = (p) => T.fotos(p).filter((f) => !T.esVideo(f));
   T.fotoObj = function (p, color) {
-    const fs = T.fotos(p).filter((f) => !T.esVideo(f));
-    return (color && fs.find((f) => f.color === color)) || fs[0] || null;
+    let fs = soloFotos(p);
+    if (color && fs.some((f) => f.color === color)) fs = fs.filter((f) => f.color === color);
+    return fs.find((f) => !f.ambiente) || fs[0] || null;
   };
   T.esAmbiente = function (p, color) {
     const f = T.fotoObj(p, color);
     return !!(f && f.ambiente);
   };
-
   T.fotoPrincipal = function (p, color) {
-    const fs = T.fotos(p).filter((f) => !T.esVideo(f));
-    if (color) {
-      const c = fs.find((f) => f.color === color);
-      if (c) return c.url;
-    }
-    return fs[0] ? fs[0].url : "img/sin-foto.svg";
+    const f = T.fotoObj(p, color);
+    return f ? f.url : "img/sin-foto.svg";
+  };
+  /** Foto real para carruseles (la primera de ambiente; si no hay, la principal) */
+  T.fotoAmbiente = function (p) {
+    const f = soloFotos(p).find((x) => x.ambiente);
+    return f ? f.url : "";
   };
 
   // ---------------------------------------------------------------------
@@ -349,7 +390,9 @@
     document.querySelectorAll("[data-eslogan]").forEach((el) => (el.textContent = cfg.eslogan || ""));
     document.querySelectorAll("[data-anio]").forEach((el) => (el.textContent = new Date().getFullYear()));
     document.querySelectorAll("[data-logo]").forEach((el) => {
-      if (cfg.logo) { el.src = cfg.logo; el.classList.remove("oculto"); }
+      // La cabecera es azul: el logo oscuro de fábrica se cambia por su versión blanca
+      const logo = !cfg.logo || /logo-arkeo-negro\.png$/.test(cfg.logo) ? "img/logo-arkeo-blanco.png" : cfg.logo;
+      el.src = logo; el.classList.remove("oculto");
     });
     const wa = cfg.whatsapp ? T.enlaceWa(cfg.whatsapp, "Hola, vengo del catálogo web 👋") : "";
     document.querySelectorAll("[data-wa]").forEach((el) => {

@@ -318,6 +318,9 @@
     if (tipo === "select") return "<label" + clase + ">" + etiqueta + '<select name="' + nombre + '"' + attrs + ">" + extra.opciones.map((o) => { const [v, t] = Array.isArray(o) ? o : [o, o]; return '<option value="' + esc(v) + '"' + (String(v) === String(valor == null ? "" : valor) ? " selected" : "") + ">" + esc(t) + "</option>"; }).join("") + "</select>" + (extra.ayuda ? '<span class="ayuda">' + extra.ayuda + "</span>" : "") + "</label>";
     return "<label" + clase + ">" + etiqueta + '<input name="' + nombre + '" type="' + tipo + '" value="' + esc(valor == null ? "" : valor) + '"' + attrs + ">" + (extra.ayuda ? '<span class="ayuda">' + extra.ayuda + "</span>" : "") + "</label>";
   }
+  function oculto(nombre, valor) {
+    return '<input type="hidden" name="' + nombre + '" value="' + esc(valor == null ? "" : valor) + '">';
+  }
   function interruptor(etiqueta, nombre, activo) {
     return '<label class="interruptor"><input type="checkbox" name="' + nombre + '"' + (activo ? " checked" : "") + ">" + etiqueta + "</label>";
   }
@@ -608,7 +611,7 @@
           '<img src="' + esc(T.fotoPrincipal(p)) + '" alt="" loading="lazy">' +
           '<div class="c-info"><div class="nombre">' + esc(p.nombre || "(sin nombre)") + (p.disponible === false ? ' <small style="color:var(--peligro)">· oculto</small>' : "") + '</div><div class="sub">' + esc([p.codigo, p.marca].filter(Boolean).join(" · ")) + "</div></div>" +
           '<div class="c-cat sub">' + esc(p.categoria || "—") + "</div>" +
-          '<div class="c-precio"><b>' + T.dinero(T.precio(p, "detal", "divisas")) + "</b>" + (T.tieneMayor(p) ? '<div class="sub">Mayor ' + T.dinero(T.precio(p, "mayor", "divisas")) + "</div>" : "") + "</div>" +
+          '<div class="c-precio"><b>' + T.dinero(T.precio(p, "detal", "divisas")) + "</b>" + (T.tieneMayor(p) ? '<div class="sub">Mayor ' + T.dinero(T.precio(p, "mayor", "divisas")) + "</div>" : T.precioBs(p) ? '<div class="sub">' + T.bs(T.precioBs(p)) + "</div>" : "") + "</div>" +
           '<div class="c-stock"><span class="stock-badge ' + st.tipo + '" title="' + esc(detalleStock) + '"><i></i>' + (p.encargo ? "Encargo" : T.stockDe(p)) + '</span>' + (detalleStock ? '<div class="sub solo-escritorio">' + esc(detalleStock) + "</div>" : "") + "</div>" +
           '<div class="acciones">' +
           '<button class="icono-boton" data-accion="visible" title="' + (p.disponible === false ? "Mostrar en la tienda" : "Ocultar de la tienda") + '">' + icono(p.disponible === false ? "ojo" : "ojo") + "</button>" +
@@ -700,13 +703,18 @@
       "</div>" +
       (cols.length ? '<div><div class="etiqueta-campo">Colecciones</div><div class="interruptores">' + cols.map((c) => interruptor(esc(c), "col::" + c, (p.colecciones || []).includes(c))).join("") + "</div></div>" : "") +
       "</div>" +
-      '<div class="seccion-form"><h3>Precios (en dólares)</h3><p class="ayuda">«En divisas» = pagando en dólares/Zelle. «A tasa BCV» = pagando en bolívares (la tienda lo muestra también en Bs con la tasa del día). Deja vacío lo que no uses.</p><div class="rejilla-campos">' +
-      campo("Detal · en divisas", "divisa_detal", p.divisa_detal, { attrs: ' inputmode="decimal"' }) +
-      campo("Detal · a tasa BCV", "bcv_detal", p.bcv_detal, { attrs: ' inputmode="decimal"' }) +
-      campo("Mayor · en divisas", "divisa_mayor", p.divisa_mayor, { attrs: ' inputmode="decimal"' }) +
-      campo("Mayor · a tasa BCV", "bcv_mayor", p.bcv_mayor, { attrs: ' inputmode="decimal"' }) +
-      campo("Precio anterior (oferta)", "precio_antes", p.precio_antes, { attrs: ' inputmode="decimal"', ayuda: "Si es mayor al precio detal, se muestra tachado con el % de descuento." }) +
-      "</div></div>" +
+      (E.cfg.ventaMayor
+        ? '<div class="seccion-form"><h3>Precios (en dólares)</h3><p class="ayuda">«En divisas» = pagando en dólares/Zelle. «A tasa BCV» = pagando en bolívares. Deja vacío lo que no uses.</p><div class="rejilla-campos">' +
+          campo("Detal · en divisas", "divisa_detal", p.divisa_detal, { attrs: ' inputmode="decimal"' }) +
+          (E.cfg.precioBsAutomatico ? oculto("bcv_detal", p.bcv_detal) : campo("Detal · a tasa BCV", "bcv_detal", p.bcv_detal, { attrs: ' inputmode="decimal"' })) +
+          campo("Mayor · en divisas", "divisa_mayor", p.divisa_mayor, { attrs: ' inputmode="decimal"' }) +
+          (E.cfg.precioBsAutomatico ? oculto("bcv_mayor", p.bcv_mayor) : campo("Mayor · a tasa BCV", "bcv_mayor", p.bcv_mayor, { attrs: ' inputmode="decimal"' }))
+        : '<div class="seccion-form"><h3>Precio</h3><p class="ayuda">Escribe el precio <b>en divisas</b>. ' + (E.cfg.precioBsAutomatico ? "El precio en bolívares se calcula solo con la brecha (" + E.cfg.brecha + " %) y la tasa BCV de Ajustes." : "Escribe también el precio a tasa BCV.") + '</p><div class="rejilla-campos">' +
+          campo("Precio en divisas ($) *", "divisa_detal", p.divisa_detal, { attrs: ' inputmode="decimal" id="ed-precio"' }) +
+          (E.cfg.precioBsAutomatico ? oculto("bcv_detal", p.bcv_detal) : campo("Precio a tasa BCV ($)", "bcv_detal", p.bcv_detal, { attrs: ' inputmode="decimal"' })) +
+          oculto("divisa_mayor", p.divisa_mayor) + oculto("bcv_mayor", p.bcv_mayor)) +
+      campo("Precio anterior (oferta)", "precio_antes", p.precio_antes, { attrs: ' inputmode="decimal"', ayuda: "Si es mayor al precio, se muestra tachado con el % de descuento." }) +
+      '</div><p class="vista-bs" id="ed-vista-bs"></p></div>' +
       '<div class="seccion-form"><h3>Estado</h3><div class="interruptores">' +
       interruptor("Visible en la tienda", "disponible", p.disponible !== false) +
       interruptor("Por encargo", "encargo", !!p.encargo) +
@@ -734,6 +742,17 @@
       { alCerrar: () => descartar() });
 
     const form = $("#f-prod");
+    const vistaBs = () => {
+      const el = $("#ed-vista-bs");
+      if (!el) return;
+      const d = num(form.divisa_detal.value);
+      if (d == null) { el.textContent = ""; return; }
+      const prov = { divisa_detal: d, bcv_detal: num(form.bcv_detal ? form.bcv_detal.value : null) };
+      const bcv = T.precio(prov, "detal", "bcv");
+      el.innerHTML = "En la tienda: <b>" + T.dinero(d) + "</b> en divisas · " + (E.cfg.tasaBCV ? "<b>" + T.bs(bcv * E.cfg.tasaBCV) + "</b> en bolívares" : "<b>" + T.dinero(bcv) + "</b> a tasa BCV (falta la tasa en Ajustes)");
+    };
+    form.addEventListener("input", (e) => { if (e.target.name === "divisa_detal" || e.target.name === "bcv_detal") vistaBs(); });
+    vistaBs();
     pintarColores();
     pintarFotos();
 
@@ -860,7 +879,7 @@
         colecciones: cols.filter((c) => v["col::" + c]),
         orden: parseInt(v.orden, 10) || 0,
       };
-      if (fila.divisa_detal == null && fila.bcv_detal == null) { T.tostada("Escribe al menos un precio al detal"); form.divisa_detal.focus(); return; }
+      if (fila.divisa_detal == null && (E.cfg.precioBsAutomatico || fila.bcv_detal == null)) { T.tostada("Escribe el precio en divisas"); form.divisa_detal.focus(); return; }
       const listo = ocupado(e.currentTarget);
       try {
         const g = await D.guardarProducto(fila);
@@ -1011,7 +1030,7 @@
       }).join("");
       const waCliente = c.telefono ? T.enlaceWa(c.telefono, "Hola " + (c.nombre || "") + ", te escribimos de " + E.cfg.nombreTienda + " por tu pedido " + (p.codigo || "") + ".") : "";
       return '<article class="pedido" data-id="' + esc(p.id) + '">' +
-        '<div class="pedido-cabeza"><strong>' + esc(p.codigo || "Pedido") + "</strong><span>" + fecha(p.creado) + " · " + (p.tipo_precio === "mayor" ? "al mayor" : "al detal") + " · pago " + (p.forma_pago === "bcv" ? "Bs (BCV)" : "divisas") + "</span></div>" +
+        '<div class="pedido-cabeza"><strong>' + esc(p.codigo || "Pedido") + "</strong><span>" + fecha(p.creado) + (E.cfg.ventaMayor ? " · " + (p.tipo_precio === "mayor" ? "al mayor" : "al detal") : "") + " · " + esc(p.forma_pago === "bcv" ? "Bolívares" : p.forma_pago === "divisas" ? "Divisas" : p.forma_pago || "") + "</span></div>" +
         '<div class="pedido-cliente"><b>' + esc(c.nombre || "") + "</b>" + (c.cedula ? " · " + esc(c.cedula) : "") + " · " + esc(c.telefono || "") + (c.ciudad ? "<br>" + esc(c.ciudad) : "") + (c.entrega ? " · " + esc(c.entrega) : "") + (p.nota ? "<br><i>Nota: " + esc(p.nota) + "</i>" : "") + "</div>" +
         '<div class="pedido-items">' + items + "</div>" +
         '<div class="pedido-total"><span>Total</span><span>' + T.dinero(p.total) + (p.total_bs ? ' <small class="ayuda">· ' + T.bs(p.total_bs) + "</small>" : "") + "</span></div>" +
@@ -1084,7 +1103,7 @@
       const total = Math.round(items.reduce((a, i) => a + i.subtotal, 0) * 100) / 100;
       const cambios = {
         items, total,
-        total_bs: p.forma_pago === "bcv" && E.cfg.tasaBCV ? Math.round(total * E.cfg.tasaBCV * 100) / 100 : p.total_bs,
+        total_bs: p.total_bs && E.cfg.tasaBCV ? Math.round(total * E.cfg.tasaBCV * 100) / 100 : p.total_bs,
         cliente: { nombre: v.nombre, telefono: v.telefono, cedula: v.cedula, ciudad: v.ciudad, entrega: v.entrega },
         nota: v.nota || null,
       };
@@ -1327,9 +1346,15 @@
       campo("Teléfono visible", "telefono", c.telefono) + campo("Instagram", "instagram", c.instagram, { placeholder: "@usuario" }) + campo("TikTok", "tiktok", c.tiktok, { placeholder: "@usuario" }) +
       campo("Correo", "correo", c.correo, { tipo: "email" }) + campo("Horario", "horario", c.horario) +
       campo("Dirección", "direccion", c.direccion, { doble: true }) + campo("Enlace de Google Maps", "mapa", c.mapa, { doble: true, placeholder: "https://maps.app.goo.gl/…" }) + "</div></div>" +
+      '<div class="tarjeta-admin"><h3>Precios en bolívares</h3><p class="ayuda">Cada producto lleva un solo precio en divisas. El precio en bolívares se calcula solo: <b>precio en divisas + brecha (%) × tasa BCV</b>. Cambia la brecha o la tasa aquí y se actualizan los precios en Bs de toda la tienda.</p><div class="rejilla-campos">' +
+      campo("Tasa BCV (Bs por $)", "tasaBCV", c.tasaBCV || "", { attrs: ' inputmode="decimal" id="aj-tasa"', ayuda: c.tasaFecha ? "Actualizada el " + c.tasaFecha : "" }) +
+      campo("Brecha cambiaria (%)", "brecha", c.brecha, { attrs: ' inputmode="decimal" id="aj-brecha"', ayuda: "Ejemplo: 25 = el precio en Bs es un 25 % más que en divisas." }) +
+      '</div><p class="vista-bs" id="aj-ejemplo"></p><div class="interruptores">' +
+      interruptor("Calcular el precio en Bs automáticamente", "precioBsAutomatico", c.precioBsAutomatico) +
+      interruptor("Vender también al mayor", "ventaMayor", c.ventaMayor) + "</div></div>" +
+      '<div class="tarjeta-admin"><h3>Métodos de pago <button type="button" class="boton claro pequeno" id="mp-agregar">' + icono("mas") + 'Método</button></h3><p class="ayuda">Marca los que quieres que aparezcan en la tienda y en el carrito. En «Datos» puedes poner el correo de Zelle, el ID de Binance, etc. (salen en la página de pagos).</p><div id="mp-lista" class="lista-orden"></div></div>' +
       '<div class="tarjeta-admin"><h3>Ventas</h3><div class="rejilla-campos">' +
-      campo("Tasa BCV (Bs por $)", "tasaBCV", c.tasaBCV || "", { attrs: ' inputmode="decimal"', ayuda: c.tasaFecha ? "Actualizada el " + c.tasaFecha : "" }) +
-      campo("Mínimo de piezas para precio al mayor", "minimoMayor", c.minimoMayor, { attrs: ' inputmode="numeric"' }) +
+      (c.ventaMayor ? campo("Mínimo de piezas para precio al mayor", "minimoMayor", c.minimoMayor, { attrs: ' inputmode="numeric"' }) : oculto("minimoMayor", c.minimoMayor)) +
       campo("Aviso «¡Pocas unidades!» desde", "pocasUnidades", c.pocasUnidades, { attrs: ' inputmode="numeric"', ayuda: "Si quedan esta cantidad o menos." }) +
       campo("Texto para productos por encargo", "notaEncargo", c.notaEncargo, { doble: true }) +
       campo("Datos para pagar (página de pagos)", "datosPago", c.datosPago, { tipo: "area", doble: true, filas: 4, placeholder: "- Pago móvil: Banco …, C.I. …, Tel. …\n- Zelle: correo@…" }) +
@@ -1345,6 +1370,28 @@
       '<div class="tarjeta-admin"><h3>Mi cuenta</h3><p class="ayuda">Entraste como <b>' + esc(E.correo) + '</b>.</p><div class="rejilla-campos"><label class="campo">Nueva contraseña<input type="password" id="aj-clave" autocomplete="new-password" minlength="8"></label></div><div><button type="button" class="boton claro pequeno" id="aj-cambiar-clave">Cambiar contraseña</button></div></div>' +
       "</form>";
     let logo = c.logo || "";
+    // Métodos de pago
+    const metodos = (c.metodosPago || []).map((m) => Object.assign({}, m));
+    const pintarMetodos = () => {
+      $("#mp-lista").innerHTML = metodos.map((m, i) =>
+        '<div class="fila-metodo" data-i="' + i + '"><label class="interruptor"><input type="checkbox" data-mp="activo"' + (m.activo ? " checked" : "") + "> Activo</label>" +
+        '<input data-mp="nombre" value="' + esc(m.nombre) + '" placeholder="Nombre (ej.: Zelle)">' +
+        '<select data-mp="moneda"><option value="divisas"' + (m.moneda !== "bs" ? " selected" : "") + '>En divisas</option><option value="bs"' + (m.moneda === "bs" ? " selected" : "") + ">En bolívares</option></select>" +
+        '<input data-mp="detalle" value="' + esc(m.detalle || "") + '" placeholder="Datos (opcional)">' +
+        '<button type="button" class="icono-boton" data-mp-x aria-label="Quitar">' + icono("basura") + "</button></div>").join("");
+    };
+    pintarMetodos();
+    $("#mp-agregar").onclick = () => { metodos.push({ nombre: "", moneda: "divisas", detalle: "", activo: true }); pintarMetodos(); };
+    $("#mp-lista").addEventListener("input", (e) => { const f = e.target.closest("[data-i]"); if (f && e.target.dataset.mp) metodos[Number(f.dataset.i)][e.target.dataset.mp] = e.target.type === "checkbox" ? e.target.checked : e.target.value; });
+    $("#mp-lista").addEventListener("change", (e) => { const f = e.target.closest("[data-i]"); if (f && e.target.dataset.mp) metodos[Number(f.dataset.i)][e.target.dataset.mp] = e.target.type === "checkbox" ? e.target.checked : e.target.value; });
+    $("#mp-lista").addEventListener("click", (e) => { const f = e.target.closest("[data-i]"); if (f && e.target.closest("[data-mp-x]")) { metodos.splice(Number(f.dataset.i), 1); pintarMetodos(); } });
+    // Ejemplo del cálculo en Bs
+    const ejemplo = () => {
+      const tasa = num($("#aj-tasa").value) || 0, br = num($("#aj-brecha").value) || 0;
+      const conBrecha = Math.round(100 * (1 + br / 100) * 100) / 100;
+      $("#aj-ejemplo").innerHTML = "Ejemplo: un producto de <b>$100</b> en divisas → <b>$" + T.numero(conBrecha) + "</b> a tasa BCV" + (tasa ? " → <b>" + T.bs(conBrecha * tasa) + "</b>" : " (escribe la tasa para ver los Bs)");
+    };
+    $("#aj-tasa").addEventListener("input", ejemplo); $("#aj-brecha").addEventListener("input", ejemplo); ejemplo();
     $("#vista").onchange = async (e) => {
       const inp = e.target.closest("input[type=file][data-img]");
       if (!inp || !inp.files[0]) return;
@@ -1416,6 +1463,8 @@
           correo: v.correo.trim(), horario: v.horario.trim(), direccion: v.direccion.trim(), mapa: v.mapa.trim(),
           tasaBCV: tasa, tasaFecha: tasa !== Number(actual.tasaBCV) ? new Date().toISOString().slice(0, 10) : actual.tasaFecha || "",
           minimoMayor: Math.max(1, ent(v.minimoMayor) || 1), pocasUnidades: ent(v.pocasUnidades), notaEncargo: v.notaEncargo.trim(),
+          brecha: Math.max(0, num(v.brecha) || 0), precioBsAutomatico: !!v.precioBsAutomatico, ventaMayor: !!v.ventaMayor,
+          metodosPago: metodos.filter((m) => m.nombre.trim()).map((m) => ({ nombre: m.nombre.trim(), moneda: m.moneda, detalle: (m.detalle || "").trim(), activo: !!m.activo })),
           datosPago: v.datosPago.trim(), agencias: v.agencias.trim(), ubicacion: v.ubicacion.trim(),
           workerUrl: v.workerUrl.trim().replace(/\/+$/, ""), diasPedidos: Math.max(1, ent(v.diasPedidos) || 30),
         });

@@ -20,7 +20,7 @@
     config: {
       nombreTienda: "ARKEO",
       eslogan: "Home & Office · Mobiliario de oficina y hogar",
-      logo: "img/logo-arkeo-negro.png",
+      logo: "img/logo-arkeo-blanco.png",
       whatsapp: "04125074777",
       instagram: "mobiliariodeoficina",
       correo: "",
@@ -30,6 +30,7 @@
       tasaBCV: 45.5,
       tasaFecha: new Date().toISOString().slice(0, 10),
       minimoMayor: 6,
+      brecha: 25,
       pocasUnidades: 3,
       diasPedidos: 30,
       workerUrl: "",
@@ -45,7 +46,7 @@
         { nombre: "Espejos", icono: "espejo" },
         { nombre: "Vanity", icono: "tocador" },
       ],
-      portada: { titulo: "", subtitulo: "Sillas, escritorios, comedores, barras, espejos y vanity. Al mayor y al detal, con envíos a toda Venezuela.", boton: "Ver catálogo", imagen: "" },
+      portada: { titulo: "", subtitulo: "Sillas, escritorios, comedores, barras, espejos y vanity. Precios en divisas y en bolívares, con envíos a toda Venezuela.", boton: "Ver catálogo", imagen: "" },
       colecciones: [
         { nombre: "Oficina ejecutiva", descripcion: "Presidenciales, escritorios y reunión", imagen: "img/fotos/taburete-velvet-m.webp" },
         { nombre: "Hogar", descripcion: "Comedor, barra, espejos y vanity", imagen: "img/fotos/silla-velvet-negra-m.webp" },

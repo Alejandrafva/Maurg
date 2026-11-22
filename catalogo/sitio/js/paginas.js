@@ -17,6 +17,11 @@
     } else
     if (propio && String(propio).trim()) cont.insertAdjacentHTML("afterbegin", T.textoAHtml(propio));
 
+    const lm = document.getElementById("lista-metodos");
+    if (slug === "pagos" && lm) {
+      const act = (cfg.metodosPago || []).filter((m) => m.activo);
+      if (act.length) lm.innerHTML = act.map((m) => '<div class="metodo"><b>' + esc(m.nombre) + "</b><span>" + (m.moneda === "bs" ? "En bolívares" : "En divisas") + "</span>" + (m.detalle ? "<small>" + esc(m.detalle) + "</small>" : "") + "</div>").join("");
+    }
     if (slug === "pagos" && cfg.datosPago && document.getElementById("extra-pago")) {
       document.getElementById("extra-pago").innerHTML = "<h2>Datos para pagar</h2>" + T.textoAHtml(cfg.datosPago);
     }

@@ -46,11 +46,15 @@
     return lum > 0.85 ? "#a8a6a7" : c.hex; // los colores muy claros no se verían sobre el fondo
   }
 
+  const foto = (p) => T.fotoAmbiente(p) || T.fotoPrincipal(p);
+
   function elegir(productos) {
     // Las fotos de ambiente van en la portada; aquí lucen las fotos recortadas
-    const conFoto = productos.filter((p) => p.disponible !== false && T.fotos(p).some((f) => !T.esVideo(f)) && !T.esAmbiente(p));
+    // Fotos reales (de ambiente) primero; al tocar se abre la ficha con la foto de fondo blanco
+    const conFoto = productos.filter((p) => p.disponible !== false && T.fotos(p).some((f) => !T.esVideo(f)));
     const dest = conFoto.filter((p) => p.destacado);
-    const lista = dest.length >= 2 ? dest : conFoto;
+    const lista = (dest.length >= 2 ? dest : conFoto).slice();
+    lista.sort((a, b) => (T.fotoAmbiente(b) ? 1 : 0) - (T.fotoAmbiente(a) ? 1 : 0));
     return lista.slice(0, MAX);
   }
 
@@ -59,7 +63,7 @@
     const raiz = document.getElementById("orbita");
     if (!raiz) return;
     const items = elegir(productos);
-    const firma = items.map((p) => p.id + ":" + T.fotoPrincipal(p) + ":" + T.precio(p, "detal", "divisas") + ":" + T.stockDe(p)).join("|");
+    const firma = items.map((p) => p.id + ":" + foto(p) + ":" + T.precioBs(p) + ":" + T.precio(p, "detal", "divisas") + ":" + T.stockDe(p)).join("|");
     if (S && S.firma === firma) { S.cfg = cfg; S.acciones = acciones; return; }
     if (S) desmontar();
     if (items.length < 2) { raiz.hidden = true; return; }
@@ -75,7 +79,7 @@
       items.map((p, i) => '<button class="orbita-punto" role="tab" data-ir="' + i + '" aria-label="' + esc(p.nombre) + '"><i></i></button>').join("") +
       "</div>" +
       '<div class="orbita-platos">' +
-      items.map((p, i) => '<button class="orbita-plato" data-abrir-orbita="' + i + '" tabindex="-1" aria-hidden="true"><img src="' + esc(T.fotoPrincipal(p)) + '" alt="' + esc(p.nombre) + '" draggable="false"' + (i > 1 ? ' loading="lazy"' : "") + "></button>").join("") +
+      items.map((p, i) => '<button class="orbita-plato' + (T.fotoAmbiente(p) ? " real" : "") + '" data-abrir-orbita="' + i + '" tabindex="-1" aria-hidden="true"><img src="' + esc(foto(p)) + '" alt="' + esc(p.nombre) + '" draggable="false"' + (i > 1 ? ' loading="lazy"' : "") + "></button>").join("") +
       "</div>" +
       '<div class="orbita-contador" aria-hidden="true"><b>01</b><span>/ ' + String(n).padStart(2, "0") + "</span></div>" +
       '<div class="orbita-texto"><p class="orbita-ceja"></p><h2 class="orbita-titulo"><span class="t1"></span><span class="t2"></span></h2>' +
@@ -85,7 +89,7 @@
       '<div class="orbita-tira">' +
       '<button class="orbita-flecha" data-paso="-1" aria-label="Anterior">' + icono("izquierda") + "</button>" +
       '<div class="orbita-miniaturas">' +
-      items.map((p, i) => '<button class="orbita-mini" data-ir="' + i + '"><img src="' + esc(T.fotoPrincipal(p)) + '" alt="" loading="lazy"><span>' + esc(p.nombre) + "</span></button>").join("") +
+      items.map((p, i) => '<button class="orbita-mini' + (T.fotoAmbiente(p) ? " real" : "") + '" data-ir="' + i + '"><img src="' + esc(foto(p)) + '" alt="" loading="lazy"><span>' + esc(p.nombre) + "</span></button>").join("") +
       "</div>" +
       '<button class="orbita-flecha" data-paso="1" aria-label="Siguiente">' + icono("derecha") + "</button></div>" +
       "</div></div></div>";
@@ -319,8 +323,9 @@
     const colores = T.colores(p);
     const estados = { ok: "Disponible", pocas: "¡Pocas unidades!", agotado: "Agotado", encargo: "Por encargo" };
     S.tarjeta.innerHTML =
-      '<div class="orbita-precios"><div><small>Al detal</small><strong>' + T.dinero(d) + "</strong></div>" +
-      (T.tieneMayor(p) && m < d ? "<div><small>Al mayor · " + cfg.minimoMayor + "+</small><strong>" + T.dinero(m) + "</strong></div>" : "") + "</div>" +
+      '<div class="orbita-precios"><div><small>En divisas</small><strong>' + T.dinero(d) + "</strong></div>" +
+      (T.tieneMayor(p) && m < d ? "<div><small>Al mayor · " + cfg.minimoMayor + "+</small><strong>" + T.dinero(m) + "</strong></div>"
+        : T.precioBs(p) ? "<div><small>En bolívares</small><strong>" + T.bs(T.precioBs(p)) + "</strong></div>" : "") + "</div>" +
       '<p class="orbita-estado ' + st.tipo + '">' + estados[st.tipo] + (p.codigo ? " · " + esc(p.codigo) : "") + "</p>" +
       (p.descripcion ? '<p class="orbita-desc">' + esc(p.descripcion) + "</p>" : "") +
       (colores.length ? '<div class="orbita-acabados"><small>Acabados disponibles</small><div class="orbita-colores">' +

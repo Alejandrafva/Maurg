@@ -135,7 +135,7 @@ on conflict (id) do nothing;
 -- Agrega los ajustes que falten SIN tocar los que ya existen.
 update public.config set datos = jsonb_build_object(
   'nombreTienda', 'ARKEO',
-  'logo', 'img/logo-arkeo-negro.png',
+  'logo', 'img/logo-arkeo-blanco.png',
   'eslogan', 'Home & Office · Mobiliario de oficina y hogar',
   'whatsapp', '04125074777',
   'instagram', 'mobiliariodeoficina',
@@ -147,6 +147,17 @@ update public.config set datos = jsonb_build_object(
   'mapa', '',
   'tasaBCV', 0,
   'minimoMayor', 6,
+  'ventaMayor', false,
+  'brecha', 25,
+  'precioBsAutomatico', true,
+  'metodosPago', jsonb_build_array(
+    jsonb_build_object('nombre','Zelle','moneda','divisas','detalle','','activo',true),
+    jsonb_build_object('nombre','Binance','moneda','divisas','detalle','','activo',true),
+    jsonb_build_object('nombre','Banesco Panamá','moneda','divisas','detalle','','activo',true),
+    jsonb_build_object('nombre','Bizum','moneda','divisas','detalle','','activo',false),
+    jsonb_build_object('nombre','Efectivo en tienda','moneda','divisas','detalle','','activo',false),
+    jsonb_build_object('nombre','Pago móvil / transferencia en Bs','moneda','bs','detalle','','activo',false)
+  ),
   'pocasUnidades', 3,
   'diasPedidos', 30,
   'workerUrl', '',
@@ -165,7 +176,7 @@ update public.config set datos = jsonb_build_object(
   ),
   'portada', jsonb_build_object(
     'titulo', '',
-    'subtitulo', 'Sillas, escritorios, comedores, barras, espejos y vanity. Al mayor y al detal, con envíos a toda Venezuela.',
+    'subtitulo', 'Sillas, escritorios, comedores, barras, espejos y vanity. Precios en divisas y en bolívares, con envíos a toda Venezuela.',
     'boton', 'Ver catálogo',
     'imagen', ''
   ),
