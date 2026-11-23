@@ -1359,3 +1359,25 @@ body { background: #ffffff; color: var(--negro); }
 /* Páginas del menú: fondo blanco, foto con velo negro→azul */
 .pagina-cabeza.con-foto { background: linear-gradient(90deg, rgba(11,9,10,.92) 0%, rgba(5,51,89,.65) 55%, rgba(5,51,89,.12) 100%), var(--foto) center / cover, var(--negro); }
 .pagina-indice a[aria-current="page"] { background: var(--negro); }
+
+/* Ventajas delicadas: cuadrícula con bordes finos, letra grande y liviana */
+.ventajas-delicadas { background: #fff; padding: 96px 0 90px; }
+.ventajas-caja { max-width: 1040px; }
+.ventajas-delicadas h2 { margin: 0; text-align: center; font-family: var(--letra); font-weight: 500; font-size: clamp(30px, 3.6vw, 42px); letter-spacing: -0.03em; line-height: 1.1; color: var(--negro); text-wrap: balance; }
+.ventajas-delicadas > .contenedor > p { margin: 14px auto 0; max-width: 620px; text-align: center; font-size: clamp(17px, 1.8vw, 22px); letter-spacing: -0.015em; color: var(--grafito); }
+.ventajas-rejilla { margin-top: 56px; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); overflow: hidden; border: 1px solid rgba(168,166,167,.55); border-radius: 22px; }
+.ventaja-celda { margin: -1px; border-top: 1px solid rgba(168,166,167,.55); border-left: 1px solid rgba(168,166,167,.55); padding: 38px 30px; display: flex; flex-direction: column; gap: 14px; text-decoration: none; color: var(--negro); background: #fff; transition: background .35s; }
+.ventaja-celda:hover { background: #f7f7f8; }
+.ventaja-celda svg { width: 26px; height: 26px; color: var(--marino); stroke-width: 1.3; }
+.ventaja-celda strong { font-family: var(--letra); font-weight: 500; font-size: clamp(22px, 2.2vw, 28px); letter-spacing: -0.03em; line-height: 1.1; margin-top: 8px; }
+.ventaja-celda span { font-size: 16px; line-height: 1.45; color: rgba(11,9,10,.7); }
+@media (max-width: 900px) { .ventajas-rejilla { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 560px) {
+  .ventajas-delicadas { padding: 64px 0 56px; }
+  .ventajas-rejilla { margin-top: 36px; border-radius: 18px; }
+  .ventaja-celda { padding: 24px 18px; gap: 10px; }
+  .ventaja-celda strong { font-size: 19px; margin-top: 4px; }
+  .ventaja-celda span { font-size: 14px; }
+}
+/* Categorías ahora va después de productos */
+.cats-seccion { margin-top: 0; }

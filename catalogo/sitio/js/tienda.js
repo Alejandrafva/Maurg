@@ -104,7 +104,8 @@
     poner("#franja-1", ini.franja1); poner("#franja-2", ini.franja2);
     poner("#cats-ceja", ini.catsCeja); poner("#cats-titulo", ini.catsTitulo);
     poner("#banda-ceja", ini.bandaCeja); poner("#banda-titulo", ini.bandaTitulo);
-    if (ini.bandaFoto) $("#banda-mayor").style.backgroundImage = "linear-gradient(90deg, rgba(5,51,89,.96) 0%, rgba(5,51,89,.86) 50%, rgba(5,51,89,.35) 100%), url('" + ini.bandaFoto.replace(/'/g, "%27") + "')";
+    poner("#vent-titulo", ini.ventTitulo); poner("#vent-texto", ini.ventTexto);
+    if (ini.bandaFoto) $("#banda-mayor").style.backgroundImage = "linear-gradient(90deg, rgba(11,9,10,.97) 0%, rgba(11,9,10,.85) 50%, rgba(11,9,10,.35) 100%), url('" + ini.bandaFoto.replace(/'/g, "%27") + "')";
     (ini.ventajas || []).forEach((v, k) => {
       if (!v) return;
       const t = document.querySelector('[data-ventaja-t="' + k + '"]'), d = document.querySelector('[data-ventaja-d="' + k + '"]');

@@ -64,7 +64,7 @@ Ordena con ▲▼ (ese es el orden de la barra de categorías en la tienda), cam
 | **"Nuestros productos"** (cuadrícula, 2 por fila en el celular) | Sale sola: los primeros 8 productos según el orden ▲▼ de Productos (los Destacados primero) |
 | **Página de Catálogo** (`catalogo.html`) | Sale sola con todos los productos visibles. Los filtros (categoría, precio, material, color, disponibilidad) se arman solos con los datos de cada producto: llena bien **Categoría**, **Material** y **Colores** |
 | **Colecciones** (las dos fotos grandes) | Página › Colecciones |
-| **Las 4 ventajas** (envíos, pagos…) | Página › Textos de la página de inicio |
+| **Las 4 ventajas** (envíos, pagos…), su título y su texto | Página › Textos de la página de inicio |
 | **Banda azul** (título, texto y foto) | Página › Textos de la página de inicio |
 | **Reseñas** | Página › Reseñas |
 | **Foto grande de cada página del menú** (Pagos, Envíos, Reseñas, Contacto, Políticas, Privacidad) | Página › Fotos de las páginas del menú |

@@ -1193,9 +1193,11 @@
       campo("Franja bajo la portada · texto grande", "ini_franja2", ini.franja2, { placeholder: "Piezas atemporales para cada espacio de tu hogar y oficina." }) +
       campo("Categorías · palabra pequeña", "ini_catsCeja", ini.catsCeja, { placeholder: "Explora" }) +
       campo("Categorías · título", "ini_catsTitulo", ini.catsTitulo, { placeholder: "Compra por espacio" }) +
-      campo("Banda azul · palabra pequeña", "ini_bandaCeja", ini.bandaCeja, { placeholder: "Empresas y mayoristas" }) +
-      campo("Banda azul · título", "ini_bandaTitulo", ini.bandaTitulo, { placeholder: "Equipa tu oficina completa" }) +
-      campo("Banda azul · texto", "ini_bandaTexto", ini.bandaTexto, { tipo: "area", doble: true, filas: 2, placeholder: "Precio al mayor desde 6 piezas combinando modelos. Cotiza tu proyecto y te asesoramos." }) +
+      campo("Ventajas · título", "ini_ventTitulo", ini.ventTitulo, { placeholder: "Comprar en ARKEO es sencillo" }) +
+      campo("Ventajas · texto", "ini_ventTexto", ini.ventTexto, { placeholder: "Atención cercana, pagos flexibles y entregas en todo el país." }) +
+      campo("Banda de asesoría · palabra pequeña", "ini_bandaCeja", ini.bandaCeja, { placeholder: "Empresas y mayoristas" }) +
+      campo("Banda de asesoría · título", "ini_bandaTitulo", ini.bandaTitulo, { placeholder: "Equipa tu oficina completa" }) +
+      campo("Banda de asesoría · texto", "ini_bandaTexto", ini.bandaTexto, { tipo: "area", doble: true, filas: 2, placeholder: "Precio al mayor desde 6 piezas combinando modelos. Cotiza tu proyecto y te asesoramos." }) +
       "</div>" + bloqueImagen("banda-img", ini.bandaFoto, "Foto de fondo de la banda azul (opcional, horizontal).") +
       '<div class="rejilla-campos">' + [["Envíos nacionales", "A toda Venezuela"], ["Divisas o bolívares", "Precio a tasa BCV"], ["Al mayor y al detal", "Precio al mayor desde N piezas"], ["Clientes felices", "Lee sus reseñas"]].map(([t, d], k) =>
         campo("Ventaja " + (k + 1) + " · título", "ini_vt_" + k, (ini.ventajas && ini.ventajas[k] || {}).titulo, { placeholder: t }) +
@@ -1292,7 +1294,7 @@
           galeria: gal.filter((g) => g.foto).map((g) => ({ foto: g.foto, enlace: /^https?:\/\//i.test(g.enlace || "") ? g.enlace : "" })),
           inicio: {
             franja1: v.ini_franja1.trim(), franja2: v.ini_franja2.trim(), catsCeja: v.ini_catsCeja.trim(), catsTitulo: v.ini_catsTitulo.trim(),
-            bandaCeja: v.ini_bandaCeja.trim(), bandaTitulo: v.ini_bandaTitulo.trim(), bandaTexto: v.ini_bandaTexto.trim(), bandaFoto: ini.bandaFoto || "",
+            bandaCeja: v.ini_bandaCeja.trim(), bandaTitulo: v.ini_bandaTitulo.trim(), bandaTexto: v.ini_bandaTexto.trim(), bandaFoto: ini.bandaFoto || "", ventTitulo: (v.ini_ventTitulo || "").trim(), ventTexto: (v.ini_ventTexto || "").trim(),
             ventajas: [0, 1, 2, 3].map((k) => ({ titulo: (v["ini_vt_" + k] || "").trim(), texto: (v["ini_vd_" + k] || "").trim() })),
           },
         });
