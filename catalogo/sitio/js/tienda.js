@@ -7,7 +7,7 @@
   const esc = T.esc;
   const POR_PAGINA = 24;
   const EN_CATALOGO = document.body.dataset.pagina === "catalogo";
-  const EN_FILA = 16; // productos en la fila del inicio
+  const EN_FILA = 8; // productos en la cuadrícula del inicio
   const URLP = new URLSearchParams(location.search);
 
   const estado = {
@@ -317,10 +317,10 @@
     if ($("#titulo-lista") && EN_CATALOGO) $("#titulo-lista").textContent = titulo;
     if ($("#resultado")) $("#resultado").textContent = EN_CATALOGO ? lista.length + (lista.length === 1 ? " producto" : " productos") : "";
     if (!EN_CATALOGO) {
-      $("#rejilla").innerHTML = lista.slice(0, EN_FILA).map(tarjeta).join("") +
-        (lista.length ? '<a class="producto ver-todo-tarjeta" href="catalogo.html"><span>' + icono("flecha") + "</span><b>Ver todo el catálogo</b><small>" + lista.length + " productos</small></a>" : "");
+      $("#rejilla").innerHTML = lista.slice(0, EN_FILA).map(tarjeta).join("");
+      const total = $("#total-catalogo");
+      if (total) total.textContent = lista.length ? "Ver los " + lista.length + " productos" : "Ver catálogo";
       observarRevelar();
-      flechasFila();
       return;
     }
     pintarActivos();
@@ -334,19 +334,6 @@
     $("#rejilla").innerHTML = lista.slice(0, estado.mostrar).map(tarjeta).join("");
     observarRevelar();
     if ($("#mas-productos")) $("#mas-productos").classList.toggle("oculto", lista.length <= estado.mostrar);
-  }
-
-  // Flechas para correr la fila del inicio
-  function flechasFila() {
-    const f = $("#rejilla");
-    const izq = document.querySelector('[data-fila="-1"]'), der = document.querySelector('[data-fila="1"]');
-    if (!izq || !der) return;
-    const act = () => {
-      izq.disabled = f.scrollLeft < 8;
-      der.disabled = f.scrollLeft + f.clientWidth > f.scrollWidth - 8;
-    };
-    f.onscroll = act;
-    act();
   }
 
   // -------------------------------------------------------------------
@@ -1054,7 +1041,6 @@
         $("#titulo-lista").scrollIntoView({ behavior: "smooth", block: "start" });
         return;
       }
-      if (d.fila) { const f = $("#rejilla"); f.scrollBy({ left: f.clientWidth * 0.85 * Number(d.fila), behavior: "smooth" }); return; }
       if (d.fCat !== undefined) { estado.categoria = d.fCat; estado.coleccion = ""; estado.mostrar = POR_PAGINA; pintarFiltros(); pintarLista(); return; }
       if (d.fTramo !== undefined) {
         const [a, b] = d.fTramo.split("-");

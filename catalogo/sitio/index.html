@@ -86,19 +86,20 @@
       <div class="cats-tarjetas" id="cats-tarjetas"></div>
     </section>
 
-    <section id="catalogo" class="contenedor fila-seccion" aria-label="Catálogo">
-      <div class="titulo-bloque revelar">
-        <div><small>Catálogo</small><h2 id="titulo-lista">Nuestros productos</h2></div>
-        <div class="fila-controles">
-          <a class="enlace-flecha" href="catalogo.html">Ver todo <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
-          <button class="fila-flecha" data-fila="-1" aria-label="Ver anteriores"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></svg></button>
-          <button class="fila-flecha llena" data-fila="1" aria-label="Ver siguientes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></button>
-        </div>
+    <section id="catalogo" class="contenedor productos-inicio" aria-label="Productos">
+      <div class="titulo-centro revelar">
+        <small>Catálogo</small>
+        <h2 id="titulo-lista">Nuestros productos</h2>
+        <p>Piezas seleccionadas para tu casa y tu oficina.</p>
       </div>
-      <div class="fila-productos" id="rejilla" aria-live="polite"></div>
+      <div class="rejilla" id="rejilla" aria-live="polite"></div>
+      <div class="ver-todo-centro"><a class="boton boton-grande" href="catalogo.html" id="total-catalogo">Ver todo el catálogo</a></div>
       <p class="resultado oculto" id="resultado"></p>
 
-      <div class="ventajas">
+    </section>
+
+    <section class="franja-ventajas" aria-label="Ventajas">
+        <div class="contenedor ventajas">
         <a class="ventaja" href="envios.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 6h11v10h-11z"/><path d="M13.5 9.5h4l3 3.5V16h-7"/><circle cx="6.5" cy="17.5" r="1.8"/><circle cx="17" cy="17.5" r="1.8"/></svg><strong data-ventaja-t="0">Envíos nacionales</strong><span data-ventaja-d="0">A toda Venezuela</span></a>
         <a class="ventaja" href="pagos.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="5" width="19" height="14" rx="2"/><path d="M2.5 9.5h19M6 15h4"/></svg><strong data-ventaja-t="1">Divisas o bolívares</strong><span data-ventaja-d="1">Zelle, Binance y más</span></a>
         <a class="ventaja" href="contacto.html" id="ventaja-mayor"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7.5 12 3l9 4.5v9L12 21l-9-4.5z"/><path d="M3 7.5 12 12l9-4.5M12 12v9"/></svg><strong data-ventaja-t="2">Showroom</strong><span id="texto-mayor" data-ventaja-d="2">Visítanos en San Diego, Carabobo</span></a>

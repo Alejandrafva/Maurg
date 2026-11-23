@@ -61,7 +61,7 @@ Ordena con ▲▼ (ese es el orden de la barra de categorías en la tienda), cam
 | **Franja** bajo la portada (dos textos) | Página › Textos de la página de inicio |
 | **"Compra por espacio"** (título) | Página › Textos de la página de inicio |
 | **Tarjetas de categoría** (nombre, orden, icono) | Categorías. La foto de cada tarjeta es la del primer producto de esa categoría. |
-| **Fila "Nuestros productos"** (con flechas) | Sale sola: los primeros 16 productos según el orden ▲▼ de Productos (los Destacados primero) |
+| **"Nuestros productos"** (cuadrícula, 2 por fila en el celular) | Sale sola: los primeros 8 productos según el orden ▲▼ de Productos (los Destacados primero) |
 | **Página de Catálogo** (`catalogo.html`) | Sale sola con todos los productos visibles. Los filtros (categoría, precio, material, color, disponibilidad) se arman solos con los datos de cada producto: llena bien **Categoría**, **Material** y **Colores** |
 | **Colecciones** (las dos fotos grandes) | Página › Colecciones |
 | **Las 4 ventajas** (envíos, pagos…) | Página › Textos de la página de inicio |
