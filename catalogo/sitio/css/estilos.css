@@ -1456,3 +1456,9 @@ body { background: #ffffff; color: var(--negro); }
 @media (prefers-reduced-motion: reduce) { .bot-tarjeta, .bot-burbuja, .bot-entrada-zona.aparece, .bot-check { animation: none; } .bot-escribe i { animation: none; } }
 .boton.whatsapp.bot-enviar { background: var(--whatsapp); border-color: var(--whatsapp); }
 .boton.whatsapp.bot-enviar:hover { background: #17924a; border-color: #17924a; }
+
+/* Páginas del menú sin índice a la izquierda: el texto centrado */
+.pagina-rejilla { grid-template-columns: minmax(0, 1fr); max-width: 860px; margin: 0 auto; }
+@media (max-width: 820px) { .pagina-rejilla { grid-template-columns: minmax(0, 1fr); } }
+/* Contacto: solo el asistente */
+body[data-pagina="contacto"] .bot-contacto { margin-bottom: 10px; }

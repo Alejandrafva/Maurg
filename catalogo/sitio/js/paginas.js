@@ -4,7 +4,8 @@
   const T = window.Tienda;
   const esc = T.esc;
   const slug = document.body.dataset.pagina;
-  const original = document.getElementById("contenido").innerHTML;
+  const contenido = document.getElementById("contenido");
+  const original = contenido ? contenido.innerHTML : "";
 
   function pintar(cfg) {
     T.pintarComun(cfg);
@@ -16,6 +17,7 @@
     }
     const propio = cfg.paginas && cfg.paginas[slug];
     const cont = document.getElementById("contenido");
+    if (!cont) return; // Contacto: solo el asistente
     cont.innerHTML = original;
     if (propio && String(propio).trim() && slug !== "resenas" && slug !== "contacto") {
       cont.innerHTML = T.textoAHtml(propio) + '<div id="extra-pago"></div><div id="extra-envio"></div>';
