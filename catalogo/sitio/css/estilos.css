@@ -1381,3 +1381,78 @@ body { background: #ffffff; color: var(--negro); }
 }
 /* Categorías ahora va después de productos */
 .cats-seccion { margin-top: 0; }
+
+/* ===================================================================
+   Asistente de Contacto (chat sencillo que termina en WhatsApp)
+   =================================================================== */
+.bot-contacto { position: relative; margin: 0 0 34px; padding: clamp(18px, 4vw, 44px); border-radius: 32px; overflow: hidden; background: radial-gradient(90% 70% at 85% 0%, rgba(11,70,119,.85) 0%, transparent 60%), radial-gradient(70% 60% at 0% 100%, rgba(5,51,89,.75) 0%, transparent 60%), var(--negro); box-shadow: 0 40px 80px -46px rgba(3,20,38,.9); isolation: isolate; }
+.bot-contacto::before { content: ""; position: absolute; inset: 0; background-image: radial-gradient(rgba(255,255,255,.18) 1px, transparent 1px); background-size: 26px 26px; -webkit-mask-image: linear-gradient(180deg, #000, transparent 75%); mask-image: linear-gradient(180deg, #000, transparent 75%); opacity: .35; z-index: -1; }
+.bot-tarjeta { position: relative; max-width: 620px; margin: 0 auto; border-radius: 26px; background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.12); -webkit-backdrop-filter: blur(18px); backdrop-filter: blur(18px); box-shadow: inset 0 1px 0 rgba(255,255,255,.12), 0 30px 60px -30px rgba(0,0,0,.7); color: #fff; animation: bot-sube .6s cubic-bezier(.2,.8,.2,1) both; }
+.bot-tarjeta::after { content: ""; position: absolute; left: 10%; right: 10%; top: 0; height: 1px; background: linear-gradient(90deg, transparent, rgba(255,255,255,.4), transparent); }
+@keyframes bot-sube { from { opacity: 0; transform: translateY(16px) scale(.985); } }
+.bot-entrada { padding: clamp(28px, 5vw, 48px) clamp(22px, 5vw, 44px); text-align: center; }
+.bot-entrada small { display: block; margin-top: 16px; font-size: 12px; letter-spacing: .22em; text-transform: uppercase; color: var(--plata); }
+.bot-entrada h2 { margin: 8px 0 12px; font-family: var(--letra); font-weight: 500; font-size: clamp(26px, 3.6vw, 38px); letter-spacing: -0.03em; line-height: 1.1; color: #fff; }
+.bot-entrada p { margin: 0 auto 26px; max-width: 420px; color: rgba(255,255,255,.72); line-height: 1.55; }
+.bot-empezar { min-height: 52px; padding: 0 28px; gap: 10px; background: #fff; border-color: #fff; color: var(--negro); font-weight: 700; }
+.bot-empezar:hover { background: #dce7f3; border-color: #dce7f3; }
+.bot-empezar svg { width: 18px; height: 18px; transition: transform .25s; }
+.bot-empezar:hover svg { transform: translateX(3px); }
+.bot-avatar { display: inline-grid; place-items: center; width: 40px; height: 40px; flex: none; border-radius: 50%; background: linear-gradient(135deg, #0b4677, #053359); border: 1px solid rgba(255,255,255,.25); color: #fff; }
+.bot-avatar svg { width: 20px; height: 20px; }
+.bot-avatar.grande { width: 64px; height: 64px; box-shadow: 0 0 0 8px rgba(255,255,255,.05), 0 0 40px rgba(11,70,119,.8); }
+.bot-avatar.grande svg { width: 28px; height: 28px; }
+
+.bot-chat { display: flex; flex-direction: column; }
+.bot-cabeza { display: flex; align-items: center; gap: 12px; padding: 16px 18px; border-bottom: 1px solid rgba(255,255,255,.1); }
+.bot-cabeza b { display: block; font-size: 15px; }
+.bot-cabeza small { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; color: rgba(255,255,255,.65); }
+.bot-cabeza small i { width: 7px; height: 7px; border-radius: 50%; background: #10b981; box-shadow: 0 0 0 3px rgba(16,185,129,.2); }
+.bot-reiniciar { margin-left: auto; width: 36px; height: 36px; border-radius: 50%; border: 1px solid rgba(255,255,255,.18); background: none; color: rgba(255,255,255,.75); display: grid; place-items: center; cursor: pointer; }
+.bot-reiniciar svg { width: 16px; height: 16px; }
+.bot-progreso { height: 3px; background: rgba(255,255,255,.08); }
+.bot-progreso i { display: block; height: 100%; width: 0; background: linear-gradient(90deg, #9cc4ea, #fff); border-radius: 0 3px 3px 0; transition: width .6s cubic-bezier(.2,.8,.2,1); }
+.bot-mensajes { display: flex; flex-direction: column; gap: 10px; padding: 20px 18px 8px; min-height: 260px; max-height: min(52vh, 460px); overflow-y: auto; scrollbar-width: thin; scrollbar-color: rgba(255,255,255,.2) transparent; }
+.bot-burbuja { max-width: 82%; padding: 11px 15px; border-radius: 18px; font-size: 15px; line-height: 1.45; animation: bot-burbuja .35s cubic-bezier(.2,.8,.2,1) both; white-space: pre-wrap; word-break: break-word; }
+@keyframes bot-burbuja { from { opacity: 0; transform: translateY(8px); } }
+.bot-burbuja.suya { align-self: flex-start; background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.1); border-bottom-left-radius: 6px; }
+.bot-burbuja.mia { align-self: flex-end; background: #fff; color: var(--negro); border-bottom-right-radius: 6px; font-weight: 500; }
+.bot-escribe { display: inline-flex; gap: 4px; padding: 4px 2px; }
+.bot-escribe i { width: 7px; height: 7px; border-radius: 50%; background: rgba(255,255,255,.7); animation: bot-punto 1s infinite; }
+.bot-escribe i:nth-child(2) { animation-delay: .15s; } .bot-escribe i:nth-child(3) { animation-delay: .3s; }
+@keyframes bot-punto { 0%, 60%, 100% { opacity: .3; transform: translateY(0); } 30% { opacity: 1; transform: translateY(-3px); } }
+.bot-entrada-zona { padding: 10px 18px 20px; display: grid; gap: 10px; }
+.bot-entrada-zona:empty { padding: 0 18px 10px; }
+.bot-entrada-zona.aparece { animation: bot-burbuja .4s cubic-bezier(.2,.8,.2,1) both; }
+.bot-opciones { display: flex; flex-wrap: wrap; gap: 8px; }
+.bot-opciones button { border: 1px solid rgba(255,255,255,.25); background: rgba(255,255,255,.06); color: #fff; border-radius: 999px; padding: 10px 16px; font: inherit; font-size: 14px; cursor: pointer; transition: background .2s, color .2s, transform .15s; }
+.bot-opciones button:hover { background: #fff; color: var(--negro); transform: translateY(-1px); }
+.bot-escribir { position: relative; display: flex; align-items: center; }
+.bot-escribir input { width: 100%; min-height: 52px; padding: 0 58px 0 18px; border-radius: 16px; border: 1px solid rgba(255,255,255,.18); background: rgba(255,255,255,.07); color: #fff; font: inherit; font-size: 16px; outline: none; box-shadow: inset 0 1px 0 rgba(255,255,255,.06); transition: border-color .2s, background .2s; }
+.bot-escribir input::placeholder { color: rgba(255,255,255,.45); }
+.bot-escribir input:focus { border-color: rgba(156,196,234,.8); background: rgba(255,255,255,.1); }
+.bot-escribir button { position: absolute; right: 7px; width: 40px; height: 40px; border-radius: 50%; border: 0; background: #fff; color: var(--negro); display: grid; place-items: center; cursor: pointer; transition: transform .2s; }
+.bot-escribir button:hover { transform: scale(1.06); }
+.bot-escribir button svg { width: 18px; height: 18px; }
+.bot-omitir { justify-self: start; background: none; border: 0; color: rgba(255,255,255,.65); font: inherit; font-size: 14px; text-decoration: underline; text-underline-offset: 3px; cursor: pointer; padding: 4px 2px; }
+.bot-error { margin: 0; min-height: 0; font-size: 13px; color: #ffb4ab; }
+.bot-error:empty { display: none; }
+.bot-resumen { position: relative; display: grid; gap: 2px; padding: 16px 16px 12px; border-radius: 18px; background: rgba(0,0,0,.35); border: 1px solid rgba(255,255,255,.08); }
+.bot-resumen > div:not(.bot-check) { display: grid; grid-template-columns: 90px 1fr; gap: 10px; padding: 7px 0; border-bottom: 1px solid rgba(255,255,255,.07); font-size: 14px; }
+.bot-resumen > div:last-child { border-bottom: 0; }
+.bot-resumen span { color: rgba(255,255,255,.55); }
+.bot-resumen b { font-weight: 500; word-break: break-word; }
+.bot-check { position: absolute; top: -14px; right: 14px; width: 32px; height: 32px; border-radius: 50%; background: #10b981; display: grid; place-items: center; color: #fff; box-shadow: 0 0 0 5px rgba(16,185,129,.18); animation: bot-check .5s .1s cubic-bezier(.2,1.4,.4,1) both; }
+.bot-check svg { width: 18px; height: 18px; }
+@keyframes bot-check { from { transform: scale(0); } }
+.bot-enviar { display: inline-flex; justify-content: center; align-items: center; gap: 10px; min-height: 54px; font-size: 16px; color: #fff !important; background: var(--whatsapp); border-color: var(--whatsapp); }
+.bot-enviar svg { width: 20px; height: 20px; }
+@media (max-width: 560px) {
+  .bot-contacto { margin-left: -6px; margin-right: -6px; border-radius: 26px; padding: 14px; }
+  .bot-mensajes { min-height: 220px; max-height: 50vh; padding: 16px 14px 6px; }
+  .bot-entrada-zona { padding: 8px 14px 16px; }
+  .bot-burbuja { max-width: 88%; font-size: 14.5px; }
+}
+@media (prefers-reduced-motion: reduce) { .bot-tarjeta, .bot-burbuja, .bot-entrada-zona.aparece, .bot-check { animation: none; } .bot-escribe i { animation: none; } }
+.boton.whatsapp.bot-enviar { background: var(--whatsapp); border-color: var(--whatsapp); }
+.boton.whatsapp.bot-enviar:hover { background: #17924a; border-color: #17924a; }

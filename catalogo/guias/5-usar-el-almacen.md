@@ -71,6 +71,7 @@ Ordena con ▲▼ (ese es el orden de la barra de categorías en la tienda), cam
 | **Galería de Instagram** (fotos que llevan a tu Instagram o a una publicación) | Página › Galería de Instagram (hasta 12 fotos; pega el enlace de la publicación si quieres) |
 | **Menú** (categorías desplegables en la computadora y menú de pantalla completa en el celular) | Sale solo con tus Categorías (las que tienen productos, con la foto del primer producto) |
 | **Ubicación con mapa** (antes del pie de página) | Ajustes › Contacto: dirección, horario y enlace de Google Maps (opcional; si no lo pones, el botón «Cómo llegar» busca la dirección) |
+| **Asistente de Contacto** (chat que pregunta nombre, qué busca, casa u oficina, cantidad, ciudad y entrega, y luego abre WhatsApp con todo) | Sale solo: usa tus Categorías y el WhatsApp de Ajustes |
 | **Pie de página** (columnas y el nombre ARKEO grande) | Sale solo: eslogan, horario, categorías y contacto de Ajustes |
 | **Pagos, envíos, políticas, privacidad** | Página › Páginas informativas |
 | **Logo, WhatsApp, teléfonos, Instagram, dirección** (cabecera, pie y contacto) | Ajustes |
