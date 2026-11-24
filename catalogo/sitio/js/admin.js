@@ -495,7 +495,11 @@
 
   function pintarTasa() {
     $("#tasa-valor").textContent = E.cfg.tasaBCV ? T.numero(E.cfg.tasaBCV) : "—";
+    const falta = !(Number(E.cfg.tasaBCV) > 0);
+    $("#aviso-tasa").classList.toggle("oculto", !falta);
+    $("#tasa-rapida").classList.toggle("falta", falta);
   }
+  $("#aviso-tasa-boton").addEventListener("click", () => $("#tasa-rapida").click());
   function pintarGlobo() {
     const n = E.pedidos.length;
     $("#globo-pedidos").textContent = n;
@@ -1178,16 +1182,24 @@
     const res = cfg.resenas.slice();
     const ini = Object.assign({}, cfg.inicio || {});
     const fotosPag = Object.assign({}, cfg.fotosPaginas || {});
+    // Fotos del carrusel del héroe: independientes de las fotos de los productos
+    const heroeFotos = (Array.isArray(cfg.portada.fotos) ? cfg.portada.fotos : []).filter((f) => f && f.foto).map((f) => ({ foto: f.foto, producto: f.producto != null ? String(f.producto) : "" }));
+    if (!heroeFotos.length && cfg.portada.imagen) heroeFotos.push({ foto: cfg.portada.imagen, producto: "" });
+    const subtituloViejo = /Al mayor y al detal/i.test(cfg.portada.subtitulo || "");
+    const prodOrden = E.productos.slice().sort((a, b) => String(a.nombre).localeCompare(String(b.nombre), "es"));
     const gal = (cfg.galeria || []).map((g) => Object.assign({}, g));
     const PAGS = [["pagos", "Métodos de pago"], ["envios", "Envíos"], ["resenas", "Reseñas (texto de introducción)"], ["contacto", "Contacto (texto de introducción)"], ["politicas", "Políticas"], ["privacidad", "Privacidad"]];
     $("#vista").innerHTML = '<form id="f-pag" class="tarjetas-admin">' +
       '<div class="tarjeta-admin"><h3>Portada (carrusel grande)</h3>' +
-      '<p class="ayuda">Las <b>fotos del carrusel</b> son los productos marcados como <b>Destacado</b> cuya primera foto es <b>de ambiente</b> (se cambian en Productos). Aquí puedes agregar además una foto fija al inicio del carrusel. La frase pequeña de arriba es el <b>eslogan</b> (Ajustes › Tienda).</p>' +
+      '<p class="ayuda">La frase pequeña de arriba es el <b>eslogan</b> (Ajustes › Tienda).</p>' +
       '<div class="rejilla-campos">' +
       campo("Título grande", "titulo", cfg.portada.titulo, { doble: true, placeholder: "Encuentra el equilibrio perfecto entre **confort y estilo**.", ayuda: "Escribe **así** para poner palabras en negrita. Vacío = texto de fábrica." }) +
       campo("Texto del botón", "boton", cfg.portada.boton) +
-      campo("Subtítulo", "subtitulo", cfg.portada.subtitulo, { tipo: "area", doble: true, filas: 2 }) +
-      "</div>" + bloqueImagen("portada-img", cfg.portada.imagen, "Foto extra al inicio del carrusel (opcional). Mejor horizontal y de ambiente.") + "</div>" +
+      campo("Subtítulo", "subtitulo", subtituloViejo ? "" : cfg.portada.subtitulo, { tipo: "area", doble: true, filas: 2, placeholder: "Sillas, escritorios, comedores, barras, espejos y vanity. Precios en divisas y en bolívares, con envíos a toda Venezuela." }) +
+      "</div></div>" +
+      '<div class="tarjeta-admin"><h3>Fotos del carrusel de la portada <button type="button" class="boton claro pequeno" id="hf-agregar">' + icono("mas") + "Foto</button></h3>" +
+      '<p class="ayuda">Estas fotos son <b>solo para la portada</b>: no cambian las fotos de los productos. Debajo de cada foto elige <b>qué producto es</b>: la tarjeta de la portada mostrará su nombre, precio en $ y en Bs, y el botón «Ver producto». Hasta 8 fotos; mejor horizontales y de ambiente. Ordénalas con ▲. Si no subes ninguna, se usan los productos <b>Destacados</b> con foto de ambiente.</p>' +
+      '<div id="hf-lista" class="hf-lista"></div></div>' +
       '<div class="tarjeta-admin"><h3>Textos de la página de inicio</h3><p class="ayuda">Deja vacío para usar el texto de fábrica (el que ves en gris).</p><div class="rejilla-campos">' +
       campo("Franja bajo la portada · texto corto", "ini_franja1", ini.franja1, { placeholder: "Eleva tus espacios con mobiliario moderno para tu casa y tu oficina." }) +
       campo("Franja bajo la portada · texto grande", "ini_franja2", ini.franja2, { placeholder: "Piezas atemporales para cada espacio de tu hogar y oficina." }) +
@@ -1229,7 +1241,22 @@
         bloqueImagen("gal-img-" + i, g.foto, "") +
         '<label class="campo">Enlace de la publicación (opcional)<input data-gal="enlace" value="' + esc(g.enlace || "") + '" placeholder="https://www.instagram.com/p/…"></label></div>').join("") || '<p class="ayuda">Sin fotos: se muestran las de fábrica.</p>';
     }
-    pintarCols(); pintarRes(); pintarGal();
+    function pintarHeroeFotos() {
+      $("#hf-lista").innerHTML = heroeFotos.map((f, i) => '<div class="bloque-lista hf-item" data-i="' + i + '"><div class="encabezado"><span>Foto ' + (i + 1) + '</span><span><button type="button" class="icono-boton" data-hf-m="-1" aria-label="Subir">' + icono("arriba") + '</button> <button type="button" class="icono-boton" data-hf-x aria-label="Quitar">' + icono("basura") + "</button></span></div>" +
+        (f.foto ? '<img class="hf-foto" src="' + esc(f.foto) + '" alt="">' : "") +
+        bloqueImagen("heroe-img-" + i, f.foto, "") +
+        '<label class="campo">¿Qué producto es esta foto?<select data-hf="producto"><option value="">— Ninguno (solo la foto) —</option>' +
+        prodOrden.map((p) => '<option value="' + p.id + '"' + (String(p.id) === f.producto ? " selected" : "") + ">" + esc(p.nombre) + (p.codigo ? " · " + esc(p.codigo) : "") + (p.disponible === false ? " (oculto)" : "") + "</option>").join("") +
+        "</select></label></div>").join("") || '<p class="ayuda">Sin fotos propias: la portada usa los productos Destacados.</p>';
+    }
+    pintarCols(); pintarRes(); pintarGal(); pintarHeroeFotos();
+    $("#hf-agregar").onclick = () => { if (heroeFotos.length >= 8) { T.tostada("Máximo 8 fotos"); return; } heroeFotos.push({ foto: "", producto: "" }); pintarHeroeFotos(); };
+    $("#hf-lista").addEventListener("change", (e) => { const f = e.target.closest("[data-i]"); if (f && e.target.dataset.hf) heroeFotos[Number(f.dataset.i)][e.target.dataset.hf] = e.target.value; });
+    $("#hf-lista").addEventListener("click", (e) => {
+      const f = e.target.closest("[data-i]"); if (!f) return; const i = Number(f.dataset.i);
+      if (e.target.closest("[data-hf-x]")) { heroeFotos.splice(i, 1); pintarHeroeFotos(); }
+      if (e.target.closest("[data-hf-m]") && i > 0) { const t = heroeFotos[i]; heroeFotos[i] = heroeFotos[i - 1]; heroeFotos[i - 1] = t; pintarHeroeFotos(); }
+    });
     $("#gal-agregar").onclick = () => { if (gal.length >= 12) { T.tostada("Máximo 12 fotos"); return; } gal.push({ foto: "", enlace: "" }); pintarGal(); };
     $("#gal-lista").addEventListener("input", (e) => { const f = e.target.closest("[data-i]"); if (f && e.target.dataset.gal) gal[Number(f.dataset.i)][e.target.dataset.gal] = e.target.value.trim(); });
     $("#gal-lista").addEventListener("click", (e) => {
@@ -1258,7 +1285,7 @@
       $(".progreso", caja).textContent = "Subiendo…";
       try {
         const blob = await aligerar(inp.files[0], 900);
-        const url = await F.subir(blob, clave === "portada-img" || clave === "banda-img" || clave.startsWith("pagfoto-") || clave.startsWith("gal-img-") ? "portada" : clave.startsWith("res") ? "resenas" : "colecciones", clave);
+        const url = await F.subir(blob, clave === "portada-img" || clave === "banda-img" || clave.startsWith("heroe-img-") || clave.startsWith("pagfoto-") || clave.startsWith("gal-img-") ? "portada" : clave.startsWith("res") ? "resenas" : "colecciones", clave);
         ponerImagen(clave, url);
       } catch (ex) { falla(ex); $(".progreso", caja).textContent = ""; }
       inp.value = "";
@@ -1273,6 +1300,7 @@
       else if (clave.startsWith("col-img-")) cols[Number(clave.slice(8))].imagen = url;
       else if (clave.startsWith("res-img-")) res[Number(clave.slice(8))].foto = url;
       else if (clave.startsWith("pagfoto-")) fotosPag[clave.slice(8)] = url;
+      else if (clave.startsWith("heroe-img-")) { heroeFotos[Number(clave.slice(10))].foto = url; pintarHeroeFotos(); return; }
       else if (clave.startsWith("gal-img-")) gal[Number(clave.slice(8))].foto = url;
       const caja = $('[data-bloque="' + clave + '"]');
       if (caja) caja.outerHTML = bloqueImagen(clave, url, caja.dataset.ayuda || "");
@@ -1286,7 +1314,7 @@
         const paginas = {};
         PAGS.forEach(([k]) => { if ((v["pag::" + k] || "").trim()) paginas[k] = v["pag::" + k].trim(); });
         const nuevo = Object.assign({}, actual, {
-          portada: { titulo: v.titulo.trim(), subtitulo: v.subtitulo.trim(), boton: v.boton.trim() || "Ver catálogo", imagen: cfg.portada.imagen || "" },
+          portada: { titulo: v.titulo.trim(), subtitulo: v.subtitulo.trim(), boton: v.boton.trim() || "Ver catálogo", imagen: "", fotos: heroeFotos.filter((f) => f.foto).map((f) => ({ foto: f.foto, producto: f.producto || "" })) },
           colecciones: cols.filter((c) => (c.nombre || "").trim()).map((c) => ({ nombre: c.nombre.trim(), descripcion: (c.descripcion || "").trim(), imagen: c.imagen || "" })),
           resenas: res.filter((r) => (r.texto || "").trim()).map((r) => ({ nombre: (r.nombre || "").trim(), ciudad: (r.ciudad || "").trim(), estrellas: Number(r.estrellas) || 5, texto: r.texto.trim(), foto: r.foto || "" })),
           paginas,

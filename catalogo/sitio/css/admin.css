@@ -187,3 +187,18 @@ body.admin { background: var(--fondo); }
 .fila-metodo { display: grid; grid-template-columns: auto 1.2fr 150px 1.4fr 40px; gap: 8px; align-items: center; background: var(--superficie); border: 1px solid var(--linea); border-radius: 12px; padding: 8px; }
 .fila-metodo input:not([type=checkbox]), .fila-metodo select { min-height: 40px; border: 1px solid var(--linea); border-radius: 10px; padding: 0 10px; background: var(--superficie); width: 100%; }
 @media (max-width: 760px) { .fila-metodo { grid-template-columns: 1fr 1fr; } .fila-metodo .icono-boton { justify-self: end; } }
+
+/* Aviso cuando falta la tasa BCV */
+.aviso-tasa { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 14px; margin: 0 0 18px; padding: 14px 18px; border-radius: 16px; background: #fdecea; border: 1px solid #f5c2bd; color: #7a1c15; font-size: 14px; }
+.aviso-tasa.oculto { display: none; }
+.aviso-tasa .boton { margin-left: auto; background: #b3261e; border-color: #b3261e; color: #fff; }
+.tasa-rapida.falta { border-color: #b3261e; color: #b3261e; background: #fdecea; }
+.tasa-rapida.falta b { color: #b3261e; }
+
+/* Fotos del carrusel de la portada */
+.hf-lista { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 14px; }
+.hf-item { display: grid; gap: 10px; align-content: start; }
+.hf-foto { width: 100%; aspect-ratio: 16 / 10; object-fit: cover; border-radius: 14px; background: var(--tarjeta, #eee); }
+.hf-item .mini-foto { display: none; }
+.hf-item select { width: 100%; }
+.hf-lista > p { grid-column: 1 / -1; }

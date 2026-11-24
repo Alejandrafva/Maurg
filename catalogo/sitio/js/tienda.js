@@ -120,15 +120,22 @@
     document.title = cfg.nombreTienda + " · Mobiliario de oficina y hogar";
 
     // Diapositivas: destacados con foto de ambiente; si no hay, la imagen de portada o cualquier foto de ambiente
-    let slides = visibles().filter((p) => p.destacado && T.fotoAmbiente(p)).map((p) => ({ p, img: T.fotoAmbiente(p) }));
-    if (!slides.length) slides = visibles().filter((p) => T.fotoAmbiente(p)).slice(0, 5).map((p) => ({ p, img: T.fotoAmbiente(p) }));
-    if (por.imagen) slides.unshift({ p: null, img: por.imagen });
+    // Primero: las fotos propias del carrusel (Página › Fotos del carrusel), cada una con su producto
+    const propias = (Array.isArray(por.fotos) ? por.fotos : []).filter((f) => f && f.foto);
+    let slides;
+    if (propias.length) {
+      slides = propias.map((f) => ({ p: visibles().find((x) => String(x.id) === String(f.producto)) || null, img: f.foto }));
+    } else {
+      slides = visibles().filter((p) => p.destacado && T.fotoAmbiente(p)).map((p) => ({ p, img: T.fotoAmbiente(p) }));
+      if (!slides.length) slides = visibles().filter((p) => T.fotoAmbiente(p)).slice(0, 5).map((p) => ({ p, img: T.fotoAmbiente(p) }));
+      if (por.imagen) slides.unshift({ p: null, img: por.imagen });
+    }
     if (!slides.length) {
       const d = visibles().find((p) => T.fotos(p).length);
       slides = [{ p: d || null, img: d ? T.fotoPrincipal(d) : "img/sin-foto.svg", recorte: true }];
     }
-    slides = slides.slice(0, 6);
-    const firma = slides.map((x) => x.img).join("|");
+    slides = slides.slice(0, 8);
+    const firma = slides.map((x) => x.img + "#" + (x.p ? x.p.id : "")).join("|");
     if (firma === heroe.firma) return;
     heroe.firma = firma;
     heroe.slides = slides;

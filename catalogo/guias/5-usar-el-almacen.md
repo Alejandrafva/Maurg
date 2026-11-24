@@ -17,6 +17,8 @@ Entra a `https://tu-tienda/admin.html` (o `/almacen`) con el correo y la contras
 - **Fotos (Cloudflare):** pega la **dirección del Worker** (Paso 3.5) y toca **Probar conexión** → debe decir *Conectado*.
 - Toca **Guardar ajustes**.
 
+Si la tasa está vacía, el almacén muestra un **aviso rojo**: sin tasa los clientes no ven los precios en bolívares.
+
 **Cambiar la tasa del día rápido:** arriba a la derecha, en cualquier sección, toca **Tasa BCV ✎**.
 
 ## 5.2 Productos
@@ -55,7 +57,7 @@ Ordena con ▲▼ (ese es el orden de la barra de categorías en la tienda), cam
 ## 5.5 Página (todo lo que se ve en la página de inicio)
 | Parte de la página | Dónde se cambia |
 |---|---|
-| **Fotos del carrusel grande** | Productos: marca el producto como **Destacado** y su primera foto como **Ambiente**. Opcional: Página › Portada › una foto extra al inicio. |
+| **Fotos del carrusel grande** | Página › **Fotos del carrusel de la portada**: sube cada foto (solo para la portada, no cambia las fotos de los productos) y debajo elige **qué producto es**. La tarjeta muestra su nombre, precio en $ y Bs y «Ver producto». Si no subes ninguna, se usan los productos **Destacados** con foto de **Ambiente**. |
 | **Frase pequeña** de la portada | Ajustes › Tienda › Eslogan |
 | **Título grande**, subtítulo y botón | Página › Portada. Escribe `**así**` para poner palabras en negrita. |
 | **Franja** bajo la portada (dos textos) | Página › Textos de la página de inicio |
