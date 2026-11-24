@@ -102,7 +102,7 @@
     const ini = cfg.inicio || {};
     const poner = (sel, v) => { const el = $(sel); if (el && v) el.textContent = v; };
     poner("#franja-1", ini.franja1); poner("#franja-2", ini.franja2);
-    poner("#cats-ceja", ini.catsCeja); poner("#cats-titulo", ini.catsTitulo);
+    poner("#cats-ceja", ini.catsCeja); if (!/compra por espacio/i.test(ini.catsTitulo || "")) poner("#cats-titulo", ini.catsTitulo);
     poner("#banda-ceja", ini.bandaCeja); poner("#banda-titulo", ini.bandaTitulo);
     poner("#vent-titulo", ini.ventTitulo); poner("#vent-texto", ini.ventTexto);
     if (ini.bandaFoto) $("#banda-mayor").style.backgroundImage = "linear-gradient(90deg, rgba(11,9,10,.97) 0%, rgba(11,9,10,.85) 50%, rgba(11,9,10,.35) 100%), url('" + ini.bandaFoto.replace(/'/g, "%27") + "')";
@@ -448,35 +448,57 @@
     return e.join("");
   }
 
+  // Color elegido en cada tarjeta (con los puntos de color)
+  const colorTarjeta = {};
+  function colorInicial(p) {
+    const cols = T.colores(p);
+    if (!cols.length) return "";
+    if (colorTarjeta[p.id] && cols.some((c) => c.nombre === colorTarjeta[p.id])) return colorTarjeta[p.id];
+    return (cols.find((c) => p.encargo || T.stockDe(p, c.nombre) > 0) || cols[0]).nombre;
+  }
+  function fotoTarjeta(p) {
+    const elegido = colorTarjeta[p.id];
+    if (elegido) {
+      const f = fotosParaColor(p, elegido).filter((x) => !T.esVideo(x))[0];
+      if (f) return { url: f.url, cubrir: !!f.ambiente };
+    }
+    return { url: T.fotoPrincipal(p), cubrir: T.esAmbiente(p) };
+  }
+
   function tarjeta(p) {
     const st = T.estado(p, estado.cfg);
-    const foto = T.fotoPrincipal(p);
+    const foto = fotoTarjeta(p);
     const dd = T.precio(p, "detal", "divisas");
     const dm = T.precio(p, "mayor", "divisas");
     const bsTarjeta = T.precioBs(p);
     const antes = Number(p.precio_antes) > dd ? "<s>" + T.dinero(p.precio_antes) + "</s>" : "";
     const colores = T.colores(p);
-    const puntos = colores.length > 1 ? '<div class="puntos">' + colores.slice(0, 6).map((c) => '<span class="punto" title="' + esc(c.nombre) + '" style="background:' + esc(c.hex || "#ccc") + '"></span>').join("") + "</div>" : "";
-    const cubrir = T.esAmbiente(p) ? " cubrir" : "";
-    return '<article class="producto revelar' + (st.tipo === "agotado" ? " agotado" : "") + '" style="--d:' + ((tarjeta.k = (tarjeta.k || 0) + 1) % 4) * 70 + 'ms"><div class="marco">' +
+    const sel = colorInicial(p);
+    const puntos = colores.length > 1 ? '<div class="puntos" role="group" aria-label="Colores">' + colores.slice(0, 7).map((c) =>
+      '<button type="button" class="punto" data-punto="' + p.id + '" data-color-tarjeta="' + esc(c.nombre) + '" aria-pressed="' + (c.nombre === sel && !!colorTarjeta[p.id]) + '" title="' + esc(c.nombre) + '" aria-label="Color ' + esc(c.nombre) + '" style="--c:' + esc(c.hex || "#ccc") + '"></button>').join("") + "</div>" : "";
+    return '<article class="producto revelar' + (st.tipo === "agotado" ? " agotado" : "") + '" data-tarjeta="' + p.id + '" style="--d:' + ((tarjeta.k = (tarjeta.k || 0) + 1) % 4) * 70 + 'ms"><div class="marco">' +
       '<button class="foto" data-abrir="' + p.id + '" aria-label="Ver ' + esc(p.nombre) + '">' +
       '<span class="etiquetas">' + etiquetasDe(p, st) + "</span>" +
-      '<img src="' + esc(foto) + '" alt="' + esc(p.nombre) + '" loading="lazy" decoding="async" class="' + cubrir + '"></button>' +
+      '<img src="' + esc(foto.url) + '" alt="' + esc(p.nombre) + '" loading="lazy" decoding="async" class="' + (foto.cubrir ? "cubrir" : "") + '"></button>' +
       "</div>" +
-      '<div class="info"><div class="fila"><h3><button data-abrir="' + p.id + '">' + esc(p.nombre) + '</button></h3><span class="precio">' + antes + T.dinero(dd) + "</span></div>" +
-      '<div class="detalle"><span>' + esc(p.codigo || p.marca || p.categoria || "") + "</span>" + (T.tieneMayor(p) && dm < dd ? "<span>Mayor " + T.dinero(dm) + "</span>" : bsTarjeta ? '<span class="precio-bs">' + T.bs(bsTarjeta) + "</span>" : "") + "</div>" +
-      puntos + "</div>" + accionesTarjeta(p, st) + "</article>";
+      '<div class="info">' +
+        '<span class="ref">' + esc(p.categoria || p.codigo || "") + "</span>" +
+        '<h3><button data-abrir="' + p.id + '">' + esc(p.nombre) + "</button></h3>" +
+        '<div class="precios"><span class="precio">' + T.dinero(dd) + antes + "</span>" +
+          (T.tieneMayor(p) && dm < dd ? '<span class="precio-bs">Mayor ' + T.dinero(dm) + "</span>" : bsTarjeta ? '<span class="precio-bs">' + T.bs(bsTarjeta) + "</span>" : "") + "</div>" +
+        puntos +
+      "</div>" + accionesTarjeta(p, st) + "</article>";
   }
 
-  // Botones debajo de cada producto: Añadir al carrito y Pedir
+  // Botones debajo de cada producto: bolsa = añadir directo; Comprar = ver el producto
   function accionesTarjeta(p, st) {
     if (st.tipo === "agotado") {
       const wa = estado.cfg.whatsapp ? T.enlaceWa(estado.cfg.whatsapp, "Hola, quisiera saber cuándo vuelve a estar disponible: " + p.nombre + (p.codigo ? " [" + p.codigo + "]" : "")) : "";
       return '<div class="acciones-tarjeta"><button class="boton-tarjeta claro" disabled>Agotado</button>' +
         (wa ? '<a class="boton-tarjeta" href="' + esc(wa) + '" target="_blank" rel="noopener">Consultar</a>' : "") + "</div>";
     }
-    return '<div class="acciones-tarjeta"><button class="boton-tarjeta claro" data-anadir="' + p.id + '" aria-label="Añadir ' + esc(p.nombre) + ' al carrito">' + icono("bolsa") + "<span>Añadir</span></button>" +
-      '<button class="boton-tarjeta" data-pedir="' + p.id + '" aria-label="Pedir ' + esc(p.nombre) + '">Pedir</button></div>';
+    return '<div class="acciones-tarjeta"><button class="boton-tarjeta claro" data-anadir="' + p.id + '" aria-label="Añadir ' + esc(p.nombre) + ' al carrito" title="Añadir al carrito">' + icono("bolsa") + "<span>Añadir</span></button>" +
+      '<button class="boton-tarjeta" data-comprar="' + p.id + '" aria-label="Comprar ' + esc(p.nombre) + '">Comprar</button></div>';
   }
 
   // -------------------------------------------------------------------
@@ -558,7 +580,7 @@
     const comprar = puedeComprar
       ? '<div class="comprar"><div class="cantidad"><button data-cant="-1" aria-label="Menos">' + icono("menos") + '</button><input id="ficha-cantidad" type="number" inputmode="numeric" min="1" max="' + max + '" value="' + ficha.cantidad + '" aria-label="Cantidad"><button data-cant="1" aria-label="Más">' + icono("mas") + "</button></div>" +
         '<button class="boton claro" id="ficha-agregar">' + icono("bolsa") + "Añadir al carrito</button>" +
-        '<button class="boton ancho" id="ficha-pedir">Pedir ahora</button></div>'
+        '<button class="boton ancho" id="ficha-pedir">Comprar ahora</button></div>'
       : "";
     const preguntar = estado.cfg.whatsapp
       ? '<a class="boton ' + (puedeComprar ? "claro" : "whatsapp") + ' ancho" target="_blank" rel="noopener" href="' + T.enlaceWa(estado.cfg.whatsapp, "Hola, me interesa: " + p.nombre + (p.codigo ? " (" + p.codigo + ")" : "") + (color ? ", color " + color : "") + "\n" + enlaceProducto(p)) + '">' + icono("whatsapp") + "Preguntar por WhatsApp</a>"
@@ -683,7 +705,7 @@
     else estado.carrito.push({ id: p.id, color: color || "", cantidad: nueva });
     guardarCarrito();
     const faltan = estado.cfg.minimoMayor - unidadesCarrito();
-    T.tostada("Agregado: " + p.nombre + (faltan > 0 && T.tieneMayor(p) ? " · faltan " + faltan + " para precio al mayor" : ""));
+    T.tostada("Agregado al carrito: " + p.nombre + (color ? " (" + color + ")" : "") + (faltan > 0 && T.tieneMayor(p) ? " · faltan " + faltan + " para precio al mayor" : ""));
     if (nueva - actual < cantidad) T.tostada("Solo quedan " + max + " unidades" + (color ? " en " + color : ""));
   }
 
@@ -1080,17 +1102,27 @@
       if (d.nav === "buscar") { e.preventDefault(); $("#buscar").scrollIntoView({ behavior: "smooth", block: "center" }); setTimeout(() => $("#buscar").focus({ preventScroll: true }), 450); return; }
       if (d.nav === "inicio") { e.preventDefault(); window.scrollTo({ top: 0, behavior: "smooth" }); return; }
       if (d.abrir) { abrirFicha(d.abrir); return; }
-      if (d.anadir || d.pedir) {
-        const id = d.anadir || d.pedir;
-        const p = estado.productos.find((x) => String(x.id) === String(id));
+      if (d.punto) {
+        // Cambiar el color en la tarjeta: cambia la foto al modelo de ese color
+        const p = estado.productos.find((x) => String(x.id) === String(d.punto));
         if (!p) return;
-        const cols = T.colores(p);
-        if (cols.length > 1) { abrirFicha(p.id); if (ficha) ficha.pedir = !!d.pedir; T.tostada("Elige el color"); return; }
-        const antes = unidadesCarrito();
-        agregar(p.id, (cols[0] || {}).nombre || "", 1);
-        if (d.pedir && unidadesCarrito() >= antes) abrirCarrito();
+        colorTarjeta[p.id] = d.colorTarjeta;
+        const art = t.closest("[data-tarjeta]");
+        const f = fotoTarjeta(p);
+        const img = art && art.querySelector(".foto img");
+        if (img) { img.classList.add("cambia"); img.src = f.url; img.classList.toggle("cubrir", f.cubrir); setTimeout(() => img.classList.remove("cambia"), 350); }
+        if (art) art.querySelectorAll("[data-punto]").forEach((b) => b.setAttribute("aria-pressed", String(b === t)));
         return;
       }
+      if (d.anadir) {
+        // Añadir directo al carrito, con el color elegido en la tarjeta
+        const p = estado.productos.find((x) => String(x.id) === String(d.anadir));
+        if (!p) return;
+        const color = colorInicial(p);
+        agregar(p.id, color, 1);
+        return;
+      }
+      if (d.comprar) { const p = estado.productos.find((x) => String(x.id) === String(d.comprar)); if (p) abrirFicha(p.id, colorTarjeta[p.id] || ""); return; }
       if (d.rapido) {
         const p = estado.productos.find((x) => String(x.id) === d.rapido);
         if (p && T.colores(p).length > 1) abrirFicha(p.id);

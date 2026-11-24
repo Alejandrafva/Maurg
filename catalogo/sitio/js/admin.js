@@ -1204,7 +1204,7 @@
       campo("Franja bajo la portada · texto corto", "ini_franja1", ini.franja1, { placeholder: "Eleva tus espacios con mobiliario moderno para tu casa y tu oficina." }) +
       campo("Franja bajo la portada · texto grande", "ini_franja2", ini.franja2, { placeholder: "Piezas atemporales para cada espacio de tu hogar y oficina." }) +
       campo("Categorías · palabra pequeña", "ini_catsCeja", ini.catsCeja, { placeholder: "Explora" }) +
-      campo("Categorías · título", "ini_catsTitulo", ini.catsTitulo, { placeholder: "Compra por espacio" }) +
+      campo("Categorías · título", "ini_catsTitulo", ini.catsTitulo, { placeholder: "Compra por categoría" }) +
       campo("Ventajas · título", "ini_ventTitulo", ini.ventTitulo, { placeholder: "Comprar en ARKEO es sencillo" }) +
       campo("Ventajas · texto", "ini_ventTexto", ini.ventTexto, { placeholder: "Atención cercana, pagos flexibles y entregas en todo el país." }) +
       campo("Banda de asesoría · palabra pequeña", "ini_bandaCeja", ini.bandaCeja, { placeholder: "Empresas y mayoristas" }) +

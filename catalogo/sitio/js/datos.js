@@ -394,8 +394,8 @@
     document.querySelectorAll("[data-eslogan]").forEach((el) => (el.textContent = cfg.eslogan || ""));
     document.querySelectorAll("[data-anio]").forEach((el) => (el.textContent = new Date().getFullYear()));
     document.querySelectorAll("[data-logo]").forEach((el) => {
-      // La cabecera es azul: el logo oscuro de fábrica se cambia por su versión blanca
-      const logo = !cfg.logo || /logo-arkeo-negro\.png$/.test(cfg.logo) ? "img/logo-arkeo-blanco.png" : cfg.logo;
+      // La cabecera es blanca: el logo de fábrica se muestra en azul marino
+      const logo = !cfg.logo || /logo-arkeo-(negro|blanco)\.png$/.test(cfg.logo) ? "img/logo-arkeo-azul.png" : cfg.logo;
       el.src = logo; el.classList.remove("oculto");
     });
     const wa = cfg.whatsapp ? T.enlaceWa(cfg.whatsapp, "Hola, vengo del catálogo web 👋") : "";
