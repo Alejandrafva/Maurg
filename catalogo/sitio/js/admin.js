@@ -570,7 +570,6 @@
       '<select class="selector" id="p-cat"><option value="">Todas las categorías</option>' + cats.map((c) => '<option' + (c === E.filtro.categoria ? " selected" : "") + ">" + esc(c) + "</option>").join("") + "</select>" +
       '<select class="selector" id="p-estado">' + [["", "Todos"], ["agotado", "Agotados"], ["pocas", "Pocas unidades"], ["encargo", "Por encargo"], ["oculto", "Ocultos"]].map(([v, t]) => '<option value="' + v + '"' + (v === E.filtro.estado ? " selected" : "") + ">" + t + "</option>").join("") + "</select>" +
       '<span class="espacio"></span>' +
-      '<button class="boton claro pequeno" id="p-importar">' + icono("subir") + "Importar catálogo</button>" +
       '<button class="boton claro pequeno" id="p-excel">' + icono("descargar") + "Excel</button>" +
       '<button class="boton pequeno" id="p-nuevo">' + icono("mas") + "Nuevo producto</button></div>" +
       '<div id="p-lista"></div>';
@@ -581,109 +580,6 @@
     $("#p-estado").addEventListener("change", (e) => { E.filtro.estado = e.target.value; pintarListaProductos(); });
     $("#p-nuevo").addEventListener("click", () => editarProducto(null));
     $("#p-excel").addEventListener("click", (e) => descargarExcel(e.currentTarget));
-    $("#p-importar").addEventListener("click", importarCatalogo);
-  }
-
-  // ===================================================================
-  // IMPORTAR CATÁLOGO (productos y fotos preparados en la carpeta importar/)
-  // No borra nada: salta los productos que ya existen (mismo nombre o código).
-  // ===================================================================
-  const EJEMPLOS = ["CO-210", "BA-330", "BA-120", "BA-150", "CO-404", "VN-140", "PR-900", "EJ-520", "VI-210", "ES-160", "MR-240", "AR-030", "CO-604", "EP-180", "VN-120", "PR-950"];
-  const ICONO_CATEGORIA = { "Sillas presidenciales": "presidencial", "Sillas gamer": "presidencial", "Sillas ejecutivas": "silla", "Sillas de visitante": "visitante", "Sillas de cajero": "taburete",
-    "Tándem": "sofa", "Combos de oficina": "escritorio", "Escritorios": "escritorio", "Bibliotecas y gabinetes": "almacenaje", "Archivadores": "almacenaje", "Mesas de reunión": "mesa",
-    "Lockers": "caja", "Recepción": "escritorio", "Sillas operativas": "silla", "Spa y salón": "butaca", "Vanity": "tocador", "Closets y hogar": "hogar", "Espejos": "espejo",
-    "Poltronas y sofás": "butaca", "Sillas de barbería": "butaca", "Sillas de barra": "taburete", "Taburetes": "taburete", "Mesas de comedor": "comedor", "Mesas de centro": "mesa",
-    "Mesas de barra": "mesa", "Sillas de comedor": "comedor" };
-  async function importarCatalogo() {
-    let cat;
-    try {
-      const r = await fetch("importar/catalogo-noviembre.json", { cache: "no-store" });
-      if (!r.ok) throw new Error(r.status);
-      cat = await r.json();
-    } catch (e) { T.tostada("No se encontró el catálogo para importar (carpeta importar/)."); return; }
-    const lista = cat.productos || [];
-    const yaNombre = new Set(E.productos.map((p) => T.normalizar(p.nombre)));
-    const yaCodigo = new Set(E.productos.map((p) => String(p.codigo || "").toUpperCase()).filter(Boolean));
-    const nuevos = lista.filter((p) => !yaNombre.has(T.normalizar(p.nombre)) && !yaCodigo.has(String(p.codigo).toUpperCase()));
-    const ejemplos = E.productos.filter((p) => EJEMPLOS.includes(p.codigo) && p.disponible !== false);
-    const brecha = Number(E.cfg.brecha) || 0;
-    const ej = lista.find((p) => p.precio) || {};
-    const conBrecha = ej.precio ? Math.round((ej.precio / (1 + brecha / 100)) * 100) / 100 : 0;
-    const nFotos = lista.reduce((t, p) => t + (p.fotos || []).length, 0);
-    const nCats = new Set(lista.map((p) => p.categoria)).size;
-    abrirModal("Importar " + (cat.nombre || "catálogo"),
-      '<form id="f-imp" class="seccion-form">' +
-      '<p class="ayuda" style="margin-top:0"><b>' + lista.length + " productos</b> en " + nCats + " categorías, con " + nFotos + " fotos en fondo blanco. " +
-      (lista.length - nuevos.length ? "<b>" + (lista.length - nuevos.length) + "</b> ya están en el almacén y se saltan. " : "") + "No se borra nada.</p>" +
-      '<div class="campo"><b>¿Cómo leer los precios del PDF?</b>' +
-        '<label class="opcion-radio"><input type="radio" name="modo" value="divisas" checked><span>Son el precio en <b>divisas</b> ($). Ej.: ' + esc(ej.nombre || "") + " → <b>" + T.dinero(ej.precio || 0) + "</b></span></label>" +
-        '<label class="opcion-radio"><input type="radio" name="modo" value="bs"><span>Son precios para <b>pagar en Bs</b> (ya traen la brecha del ' + brecha + " %): quitar la brecha. Ej.: → <b>" + T.dinero(conBrecha) + "</b></span></label>" +
-        '<span class="ayuda">El precio en bolívares se sigue calculando solo con la fórmula: precio en $ + ' + brecha + " % × tasa BCV.</span></div>" +
-      campo("Existencia inicial de cada producto (o de cada color)", "stock", "5", { attrs: ' inputmode="numeric"', ayuda: "Luego la ajustas en cada producto. Los agotados del PDF entran ocultos y sin precio." }) +
-      (ejemplos.length ? '<label class="opcion-radio"><input type="checkbox" name="ocultarEjemplos" checked><span>Ocultar los ' + ejemplos.length + " productos de ejemplo (no se borran; se pueden volver a mostrar con 👁)</span></label>" : "") +
-      '<div class="progreso-imp oculto" id="imp-progreso"><div><i id="imp-barra"></i></div><p id="imp-texto"></p></div>' +
-      "</form>",
-      '<button class="boton" id="imp-ir"' + (nuevos.length ? "" : " disabled") + ">" + (nuevos.length ? "Importar " + nuevos.length + " productos" : "Ya está todo importado") + "</button>");
-    $("#imp-ir").onclick = async (ev) => {
-      const v = leerForm($("#f-imp"));
-      const modo = ($("#f-imp [name=modo]:checked") || {}).value || "divisas";
-      const stockIni = Math.max(0, parseInt(v.stock, 10) || 0);
-      const listo = ocupado(ev.currentTarget, "Importando…");
-      $("#imp-progreso").classList.remove("oculto");
-      $("#modal-cerrar").disabled = true;
-      let hechos = 0, errores = 0;
-      const base = E.productos.reduce((m, p) => Math.max(m, Number(p.orden) || 0), 0) + 1;
-      const urlFoto = async (arch, nombre) => {
-        const ruta = "importar/fotos/" + arch;
-        if (F.url()) {
-          try {
-            const blob = await (await fetch(ruta)).blob();
-            return await F.subir(blob, "productos", nombre);
-          } catch (e) { console.warn("Foto no subida a Cloudflare, se usa la de la página", e); }
-        }
-        return T.demo ? ruta : new URL(ruta, location.href).href;
-      };
-      try {
-        for (let i = 0; i < nuevos.length; i++) {
-          const p = nuevos[i];
-          $("#imp-texto").textContent = (i + 1) + " de " + nuevos.length + " · " + p.nombre;
-          $("#imp-barra").style.width = Math.round((i / nuevos.length) * 100) + "%";
-          try {
-            const fotos = [];
-            for (const f of p.fotos || []) fotos.push({ url: await urlFoto(f.archivo, T.slug(p.nombre) + (f.color ? "-" + T.slug(f.color) : "")), color: f.color || "", tipo: "foto", ambiente: !!f.ambiente });
-            const colores = (p.colores || []).map((c) => ({ nombre: c.nombre, hex: c.hex }));
-            const sc = {};
-            colores.forEach((c) => { sc[c.nombre] = p.agotado ? 0 : stockIni; });
-            let precio = p.precio == null ? null : Number(p.precio);
-            if (precio != null && modo === "bs") precio = Math.round((precio / (1 + brecha / 100)) * 100) / 100;
-            const fila = {
-              nombre: p.nombre, codigo: p.codigo, marca: "", categoria: p.categoria, colores, descripcion: p.descripcion || "",
-              divisa_detal: precio, divisa_mayor: null, bcv_detal: null, bcv_mayor: null, precio_antes: null,
-              disponible: !p.agotado && precio != null, encargo: false, destacado: !!p.destacado, nuevo: false,
-              fotos, colecciones: [], orden: base + i, stock: colores.length ? 0 : (p.agotado ? 0 : stockIni), stock_color: sc,
-              material: p.material || null, alto: p.alto || null, ancho: p.ancho || null, fondo: p.fondo || null,
-            };
-            const g = await D.guardarProducto(fila);
-            E.productos.push(g); hechos++;
-          } catch (e) { errores++; console.error("No se importó", p.nombre, e); }
-        }
-        // categorías nuevas (las existentes no se tocan)
-        const cfg = Object.assign({}, await D.config());
-        const actuales = (cfg.categorias || []).map((c) => (typeof c === "string" ? { nombre: c, icono: "" } : c));
-        const nombres = new Set(actuales.map((c) => c.nombre));
-        [...new Set(lista.map((p) => p.categoria))].forEach((c) => { if (!nombres.has(c)) actuales.push({ nombre: c, icono: ICONO_CATEGORIA[c] || "" }); });
-        cfg.categorias = actuales;
-        await D.guardarConfig(cfg); E.cfg = T.unirAjustes(cfg);
-        if (v.ocultarEjemplos) for (const p of ejemplos) { const g = await D.guardarProducto({ id: p.id, disponible: false }); Object.assign(p, g); }
-        $("#imp-barra").style.width = "100%";
-        $("#imp-texto").textContent = "Listo: " + hechos + " productos importados" + (errores ? " · " + errores + " con error (vuelve a tocar Importar para reintentarlos)" : "") + ".";
-        T.tostada("Catálogo importado: " + hechos + " productos");
-        pintarListaProductos();
-        ev.currentTarget && (ev.currentTarget.textContent = "Cerrar");
-        $("#imp-ir").disabled = false; $("#imp-ir").textContent = "Cerrar"; $("#imp-ir").onclick = () => cerrarModal(true);
-      } catch (e) { falla(e); listo(); }
-      $("#modal-cerrar").disabled = false;
-    };
   }
 
   function productosFiltrados() {
@@ -1113,7 +1009,11 @@
   // PEDIDOS
   // ===================================================================
   function vistaPedidos() {
-    $("#vista").innerHTML = '<div class="barra-vista"><p class="ayuda" style="max-width:640px">Los pedidos llegan aquí como <b>pendientes</b>. Al <b>aceptar</b> se descuenta el stock y el pedido se borra. Al <b>rechazar</b> se borra. Los que no atiendas se borran solos a los ' + (E.cfg.diasPedidos || 30) + ' días.</p><span class="espacio"></span><button class="boton claro pequeno" id="pd-recargar">Actualizar</button></div><div class="tarjetas-admin" id="pd-lista"></div>';
+    $("#vista").innerHTML = '<div class="barra-vista"><p class="ayuda" style="max-width:640px">Los pedidos llegan aquí como <b>pendientes</b>. Al <b>aceptar</b> se descuenta el stock y el pedido se borra. Al <b>rechazar</b> se borra. Los que no atiendas se borran solos a los ' + (E.cfg.diasPedidos || 30) + ' días.</p><span class="espacio"></span><button class="boton claro pequeno" id="pd-recargar">Actualizar</button></div>' +
+      '<div class="barra-lote oculto" id="pd-lote"><label class="lote-todos"><input type="checkbox" id="pd-todos"> <span>Seleccionar todos</span></label><span class="lote-n" id="pd-n"></span><span class="espacio"></span>' +
+      '<button class="boton verde pequeno" id="pd-aceptar-sel" disabled>' + icono("check") + 'Aceptar</button><button class="boton claro pequeno" id="pd-rechazar-sel" disabled style="color:var(--peligro)">' + icono("basura") + 'Rechazar</button></div>' +
+      '<div class="tarjetas-admin" id="pd-lista"></div>';
+    E.selPedidos = new Set();
     $("#pd-recargar").onclick = async (e) => {
       const listo = ocupado(e.currentTarget, "Actualizando…");
       try { [E.pedidos, E.productos] = await Promise.all([D.pedidos(), D.productos()]); pintarGlobo(); pintarPedidos(); } catch (ex) { falla(ex); } finally { listo(); }
@@ -1127,6 +1027,8 @@
 
   function pintarPedidos() {
     const el = $("#pd-lista");
+    E.selPedidos = new Set([...(E.selPedidos || [])].filter((id) => E.pedidos.some((x) => x.id === id)));
+    pintarLote();
     if (!E.pedidos.length) { el.innerHTML = '<div class="vacio-admin"><strong>No hay pedidos pendientes</strong>Cuando un cliente envíe un pedido por WhatsApp aparecerá aquí.</div>'; return; }
     el.innerHTML = E.pedidos.map((p) => {
       const c = p.cliente || {};
@@ -1138,7 +1040,7 @@
       }).join("");
       const waCliente = c.telefono ? T.enlaceWa(c.telefono, "Hola " + (c.nombre || "") + ", te escribimos de " + E.cfg.nombreTienda + " por tu pedido " + (p.codigo || "") + ".") : "";
       return '<article class="pedido" data-id="' + esc(p.id) + '">' +
-        '<div class="pedido-cabeza"><strong>' + esc(p.codigo || "Pedido") + "</strong><span>" + fecha(p.creado) + (E.cfg.ventaMayor ? " · " + (p.tipo_precio === "mayor" ? "al mayor" : "al detal") : "") + " · " + esc(p.forma_pago === "bcv" ? "Bolívares" : p.forma_pago === "divisas" ? "Divisas" : p.forma_pago || "") + "</span></div>" +
+        '<div class="pedido-cabeza"><label class="pedido-sel" title="Seleccionar"><input type="checkbox" data-sel="' + esc(p.id) + '"' + (E.selPedidos.has(p.id) ? " checked" : "") + ' aria-label="Seleccionar pedido ' + esc(p.codigo || "") + '"></label><strong>' + esc(p.codigo || "Pedido") + "</strong><span>" + fecha(p.creado) + (E.cfg.ventaMayor ? " · " + (p.tipo_precio === "mayor" ? "al mayor" : "al detal") : "") + " · " + esc(p.forma_pago === "bcv" ? "Bolívares" : p.forma_pago === "divisas" ? "Divisas" : p.forma_pago || "") + "</span></div>" +
         '<div class="pedido-cliente"><b>' + esc(c.nombre || "") + "</b>" + (c.cedula ? " · " + esc(c.cedula) : "") + " · " + esc(c.telefono || "") + (c.ciudad ? "<br>" + esc(c.ciudad) : "") + (c.entrega ? " · " + esc(c.entrega) : "") + (p.nota ? "<br><i>Nota: " + esc(p.nota) + "</i>" : "") + "</div>" +
         '<div class="pedido-items">' + items + "</div>" +
         '<div class="pedido-total"><span>Total</span><span>' + T.dinero(p.total) + (p.total_bs ? ' <small class="ayuda">· ' + T.bs(p.total_bs) + "</small>" : "") + "</span></div>" +
@@ -1150,6 +1052,13 @@
         '<button class="boton claro" data-pd="rechazar" style="color:var(--peligro)">' + icono("basura") + "Rechazar</button>" +
         "</div></article>";
     }).join("");
+    el.onchange = (e) => {
+      const c = e.target.closest("[data-sel]"); if (!c) return;
+      if (c.checked) E.selPedidos.add(c.dataset.sel); else E.selPedidos.delete(c.dataset.sel);
+      c.closest(".pedido").classList.toggle("elegido", c.checked);
+      pintarLote();
+    };
+    $$(".pedido", el).forEach((a) => a.classList.toggle("elegido", E.selPedidos.has(a.dataset.id)));
     el.onclick = async (e) => {
       const b = e.target.closest("[data-pd]");
       if (!b) return;
@@ -1177,36 +1086,144 @@
     };
   }
 
+  function pintarLote() {
+    const barra = $("#pd-lote"); if (!barra) return;
+    const n = E.selPedidos.size, total = E.pedidos.length;
+    barra.classList.toggle("oculto", total < 2);
+    $("#pd-n").textContent = n ? n + (n === 1 ? " seleccionado" : " seleccionados") : "";
+    $("#pd-todos").checked = n > 0 && n === total;
+    $("#pd-todos").indeterminate = n > 0 && n < total;
+    $("#pd-aceptar-sel").disabled = $("#pd-rechazar-sel").disabled = !n;
+    $("#pd-aceptar-sel").innerHTML = icono("check") + "Aceptar" + (n ? " (" + n + ")" : "");
+    $("#pd-rechazar-sel").innerHTML = icono("basura") + "Rechazar" + (n ? " (" + n + ")" : "");
+    $("#pd-todos").onchange = (e) => { E.selPedidos = new Set(e.target.checked ? E.pedidos.map((x) => x.id) : []); pintarPedidos(); };
+    $("#pd-rechazar-sel").onclick = async () => {
+      const sel = E.pedidos.filter((x) => E.selPedidos.has(x.id));
+      if (!sel.length) return;
+      if (!(await confirmar("Rechazar " + sel.length + " pedidos", "Se borrarán estos pedidos y sus PDF. El stock no cambia:<br>" + sel.map((x) => "• " + esc(x.codigo || "Pedido") + " · " + esc((x.cliente || {}).nombre || "")).join("<br>"), "Rechazar " + sel.length, true))) return;
+      await enLote(sel, async (x) => { await D.borrarPedido(x.id); F.borrar([x.pdf_url]); }, "rechazados");
+    };
+    $("#pd-aceptar-sel").onclick = async () => {
+      const sel = E.pedidos.filter((x) => E.selPedidos.has(x.id));
+      if (!sel.length) return;
+      // suma de lo que se descuenta, para avisar si falta stock
+      const suma = {};
+      sel.forEach((x) => (x.items || []).forEach((i) => { const k = i.id + "|" + (i.color || ""); suma[k] = (suma[k] || 0) + i.cantidad; }));
+      const faltan = Object.keys(suma).filter((k) => { const [id, color] = k.split("|"); const prod = E.productos.find((x) => String(x.id) === id); return prod && !prod.encargo && T.stockDe(prod, color) < suma[k]; });
+      const texto = "Se aceptarán y se descontará el stock de:<br>" + sel.map((x) => "• " + esc(x.codigo || "Pedido") + " · " + esc((x.cliente || {}).nombre || "") + " · " + T.dinero(x.total)).join("<br>") +
+        (faltan.length ? '<br><br><b style="color:var(--peligro)">Ojo: ' + faltan.length + " producto(s) no alcanzan para todos; quedarán en 0.</b>" : "") + "<br><br>Luego se borran de la lista.";
+      if (!(await confirmar("Aceptar " + sel.length + " pedidos", texto, "Aceptar " + sel.length))) return;
+      await enLote(sel, async (x) => { await D.aceptarPedido(x.id, (x.items || []).map((i) => ({ id: i.id, color: i.color || "", cantidad: i.cantidad }))); F.borrar([x.pdf_url]); }, "aceptados");
+      try { E.productos = await D.productos(); } catch (ex) { /* nada */ }
+      pintarPedidos();
+    };
+  }
+  async function enLote(lista, accion, palabra) {
+    const btns = [$("#pd-aceptar-sel"), $("#pd-rechazar-sel")]; btns.forEach((b) => (b.disabled = true));
+    let ok = 0, mal = 0;
+    for (const x of lista) {
+      $("#pd-n").textContent = "Procesando " + (ok + mal + 1) + " de " + lista.length + "…";
+      try { await accion(x); ok++; E.pedidos = E.pedidos.filter((y) => y !== x); E.selPedidos.delete(x.id); } catch (ex) { mal++; console.error(ex); }
+    }
+    pintarGlobo(); pintarPedidos();
+    T.tostada(ok + " pedido(s) " + palabra + (mal ? " · " + mal + " con error (siguen en la lista)" : ""), mal ? 5000 : 2500);
+  }
+
   function editarPedido(p) {
     const items = JSON.parse(JSON.stringify(p.items || []));
     const c = Object.assign({}, p.cliente || {});
-    function cuerpo() {
-      return '<form id="f-ped"><div class="seccion-form"><h3>Productos</h3>' +
-        items.map((i, k) => '<div class="fila-color" style="grid-template-columns:1fr 90px 100px 40px" data-k="' + k + '"><div><b>' + esc(i.nombre) + "</b><br><small class=\"ayuda\">" + esc([i.codigo, i.color].filter(Boolean).join(" · ")) + '</small></div>' +
-          '<input data-k-c="cantidad" value="' + i.cantidad + '" inputmode="numeric" style="border:1px solid var(--linea);border-radius:12px;padding:0 10px" aria-label="Cantidad">' +
-          '<input data-k-c="precio" value="' + i.precio + '" inputmode="decimal" style="border:1px solid var(--linea);border-radius:12px;padding:0 10px" aria-label="Precio unitario">' +
-          '<button type="button" class="icono-boton" data-k-quitar aria-label="Quitar">' + icono("basura") + "</button></div>").join("") +
-        '<p class="ayuda">Cantidad · precio unitario (USD)</p></div>' +
-        '<div class="seccion-form"><h3>Cliente</h3><div class="rejilla-campos">' +
-        campo("Nombre", "nombre", c.nombre) + campo("Teléfono", "telefono", c.telefono) + campo("Cédula / RIF", "cedula", c.cedula) + campo("Ciudad", "ciudad", c.ciudad) + campo("Entrega", "entrega", c.entrega, { doble: true }) +
-        campo("Nota", "nota", p.nota, { tipo: "area", doble: true, filas: 2 }) + "</div></div></form>";
-    }
-    abrirModal("Editar pedido " + (p.codigo || ""), cuerpo(), '<button class="boton claro" id="pe-cancelar">Cancelar</button><button class="boton" id="pe-guardar">Guardar</button>');
-    $("#pe-cancelar").onclick = () => cerrarModal();
-    $("#modal-cuerpo").onclick = (e) => {
-      const q = e.target.closest("[data-k-quitar]");
-      if (!q) return;
-      if (items.length === 1) { T.tostada("El pedido debe tener al menos un producto. Usa «Rechazar» para borrarlo."); return; }
-      items.splice(Number(q.closest("[data-k]").dataset.k), 1);
-      $("#modal-cuerpo").innerHTML = cuerpo();
-    };
-    $("#pe-guardar").onclick = async (e) => {
+    const tipo = p.tipo_precio === "mayor" ? "mayor" : "detal";
+    const pago = p.total_bs ? "bcv" : "divisas"; // en pedidos en Bs el precio ya trae la brecha
+    const prodDe = (i) => E.productos.find((x) => String(x.id) === String(i.id));
+    // guarda lo escrito en las filas antes de volver a pintar
+    function leerFilas() {
       $$("#f-ped [data-k]").forEach((fila) => {
-        const i = items[Number(fila.dataset.k)];
-        i.cantidad = Math.max(1, ent($("[data-k-c=cantidad]", fila).value));
+        const i = items[Number(fila.dataset.k)]; if (!i) return;
+        i.cantidad = Math.max(1, ent($("[data-k-c=cantidad]", fila).value) || 1);
         i.precio = num($("[data-k-c=precio]", fila).value) || 0;
+        const sc = $("[data-k-c=color]", fila); if (sc) i.color = sc.value;
         i.subtotal = Math.round(i.precio * i.cantidad * 100) / 100;
       });
+      const f = $("#f-ped"); if (f) Object.assign(c, leerForm(f));
+    }
+    function totalTexto() {
+      const t = items.reduce((a, i) => a + (Number(i.precio) || 0) * (Number(i.cantidad) || 0), 0);
+      return T.dinero(Math.round(t * 100) / 100) + (pago === "bcv" && E.cfg.tasaBCV ? " · " + T.bs(Math.round(t * E.cfg.tasaBCV * 100) / 100) : "");
+    }
+    const ins = 'style="border:1px solid var(--linea);border-radius:12px;padding:0 10px;min-width:0"';
+    function fila(i, k) {
+      const prod = prodDe(i);
+      const cols = prod ? T.colores(prod) : [];
+      const sel = cols.length > 1
+        ? '<select data-k-c="color" ' + ins + ' aria-label="Color">' + cols.map((x) => '<option' + (x.nombre === i.color ? " selected" : "") + ">" + esc(x.nombre) + "</option>").join("") + "</select>"
+        : '<span class="ayuda">' + esc(i.color || "—") + "</span>";
+      const foto = prod ? T.fotoPrincipal(prod) : "";
+      return '<div class="fila-ped" data-k="' + k + '">' +
+        (foto ? '<img src="' + esc(foto) + '" alt="">' : '<span class="sin-foto"></span>') +
+        '<div class="fp-nombre"><b>' + esc(i.nombre) + '</b><small class="ayuda">' + esc(i.codigo || "") + "</small></div>" +
+        sel +
+        '<input data-k-c="cantidad" value="' + i.cantidad + '" inputmode="numeric" placeholder="Cant." title="Cantidad" ' + ins + ' aria-label="Cantidad">' +
+        '<input data-k-c="precio" value="' + i.precio + '" inputmode="decimal" placeholder="Precio $" title="Precio unitario" ' + ins + ' aria-label="Precio unitario">' +
+        '<button type="button" class="icono-boton" data-k-quitar aria-label="Quitar">' + icono("basura") + "</button></div>";
+    }
+    function cuerpo() {
+      return '<form id="f-ped"><div class="seccion-form"><h3>Productos</h3>' +
+        '<div class="cab-ped ayuda"><span></span><span>Producto</span><span>Color</span><span>Cant.</span><span>Precio $' + (pago === "bcv" ? " (pago en Bs)" : "") + '</span><span></span></div>' +
+        items.map(fila).join("") +
+        '<div class="agregar-ped"><label class="campo" style="margin:0">Agregar producto<input id="pe-buscar" type="search" autocomplete="off" placeholder="Busca por nombre o código…" ' + ins + '></label><div id="pe-resultados" class="resultados-ped"></div></div>' +
+        '<p class="total-ped"><span>Total</span><b id="pe-total">' + totalTexto() + "</b></p></div>" +
+        '<div class="seccion-form"><h3>Cliente</h3><div class="rejilla-campos">' +
+        campo("Nombre", "nombre", c.nombre) + campo("Teléfono", "telefono", c.telefono) + campo("Cédula / RIF", "cedula", c.cedula) + campo("Ciudad", "ciudad", c.ciudad) + campo("Entrega", "entrega", c.entrega, { doble: true }) +
+        campo("Nota", "nota", c.nota != null ? c.nota : p.nota, { tipo: "area", doble: true, filas: 2 }) + "</div></div></form>";
+    }
+    function repintar(foco) {
+      $("#modal-cuerpo").innerHTML = cuerpo();
+      enlazar();
+      if (foco) { const b = $("#pe-buscar"); b.focus(); }
+    }
+    function buscar() {
+      const q = T.normalizar($("#pe-buscar").value).split(/\s+/).filter(Boolean);
+      const caja = $("#pe-resultados");
+      if (!q.length) { caja.innerHTML = ""; return; }
+      const lista = E.productos.filter((x) => { const t = T.normalizar([x.nombre, x.codigo, x.categoria].join(" ")); return q.every((w) => t.includes(w)); }).slice(0, 8);
+      caja.innerHTML = lista.map((x) => {
+        const st = x.encargo ? "Por encargo" : "Stock " + T.stockDe(x);
+        return '<button type="button" class="res-ped" data-agregar="' + x.id + '">' + (T.fotos(x).length ? '<img src="' + esc(T.fotoPrincipal(x)) + '" alt="">' : '<span class="sin-foto"></span>') +
+          "<span><b>" + esc(x.nombre) + "</b><small>" + esc([x.codigo, st].filter(Boolean).join(" · ")) + "</small></span><em>" + T.dinero(T.precio(x, tipo, pago)) + "</em></button>";
+      }).join("") || '<p class="ayuda" style="margin:6px 0">No hay productos con esa búsqueda.</p>';
+    }
+    function enlazar() {
+      $("#pe-buscar").oninput = buscar;
+      $("#pe-buscar").onkeydown = (e) => { if (e.key === "Enter") { e.preventDefault(); const b = $("#pe-resultados [data-agregar]"); if (b) b.click(); } };
+      $("#f-ped").oninput = (e) => { if (e.target.closest("[data-k]")) { leerFilas(); $("#pe-total").textContent = totalTexto(); } };
+      $("#f-ped").onchange = $("#f-ped").oninput;
+    }
+    abrirModal("Editar pedido " + (p.codigo || ""), cuerpo(), '<button class="boton claro" id="pe-cancelar">Cancelar</button><button class="boton" id="pe-guardar">Guardar</button>');
+    enlazar();
+    $("#pe-cancelar").onclick = () => cerrarModal();
+    $("#modal-cuerpo").onclick = (e) => {
+      const ag = e.target.closest("[data-agregar]");
+      if (ag) {
+        leerFilas();
+        const prod = E.productos.find((x) => String(x.id) === ag.dataset.agregar);
+        const cols = T.colores(prod);
+        const color = cols.length ? (cols.find((x) => prod.encargo || T.stockDe(prod, x.nombre) > 0) || cols[0]).nombre : "";
+        const ya = items.find((i) => String(i.id) === String(prod.id) && (i.color || "") === color);
+        if (ya) ya.cantidad += 1;
+        else { const precio = T.precio(prod, tipo, pago); items.push({ id: prod.id, nombre: prod.nombre, codigo: prod.codigo || "", color, cantidad: 1, precio, subtotal: precio }); }
+        repintar(true);
+        T.tostada("Agregado: " + prod.nombre);
+        return;
+      }
+      const q = e.target.closest("[data-k-quitar]");
+      if (!q) return;
+      leerFilas();
+      if (items.length === 1) { T.tostada("El pedido debe tener al menos un producto. Usa «Rechazar» para borrarlo."); return; }
+      items.splice(Number(q.closest("[data-k]").dataset.k), 1);
+      repintar();
+    };
+    $("#pe-guardar").onclick = async (e) => {
+      leerFilas();
       const v = leerForm($("#f-ped"));
       const total = Math.round(items.reduce((a, i) => a + i.subtotal, 0) * 100) / 100;
       const cambios = {
