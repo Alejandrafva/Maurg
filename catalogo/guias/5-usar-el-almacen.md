@@ -36,6 +36,24 @@ En la lista: 👁 ocultar/mostrar en la tienda · ⧉ duplicar · ✎ editar · 
 
 **Avisos automáticos en la tienda:** *Agotado* (stock 0), *¡Pocas unidades!* (según Ajustes), *Por encargo*, *-X%* (oferta) y *Nuevo*.
 
+## 5.2.1 Importar el catálogo completo (PDF de noviembre)
+El paquete trae el catálogo del PDF ya preparado: **291 productos** en 26 categorías, con sus fotos en **fondo blanco** (una foto por color cuando el PDF mostraba varios colores), ordenados por categoría y nombre.
+
+1. Entra al almacén › **Productos** › **Importar catálogo**.
+2. Elige cómo leer los precios del PDF:
+   - **En divisas**: el número del PDF es el precio en $.
+   - **Para pagar en Bs**: el PDF ya trae la brecha; se le quita (precio ÷ 1,25 si la brecha es 25 %).
+   En los dos casos el precio en bolívares lo calcula la tienda con la fórmula de siempre.
+3. Escribe la **existencia inicial** (se pone en cada producto o color; después la ajustas).
+4. Deja marcado **Ocultar los productos de ejemplo** (no se borran).
+5. Toca **Importar** y espera a que la barra llegue al final (sube las fotos a Cloudflare). Si se corta, vuelve a tocar Importar: salta lo que ya entró.
+
+Notas:
+- Las sillas de barra y los taburetes del PDF se venden **por juego de 3**: el nombre dice «(juego de 3)» y el precio es el del juego.
+- Los productos **agotados** del PDF entran **ocultos y sin precio**: ponles precio y existencia cuando vuelvan.
+- Los **combos** muestran el escritorio y la silla Trendy en la misma foto.
+- **Vista 3D**: en la ficha del producto, el botón **3D** deja girar la foto con el dedo. Si subes **4 o más fotos del mismo color** (frente, lado, atrás…), el botón las recorre como un giro de 360°.
+
 ## 5.3 Pedidos
 Cuando un cliente toca **Enviar pedido por WhatsApp**:
 1. Se arma un **PDF** del pedido y se sube a Cloudflare.

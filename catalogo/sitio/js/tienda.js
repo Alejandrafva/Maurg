@@ -533,6 +533,7 @@
   const blancoPrimero = (l) => l.filter((f) => !f.ambiente).concat(l.filter((f) => f.ambiente));
 
   function pintarFicha() {
+    if (visor) cerrarVisor3d();
     const { p, color } = ficha;
     const cfg = estado.cfg;
     const st = T.estado(p, cfg, color);
@@ -595,6 +596,7 @@
     $("#ficha").innerHTML =
       '<button class="icono-boton cerrar" data-cerrar-ficha aria-label="Cerrar">' + icono("cerrar") + "</button>" +
       '<div class="ficha-cuerpo"><div class="galeria"><div class="galeria-principal" id="galeria">' + media + "</div>" +
+      (fotos.some((f) => !T.esVideo(f)) ? '<button class="boton-3d" data-ver3d aria-label="Ver en 3D"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 4 0 0 1-9 4 9 4 0 0 1-9-4"/><path d="M3 12a9 4 0 0 1 9-4c2 0 3.8.3 5.3.9"/><path d="m15.5 6 2.2 2.6-3.1 1"/></svg><span>3D</span></button>' : "") +
       (fotos.length > 1 ? '<button class="flecha-galeria izq" data-galeria="-1" aria-label="Anterior">' + icono("izquierda") + '</button><button class="flecha-galeria der" data-galeria="1" aria-label="Siguiente">' + icono("derecha") + "</button>" : "") +
       minis + "</div>" +
       '<div class="ficha-info"><div><div class="marca-cat">' + esc([p.categoria, p.marca].filter(Boolean).join(" · ")) + '</div><h2 id="ficha-nombre">' + esc(p.nombre) + "</h2>" +
@@ -628,6 +630,7 @@
   }
 
   function cerrarFicha(desdeHistorial) {
+    if (visor) cerrarVisor3d();
     const empujado = ficha && ficha.empujado;
     ocultarPanel($("#ficha"));
     ficha = null;
@@ -636,6 +639,74 @@
       if (empujado) history.back();
       else try { history.replaceState(null, "", location.pathname + location.search); } catch (e) { /* nada */ }
     }
+  }
+
+  // -------------------------------------------------------------------
+  // Visor 3D: con 4 o más fotos (ángulos) del mismo color gira como 360°;
+  // con menos, inclina la foto en perspectiva al arrastrar.
+  // -------------------------------------------------------------------
+  let visor = null;
+  function abrirVisor3d() {
+    const p = ficha.p;
+    const marcos = fotosParaColor(p, ficha.color).filter((f) => !T.esVideo(f) && !f.ambiente);
+    const lista = marcos.length ? marcos : fotosParaColor(p, ficha.color).filter((f) => !T.esVideo(f));
+    if (!lista.length) return;
+    const giro = lista.length >= 4;
+    const caja = document.createElement("div");
+    caja.className = "visor3d" + (giro ? " giro" : " inclina");
+    caja.innerHTML = '<div class="escena3d"><div class="objeto3d"><img alt="' + esc(p.nombre) + '" src="' + esc(lista[0].url) + '" draggable="false"></div><i class="sombra3d"></i></div>' +
+      '<p class="pista3d">' + icono("izquierda") + (giro ? "Arrastra para girar 360°" : "Arrastra para verla en 3D") + icono("derecha") + "</p>" +
+      '<button class="icono-boton cerrar3d" data-cerrar3d aria-label="Cerrar vista 3D">' + icono("cerrar") + "</button>";
+    $(".galeria").appendChild(caja);
+    lista.forEach((f) => { const i = new Image(); i.src = f.url; });
+    const img = caja.querySelector("img"), obj = caja.querySelector(".objeto3d"), sombra = caja.querySelector(".sombra3d");
+    visor = { caja, lista, giro, i: 0, ang: 0, arr: null, auto: null };
+    const pintar = () => {
+      if (giro) {
+        const n = lista.length, k = ((Math.round(visor.ang / (360 / n)) % n) + n) % n;
+        if (k !== visor.i) { visor.i = k; img.src = lista[k].url; }
+      } else {
+        const a = Math.max(-38, Math.min(38, visor.ang));
+        obj.style.transform = "rotateY(" + a + "deg) rotateX(" + (Math.abs(a) * 0.12) + "deg) scale(" + (1 - Math.abs(a) / 600) + ")";
+        sombra.style.transform = "translateX(" + (-a * 1.4) + "px) scaleX(" + (1 - Math.abs(a) / 160) + ")";
+      }
+    };
+    const animar = () => {
+      let t0 = performance.now();
+      const paso = (t) => {
+        if (!visor || visor.arr) return;
+        const dt = (t - t0) / 1000; t0 = t;
+        if (giro) visor.ang += dt * 40;
+        else visor.ang = Math.sin(t / 900) * 22;
+        pintar(); visor.auto = requestAnimationFrame(paso);
+      };
+      visor.auto = requestAnimationFrame(paso);
+    };
+    const escena = caja.querySelector(".escena3d");
+    escena.addEventListener("pointerdown", (e) => {
+      cancelAnimationFrame(visor.auto);
+      visor.arr = { x: e.clientX, ang: visor.ang };
+      escena.setPointerCapture(e.pointerId); caja.classList.add("tocando");
+    });
+    escena.addEventListener("pointermove", (e) => {
+      if (!visor || !visor.arr) return;
+      visor.ang = visor.arr.ang + (e.clientX - visor.arr.x) * (giro ? 0.9 : 0.35);
+      pintar();
+    });
+    const soltar = () => {
+      if (!visor || !visor.arr) return;
+      visor.arr = null; caja.classList.remove("tocando");
+      if (!giro) { obj.style.transition = sombra.style.transition = "transform .6s cubic-bezier(.2,.8,.2,1)"; visor.ang = 0; pintar(); setTimeout(() => { if (visor) obj.style.transition = sombra.style.transition = ""; }, 650); }
+    };
+    escena.addEventListener("pointerup", soltar);
+    escena.addEventListener("pointercancel", soltar);
+    pintar();
+    if (!(window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches)) animar();
+  }
+  function cerrarVisor3d() {
+    if (!visor) return;
+    cancelAnimationFrame(visor.auto);
+    visor.caja.remove(); visor = null;
   }
 
   function abrirDesdeEnlace() {
@@ -1154,6 +1225,8 @@
         g.scrollBy({ left: g.clientWidth * Number(d.galeria), behavior: "smooth" });
         return;
       }
+      if (d.ver3d !== undefined && ficha) { abrirVisor3d(); return; }
+      if (d.cerrar3d !== undefined) { cerrarVisor3d(); return; }
       if (d.mini !== undefined) {
         const g = $("#galeria");
         g.scrollTo({ left: g.clientWidth * Number(d.mini), behavior: "smooth" });

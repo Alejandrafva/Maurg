@@ -1535,3 +1535,26 @@ body { background: #ffffff; color: var(--negro); }
   .producto h3 { font-size: 14px; }
   .producto .punto { width: 22px; height: 22px; }
 }
+
+/* ===================================================================
+   Fotos en fondo blanco (#FFFFFF) y visor 3D
+   =================================================================== */
+.producto .foto { background: #ffffff; box-shadow: inset 0 0 0 1px rgba(168,166,167,.28); }
+.producto .foto img:not(.cubrir) { filter: none; }
+.galeria { background: #ffffff; }
+.boton-3d { position: absolute; left: 14px; top: 14px; z-index: 3; display: inline-flex; align-items: center; gap: 6px; height: 40px; padding: 0 14px 0 10px; border-radius: 999px; border: 1px solid rgba(5,51,89,.18); background: rgba(255,255,255,.92); color: var(--marino); font: inherit; font-size: 13px; font-weight: 700; letter-spacing: .04em; cursor: pointer; box-shadow: 0 10px 24px -14px rgba(5,51,89,.6); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); transition: transform .2s, background .2s; }
+.boton-3d svg { width: 22px; height: 22px; animation: giro3d 3s ease-in-out infinite; }
+.boton-3d:hover { transform: translateY(-1px); background: #fff; }
+@keyframes giro3d { 0%, 100% { transform: rotate(0); } 50% { transform: rotate(-25deg); } }
+.visor3d { position: absolute; inset: 0; z-index: 5; display: grid; grid-template-rows: 1fr auto; background: radial-gradient(circle at 50% 40%, #ffffff 0%, #ffffff 55%, #f2f4f7 100%); animation: visor-entra .35s ease both; touch-action: none; }
+@keyframes visor-entra { from { opacity: 0; } }
+.escena3d { position: relative; display: grid; place-items: center; perspective: 1100px; cursor: grab; overflow: hidden; user-select: none; -webkit-user-select: none; }
+.visor3d.tocando .escena3d { cursor: grabbing; }
+.objeto3d { width: 82%; height: 82%; display: grid; place-items: center; transform-style: preserve-3d; will-change: transform; }
+.objeto3d img { max-width: 100%; max-height: 100%; object-fit: contain; pointer-events: none; filter: drop-shadow(0 22px 18px rgba(11,9,10,.16)); }
+.visor3d.giro .objeto3d img { transition: none; }
+.sombra3d { position: absolute; left: 22%; right: 22%; bottom: 8%; height: 18px; border-radius: 50%; background: radial-gradient(closest-side, rgba(11,9,10,.22), transparent); will-change: transform; }
+.pista3d { margin: 0; padding: 0 0 16px; display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 13px; font-weight: 600; color: var(--grafito); }
+.pista3d svg { width: 16px; height: 16px; color: var(--marino); }
+.cerrar3d { position: absolute; right: 14px; top: 14px; background: #fff; }
+@media (prefers-reduced-motion: reduce) { .boton-3d svg { animation: none; } }

@@ -570,6 +570,7 @@
       '<select class="selector" id="p-cat"><option value="">Todas las categorías</option>' + cats.map((c) => '<option' + (c === E.filtro.categoria ? " selected" : "") + ">" + esc(c) + "</option>").join("") + "</select>" +
       '<select class="selector" id="p-estado">' + [["", "Todos"], ["agotado", "Agotados"], ["pocas", "Pocas unidades"], ["encargo", "Por encargo"], ["oculto", "Ocultos"]].map(([v, t]) => '<option value="' + v + '"' + (v === E.filtro.estado ? " selected" : "") + ">" + t + "</option>").join("") + "</select>" +
       '<span class="espacio"></span>' +
+      '<button class="boton claro pequeno" id="p-importar">' + icono("subir") + "Importar catálogo</button>" +
       '<button class="boton claro pequeno" id="p-excel">' + icono("descargar") + "Excel</button>" +
       '<button class="boton pequeno" id="p-nuevo">' + icono("mas") + "Nuevo producto</button></div>" +
       '<div id="p-lista"></div>';
@@ -580,6 +581,109 @@
     $("#p-estado").addEventListener("change", (e) => { E.filtro.estado = e.target.value; pintarListaProductos(); });
     $("#p-nuevo").addEventListener("click", () => editarProducto(null));
     $("#p-excel").addEventListener("click", (e) => descargarExcel(e.currentTarget));
+    $("#p-importar").addEventListener("click", importarCatalogo);
+  }
+
+  // ===================================================================
+  // IMPORTAR CATÁLOGO (productos y fotos preparados en la carpeta importar/)
+  // No borra nada: salta los productos que ya existen (mismo nombre o código).
+  // ===================================================================
+  const EJEMPLOS = ["CO-210", "BA-330", "BA-120", "BA-150", "CO-404", "VN-140", "PR-900", "EJ-520", "VI-210", "ES-160", "MR-240", "AR-030", "CO-604", "EP-180", "VN-120", "PR-950"];
+  const ICONO_CATEGORIA = { "Sillas presidenciales": "presidencial", "Sillas gamer": "presidencial", "Sillas ejecutivas": "silla", "Sillas de visitante": "visitante", "Sillas de cajero": "taburete",
+    "Tándem": "sofa", "Combos de oficina": "escritorio", "Escritorios": "escritorio", "Bibliotecas y gabinetes": "almacenaje", "Archivadores": "almacenaje", "Mesas de reunión": "mesa",
+    "Lockers": "caja", "Recepción": "escritorio", "Sillas operativas": "silla", "Spa y salón": "butaca", "Vanity": "tocador", "Closets y hogar": "hogar", "Espejos": "espejo",
+    "Poltronas y sofás": "butaca", "Sillas de barbería": "butaca", "Sillas de barra": "taburete", "Taburetes": "taburete", "Mesas de comedor": "comedor", "Mesas de centro": "mesa",
+    "Mesas de barra": "mesa", "Sillas de comedor": "comedor" };
+  async function importarCatalogo() {
+    let cat;
+    try {
+      const r = await fetch("importar/catalogo-noviembre.json", { cache: "no-store" });
+      if (!r.ok) throw new Error(r.status);
+      cat = await r.json();
+    } catch (e) { T.tostada("No se encontró el catálogo para importar (carpeta importar/)."); return; }
+    const lista = cat.productos || [];
+    const yaNombre = new Set(E.productos.map((p) => T.normalizar(p.nombre)));
+    const yaCodigo = new Set(E.productos.map((p) => String(p.codigo || "").toUpperCase()).filter(Boolean));
+    const nuevos = lista.filter((p) => !yaNombre.has(T.normalizar(p.nombre)) && !yaCodigo.has(String(p.codigo).toUpperCase()));
+    const ejemplos = E.productos.filter((p) => EJEMPLOS.includes(p.codigo) && p.disponible !== false);
+    const brecha = Number(E.cfg.brecha) || 0;
+    const ej = lista.find((p) => p.precio) || {};
+    const conBrecha = ej.precio ? Math.round((ej.precio / (1 + brecha / 100)) * 100) / 100 : 0;
+    const nFotos = lista.reduce((t, p) => t + (p.fotos || []).length, 0);
+    const nCats = new Set(lista.map((p) => p.categoria)).size;
+    abrirModal("Importar " + (cat.nombre || "catálogo"),
+      '<form id="f-imp" class="seccion-form">' +
+      '<p class="ayuda" style="margin-top:0"><b>' + lista.length + " productos</b> en " + nCats + " categorías, con " + nFotos + " fotos en fondo blanco. " +
+      (lista.length - nuevos.length ? "<b>" + (lista.length - nuevos.length) + "</b> ya están en el almacén y se saltan. " : "") + "No se borra nada.</p>" +
+      '<div class="campo"><b>¿Cómo leer los precios del PDF?</b>' +
+        '<label class="opcion-radio"><input type="radio" name="modo" value="divisas" checked><span>Son el precio en <b>divisas</b> ($). Ej.: ' + esc(ej.nombre || "") + " → <b>" + T.dinero(ej.precio || 0) + "</b></span></label>" +
+        '<label class="opcion-radio"><input type="radio" name="modo" value="bs"><span>Son precios para <b>pagar en Bs</b> (ya traen la brecha del ' + brecha + " %): quitar la brecha. Ej.: → <b>" + T.dinero(conBrecha) + "</b></span></label>" +
+        '<span class="ayuda">El precio en bolívares se sigue calculando solo con la fórmula: precio en $ + ' + brecha + " % × tasa BCV.</span></div>" +
+      campo("Existencia inicial de cada producto (o de cada color)", "stock", "5", { attrs: ' inputmode="numeric"', ayuda: "Luego la ajustas en cada producto. Los agotados del PDF entran ocultos y sin precio." }) +
+      (ejemplos.length ? '<label class="opcion-radio"><input type="checkbox" name="ocultarEjemplos" checked><span>Ocultar los ' + ejemplos.length + " productos de ejemplo (no se borran; se pueden volver a mostrar con 👁)</span></label>" : "") +
+      '<div class="progreso-imp oculto" id="imp-progreso"><div><i id="imp-barra"></i></div><p id="imp-texto"></p></div>' +
+      "</form>",
+      '<button class="boton" id="imp-ir"' + (nuevos.length ? "" : " disabled") + ">" + (nuevos.length ? "Importar " + nuevos.length + " productos" : "Ya está todo importado") + "</button>");
+    $("#imp-ir").onclick = async (ev) => {
+      const v = leerForm($("#f-imp"));
+      const modo = ($("#f-imp [name=modo]:checked") || {}).value || "divisas";
+      const stockIni = Math.max(0, parseInt(v.stock, 10) || 0);
+      const listo = ocupado(ev.currentTarget, "Importando…");
+      $("#imp-progreso").classList.remove("oculto");
+      $("#modal-cerrar").disabled = true;
+      let hechos = 0, errores = 0;
+      const base = E.productos.reduce((m, p) => Math.max(m, Number(p.orden) || 0), 0) + 1;
+      const urlFoto = async (arch, nombre) => {
+        const ruta = "importar/fotos/" + arch;
+        if (F.url()) {
+          try {
+            const blob = await (await fetch(ruta)).blob();
+            return await F.subir(blob, "productos", nombre);
+          } catch (e) { console.warn("Foto no subida a Cloudflare, se usa la de la página", e); }
+        }
+        return T.demo ? ruta : new URL(ruta, location.href).href;
+      };
+      try {
+        for (let i = 0; i < nuevos.length; i++) {
+          const p = nuevos[i];
+          $("#imp-texto").textContent = (i + 1) + " de " + nuevos.length + " · " + p.nombre;
+          $("#imp-barra").style.width = Math.round((i / nuevos.length) * 100) + "%";
+          try {
+            const fotos = [];
+            for (const f of p.fotos || []) fotos.push({ url: await urlFoto(f.archivo, T.slug(p.nombre) + (f.color ? "-" + T.slug(f.color) : "")), color: f.color || "", tipo: "foto", ambiente: false });
+            const colores = (p.colores || []).map((c) => ({ nombre: c.nombre, hex: c.hex }));
+            const sc = {};
+            colores.forEach((c) => { sc[c.nombre] = p.agotado ? 0 : stockIni; });
+            let precio = p.precio == null ? null : Number(p.precio);
+            if (precio != null && modo === "bs") precio = Math.round((precio / (1 + brecha / 100)) * 100) / 100;
+            const fila = {
+              nombre: p.nombre, codigo: p.codigo, marca: "", categoria: p.categoria, colores, descripcion: p.descripcion || "",
+              divisa_detal: precio, divisa_mayor: null, bcv_detal: null, bcv_mayor: null, precio_antes: null,
+              disponible: !p.agotado && precio != null, encargo: false, destacado: false, nuevo: false,
+              fotos, colecciones: [], orden: base + i, stock: colores.length ? 0 : (p.agotado ? 0 : stockIni), stock_color: sc,
+              material: p.material || null, alto: p.alto || null, ancho: p.ancho || null, fondo: p.fondo || null,
+            };
+            const g = await D.guardarProducto(fila);
+            E.productos.push(g); hechos++;
+          } catch (e) { errores++; console.error("No se importó", p.nombre, e); }
+        }
+        // categorías nuevas (las existentes no se tocan)
+        const cfg = Object.assign({}, await D.config());
+        const actuales = (cfg.categorias || []).map((c) => (typeof c === "string" ? { nombre: c, icono: "" } : c));
+        const nombres = new Set(actuales.map((c) => c.nombre));
+        [...new Set(lista.map((p) => p.categoria))].forEach((c) => { if (!nombres.has(c)) actuales.push({ nombre: c, icono: ICONO_CATEGORIA[c] || "" }); });
+        cfg.categorias = actuales;
+        await D.guardarConfig(cfg); E.cfg = T.unirAjustes(cfg);
+        if (v.ocultarEjemplos) for (const p of ejemplos) { const g = await D.guardarProducto({ id: p.id, disponible: false }); Object.assign(p, g); }
+        $("#imp-barra").style.width = "100%";
+        $("#imp-texto").textContent = "Listo: " + hechos + " productos importados" + (errores ? " · " + errores + " con error (vuelve a tocar Importar para reintentarlos)" : "") + ".";
+        T.tostada("Catálogo importado: " + hechos + " productos");
+        pintarListaProductos();
+        ev.currentTarget && (ev.currentTarget.textContent = "Cerrar");
+        $("#imp-ir").disabled = false; $("#imp-ir").textContent = "Cerrar"; $("#imp-ir").onclick = () => cerrarModal(true);
+      } catch (e) { falla(e); listo(); }
+      $("#modal-cerrar").disabled = false;
+    };
   }
 
   function productosFiltrados() {
