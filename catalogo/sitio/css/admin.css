@@ -249,3 +249,11 @@ body.admin { background: var(--fondo); }
   .fila-ped > :nth-child(1) { grid-area: f; } .fila-ped > :nth-child(2) { grid-area: n; } .fila-ped > :nth-child(3) { grid-area: c; }
   .fila-ped > :nth-child(4) { grid-area: x; } .fila-ped > :nth-child(5) { grid-area: p; } .fila-ped > :nth-child(6) { grid-area: q; }
 }
+
+/* Categorías: foto sin fondo */
+.foto-cat { position: relative; width: 64px; height: 64px; flex: none; display: grid; place-items: center; border-radius: 14px; border: 1px dashed var(--linea); background: repeating-conic-gradient(#f1f1f1 0 25%, #fff 0 50%) 0 0 / 14px 14px; cursor: pointer; overflow: hidden; }
+.foto-cat img { width: 100%; height: 100%; object-fit: contain; padding: 4px; }
+.foto-cat svg { width: 26px; height: 26px; color: #5a5a5c; }
+.foto-cat span { position: absolute; inset: auto 0 0 0; font-size: 10px; font-weight: 700; text-align: center; background: rgba(5,51,89,.85); color: #fff; padding: 2px 0; }
+.item-orden:has(.foto-cat) { grid-template-columns: auto 64px minmax(0, 1fr) auto auto; }
+@media (max-width: 640px) { .item-orden:has(.foto-cat) { grid-template-columns: auto 52px minmax(0, 1fr) auto auto; } .foto-cat { width: 52px; height: 52px; } }

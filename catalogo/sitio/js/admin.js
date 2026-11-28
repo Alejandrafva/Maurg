@@ -1241,21 +1241,24 @@
   // CATEGORÍAS
   // ===================================================================
   function vistaCategorias() {
-    const lista = categoriasConfig().map((c) => ({ nombre: c.nombre, icono: c.icono || "", original: c.nombre, oculta: !!c.oculta }));
+    const lista = categoriasConfig().map((c) => ({ nombre: c.nombre, icono: c.icono || "", original: c.nombre, oculta: !!c.oculta, foto: c.foto || "" }));
+    const RECORTES = ["archivadores", "bibliotecas-y-gabinetes", "closets-y-hogar", "combos-de-oficina", "comedor", "escritorios", "espejos", "lockers", "mesas-de-barra", "mesas-de-centro", "mesas-de-comedor", "mesas-de-reunion", "poltronas-y-sofas", "recepcion", "sillas-de-barberia", "sillas-de-barra", "sillas-de-cajero", "sillas-de-comedor", "sillas-de-visitante", "sillas-ejecutivas", "sillas-gamer", "sillas-operativas", "sillas-presidenciales", "spa-y-salon", "taburetes", "tandem", "vanity"];
+    const fotoDe = (c) => c.foto || (RECORTES.includes(T.slug(c.nombre)) ? "img/categorias/" + T.slug(c.nombre) + ".webp" : "");
     todasCategorias().forEach((n) => { if (!lista.some((c) => c.nombre === n)) lista.push({ nombre: n, icono: "", original: n }); });
     const cuenta = (n) => E.productos.filter((p) => p.categoria === n).length;
     function pintar() {
       $("#cat-lista").innerHTML = lista.map((c, i) =>
         '<div class="item-orden" data-i="' + i + '"><div class="mover"><button data-m="-1" aria-label="Subir">' + icono("arriba") + '</button><button data-m="1" aria-label="Bajar">' + icono("abajo") + "</button></div>" +
-        '<div class="vista-icono">' + icono(c.icono || "todo") + "</div>" +
+        '<label class="foto-cat" title="Foto sin fondo de la categoría (PNG o WebP transparente)">' + (fotoDe(c) ? '<img src="' + esc(fotoDe(c)) + '" alt="">' : icono(c.icono || "todo")) + '<span>' + (c.foto ? "Cambiar" : "Foto") + '</span><input type="file" accept="image/png,image/webp" data-foto-cat hidden></label>' +
         '<div class="campos"><input class="cat-nombre" value="' + esc(c.nombre) + '" placeholder="Nombre de la categoría" style="border:1px solid var(--linea);border-radius:10px;padding:0 10px">' +
         '<select class="cat-icono" style="border:1px solid var(--linea);border-radius:10px;padding:0 8px;background:var(--superficie)">' + ['<option value="">Icono automático</option>'].concat(window.ICONOS_CATEGORIA.map((k) => '<option value="' + k + '"' + (k === c.icono ? " selected" : "") + ">" + k.replace("-", " ") + "</option>")).join("") + "</select>" +
         '<span class="num-prod">' + cuenta(c.original) + " producto(s)</span></div>" +
+        (c.foto ? '<button class="icono-boton" data-foto-quitar title="Volver a la foto de fábrica" aria-label="Quitar foto">' + icono("cerrar") + "</button>" : "") +
         '<button class="icono-boton" data-quitar aria-label="Quitar">' + icono("basura") + "</button></div>"
       ).join("") || '<div class="vacio-admin">Sin categorías</div>';
     }
     $("#vista").innerHTML = '<div class="tarjeta-admin"><h3>Categorías del catálogo <small>El orden aquí es el orden en la tienda</small></h3>' +
-      '<p class="ayuda">Si cambias el nombre de una categoría, sus productos se actualizan solos. Las categorías sin productos no se muestran en la tienda.</p>' +
+      '<p class="ayuda">Si cambias el nombre de una categoría, sus productos se actualizan solos. Las categorías sin productos no se muestran en la tienda. La <b>foto</b> sale en «Compra por categoría» y en el menú: súbela <b>sin fondo</b> (PNG o WebP transparente) para que el mueble sobresalga de la tarjeta.</p>' +
       '<div class="lista-orden" id="cat-lista"></div>' +
       '<div style="display:flex;gap:8px;flex-wrap:wrap;justify-content:space-between"><button class="boton claro pequeno" id="cat-agregar">' + icono("mas") + 'Agregar categoría</button><button class="boton" id="cat-guardar">Guardar categorías</button></div></div>';
     pintar();
@@ -1263,11 +1266,23 @@
       const fila = e.target.closest("[data-i]"); if (!fila) return;
       const c = lista[Number(fila.dataset.i)];
       if (e.target.classList.contains("cat-nombre")) c.nombre = e.target.value;
-      if (e.target.classList.contains("cat-icono")) { c.icono = e.target.value; $(".vista-icono", fila).innerHTML = icono(c.icono || "todo"); }
+      if (e.target.classList.contains("cat-icono")) { c.icono = e.target.value; if (!fotoDe(c)) { const l = $(".foto-cat", fila); l.firstChild.outerHTML = icono(c.icono || "todo"); } }
+    });
+    $("#cat-lista").addEventListener("change", async (e) => {
+      const inp = e.target.closest("[data-foto-cat]"); if (!inp || !inp.files[0]) return;
+      const fila = inp.closest("[data-i]"); const c = lista[Number(fila.dataset.i)];
+      const etiqueta = $(".foto-cat span", fila); etiqueta.textContent = "Subiendo…";
+      try {
+        const blob = await aligerar(inp.files[0], 700);
+        c.foto = await F.subir(blob, "portada", "categoria-" + T.slug(c.nombre));
+        pintar(); T.tostada("Foto lista. Toca «Guardar categorías».");
+      } catch (ex) { falla(ex); etiqueta.textContent = "Foto"; }
+      inp.value = "";
     });
     $("#cat-lista").addEventListener("click", async (e) => {
       const fila = e.target.closest("[data-i]"); if (!fila) return;
       const i = Number(fila.dataset.i);
+      if (e.target.closest("[data-foto-quitar]")) { lista[i].foto = ""; pintar(); return; }
       const m = e.target.closest("[data-m]");
       if (m) { const j = i + Number(m.dataset.m); if (j < 0 || j >= lista.length) return; const t = lista[i]; lista[i] = lista[j]; lista[j] = t; pintar(); return; }
       if (e.target.closest("[data-quitar]")) {
@@ -1284,7 +1299,7 @@
       const listo = ocupado(e.currentTarget);
       try {
         for (const c of limpias) if (c.original && c.original !== c.nombre.trim()) await D.renombrarCategoria(c.original, c.nombre.trim());
-        const cfg = Object.assign({}, await D.config(), { categorias: limpias.map((c) => ({ nombre: c.nombre.trim(), icono: c.icono })) });
+        const cfg = Object.assign({}, await D.config(), { categorias: limpias.map((c) => Object.assign({ nombre: c.nombre.trim(), icono: c.icono }, c.foto ? { foto: c.foto } : {}, c.oculta ? { oculta: true } : {})) });
         await D.guardarConfig(cfg);
         E.cfg = T.unirAjustes(cfg);
         E.productos = await D.productos();

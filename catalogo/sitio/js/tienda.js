@@ -183,6 +183,7 @@
   // Tarjetas de categoría ("Compra por espacio")
   // -------------------------------------------------------------------
   const TINTES = ["#efe7dc", "#e3e8ef", "#e9e9ea", "#e8eef4", "#f1ece6", "#e6e9ec"];
+  const CAT_RECORTES = ["archivadores", "bibliotecas-y-gabinetes", "closets-y-hogar", "combos-de-oficina", "comedor", "escritorios", "espejos", "lockers", "mesas-de-barra", "mesas-de-centro", "mesas-de-comedor", "mesas-de-reunion", "poltronas-y-sofas", "recepcion", "sillas-de-barberia", "sillas-de-barra", "sillas-de-cajero", "sillas-de-comedor", "sillas-de-visitante", "sillas-ejecutivas", "sillas-gamer", "sillas-operativas", "sillas-presidenciales", "spa-y-salon", "taburetes", "tandem", "vanity"];
   function pintarTarjetasCategoria() {
     const cont = $("#cats-tarjetas");
     if (!cont) return;
@@ -190,9 +191,11 @@
     $("#categorias-vitrina").classList.toggle("oculto", cats.length < 2);
     cont.innerHTML = cats.slice(0, 8).map((c, k) => {
       const prods = visibles().filter((p) => p.categoria === c.nombre && T.fotos(p).length);
-      const amb = prods.find((p) => T.fotoAmbiente(p));
+      // 1) foto propia de la categoría (almacén › Categorías), 2) recorte sin fondo incluido, 3) foto de un producto
+      const propia = c.foto || (CAT_RECORTES.includes(T.slug(c.nombre)) ? "img/categorias/" + T.slug(c.nombre) + ".webp" : "");
+      const amb = propia ? null : prods.find((p) => T.fotoAmbiente(p));
       const elegido = amb || prods[0];
-      const img = amb ? T.fotoAmbiente(amb) : elegido ? T.fotoPrincipal(elegido) : "";
+      const img = propia || (amb ? T.fotoAmbiente(amb) : elegido ? T.fotoPrincipal(elegido) : "");
       return '<button class="cat-tarjeta revelar" style="--tinte:' + TINTES[k % TINTES.length] + ";--d:" + (k % 4) * 80 + 'ms" data-cat-tarjeta="' + esc(c.nombre) + '">' +
         (img ? '<span class="cat-foto' + (amb ? " ambiente" : "") + '"><img src="' + esc(img) + '" alt="" loading="lazy"></span>' : '<span class="cat-foto">' + icono(iconoPara(c)) + "</span>") +
         '<span class="cat-texto"><b>' + esc(c.nombre) + "</b><small>" + c.n + (c.n === 1 ? " producto" : " productos") + "</small></span>" +

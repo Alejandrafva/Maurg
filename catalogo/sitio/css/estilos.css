@@ -1558,3 +1558,9 @@ body { background: #ffffff; color: var(--negro); }
 .pista3d svg { width: 16px; height: 16px; color: var(--marino); }
 .cerrar3d { position: absolute; right: 14px; top: 14px; background: #fff; }
 @media (prefers-reduced-motion: reduce) { .boton-3d svg { animation: none; } }
+
+/* Fotos sin fondo de las categorías (tarjetas y menú) */
+.mega-img img.recorte { object-fit: contain; padding: 4px; }
+.ml-cats img.recorte { object-fit: contain; padding: 8px; background: rgba(255,255,255,.92); }
+.cat-foto img { mix-blend-mode: normal; }
+.cat-foto:not(.ambiente) img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; object-position: center bottom; }

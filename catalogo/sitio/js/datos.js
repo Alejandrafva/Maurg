@@ -438,6 +438,7 @@
   // Menú de lujo (celular), categorías desplegables (computadora),
   // ubicación en el pie y galería de Instagram. Se usan en todas las páginas.
   // ---------------------------------------------------------------------
+  T.CAT_RECORTES = ["archivadores", "bibliotecas-y-gabinetes", "closets-y-hogar", "combos-de-oficina", "comedor", "escritorios", "espejos", "lockers", "mesas-de-barra", "mesas-de-centro", "mesas-de-comedor", "mesas-de-reunion", "poltronas-y-sofas", "recepcion", "sillas-de-barberia", "sillas-de-barra", "sillas-de-cajero", "sillas-de-comedor", "sillas-de-visitante", "sillas-ejecutivas", "sillas-gamer", "sillas-operativas", "sillas-presidenciales", "spa-y-salon", "taburetes", "tandem", "vanity"];
   const FOTOS_FABRICA = ["silla-velvet-negra", "taburete-velvet", "silla-barra-nordica", "vanity-petalo", "silla-patchwork", "taburete-concha"];
   T.FOTO_PAGINA = { pagos: "taburete-velvet", envios: "silla-barra-nordica", resenas: "vanity-petalo", contacto: "silla-patchwork", politicas: "taburete-concha", privacidad: "silla-velvet-negra", catalogo: "taburete-velvet" };
   T.fotoDePagina = function (cfg, slug) {
@@ -460,7 +461,8 @@
     return base.map((c) => {
       const de = prods.filter((p) => p.categoria === c.nombre);
       const conFoto = de.find((p) => T.fotos(p).length);
-      return { nombre: c.nombre, icono: c.icono || "silla", n: de.length, foto: conFoto ? T.fotoPrincipal(conFoto) : "" };
+      const recorte = c.foto || (T.CAT_RECORTES.includes(T.slug(c.nombre)) ? "img/categorias/" + T.slug(c.nombre) + ".webp" : "");
+      return { nombre: c.nombre, icono: c.icono || "silla", n: de.length, foto: recorte || (conFoto ? T.fotoPrincipal(conFoto) : ""), recorte: !!recorte };
     }).filter((c) => !prods.length || c.n > 0);
   }
 
@@ -477,7 +479,7 @@
     if (mega) {
       const foto = (cfg.portada && cfg.portada.imagen) || "img/fotos/taburete-velvet.webp";
       mega.innerHTML = '<div class="mega-cats">' + cats.map((c) =>
-        '<a href="' + enlaceCat(c) + '"><span class="mega-img">' + (c.foto ? '<img src="' + T.esc(c.foto) + '" alt="" loading="lazy">' : ic(c.icono)) + "</span><span><b>" + T.esc(c.nombre) + "</b>" + (c.n ? "<small>" + c.n + (c.n === 1 ? " producto" : " productos") + "</small>" : "") + "</span></a>").join("") + "</div>" +
+        '<a href="' + enlaceCat(c) + '"><span class="mega-img">' + (c.foto ? '<img src="' + T.esc(c.foto) + '" alt="" loading="lazy"' + (c.recorte ? ' class="recorte"' : "") + ">" : ic(c.icono)) + "</span><span><b>" + T.esc(c.nombre) + "</b>" + (c.n ? "<small>" + c.n + (c.n === 1 ? " producto" : " productos") + "</small>" : "") + "</span></a>").join("") + "</div>" +
         '<a class="mega-destacado" href="catalogo.html" style="background-image:linear-gradient(180deg,rgba(5,51,89,.05),rgba(3,36,65,.85)),url(\'' + T.esc(foto) + '\')"><small>Colección ' + new Date().getFullYear() + "</small><b>Ver todo el catálogo</b><span>" + ic("flecha") + "</span></a>";
       const btn = document.getElementById("menu-cats-boton");
       const caja = btn && btn.parentElement;
@@ -506,7 +508,7 @@
       '<div class="ml-cabeza"><img src="img/logo-arkeo-blanco.png" alt="ARKEO Home &amp; Office"><button class="ml-cerrar" data-cerrar-menu aria-label="Cerrar menú">' + ic("cerrar") + "</button></div>" +
       '<nav class="ml-enlaces">' + item(1, "./", "Inicio", "inicio") +
       '<button type="button" class="ml-enlace ml-desplegar" aria-expanded="false" style="--i:2">' + num(2) + "<span>Categorías</span>" + '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></button>' +
-      '<div class="ml-cats"><div>' + cats.map((c) => '<a href="' + enlaceCat(c) + '">' + (c.foto ? '<img src="' + T.esc(c.foto) + '" alt="" loading="lazy">' : '<i>' + ic(c.icono) + "</i>") + "<span>" + T.esc(c.nombre) + "</span></a>").join("") +
+      '<div class="ml-cats"><div>' + cats.map((c) => '<a href="' + enlaceCat(c) + '">' + (c.foto ? '<img src="' + T.esc(c.foto) + '" alt="" loading="lazy"' + (c.recorte ? ' class="recorte"' : "") + ">" : '<i>' + ic(c.icono) + "</i>") + "<span>" + T.esc(c.nombre) + "</span></a>").join("") +
         '<a class="ml-todo" href="catalogo.html"><i>' + ic("flecha") + "</i><span>Ver todo</span></a></div></div>" +
       item(3, "catalogo.html", "Catálogo", "catalogo") + item(4, "pagos.html", "Métodos de pago", "pagos") + item(5, "envios.html", "Envíos", "envios") +
       item(6, "resenas.html", "Reseñas", "resenas") + item(7, "contacto.html", "Contacto", "contacto") + "</nav>" +
