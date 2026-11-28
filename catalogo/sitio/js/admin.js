@@ -650,7 +650,7 @@
           $("#imp-barra").style.width = Math.round((i / nuevos.length) * 100) + "%";
           try {
             const fotos = [];
-            for (const f of p.fotos || []) fotos.push({ url: await urlFoto(f.archivo, T.slug(p.nombre) + (f.color ? "-" + T.slug(f.color) : "")), color: f.color || "", tipo: "foto", ambiente: false });
+            for (const f of p.fotos || []) fotos.push({ url: await urlFoto(f.archivo, T.slug(p.nombre) + (f.color ? "-" + T.slug(f.color) : "")), color: f.color || "", tipo: "foto", ambiente: !!f.ambiente });
             const colores = (p.colores || []).map((c) => ({ nombre: c.nombre, hex: c.hex }));
             const sc = {};
             colores.forEach((c) => { sc[c.nombre] = p.agotado ? 0 : stockIni; });
@@ -659,7 +659,7 @@
             const fila = {
               nombre: p.nombre, codigo: p.codigo, marca: "", categoria: p.categoria, colores, descripcion: p.descripcion || "",
               divisa_detal: precio, divisa_mayor: null, bcv_detal: null, bcv_mayor: null, precio_antes: null,
-              disponible: !p.agotado && precio != null, encargo: false, destacado: false, nuevo: false,
+              disponible: !p.agotado && precio != null, encargo: false, destacado: !!p.destacado, nuevo: false,
               fotos, colecciones: [], orden: base + i, stock: colores.length ? 0 : (p.agotado ? 0 : stockIni), stock_color: sc,
               material: p.material || null, alto: p.alto || null, ancho: p.ancho || null, fondo: p.fondo || null,
             };

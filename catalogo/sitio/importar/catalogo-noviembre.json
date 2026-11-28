@@ -1,0 +1,7406 @@
+{
+ "version": 1,
+ "nombre": "Catálogo noviembre 2026",
+ "productos": [
+  {
+   "nombre": "Archivador 4 Gavetas MDF Blanco",
+   "codigo": "AR-006",
+   "categoria": "Archivadores",
+   "precio": 240,
+   "juego": 1,
+   "agotado": false,
+   "material": "MDF",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "",
+   "colores": [],
+   "fotos": [
+    {
+     "archivo": "archivadores/archivador-4-gavetas-mdf-blanco.webp",
+     "color": ""
+    }
+   ]
+  },
+  {
+   "nombre": "Archivador 4 Gavetas MDF Gris",
+   "codigo": "AR-004",
+   "categoria": "Archivadores",
+   "precio": 200,
+   "juego": 1,
+   "agotado": false,
+   "material": "MDF",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "",
+   "colores": [],
+   "fotos": [
+    {
+     "archivo": "archivadores/archivador-4-gavetas-mdf-gris.webp",
+     "color": ""
+    }
+   ]
+  },
+  {
+   "nombre": "Archivador 4 Gavetas Metálico",
+   "codigo": "AR-005",
+   "categoria": "Archivadores",
+   "precio": 250,
+   "juego": 1,
+   "agotado": false,
+   "material": "Metal",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "",
+   "colores": [],
+   "fotos": [
+    {
+     "archivo": "archivadores/archivador-4-gavetas-metalico.webp",
+     "color": ""
+    }
+   ]
+  },
+  {
+   "nombre": "Arturito Blanco 3 Gavetas",
+   "codigo": "AR-001",
+   "categoria": "Archivadores",
+   "precio": 125,
+   "juego": 1,
+   "agotado": false,
+   "material": "",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "",
+   "colores": [],
+   "fotos": [
+    {
+     "archivo": "archivadores/arturito-blanco-3-gavetas.webp",
+     "color": ""
+    }
+   ]
+  },
+  {
+   "nombre": "Arturito Lazzio 3 Gavetas",
+   "codigo": "AR-003",
+   "categoria": "Archivadores",
+   "precio": 95,
+   "juego": 1,
+   "agotado": false,
+   "material": "",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "",
+   "colores": [],
+   "fotos": [
+    {
+     "archivo": "archivadores/arturito-lazzio-3-gavetas.webp",
+     "color": ""
+    }
+   ]
+  },
+  {
+   "nombre": "Arturito Metálico 3 Gavetas",
+   "codigo": "AR-002",
+   "categoria": "Archivadores",
+   "precio": 165,
+   "juego": 1,
+   "agotado": false,
+   "material": "Metal",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "",
+   "colores": [],
+   "fotos": [
+    {
+     "archivo": "archivadores/arturito-metalico-3-gavetas.webp",
+     "color": ""
+    }
+   ]
+  },
+  {
+   "nombre": "Biblioteca Blanca S/P",
+   "codigo": "BI-009",
+   "categoria": "Bibliotecas y gabinetes",
+   "precio": 300,
+   "juego": 1,
+   "agotado": false,
+   "material": "",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "",
+   "colores": [],
+   "fotos": [
+    {
+     "archivo": "bibliotecas-y-gabinetes/biblioteca-blanca-s-p.webp",
+     "color": ""
+    }
+   ]
+  },
+  {
+   "nombre": "Biblioteca Lazzio C/P",
+   "codigo": "BI-005",
+   "categoria": "Bibliotecas y gabinetes",
+   "precio": 275,
+   "juego": 1,
+   "agotado": false,
+   "material": "",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "",
+   "colores": [],
+   "fotos": [
+    {
+     "archivo": "bibliotecas-y-gabinetes/biblioteca-lazzio-c-p.webp",
+     "color": ""
+    }
+   ]
+  },
+  {
+   "nombre": "Biblioteca Lazzio P/V",
+   "codigo": "BI-006",
+   "categoria": "Bibliotecas y gabinetes",
+   "precio": 315,
+   "juego": 1,
+   "agotado": false,
+   "material": "",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "",
+   "colores": [],
+   "fotos": [
+    {
+     "archivo": "bibliotecas-y-gabinetes/biblioteca-lazzio-p-v.webp",
+     "color": ""
+    }
+   ]
+  },
+  {
+   "nombre": "Biblioteca Lazzio S/P",
+   "codigo": "BI-004",
+   "categoria": "Bibliotecas y gabinetes",
+   "precio": 240,
+   "juego": 1,
+   "agotado": false,
+   "material": "",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "",
+   "colores": [],
+   "fotos": [
+    {
+     "archivo": "bibliotecas-y-gabinetes/biblioteca-lazzio-s-p.webp",
+     "color": ""
+    }
+   ]
+  },
+  {
+   "nombre": "Biblioteca Metálica S/P",
+   "codigo": "BI-002",
+   "categoria": "Bibliotecas y gabinetes",
+   "precio": 275,
+   "juego": 1,
+   "agotado": false,
+   "material": "Metal",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "",
+   "colores": [],
+   "fotos": [
+    {
+     "archivo": "bibliotecas-y-gabinetes/biblioteca-metalica-s-p.webp",
+     "color": ""
+    }
+   ]
+  },
+  {
+   "nombre": "Biblioteca Metálica con Puertas",
+   "codigo": "BI-003",
+   "categoria": "Bibliotecas y gabinetes",
+   "precio": 265,
+   "juego": 1,
+   "agotado": false,
+   "material": "Metal",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "",
+   "colores": [],
+   "fotos": [
+    {
+     "archivo": "bibliotecas-y-gabinetes/biblioteca-metalica-con-puertas.webp",
+     "color": ""
+    }
+   ]
+  },
+  {
+   "nombre": "Biblioteca Metálica con Vidrio",
+   "codigo": "BI-001",
+   "categoria": "Bibliotecas y gabinetes",
+   "precio": 290,
+   "juego": 1,
+   "agotado": false,
+   "material": "Metal",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "",
+   "colores": [],
+   "fotos": [
+    {
+     "archivo": "bibliotecas-y-gabinetes/biblioteca-metalica-con-vidrio.webp",
+     "color": ""
+    }
+   ]
+  },
+  {
+   "nombre": "Fliper Aéreo Lazzio",
+   "codigo": "BI-008",
+   "categoria": "Bibliotecas y gabinetes",
+   "precio": 90,
+   "juego": 1,
+   "agotado": false,
+   "material": "",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "",
+   "colores": [],
+   "fotos": [
+    {
+     "archivo": "bibliotecas-y-gabinetes/fliper-aereo-lazzio.webp",
+     "color": ""
+    }
+   ]
+  },
+  {
+   "nombre": "Telefonera Horizontal Lazzio",
+   "codigo": "BI-010",
+   "categoria": "Bibliotecas y gabinetes",
+   "precio": null,
+   "juego": 1,
+   "agotado": true,
+   "material": "",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "",
+   "colores": [],
+   "fotos": [
+    {
+     "archivo": "bibliotecas-y-gabinetes/telefonera-horizontal-lazzio.webp",
+     "color": ""
+    }
+   ]
+  },
+  {
+   "nombre": "Telefonera Vertical Lazzio",
+   "codigo": "BI-007",
+   "categoria": "Bibliotecas y gabinetes",
+   "precio": 275,
+   "juego": 1,
+   "agotado": false,
+   "material": "",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "",
+   "colores": [],
+   "fotos": [
+    {
+     "archivo": "bibliotecas-y-gabinetes/telefonera-vertical-lazzio.webp",
+     "color": ""
+    }
+   ]
+  },
+  {
+   "nombre": "Armario Wood",
+   "codigo": "CH-004",
+   "categoria": "Closets y hogar",
+   "precio": 130,
+   "juego": 1,
+   "agotado": false,
+   "material": "",
+   "ancho": "80 cm",
+   "fondo": "40 cm",
+   "alto": "",
+   "descripcion": "",
+   "colores": [],
+   "fotos": [
+    {
+     "archivo": "closets-y-hogar/armario-wood.webp",
+     "color": ""
+    }
+   ]
+  },
+  {
+   "nombre": "Closet Canaria",
+   "codigo": "CH-001",
+   "categoria": "Closets y hogar",
+   "precio": 465,
+   "juego": 1,
+   "agotado": false,
+   "material": "",
+   "ancho": "180 cm",
+   "fondo": "45 cm",
+   "alto": "190 cm",
+   "descripcion": "",
+   "colores": [],
+   "fotos": [
+    {
+     "archivo": "closets-y-hogar/closet-canaria.webp",
+     "color": ""
+    }
+   ]
+  },
+  {
+   "nombre": "Closet Elegance",
+   "codigo": "CH-002",
+   "categoria": "Closets y hogar",
+   "precio": 440,
+   "juego": 1,
+   "agotado": false,
+   "material": "",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "",
+   "colores": [],
+   "fotos": [
+    {
+     "archivo": "closets-y-hogar/closet-elegance.webp",
+     "color": ""
+    }
+   ]
+  },
+  {
+   "nombre": "Closet Praga",
+   "codigo": "CH-003",
+   "categoria": "Closets y hogar",
+   "precio": 375,
+   "juego": 1,
+   "agotado": false,
+   "material": "",
+   "ancho": "120 cm",
+   "fondo": "45 cm",
+   "alto": "90 cm",
+   "descripcion": "",
+   "colores": [
+    {
+     "nombre": "Gris",
+     "hex": "#81817e"
+    },
+    {
+     "nombre": "Blanco",
+     "hex": "#ececeb"
+    }
+   ],
+   "fotos": [
+    {
+     "archivo": "closets-y-hogar/closet-praga-gris.webp",
+     "color": "Gris"
+    },
+    {
+     "archivo": "closets-y-hogar/closet-praga-blanco.webp",
+     "color": "Blanco"
+    }
+   ]
+  },
+  {
+   "nombre": "Módulo de TV Adams",
+   "codigo": "CH-006",
+   "categoria": "Closets y hogar",
+   "precio": 215,
+   "juego": 1,
+   "agotado": false,
+   "material": "",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "",
+   "colores": [],
+   "fotos": [
+    {
+     "archivo": "closets-y-hogar/modulo-de-tv-adams.webp",
+     "color": ""
+    }
+   ]
+  },
+  {
+   "nombre": "Módulo de TV Century",
+   "codigo": "CH-005",
+   "categoria": "Closets y hogar",
+   "precio": 200,
+   "juego": 1,
+   "agotado": false,
+   "material": "",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "",
+   "colores": [],
+   "fotos": [
+    {
+     "archivo": "closets-y-hogar/modulo-de-tv-century.webp",
+     "color": ""
+    }
+   ]
+  },
+  {
+   "nombre": "Módulo de TV New York",
+   "codigo": "CH-007",
+   "categoria": "Closets y hogar",
+   "precio": 200,
+   "juego": 1,
+   "agotado": false,
+   "material": "",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "",
+   "colores": [],
+   "fotos": [
+    {
+     "archivo": "closets-y-hogar/modulo-de-tv-new-york.webp",
+     "color": ""
+    }
+   ]
+  },
+  {
+   "nombre": "Zapatera Miami 2 Gavetas",
+   "codigo": "CH-009",
+   "categoria": "Closets y hogar",
+   "precio": 100,
+   "juego": 1,
+   "agotado": false,
+   "material": "",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "",
+   "colores": [
+    {
+     "nombre": "Gris",
+     "hex": "#c2c2c1"
+    },
+    {
+     "nombre": "Blanco",
+     "hex": "#f1f1f1"
+    }
+   ],
+   "fotos": [
+    {
+     "archivo": "closets-y-hogar/zapatera-miami-2-gavetas-gris.webp",
+     "color": "Gris"
+    },
+    {
+     "archivo": "closets-y-hogar/zapatera-miami-2-gavetas-blanco.webp",
+     "color": "Blanco"
+    }
+   ]
+  },
+  {
+   "nombre": "Zapatera Miami 3 Gavetas",
+   "codigo": "CH-008",
+   "categoria": "Closets y hogar",
+   "precio": 125,
+   "juego": 1,
+   "agotado": false,
+   "material": "",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "",
+   "colores": [
+    {
+     "nombre": "Gris",
+     "hex": "#cacac8"
+    },
+    {
+     "nombre": "Blanco",
+     "hex": "#f2f2f2"
+    }
+   ],
+   "fotos": [
+    {
+     "archivo": "closets-y-hogar/zapatera-miami-3-gavetas-gris.webp",
+     "color": "Gris"
+    },
+    {
+     "archivo": "closets-y-hogar/zapatera-miami-3-gavetas-blanco.webp",
+     "color": "Blanco"
+    }
+   ]
+  },
+  {
+   "nombre": "Combo All Star (escritorio + silla Trendy)",
+   "codigo": "CO-007",
+   "categoria": "Combos de oficina",
+   "precio": 140,
+   "juego": 1,
+   "agotado": false,
+   "material": "",
+   "ancho": "120 cm",
+   "fondo": "60 cm",
+   "alto": "75 cm",
+   "descripcion": " Escritorio de 120 × 60 cm con silla Trendy incluida.",
+   "colores": [],
+   "fotos": [
+    {
+     "archivo": "combos-de-oficina/combo-all-star-escritorio-silla-trendy.webp",
+     "color": ""
+    }
+   ]
+  },
+  {
+   "nombre": "Combo Aura (escritorio + silla Trendy)",
+   "codigo": "CO-009",
+   "categoria": "Combos de oficina",
+   "precio": 130,
+   "juego": 1,
+   "agotado": false,
+   "material": "",
+   "ancho": "120 cm",
+   "fondo": "60 cm",
+   "alto": "75 cm",
+   "descripcion": " Escritorio de 120 × 60 cm con silla Trendy incluida.",
+   "colores": [],
+   "fotos": [
+    {
+     "archivo": "combos-de-oficina/combo-aura-escritorio-silla-trendy.webp",
+     "color": ""
+    }
+   ]
+  },
+  {
+   "nombre": "Combo Capri (escritorio + silla Trendy)",
+   "codigo": "CO-010",
+   "categoria": "Combos de oficina",
+   "precio": 240,
+   "juego": 1,
+   "agotado": false,
+   "material": "",
+   "ancho": "",
+   "fondo": "",
+   "alto": "75 cm",
+   "descripcion": " Escritorio de 120 × 60 cm con silla Trendy incluida.",
+   "colores": [],
+   "fotos": [
+    {
+     "archivo": "combos-de-oficina/combo-capri-escritorio-silla-trendy.webp",
+     "color": ""
+    }
+   ]
+  },
+  {
+   "nombre": "Combo Doha (escritorio + silla Trendy)",
+   "codigo": "CO-005",
+   "categoria": "Combos de oficina",
+   "precio": 215,
+   "juego": 1,
+   "agotado": false,
+   "material": "",
+   "ancho": "",
+   "fondo": "",
+   "alto": "75 cm",
+   "descripcion": " Escritorio de 120 × 60 cm con silla Trendy incluida.",
+   "colores": [],
+   "fotos": [
+    {
+     "archivo": "combos-de-oficina/combo-doha-escritorio-silla-trendy.webp",
+     "color": ""
+    }
+   ]
+  },
+  {
+   "nombre": "Combo Ejecutivo B (escritorio + silla Trendy)",
+   "codigo": "CO-003",
+   "categoria": "Combos de oficina",
+   "precio": 315,
+   "juego": 1,
+   "agotado": false,
+   "material": "",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": " Escritorio de 120 × 60 cm con silla Trendy incluida.",
+   "colores": [],
+   "fotos": [
+    {
+     "archivo": "combos-de-oficina/combo-ejecutivo-b-escritorio-silla-trendy.webp",
+     "color": ""
+    }
+   ]
+  },
+  {
+   "nombre": "Combo Ejecutivo G (escritorio + silla Trendy)",
+   "codigo": "CO-004",
+   "categoria": "Combos de oficina",
+   "precio": 350,
+   "juego": 1,
+   "agotado": false,
+   "material": "",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": " Escritorio de 120 × 60 cm con silla Trendy incluida.",
+   "colores": [],
+   "fotos": [
+    {
+     "archivo": "combos-de-oficina/combo-ejecutivo-g-escritorio-silla-trendy.webp",
+     "color": ""
+    }
+   ]
+  },
+  {
+   "nombre": "Combo Lazzio B (escritorio + silla Trendy)",
+   "codigo": "CO-006",
+   "categoria": "Combos de oficina",
+   "precio": 220,
+   "juego": 1,
+   "agotado": false,
+   "material": "",
+   "ancho": "120 cm",
+   "fondo": "60 cm",
+   "alto": "",
+   "descripcion": " Escritorio de 120 × 60 cm con silla Trendy incluida.",
+   "colores": [],
+   "fotos": [
+    {
+     "archivo": "combos-de-oficina/combo-lazzio-b-escritorio-silla-trendy.webp",
+     "color": ""
+    }
+   ]
+  },
+  {
+   "nombre": "Combo Secretarial (escritorio + silla Trendy)",
+   "codigo": "CO-002",
+   "categoria": "Combos de oficina",
+   "precio": 165,
+   "juego": 1,
+   "agotado": false,
+   "material": "",
+   "ancho": "120 cm",
+   "fondo": "60 cm",
+   "alto": "",
+   "descripcion": " Escritorio de 120 × 60 cm con silla Trendy incluida.",
+   "colores": [],
+   "fotos": [
+    {
+     "archivo": "combos-de-oficina/combo-secretarial-escritorio-silla-trendy.webp",
+     "color": ""
+    }
+   ]
+  },
+  {
+   "nombre": "Combo Toby G (escritorio + silla Trendy)",
+   "codigo": "CO-001",
+   "categoria": "Combos de oficina",
+   "precio": 200,
+   "juego": 1,
+   "agotado": false,
+   "material": "",
+   "ancho": "120 cm",
+   "fondo": "60 cm",
+   "alto": "",
+   "descripcion": " Escritorio de 120 × 60 cm con silla Trendy incluida.",
+   "colores": [],
+   "fotos": [
+    {
+     "archivo": "combos-de-oficina/combo-toby-g-escritorio-silla-trendy.webp",
+     "color": ""
+    }
+   ],
+   "destacado": true
+  },
+  {
+   "nombre": "Combo Toby H (escritorio + silla Trendy)",
+   "codigo": "CO-008",
+   "categoria": "Combos de oficina",
+   "precio": 215,
+   "juego": 1,
+   "agotado": false,
+   "material": "",
+   "ancho": "120 cm",
+   "fondo": "60 cm",
+   "alto": "",
+   "descripcion": " Escritorio de 120 × 60 cm con silla Trendy incluida.",
+   "colores": [],
+   "fotos": [
+    {
+     "archivo": "combos-de-oficina/combo-toby-h-escritorio-silla-trendy.webp",
+     "color": ""
+    }
+   ]
+  },
+  {
+   "nombre": "Escritorio Capri Gris",
+   "codigo": "ES-021",
+   "categoria": "Escritorios",
+   "precio": 190,
+   "juego": 1,
+   "agotado": false,
+   "material": "",
+   "ancho": "120 cm",
+   "fondo": "60 cm",
+   "alto": "",
+   "descripcion": "",
+   "colores": [],
+   "fotos": [
+    {
+     "archivo": "escritorios/escritorio-capri-gris.webp",
+     "color": ""
+    }
+   ]
+  },
+  {
+   "nombre": "Escritorio Ejecutivo Blanco",
+   "codigo": "ES-006",
+   "categoria": "Escritorios",
+   "precio": 250,
+   "juego": 1,
+   "agotado": false,
+   "material": "",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "",
+   "colores": [],
+   "fotos": [
+    {
+     "archivo": "escritorios/escritorio-ejecutivo-blanco.webp",
+     "color": ""
+    }
+   ]
+  },
+  {
+   "nombre": "Escritorio Ejecutivo Eternity",
+   "codigo": "ES-013",
+   "categoria": "Escritorios",
+   "precio": 575,
+   "juego": 1,
+   "agotado": false,
+   "material": "",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "",
+   "colores": [
+    {
+     "nombre": "Negro",
+     "hex": "#333034"
+    },
+    {
+     "nombre": "Gris oscuro",
+     "hex": "#515059"
+    }
+   ],
+   "fotos": [
+    {
+     "archivo": "escritorios/escritorio-ejecutivo-eternity-negro.webp",
+     "color": "Negro"
+    },
+    {
+     "archivo": "escritorios/escritorio-ejecutivo-eternity-gris-oscuro.webp",
+     "color": "Gris oscuro"
+    }
+   ]
+  },
+  {
+   "nombre": "Escritorio Ejecutivo Haya",
+   "codigo": "ES-009",
+   "categoria": "Escritorios",
+   "precio": 375,
+   "juego": 1,
+   "agotado": false,
+   "material": "",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "",
+   "colores": [],
+   "fotos": [
+    {
+     "archivo": "escritorios/escritorio-ejecutivo-haya.webp",
+     "color": ""
+    }
+   ]
+  },
+  {
+   "nombre": "Escritorio Ejecutivo Lazzio",
+   "codigo": "ES-003",
+   "categoria": "Escritorios",
+   "precio": 300,
+   "juego": 1,
+   "agotado": false,
+   "material": "",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "",
+   "colores": [],
+   "fotos": [
+    {
+     "archivo": "escritorios/escritorio-ejecutivo-lazzio.webp",
+     "color": ""
+    }
+   ]
+  },
+  {
+   "nombre": "Escritorio Metro Lazzio",
+   "codigo": "ES-020",
+   "categoria": "Escritorios",
+   "precio": 650,
+   "juego": 1,
+   "agotado": false,
+   "material": "",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "",
+   "colores": [],
+   "fotos": [
+    {
+     "archivo": "escritorios/escritorio-metro-lazzio.webp",
+     "color": ""
+    }
+   ]
+  },
+  {
+   "nombre": "Escritorio Presidencial Doha",
+   "codigo": "ES-018",
+   "categoria": "Escritorios",
+   "precio": 620,
+   "juego": 1,
+   "agotado": false,
+   "material": "",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "",
+   "colores": [],
+   "fotos": [
+    {
+     "archivo": "escritorios/escritorio-presidencial-doha.webp",
+     "color": ""
+    }
+   ]
+  },
+  {
+   "nombre": "Escritorio Presidencial Noo Lazzio",
+   "codigo": "ES-015",
+   "categoria": "Escritorios",
+   "precio": 440,
+   "juego": 1,
+   "agotado": false,
+   "material": "",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "",
+   "colores": [],
+   "fotos": [
+    {
+     "archivo": "escritorios/escritorio-presidencial-noo-lazzio.webp",
+     "color": ""
+    }
+   ]
+  },
+  {
+   "nombre": "Escritorio Presidencial Premium",
+   "codigo": "ES-017",
+   "categoria": "Escritorios",
+   "precio": 840,
+   "juego": 1,
+   "agotado": false,
+   "material": "",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "",
+   "colores": [],
+   "fotos": [
+    {
+     "archivo": "escritorios/escritorio-presidencial-premium.webp",
+     "color": ""
+    }
+   ]
+  },
+  {
+   "nombre": "Escritorio Presidencial Sensation",
+   "codigo": "ES-014",
+   "categoria": "Escritorios",
+   "precio": 625,
+   "juego": 1,
+   "agotado": false,
+   "material": "",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "",
+   "colores": [],
+   "fotos": [
+    {
+     "archivo": "escritorios/escritorio-presidencial-sensation.webp",
+     "color": ""
+    }
+   ]
+  },
+  {
+   "nombre": "Escritorio Secretarial Atenas",
+   "codigo": "ES-016",
+   "categoria": "Escritorios",
+   "precio": null,
+   "juego": 1,
+   "agotado": true,
+   "material": "",
+   "ancho": "120 cm",
+   "fondo": "60 cm",
+   "alto": "",
+   "descripcion": "",
+   "colores": [],
+   "fotos": [
+    {
+     "archivo": "escritorios/escritorio-secretarial-atenas.webp",
+     "color": ""
+    }
+   ]
+  },
+  {
+   "nombre": "Escritorio Secretarial Blanco",
+   "codigo": "ES-004",
+   "categoria": "Escritorios",
+   "precio": 160,
+   "juego": 1,
+   "agotado": false,
+   "material": "",
+   "ancho": "120 cm",
+   "fondo": "60 cm",
+   "alto": "",
+   "descripcion": "",
+   "colores": [],
+   "fotos": [
+    {
+     "archivo": "escritorios/escritorio-secretarial-blanco.webp",
+     "color": ""
+    }
+   ]
+  },
+  {
+   "nombre": "Escritorio Secretarial Doha",
+   "codigo": "ES-011",
+   "categoria": "Escritorios",
+   "precio": 165,
+   "juego": 1,
+   "agotado": false,
+   "material": "",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "",
+   "colores": [],
+   "fotos": [
+    {
+     "archivo": "escritorios/escritorio-secretarial-doha.webp",
+     "color": ""
+    }
+   ]
+  },
+  {
+   "nombre": "Escritorio Secretarial Lazzio",
+   "codigo": "ES-001",
+   "categoria": "Escritorios",
+   "precio": 110,
+   "juego": 1,
+   "agotado": false,
+   "material": "",
+   "ancho": "120 cm",
+   "fondo": "60 cm",
+   "alto": "75 cm",
+   "descripcion": "",
+   "colores": [],
+   "fotos": [
+    {
+     "archivo": "escritorios/escritorio-secretarial-lazzio.webp",
+     "color": ""
+    }
+   ]
+  },
+  {
+   "nombre": "Escritorio Secretarial Lazzio en L",
+   "codigo": "ES-019",
+   "categoria": "Escritorios",
+   "precio": 775,
+   "juego": 1,
+   "agotado": false,
+   "material": "",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "",
+   "colores": [],
+   "fotos": [
+    {
+     "archivo": "escritorios/escritorio-secretarial-lazzio-en-l.webp",
+     "color": ""
+    }
+   ]
+  },
+  {
+   "nombre": "Escritorio Secretarial Nogal",
+   "codigo": "ES-010",
+   "categoria": "Escritorios",
+   "precio": null,
+   "juego": 1,
+   "agotado": true,
+   "material": "",
+   "ancho": "120 cm",
+   "fondo": "60 cm",
+   "alto": "",
+   "descripcion": "",
+   "colores": [],
+   "fotos": [
+    {
+     "archivo": "escritorios/escritorio-secretarial-nogal.webp",
+     "color": ""
+    }
+   ]
+  },
+  {
+   "nombre": "Escritorio Toby Blanco",
+   "codigo": "ES-005",
+   "categoria": "Escritorios",
+   "precio": 175,
+   "juego": 1,
+   "agotado": false,
+   "material": "",
+   "ancho": "120 cm",
+   "fondo": "60 cm",
+   "alto": "",
+   "descripcion": "",
+   "colores": [],
+   "fotos": [
+    {
+     "archivo": "escritorios/escritorio-toby-blanco.webp",
+     "color": ""
+    }
+   ]
+  },
+  {
+   "nombre": "Escritorio Toby Haya",
+   "codigo": "ES-008",
+   "categoria": "Escritorios",
+   "precio": null,
+   "juego": 1,
+   "agotado": true,
+   "material": "",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "",
+   "colores": [],
+   "fotos": [
+    {
+     "archivo": "escritorios/escritorio-toby-haya.webp",
+     "color": ""
+    }
+   ]
+  },
+  {
+   "nombre": "Escritorio Toby Lazzio",
+   "codigo": "ES-002",
+   "categoria": "Escritorios",
+   "precio": 150,
+   "juego": 1,
+   "agotado": false,
+   "material": "",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "",
+   "colores": [],
+   "fotos": [
+    {
+     "archivo": "escritorios/escritorio-toby-lazzio.webp",
+     "color": ""
+    }
+   ]
+  },
+  {
+   "nombre": "Mesa All Star Blanca",
+   "codigo": "ES-007",
+   "categoria": "Escritorios",
+   "precio": 80,
+   "juego": 1,
+   "agotado": false,
+   "material": "",
+   "ancho": "120 cm",
+   "fondo": "60 cm",
+   "alto": "75 cm",
+   "descripcion": "",
+   "colores": [],
+   "fotos": [
+    {
+     "archivo": "escritorios/mesa-all-star-blanca.webp",
+     "color": ""
+    }
+   ]
+  },
+  {
+   "nombre": "Mesa Aura Multiuso",
+   "codigo": "ES-012",
+   "categoria": "Escritorios",
+   "precio": 70,
+   "juego": 1,
+   "agotado": false,
+   "material": "",
+   "ancho": "120 cm",
+   "fondo": "60 cm",
+   "alto": "75 cm",
+   "descripcion": "",
+   "colores": [
+    {
+     "nombre": "Negro",
+     "hex": "#3a3939"
+    },
+    {
+     "nombre": "Blanco",
+     "hex": "#ffffff"
+    }
+   ],
+   "fotos": [
+    {
+     "archivo": "escritorios/mesa-aura-multiuso-negro.webp",
+     "color": "Negro"
+    },
+    {
+     "archivo": "escritorios/mesa-aura-multiuso-blanco.webp",
+     "color": "Blanco"
+    }
+   ]
+  },
+  {
+   "nombre": "Mesa Gamer LED",
+   "codigo": "ES-022",
+   "categoria": "Escritorios",
+   "precio": 190,
+   "juego": 1,
+   "agotado": false,
+   "material": "",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "",
+   "colores": [],
+   "fotos": [
+    {
+     "archivo": "escritorios/mesa-gamer-led.webp",
+     "color": ""
+    }
+   ]
+  },
+  {
+   "nombre": "Espejo Hexagonal LED 80cm",
+   "codigo": "EP-001",
+   "categoria": "Espejos",
+   "precio": 107,
+   "juego": 1,
+   "agotado": false,
+   "material": "",
+   "ancho": "80 cm",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "",
+   "colores": [],
+   "fotos": [
+    {
+     "archivo": "espejos/espejo-hexagonal-led-80cm.webp",
+     "color": "",
+     "ambiente": true
+    }
+   ]
+  },
+  {
+   "nombre": "Espejo Rectangular Deco",
+   "codigo": "EP-006",
+   "categoria": "Espejos",
+   "precio": 100,
+   "juego": 1,
+   "agotado": false,
+   "material": "",
+   "ancho": "90 cm",
+   "fondo": "",
+   "alto": "70 cm",
+   "descripcion": "",
+   "colores": [],
+   "fotos": [
+    {
+     "archivo": "espejos/espejo-rectangular-deco.webp",
+     "color": "",
+     "ambiente": true
+    }
+   ]
+  },
+  {
+   "nombre": "Espejo Rectangular Deco 120x70cm",
+   "codigo": "EP-004",
+   "categoria": "Espejos",
+   "precio": 115,
+   "juego": 1,
+   "agotado": false,
+   "material": "",
+   "ancho": "120 cm",
+   "fondo": "",
+   "alto": "70 cm",
+   "descripcion": "",
+   "colores": [],
+   "fotos": [
+    {
+     "archivo": "espejos/espejo-rectangular-deco-120x70cm.webp",
+     "color": "",
+     "ambiente": true
+    }
+   ]
+  },
+  {
+   "nombre": "Espejo Rectangular LED Pro",
+   "codigo": "EP-005",
+   "categoria": "Espejos",
+   "precio": 132,
+   "juego": 1,
+   "agotado": false,
+   "material": "",
+   "ancho": "90 cm",
+   "fondo": "",
+   "alto": "70 cm",
+   "descripcion": "",
+   "colores": [],
+   "fotos": [
+    {
+     "archivo": "espejos/espejo-rectangular-led-pro.webp",
+     "color": "",
+     "ambiente": true
+    }
+   ]
+  },
+  {
+   "nombre": "Espejo Redondo Comfort",
+   "codigo": "EP-003",
+   "categoria": "Espejos",
+   "precio": null,
+   "juego": 1,
+   "agotado": true,
+   "material": "",
+   "ancho": "60 cm",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "",
+   "colores": [],
+   "fotos": [
+    {
+     "archivo": "espejos/espejo-redondo-comfort.webp",
+     "color": "",
+     "ambiente": true
+    }
+   ]
+  },
+  {
+   "nombre": "Espejo Redondo Glass Sun 60cm",
+   "codigo": "EP-002",
+   "categoria": "Espejos",
+   "precio": 69,
+   "juego": 1,
+   "agotado": false,
+   "material": "Vidrio",
+   "ancho": "60 cm",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "",
+   "colores": [],
+   "fotos": [
+    {
+     "archivo": "espejos/espejo-redondo-glass-sun-60cm.webp",
+     "color": "",
+     "ambiente": true
+    }
+   ]
+  },
+  {
+   "nombre": "Espejo Vertical LED Pro 170x70",
+   "codigo": "EP-009",
+   "categoria": "Espejos",
+   "precio": 200,
+   "juego": 1,
+   "agotado": false,
+   "material": "",
+   "ancho": "170 cm",
+   "fondo": "",
+   "alto": "70 cm",
+   "descripcion": "",
+   "colores": [],
+   "fotos": [
+    {
+     "archivo": "espejos/espejo-vertical-led-pro-170x70.webp",
+     "color": ""
+    }
+   ]
+  },
+  {
+   "nombre": "Espejo de Gamuza Vertical Hall",
+   "codigo": "EP-007",
+   "categoria": "Espejos",
+   "precio": 175,
+   "juego": 1,
+   "agotado": false,
+   "material": "Gamuza",
+   "ancho": "170 cm",
+   "fondo": "",
+   "alto": "70 cm",
+   "descripcion": "",
+   "colores": [],
+   "fotos": [
+    {
+     "archivo": "espejos/espejo-de-gamuza-vertical-hall.webp",
+     "color": ""
+    }
+   ]
+  },
+  {
+   "nombre": "Espejo de Gamuza Vertical Room",
+   "codigo": "EP-008",
+   "categoria": "Espejos",
+   "precio": 163,
+   "juego": 1,
+   "agotado": false,
+   "material": "Gamuza",
+   "ancho": "170 cm",
+   "fondo": "",
+   "alto": "70 cm",
+   "descripcion": "",
+   "colores": [],
+   "fotos": [
+    {
+     "archivo": "espejos/espejo-de-gamuza-vertical-room.webp",
+     "color": ""
+    }
+   ]
+  },
+  {
+   "nombre": "Locker Metálico 12 Puertas",
+   "codigo": "LK-002",
+   "categoria": "Lockers",
+   "precio": 325,
+   "juego": 1,
+   "agotado": false,
+   "material": "Metal",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "",
+   "colores": [],
+   "fotos": [
+    {
+     "archivo": "lockers/locker-metalico-12-puertas.webp",
+     "color": ""
+    }
+   ]
+  },
+  {
+   "nombre": "Locker Metálico 2 Puertas",
+   "codigo": "LK-004",
+   "categoria": "Lockers",
+   "precio": 150,
+   "juego": 1,
+   "agotado": false,
+   "material": "Metal",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "",
+   "colores": [],
+   "fotos": [
+    {
+     "archivo": "lockers/locker-metalico-2-puertas.webp",
+     "color": ""
+    }
+   ]
+  },
+  {
+   "nombre": "Locker Metálico 24 Puertas",
+   "codigo": "LK-001",
+   "categoria": "Lockers",
+   "precio": 365,
+   "juego": 1,
+   "agotado": false,
+   "material": "Metal",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "",
+   "colores": [],
+   "fotos": [
+    {
+     "archivo": "lockers/locker-metalico-24-puertas.webp",
+     "color": ""
+    }
+   ]
+  },
+  {
+   "nombre": "Locker Metálico 3 Puertas",
+   "codigo": "LK-003",
+   "categoria": "Lockers",
+   "precio": 165,
+   "juego": 1,
+   "agotado": false,
+   "material": "Metal",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "",
+   "colores": [],
+   "fotos": [
+    {
+     "archivo": "lockers/locker-metalico-3-puertas.webp",
+     "color": ""
+    }
+   ]
+  },
+  {
+   "nombre": "Mesa de Barra Eames",
+   "codigo": "MB-002",
+   "categoria": "Mesas de barra",
+   "precio": 125,
+   "juego": 1,
+   "agotado": false,
+   "material": "",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "",
+   "colores": [
+    {
+     "nombre": "Blanco",
+     "hex": "#fcfcfd"
+    },
+    {
+     "nombre": "Blanco 2",
+     "hex": "#ffffff"
+    }
+   ],
+   "fotos": [
+    {
+     "archivo": "mesas-de-barra/mesa-de-barra-eames-blanco.webp",
+     "color": "Blanco"
+    },
+    {
+     "archivo": "mesas-de-barra/mesa-de-barra-eames-blanco-2.webp",
+     "color": "Blanco 2"
+    }
+   ]
+  },
+  {
+   "nombre": "Mesa de Barra Fija",
+   "codigo": "MB-003",
+   "categoria": "Mesas de barra",
+   "precio": 100,
+   "juego": 1,
+   "agotado": false,
+   "material": "",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "",
+   "colores": [],
+   "fotos": [
+    {
+     "archivo": "mesas-de-barra/mesa-de-barra-fija.webp",
+     "color": ""
+    }
+   ]
+  },
+  {
+   "nombre": "Mesa de Barra Gold",
+   "codigo": "MB-004",
+   "categoria": "Mesas de barra",
+   "precio": 115,
+   "juego": 1,
+   "agotado": false,
+   "material": "",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "",
+   "colores": [
+    {
+     "nombre": "Blanco",
+     "hex": "#ececeb"
+    },
+    {
+     "nombre": "Negro",
+     "hex": "#38332a"
+    }
+   ],
+   "fotos": [
+    {
+     "archivo": "mesas-de-barra/mesa-de-barra-gold-blanco.webp",
+     "color": "Blanco"
+    },
+    {
+     "archivo": "mesas-de-barra/mesa-de-barra-gold-negro.webp",
+     "color": "Negro"
+    }
+   ]
+  },
+  {
+   "nombre": "Mesa de Barra Multifuncional Cuadrada",
+   "codigo": "MB-006",
+   "categoria": "Mesas de barra",
+   "precio": 115,
+   "juego": 1,
+   "agotado": false,
+   "material": "",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "",
+   "colores": [
+    {
+     "nombre": "Gris",
+     "hex": "#8a8a89"
+    },
+    {
+     "nombre": "Blanco",
+     "hex": "#ececec"
+    }
+   ],
+   "fotos": [
+    {
+     "archivo": "mesas-de-barra/mesa-de-barra-multifuncional-cuadrada-gris.webp",
+     "color": "Gris"
+    },
+    {
+     "archivo": "mesas-de-barra/mesa-de-barra-multifuncional-cuadrada-blanco.webp",
+     "color": "Blanco"
+    }
+   ]
+  },
+  {
+   "nombre": "Mesa de Barra Multifuncional Redonda",
+   "codigo": "MB-001",
+   "categoria": "Mesas de barra",
+   "precio": 95,
+   "juego": 1,
+   "agotado": false,
+   "material": "",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "",
+   "colores": [
+    {
+     "nombre": "Gris",
+     "hex": "#888887"
+    },
+    {
+     "nombre": "Blanco",
+     "hex": "#f2f2f2"
+    }
+   ],
+   "fotos": [
+    {
+     "archivo": "mesas-de-barra/mesa-de-barra-multifuncional-redonda-gris.webp",
+     "color": "Gris"
+    },
+    {
+     "archivo": "mesas-de-barra/mesa-de-barra-multifuncional-redonda-blanco.webp",
+     "color": "Blanco"
+    }
+   ]
+  },
+  {
+   "nombre": "Mesa de Barra Pine",
+   "codigo": "MB-009",
+   "categoria": "Mesas de barra",
+   "precio": 165,
+   "juego": 1,
+   "agotado": false,
+   "material": "",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "",
+   "colores": [],
+   "fotos": [
+    {
+     "archivo": "mesas-de-barra/mesa-de-barra-pine.webp",
+     "color": ""
+    }
+   ]
+  },
+  {
+   "nombre": "Mesa de Barra Redonda de Vidrio",
+   "codigo": "MB-008",
+   "categoria": "Mesas de barra",
+   "precio": 115,
+   "juego": 1,
+   "agotado": false,
+   "material": "Vidrio",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "",
+   "colores": [],
+   "fotos": [
+    {
+     "archivo": "mesas-de-barra/mesa-de-barra-redonda-de-vidrio.webp",
+     "color": ""
+    }
+   ]
+  },
+  {
+   "nombre": "Mesa de Barra Tolix",
+   "codigo": "MB-007",
+   "categoria": "Mesas de barra",
+   "precio": 170,
+   "juego": 1,
+   "agotado": false,
+   "material": "",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "",
+   "colores": [],
+   "fotos": [
+    {
+     "archivo": "mesas-de-barra/mesa-de-barra-tolix.webp",
+     "color": ""
+    }
+   ]
+  },
+  {
+   "nombre": "Mesa de Barra Tulip",
+   "codigo": "MB-005",
+   "categoria": "Mesas de barra",
+   "precio": 125,
+   "juego": 1,
+   "agotado": false,
+   "material": "",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "",
+   "colores": [
+    {
+     "nombre": "Gris",
+     "hex": "#d8d8d7"
+    },
+    {
+     "nombre": "Gris 2",
+     "hex": "#9e9e9e"
+    }
+   ],
+   "fotos": [
+    {
+     "archivo": "mesas-de-barra/mesa-de-barra-tulip-gris.webp",
+     "color": "Gris"
+    },
+    {
+     "archivo": "mesas-de-barra/mesa-de-barra-tulip-gris-2.webp",
+     "color": "Gris 2"
+    }
+   ]
+  },
+  {
+   "nombre": "Mesa Auxiliar Curvi",
+   "codigo": "MT-007",
+   "categoria": "Mesas de centro",
+   "precio": 30,
+   "juego": 1,
+   "agotado": false,
+   "material": "",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "",
+   "colores": [
+    {
+     "nombre": "Blanco",
+     "hex": "#eff0ef"
+    },
+    {
+     "nombre": "Negro",
+     "hex": "#444441"
+    }
+   ],
+   "fotos": [
+    {
+     "archivo": "mesas-de-centro/mesa-auxiliar-curvi-blanco.webp",
+     "color": "Blanco"
+    },
+    {
+     "archivo": "mesas-de-centro/mesa-auxiliar-curvi-negro.webp",
+     "color": "Negro"
+    }
+   ]
+  },
+  {
+   "nombre": "Mesa Multifuncional Comfort",
+   "codigo": "MT-005",
+   "categoria": "Mesas de centro",
+   "precio": 120,
+   "juego": 1,
+   "agotado": false,
+   "material": "",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "",
+   "colores": [],
+   "fotos": [
+    {
+     "archivo": "mesas-de-centro/mesa-multifuncional-comfort.webp",
+     "color": ""
+    }
+   ]
+  },
+  {
+   "nombre": "Mesa Redonda Classic Aux",
+   "codigo": "MT-006",
+   "categoria": "Mesas de centro",
+   "precio": 115,
+   "juego": 1,
+   "agotado": false,
+   "material": "",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "",
+   "colores": [],
+   "fotos": [
+    {
+     "archivo": "mesas-de-centro/mesa-redonda-classic-aux.webp",
+     "color": ""
+    }
+   ]
+  },
+  {
+   "nombre": "Mesa de Centro Auxiliar",
+   "codigo": "MT-008",
+   "categoria": "Mesas de centro",
+   "precio": 90,
+   "juego": 1,
+   "agotado": false,
+   "material": "",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "",
+   "colores": [
+    {
+     "nombre": "Gris oscuro",
+     "hex": "#6d6b50"
+    },
+    {
+     "nombre": "Blanco",
+     "hex": "#d4d2d9"
+    }
+   ],
+   "fotos": [
+    {
+     "archivo": "mesas-de-centro/mesa-de-centro-auxiliar-gris-oscuro.webp",
+     "color": "Gris oscuro"
+    },
+    {
+     "archivo": "mesas-de-centro/mesa-de-centro-auxiliar-blanco.webp",
+     "color": "Blanco"
+    }
+   ]
+  },
+  {
+   "nombre": "Mesa de Centro Decora",
+   "codigo": "MT-003",
+   "categoria": "Mesas de centro",
+   "precio": 200,
+   "juego": 1,
+   "agotado": false,
+   "material": "",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "",
+   "colores": [],
+   "fotos": [
+    {
+     "archivo": "mesas-de-centro/mesa-de-centro-decora.webp",
+     "color": ""
+    }
+   ]
+  },
+  {
+   "nombre": "Mesa de Centro Eames",
+   "codigo": "MT-009",
+   "categoria": "Mesas de centro",
+   "precio": 100,
+   "juego": 1,
+   "agotado": false,
+   "material": "",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "",
+   "colores": [],
+   "fotos": [
+    {
+     "archivo": "mesas-de-centro/mesa-de-centro-eames.webp",
+     "color": ""
+    }
+   ]
+  },
+  {
+   "nombre": "Mesa de Centro Luna",
+   "codigo": "MT-001",
+   "categoria": "Mesas de centro",
+   "precio": 200,
+   "juego": 1,
+   "agotado": false,
+   "material": "",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "",
+   "colores": [
+    {
+     "nombre": "Blanco",
+     "hex": "#e0e0e1"
+    },
+    {
+     "nombre": "Negro",
+     "hex": "#363636"
+    }
+   ],
+   "fotos": [
+    {
+     "archivo": "mesas-de-centro/mesa-de-centro-luna-blanco.webp",
+     "color": "Blanco"
+    },
+    {
+     "archivo": "mesas-de-centro/mesa-de-centro-luna-negro.webp",
+     "color": "Negro"
+    }
+   ]
+  },
+  {
+   "nombre": "Mesa de Centro Mocca",
+   "codigo": "MT-004",
+   "categoria": "Mesas de centro",
+   "precio": null,
+   "juego": 1,
+   "agotado": true,
+   "material": "",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "",
+   "colores": [],
+   "fotos": [
+    {
+     "archivo": "mesas-de-centro/mesa-de-centro-mocca.webp",
+     "color": ""
+    }
+   ]
+  },
+  {
+   "nombre": "Mesa de Centro Verona",
+   "codigo": "MT-002",
+   "categoria": "Mesas de centro",
+   "precio": 200,
+   "juego": 1,
+   "agotado": false,
+   "material": "",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "",
+   "colores": [
+    {
+     "nombre": "Negro",
+     "hex": "#3a393a"
+    },
+    {
+     "nombre": "Gris",
+     "hex": "#bbbcbb"
+    }
+   ],
+   "fotos": [
+    {
+     "archivo": "mesas-de-centro/mesa-de-centro-verona-negro.webp",
+     "color": "Negro"
+    },
+    {
+     "archivo": "mesas-de-centro/mesa-de-centro-verona-gris.webp",
+     "color": "Gris"
+    }
+   ]
+  },
+  {
+   "nombre": "Mesa Amsterdam",
+   "codigo": "MC-003",
+   "categoria": "Mesas de comedor",
+   "precio": 365,
+   "juego": 1,
+   "agotado": false,
+   "material": "",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "",
+   "colores": [],
+   "fotos": [
+    {
+     "archivo": "mesas-de-comedor/mesa-amsterdam.webp",
+     "color": ""
+    }
+   ]
+  },
+  {
+   "nombre": "Mesa Elegance 6 Puestos Cromada",
+   "codigo": "MC-008",
+   "categoria": "Mesas de comedor",
+   "precio": 290,
+   "juego": 1,
+   "agotado": false,
+   "material": "Vidrio",
+   "ancho": "150 cm",
+   "fondo": "80 cm",
+   "alto": "",
+   "descripcion": "",
+   "colores": [],
+   "fotos": [
+    {
+     "archivo": "mesas-de-comedor/mesa-elegance-6-puestos-cromada.webp",
+     "color": ""
+    }
+   ]
+  },
+  {
+   "nombre": "Mesa Elegance 6 Puestos Dorada",
+   "codigo": "MC-004",
+   "categoria": "Mesas de comedor",
+   "precio": 340,
+   "juego": 1,
+   "agotado": false,
+   "material": "Vidrio",
+   "ancho": "150 cm",
+   "fondo": "80 cm",
+   "alto": "",
+   "descripcion": "",
+   "colores": [],
+   "fotos": [
+    {
+     "archivo": "mesas-de-comedor/mesa-elegance-6-puestos-dorada.webp",
+     "color": ""
+    }
+   ]
+  },
+  {
+   "nombre": "Mesa Elegance 6 Puestos Negra",
+   "codigo": "MC-009",
+   "categoria": "Mesas de comedor",
+   "precio": 300,
+   "juego": 1,
+   "agotado": false,
+   "material": "Vidrio",
+   "ancho": "150 cm",
+   "fondo": "80 cm",
+   "alto": "",
+   "descripcion": "",
+   "colores": [],
+   "fotos": [
+    {
+     "archivo": "mesas-de-comedor/mesa-elegance-6-puestos-negra.webp",
+     "color": ""
+    }
+   ]
+  },
+  {
+   "nombre": "Mesa Italia",
+   "codigo": "MC-002",
+   "categoria": "Mesas de comedor",
+   "precio": 225,
+   "juego": 1,
+   "agotado": false,
+   "material": "",
+   "ancho": "150 cm",
+   "fondo": "80 cm",
+   "alto": "",
+   "descripcion": "",
+   "colores": [],
+   "fotos": [
+    {
+     "archivo": "mesas-de-comedor/mesa-italia.webp",
+     "color": ""
+    }
+   ]
+  },
+  {
+   "nombre": "Mesa Tulip Redonda Mármol",
+   "codigo": "MC-006",
+   "categoria": "Mesas de comedor",
+   "precio": 165,
+   "juego": 1,
+   "agotado": false,
+   "material": "Mármol",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "",
+   "colores": [],
+   "fotos": [
+    {
+     "archivo": "mesas-de-comedor/mesa-tulip-redonda-marmol.webp",
+     "color": ""
+    }
+   ]
+  },
+  {
+   "nombre": "Mesa Tulip Redonda Unicolor",
+   "codigo": "MC-007",
+   "categoria": "Mesas de comedor",
+   "precio": 150,
+   "juego": 1,
+   "agotado": false,
+   "material": "",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "",
+   "colores": [],
+   "fotos": [
+    {
+     "archivo": "mesas-de-comedor/mesa-tulip-redonda-unicolor.webp",
+     "color": ""
+    }
+   ]
+  },
+  {
+   "nombre": "Mesa Venecia 6 Puestos Cromada",
+   "codigo": "MC-005",
+   "categoria": "Mesas de comedor",
+   "precio": 325,
+   "juego": 1,
+   "agotado": false,
+   "material": "Vidrio",
+   "ancho": "150 cm",
+   "fondo": "80 cm",
+   "alto": "",
+   "descripcion": "",
+   "colores": [],
+   "fotos": [
+    {
+     "archivo": "mesas-de-comedor/mesa-venecia-6-puestos-cromada.webp",
+     "color": ""
+    }
+   ]
+  },
+  {
+   "nombre": "Mesa Venecia 6 Puestos Negra",
+   "codigo": "MC-010",
+   "categoria": "Mesas de comedor",
+   "precio": 315,
+   "juego": 1,
+   "agotado": false,
+   "material": "Vidrio",
+   "ancho": "150 cm",
+   "fondo": "80 cm",
+   "alto": "",
+   "descripcion": "",
+   "colores": [],
+   "fotos": [
+    {
+     "archivo": "mesas-de-comedor/mesa-venecia-6-puestos-negra.webp",
+     "color": ""
+    }
+   ]
+  },
+  {
+   "nombre": "Mesa Vitrocerámica",
+   "codigo": "MC-001",
+   "categoria": "Mesas de comedor",
+   "precio": 200,
+   "juego": 1,
+   "agotado": false,
+   "material": "",
+   "ancho": "150 cm",
+   "fondo": "80 cm",
+   "alto": "",
+   "descripcion": "",
+   "colores": [],
+   "fotos": [
+    {
+     "archivo": "mesas-de-comedor/mesa-vitroceramica.webp",
+     "color": ""
+    }
+   ]
+  },
+  {
+   "nombre": "Mesa de Conferencia Negra",
+   "codigo": "MR-003",
+   "categoria": "Mesas de reunión",
+   "precio": 340,
+   "juego": 1,
+   "agotado": false,
+   "material": "",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "",
+   "colores": [],
+   "fotos": [
+    {
+     "archivo": "mesas-de-reunion/mesa-de-conferencia-negra.webp",
+     "color": ""
+    }
+   ]
+  },
+  {
+   "nombre": "Mesa de Conferencia Ovalada",
+   "codigo": "MR-002",
+   "categoria": "Mesas de reunión",
+   "precio": 275,
+   "juego": 1,
+   "agotado": false,
+   "material": "",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "",
+   "colores": [],
+   "fotos": [
+    {
+     "archivo": "mesas-de-reunion/mesa-de-conferencia-ovalada.webp",
+     "color": ""
+    }
+   ]
+  },
+  {
+   "nombre": "Mesa de Conferencia Redonda",
+   "codigo": "MR-001",
+   "categoria": "Mesas de reunión",
+   "precio": 240,
+   "juego": 1,
+   "agotado": false,
+   "material": "",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "",
+   "colores": [],
+   "fotos": [
+    {
+     "archivo": "mesas-de-reunion/mesa-de-conferencia-redonda.webp",
+     "color": ""
+    }
+   ]
+  },
+  {
+   "nombre": "Poltrona Reclinable Clásica",
+   "codigo": "PS-001",
+   "categoria": "Poltronas y sofás",
+   "precio": 425,
+   "juego": 1,
+   "agotado": false,
+   "material": "",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "",
+   "colores": [],
+   "fotos": [
+    {
+     "archivo": "poltronas-y-sofas/poltrona-reclinable-clasica.webp",
+     "color": ""
+    }
+   ]
+  },
+  {
+   "nombre": "Poltrona Reclinable con Portavasos",
+   "codigo": "PS-002",
+   "categoria": "Poltronas y sofás",
+   "precio": 450,
+   "juego": 1,
+   "agotado": false,
+   "material": "",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "",
+   "colores": [
+    {
+     "nombre": "Gris",
+     "hex": "#c4c3c0"
+    },
+    {
+     "nombre": "Negro",
+     "hex": "#353535"
+    }
+   ],
+   "fotos": [
+    {
+     "archivo": "poltronas-y-sofas/poltrona-reclinable-con-portavasos-gris.webp",
+     "color": "Gris"
+    },
+    {
+     "archivo": "poltronas-y-sofas/poltrona-reclinable-con-portavasos-negro.webp",
+     "color": "Negro"
+    }
+   ]
+  },
+  {
+   "nombre": "Sofá Cama Sweet",
+   "codigo": "PS-006",
+   "categoria": "Poltronas y sofás",
+   "precio": 750,
+   "juego": 1,
+   "agotado": false,
+   "material": "Bipiel",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "",
+   "colores": [],
+   "fotos": [
+    {
+     "archivo": "poltronas-y-sofas/sofa-cama-sweet.webp",
+     "color": ""
+    }
+   ]
+  },
+  {
+   "nombre": "Sofá Grecia 1 Puesto",
+   "codigo": "PS-004",
+   "categoria": "Poltronas y sofás",
+   "precio": 415,
+   "juego": 1,
+   "agotado": false,
+   "material": "Bipiel",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "",
+   "colores": [
+    {
+     "nombre": "Gris oscuro",
+     "hex": "#676767"
+    },
+    {
+     "nombre": "Negro",
+     "hex": "#303030"
+    }
+   ],
+   "fotos": [
+    {
+     "archivo": "poltronas-y-sofas/sofa-grecia-1-puesto-gris-oscuro.webp",
+     "color": "Gris oscuro"
+    },
+    {
+     "archivo": "poltronas-y-sofas/sofa-grecia-1-puesto-negro.webp",
+     "color": "Negro"
+    }
+   ]
+  },
+  {
+   "nombre": "Sofá Grecia 3 Puestos",
+   "codigo": "PS-003",
+   "categoria": "Poltronas y sofás",
+   "precio": 640,
+   "juego": 1,
+   "agotado": false,
+   "material": "Bipiel",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "",
+   "colores": [],
+   "fotos": [
+    {
+     "archivo": "poltronas-y-sofas/sofa-grecia-3-puestos.webp",
+     "color": ""
+    }
+   ]
+  },
+  {
+   "nombre": "Sofá Luna Moon",
+   "codigo": "PS-007",
+   "categoria": "Poltronas y sofás",
+   "precio": 665,
+   "juego": 1,
+   "agotado": false,
+   "material": "Gamuza",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "",
+   "colores": [
+    {
+     "nombre": "Negro",
+     "hex": "#242221"
+    },
+    {
+     "nombre": "Gris oscuro",
+     "hex": "#777470"
+    }
+   ],
+   "fotos": [
+    {
+     "archivo": "poltronas-y-sofas/sofa-luna-moon-negro.webp",
+     "color": "Negro"
+    },
+    {
+     "archivo": "poltronas-y-sofas/sofa-luna-moon-gris-oscuro.webp",
+     "color": "Gris oscuro"
+    }
+   ],
+   "destacado": true
+  },
+  {
+   "nombre": "Sofá Verona",
+   "codigo": "PS-005",
+   "categoria": "Poltronas y sofás",
+   "precio": 375,
+   "juego": 1,
+   "agotado": false,
+   "material": "Bipiel",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "",
+   "colores": [
+    {
+     "nombre": "Negro",
+     "hex": "#4a4947"
+    },
+    {
+     "nombre": "Negro 2",
+     "hex": "#49494a"
+    }
+   ],
+   "fotos": [
+    {
+     "archivo": "poltronas-y-sofas/sofa-verona-negro.webp",
+     "color": "Negro"
+    },
+    {
+     "archivo": "poltronas-y-sofas/sofa-verona-negro-2.webp",
+     "color": "Negro 2"
+    }
+   ]
+  },
+  {
+   "nombre": "Módulo Mini Recepción Lazzio",
+   "codigo": "RC-001",
+   "categoria": "Recepción",
+   "precio": 350,
+   "juego": 1,
+   "agotado": false,
+   "material": "",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "",
+   "colores": [
+    {
+     "nombre": "Gris",
+     "hex": "#a59f93"
+    },
+    {
+     "nombre": "Gris oscuro",
+     "hex": "#7e7d74"
+    }
+   ],
+   "fotos": [
+    {
+     "archivo": "recepcion/modulo-mini-recepcion-lazzio-gris.webp",
+     "color": "Gris"
+    },
+    {
+     "archivo": "recepcion/modulo-mini-recepcion-lazzio-gris-oscuro.webp",
+     "color": "Gris oscuro"
+    }
+   ]
+  },
+  {
+   "nombre": "Módulo Recepción Lazzio",
+   "codigo": "RC-003",
+   "categoria": "Recepción",
+   "precio": 665,
+   "juego": 1,
+   "agotado": false,
+   "material": "",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "",
+   "colores": [],
+   "fotos": [
+    {
+     "archivo": "recepcion/modulo-recepcion-lazzio.webp",
+     "color": ""
+    }
+   ]
+  },
+  {
+   "nombre": "Recepcionera Bilhair Salón",
+   "codigo": "RC-002",
+   "categoria": "Recepción",
+   "precio": 690,
+   "juego": 1,
+   "agotado": false,
+   "material": "",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "",
+   "colores": [],
+   "fotos": [
+    {
+     "archivo": "recepcion/recepcionera-bilhair-salon.webp",
+     "color": ""
+    }
+   ]
+  },
+  {
+   "nombre": "Lavacabezas Grace",
+   "codigo": "BB-012",
+   "categoria": "Sillas de barbería",
+   "precio": 450,
+   "juego": 1,
+   "agotado": false,
+   "material": "",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "",
+   "colores": [],
+   "fotos": [
+    {
+     "archivo": "sillas-de-barberia/lavacabezas-grace.webp",
+     "color": ""
+    }
+   ]
+  },
+  {
+   "nombre": "Lavacabezas Luxury",
+   "codigo": "BB-010",
+   "categoria": "Sillas de barbería",
+   "precio": 315,
+   "juego": 1,
+   "agotado": false,
+   "material": "",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "",
+   "colores": [],
+   "fotos": [
+    {
+     "archivo": "sillas-de-barberia/lavacabezas-luxury.webp",
+     "color": ""
+    }
+   ]
+  },
+  {
+   "nombre": "Lavacabezas con Sillón",
+   "codigo": "BB-011",
+   "categoria": "Sillas de barbería",
+   "precio": 625,
+   "juego": 1,
+   "agotado": false,
+   "material": "",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "",
+   "colores": [],
+   "fotos": [
+    {
+     "archivo": "sillas-de-barberia/lavacabezas-con-sillon.webp",
+     "color": ""
+    }
+   ]
+  },
+  {
+   "nombre": "Silla de Barbería Bella",
+   "codigo": "BB-007",
+   "categoria": "Sillas de barbería",
+   "precio": 265,
+   "juego": 1,
+   "agotado": false,
+   "material": "",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "",
+   "colores": [],
+   "fotos": [
+    {
+     "archivo": "sillas-de-barberia/silla-de-barberia-bella.webp",
+     "color": ""
+    }
+   ]
+  },
+  {
+   "nombre": "Silla de Barbería Black Pro",
+   "codigo": "BB-002",
+   "categoria": "Sillas de barbería",
+   "precio": 525,
+   "juego": 1,
+   "agotado": false,
+   "material": "",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "",
+   "colores": [],
+   "fotos": [
+    {
+     "archivo": "sillas-de-barberia/silla-de-barberia-black-pro.webp",
+     "color": ""
+    }
+   ]
+  },
+  {
+   "nombre": "Silla de Barbería Bloom",
+   "codigo": "BB-001",
+   "categoria": "Sillas de barbería",
+   "precio": 350,
+   "juego": 1,
+   "agotado": false,
+   "material": "",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "",
+   "colores": [
+    {
+     "nombre": "Rosado",
+     "hex": "#e1aab3"
+    },
+    {
+     "nombre": "Negro",
+     "hex": "#2c2c2b"
+    }
+   ],
+   "fotos": [
+    {
+     "archivo": "sillas-de-barberia/silla-de-barberia-bloom-rosado.webp",
+     "color": "Rosado"
+    },
+    {
+     "archivo": "sillas-de-barberia/silla-de-barberia-bloom-negro.webp",
+     "color": "Negro"
+    }
+   ]
+  },
+  {
+   "nombre": "Silla de Barbería Florencia",
+   "codigo": "BB-004",
+   "categoria": "Sillas de barbería",
+   "precio": 325,
+   "juego": 1,
+   "agotado": false,
+   "material": "",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "",
+   "colores": [],
+   "fotos": [
+    {
+     "archivo": "sillas-de-barberia/silla-de-barberia-florencia.webp",
+     "color": ""
+    }
+   ]
+  },
+  {
+   "nombre": "Silla de Barbería Florencia Gold",
+   "codigo": "BB-006",
+   "categoria": "Sillas de barbería",
+   "precio": 340,
+   "juego": 1,
+   "agotado": false,
+   "material": "",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "",
+   "colores": [],
+   "fotos": [
+    {
+     "archivo": "sillas-de-barberia/silla-de-barberia-florencia-gold.webp",
+     "color": ""
+    }
+   ]
+  },
+  {
+   "nombre": "Silla de Barbería Gala",
+   "codigo": "BB-008",
+   "categoria": "Sillas de barbería",
+   "precio": 225,
+   "juego": 1,
+   "agotado": false,
+   "material": "",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "",
+   "colores": [],
+   "fotos": [
+    {
+     "archivo": "sillas-de-barberia/silla-de-barberia-gala.webp",
+     "color": ""
+    }
+   ]
+  },
+  {
+   "nombre": "Silla de Barbería Kuchy",
+   "codigo": "BB-009",
+   "categoria": "Sillas de barbería",
+   "precio": 175,
+   "juego": 1,
+   "agotado": false,
+   "material": "",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "",
+   "colores": [
+    {
+     "nombre": "Negro",
+     "hex": "#2e2e30"
+    },
+    {
+     "nombre": "Gris",
+     "hex": "#9f9d9c"
+    }
+   ],
+   "fotos": [
+    {
+     "archivo": "sillas-de-barberia/silla-de-barberia-kuchy-negro.webp",
+     "color": "Negro"
+    },
+    {
+     "archivo": "sillas-de-barberia/silla-de-barberia-kuchy-gris.webp",
+     "color": "Gris"
+    }
+   ]
+  },
+  {
+   "nombre": "Silla de Barbería Mónaco",
+   "codigo": "BB-005",
+   "categoria": "Sillas de barbería",
+   "precio": 315,
+   "juego": 1,
+   "agotado": false,
+   "material": "",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "",
+   "colores": [],
+   "fotos": [
+    {
+     "archivo": "sillas-de-barberia/silla-de-barberia-monaco.webp",
+     "color": ""
+    }
+   ]
+  },
+  {
+   "nombre": "Silla de Barbería Mónaco Gold",
+   "codigo": "BB-003",
+   "categoria": "Sillas de barbería",
+   "precio": 340,
+   "juego": 1,
+   "agotado": false,
+   "material": "",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "",
+   "colores": [],
+   "fotos": [
+    {
+     "archivo": "sillas-de-barberia/silla-de-barberia-monaco-gold.webp",
+     "color": ""
+    }
+   ]
+  },
+  {
+   "nombre": "Silla de Barra Alba Rock (juego de 3)",
+   "codigo": "SB-027",
+   "categoria": "Sillas de barra",
+   "precio": 225,
+   "juego": 3,
+   "agotado": false,
+   "material": "",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "Precio por juego de 3 unidades.",
+   "colores": [],
+   "fotos": [
+    {
+     "archivo": "sillas-de-barra/silla-de-barra-alba-rock.webp",
+     "color": ""
+    }
+   ]
+  },
+  {
+   "nombre": "Silla de Barra Alex (juego de 3)",
+   "codigo": "SB-015",
+   "categoria": "Sillas de barra",
+   "precio": 190,
+   "juego": 3,
+   "agotado": false,
+   "material": "Bipiel",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "Precio por juego de 3 unidades.",
+   "colores": [
+    {
+     "nombre": "Negro",
+     "hex": "#444343"
+    },
+    {
+     "nombre": "Blanco",
+     "hex": "#e0dfde"
+    }
+   ],
+   "fotos": [
+    {
+     "archivo": "sillas-de-barra/silla-de-barra-alex-negro.webp",
+     "color": "Negro"
+    },
+    {
+     "archivo": "sillas-de-barra/silla-de-barra-alex-blanco.webp",
+     "color": "Blanco"
+    }
+   ]
+  },
+  {
+   "nombre": "Silla de Barra Alex Rock (juego de 3)",
+   "codigo": "SB-028",
+   "categoria": "Sillas de barra",
+   "precio": null,
+   "juego": 3,
+   "agotado": true,
+   "material": "",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "Precio por juego de 3 unidades.",
+   "colores": [],
+   "fotos": [
+    {
+     "archivo": "sillas-de-barra/silla-de-barra-alex-rock.webp",
+     "color": ""
+    }
+   ]
+  },
+  {
+   "nombre": "Silla de Barra Arianna Rock (juego de 3)",
+   "codigo": "SB-019",
+   "categoria": "Sillas de barra",
+   "precio": 280,
+   "juego": 3,
+   "agotado": false,
+   "material": "Bipiel",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "Precio por juego de 3 unidades.",
+   "colores": [
+    {
+     "nombre": "Negro",
+     "hex": "#3d3d3e"
+    },
+    {
+     "nombre": "Gris",
+     "hex": "#8f8f8c"
+    }
+   ],
+   "fotos": [
+    {
+     "archivo": "sillas-de-barra/silla-de-barra-arianna-rock-negro.webp",
+     "color": "Negro"
+    },
+    {
+     "archivo": "sillas-de-barra/silla-de-barra-arianna-rock-gris.webp",
+     "color": "Gris"
+    }
+   ]
+  },
+  {
+   "nombre": "Silla de Barra Austria (juego de 3)",
+   "codigo": "SB-010",
+   "categoria": "Sillas de barra",
+   "precio": 245,
+   "juego": 3,
+   "agotado": false,
+   "material": "Bipiel",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "Precio por juego de 3 unidades.",
+   "colores": [
+    {
+     "nombre": "Gris",
+     "hex": "#bdbcbc"
+    },
+    {
+     "nombre": "Rojo",
+     "hex": "#ff453c"
+    },
+    {
+     "nombre": "Blanco",
+     "hex": "#efefee"
+    }
+   ],
+   "fotos": [
+    {
+     "archivo": "sillas-de-barra/silla-de-barra-austria-gris.webp",
+     "color": "Gris"
+    },
+    {
+     "archivo": "sillas-de-barra/silla-de-barra-austria-rojo.webp",
+     "color": "Rojo"
+    },
+    {
+     "archivo": "sillas-de-barra/silla-de-barra-austria-blanco.webp",
+     "color": "Blanco"
+    }
+   ]
+  },
+  {
+   "nombre": "Silla de Barra Bosnia (juego de 3)",
+   "codigo": "SB-016",
+   "categoria": "Sillas de barra",
+   "precio": 170,
+   "juego": 3,
+   "agotado": false,
+   "material": "Bipiel",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "Precio por juego de 3 unidades.",
+   "colores": [
+    {
+     "nombre": "Negro",
+     "hex": "#414140"
+    },
+    {
+     "nombre": "Blanco",
+     "hex": "#eaeae9"
+    }
+   ],
+   "fotos": [
+    {
+     "archivo": "sillas-de-barra/silla-de-barra-bosnia-negro.webp",
+     "color": "Negro"
+    },
+    {
+     "archivo": "sillas-de-barra/silla-de-barra-bosnia-blanco.webp",
+     "color": "Blanco"
+    }
+   ]
+  },
+  {
+   "nombre": "Silla de Barra Camila (juego de 3)",
+   "codigo": "SB-009",
+   "categoria": "Sillas de barra",
+   "precio": 210,
+   "juego": 3,
+   "agotado": false,
+   "material": "Bipiel",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "Precio por juego de 3 unidades.",
+   "colores": [
+    {
+     "nombre": "Gris",
+     "hex": "#939298"
+    },
+    {
+     "nombre": "Negro",
+     "hex": "#434043"
+    },
+    {
+     "nombre": "Blanco",
+     "hex": "#dbdbdb"
+    }
+   ],
+   "fotos": [
+    {
+     "archivo": "sillas-de-barra/silla-de-barra-camila-gris.webp",
+     "color": "Gris"
+    },
+    {
+     "archivo": "sillas-de-barra/silla-de-barra-camila-negro.webp",
+     "color": "Negro"
+    },
+    {
+     "archivo": "sillas-de-barra/silla-de-barra-camila-blanco.webp",
+     "color": "Blanco"
+    }
+   ]
+  },
+  {
+   "nombre": "Silla de Barra Canadá (juego de 3)",
+   "codigo": "SB-020",
+   "categoria": "Sillas de barra",
+   "precio": 225,
+   "juego": 3,
+   "agotado": false,
+   "material": "Bipiel",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "Precio por juego de 3 unidades.",
+   "colores": [
+    {
+     "nombre": "Gris",
+     "hex": "#d9d9da"
+    },
+    {
+     "nombre": "Blanco",
+     "hex": "#fbfbfb"
+    }
+   ],
+   "fotos": [
+    {
+     "archivo": "sillas-de-barra/silla-de-barra-canada-gris.webp",
+     "color": "Gris"
+    },
+    {
+     "archivo": "sillas-de-barra/silla-de-barra-canada-blanco.webp",
+     "color": "Blanco"
+    }
+   ]
+  },
+  {
+   "nombre": "Silla de Barra Charlotte (juego de 3)",
+   "codigo": "SB-026",
+   "categoria": "Sillas de barra",
+   "precio": 265,
+   "juego": 3,
+   "agotado": false,
+   "material": "",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "Precio por juego de 3 unidades.",
+   "colores": [
+    {
+     "nombre": "Gris",
+     "hex": "#cdcdcc"
+    },
+    {
+     "nombre": "Negro",
+     "hex": "#454445"
+    }
+   ],
+   "fotos": [
+    {
+     "archivo": "sillas-de-barra/silla-de-barra-charlotte-gris.webp",
+     "color": "Gris"
+    },
+    {
+     "archivo": "sillas-de-barra/silla-de-barra-charlotte-negro.webp",
+     "color": "Negro"
+    }
+   ]
+  },
+  {
+   "nombre": "Silla de Barra Charlotte G (juego de 3)",
+   "codigo": "SB-004",
+   "categoria": "Sillas de barra",
+   "precio": 375,
+   "juego": 3,
+   "agotado": false,
+   "material": "Terciopelo",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "Precio por juego de 3 unidades.",
+   "colores": [
+    {
+     "nombre": "Negro",
+     "hex": "#2f2f30"
+    },
+    {
+     "nombre": "Gris",
+     "hex": "#9c9aa0"
+    }
+   ],
+   "fotos": [
+    {
+     "archivo": "sillas-de-barra/silla-de-barra-charlotte-g-negro.webp",
+     "color": "Negro"
+    },
+    {
+     "archivo": "sillas-de-barra/silla-de-barra-charlotte-g-gris.webp",
+     "color": "Gris"
+    }
+   ]
+  },
+  {
+   "nombre": "Silla de Barra Dallas Bipiel (juego de 3)",
+   "codigo": "SB-014",
+   "categoria": "Sillas de barra",
+   "precio": 280,
+   "juego": 3,
+   "agotado": false,
+   "material": "Bipiel",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "Precio por juego de 3 unidades.",
+   "colores": [
+    {
+     "nombre": "Negro",
+     "hex": "#353536"
+    },
+    {
+     "nombre": "Blanco",
+     "hex": "#dfdfde"
+    }
+   ],
+   "fotos": [
+    {
+     "archivo": "sillas-de-barra/silla-de-barra-dallas-bipiel-negro.webp",
+     "color": "Negro"
+    },
+    {
+     "archivo": "sillas-de-barra/silla-de-barra-dallas-bipiel-blanco.webp",
+     "color": "Blanco"
+    }
+   ]
+  },
+  {
+   "nombre": "Silla de Barra Dallas Terciopelo (juego de 3)",
+   "codigo": "SB-013",
+   "categoria": "Sillas de barra",
+   "precio": 280,
+   "juego": 3,
+   "agotado": false,
+   "material": "Terciopelo",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "Precio por juego de 3 unidades.",
+   "colores": [
+    {
+     "nombre": "Gris",
+     "hex": "#a9a7a2"
+    },
+    {
+     "nombre": "Negro",
+     "hex": "#212121"
+    }
+   ],
+   "fotos": [
+    {
+     "archivo": "sillas-de-barra/silla-de-barra-dallas-terciopelo-gris.webp",
+     "color": "Gris"
+    },
+    {
+     "archivo": "sillas-de-barra/silla-de-barra-dallas-terciopelo-negro.webp",
+     "color": "Negro"
+    }
+   ]
+  },
+  {
+   "nombre": "Silla de Barra Dubai (juego de 3)",
+   "codigo": "SB-005",
+   "categoria": "Sillas de barra",
+   "precio": 300,
+   "juego": 3,
+   "agotado": false,
+   "material": "Bipiel",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "Precio por juego de 3 unidades.",
+   "colores": [
+    {
+     "nombre": "Negro",
+     "hex": "#2c2930"
+    },
+    {
+     "nombre": "Gris oscuro",
+     "hex": "#787477"
+    },
+    {
+     "nombre": "Blanco",
+     "hex": "#e0deda"
+    }
+   ],
+   "fotos": [
+    {
+     "archivo": "sillas-de-barra/silla-de-barra-dubai-negro.webp",
+     "color": "Negro"
+    },
+    {
+     "archivo": "sillas-de-barra/silla-de-barra-dubai-gris-oscuro.webp",
+     "color": "Gris oscuro"
+    },
+    {
+     "archivo": "sillas-de-barra/silla-de-barra-dubai-blanco.webp",
+     "color": "Blanco"
+    }
+   ]
+  },
+  {
+   "nombre": "Silla de Barra Eames (juego de 3)",
+   "codigo": "SB-011",
+   "categoria": "Sillas de barra",
+   "precio": 200,
+   "juego": 3,
+   "agotado": false,
+   "material": "Bipiel",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "Precio por juego de 3 unidades.",
+   "colores": [
+    {
+     "nombre": "Negro",
+     "hex": "#424244"
+    },
+    {
+     "nombre": "Gris",
+     "hex": "#9b9896"
+    },
+    {
+     "nombre": "Gris 2",
+     "hex": "#9d9e9e"
+    }
+   ],
+   "fotos": [
+    {
+     "archivo": "sillas-de-barra/silla-de-barra-eames-negro.webp",
+     "color": "Negro"
+    },
+    {
+     "archivo": "sillas-de-barra/silla-de-barra-eames-gris.webp",
+     "color": "Gris"
+    },
+    {
+     "archivo": "sillas-de-barra/silla-de-barra-eames-gris-2.webp",
+     "color": "Gris 2"
+    }
+   ]
+  },
+  {
+   "nombre": "Silla de Barra Elegance B (juego de 3)",
+   "codigo": "SB-024",
+   "categoria": "Sillas de barra",
+   "precio": 280,
+   "juego": 3,
+   "agotado": false,
+   "material": "",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "Precio por juego de 3 unidades.",
+   "colores": [
+    {
+     "nombre": "Gris",
+     "hex": "#868889"
+    },
+    {
+     "nombre": "Negro",
+     "hex": "#333333"
+    }
+   ],
+   "fotos": [
+    {
+     "archivo": "sillas-de-barra/silla-de-barra-elegance-b-gris.webp",
+     "color": "Gris"
+    },
+    {
+     "archivo": "sillas-de-barra/silla-de-barra-elegance-b-negro.webp",
+     "color": "Negro"
+    }
+   ]
+  },
+  {
+   "nombre": "Silla de Barra Elegance G (juego de 3)",
+   "codigo": "SB-023",
+   "categoria": "Sillas de barra",
+   "precio": 375,
+   "juego": 3,
+   "agotado": false,
+   "material": "",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "Precio por juego de 3 unidades.",
+   "colores": [
+    {
+     "nombre": "Turquesa",
+     "hex": "#3b625a"
+    },
+    {
+     "nombre": "Gris",
+     "hex": "#a29e98"
+    }
+   ],
+   "fotos": [
+    {
+     "archivo": "sillas-de-barra/silla-de-barra-elegance-g-turquesa.webp",
+     "color": "Turquesa"
+    },
+    {
+     "archivo": "sillas-de-barra/silla-de-barra-elegance-g-gris.webp",
+     "color": "Gris"
+    }
+   ]
+  },
+  {
+   "nombre": "Silla de Barra Harry (juego de 3)",
+   "codigo": "SB-021",
+   "categoria": "Sillas de barra",
+   "precio": 375,
+   "juego": 3,
+   "agotado": false,
+   "material": "Terciopelo",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "Precio por juego de 3 unidades.",
+   "colores": [
+    {
+     "nombre": "Gris",
+     "hex": "#a29c8e"
+    },
+    {
+     "nombre": "Negro",
+     "hex": "#1f1d1e"
+    }
+   ],
+   "fotos": [
+    {
+     "archivo": "sillas-de-barra/silla-de-barra-harry-gris.webp",
+     "color": "Gris"
+    },
+    {
+     "archivo": "sillas-de-barra/silla-de-barra-harry-negro.webp",
+     "color": "Negro"
+    }
+   ]
+  },
+  {
+   "nombre": "Silla de Barra Hilary Bipiel (juego de 3)",
+   "codigo": "SB-007",
+   "categoria": "Sillas de barra",
+   "precio": 280,
+   "juego": 3,
+   "agotado": false,
+   "material": "Bipiel",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "Precio por juego de 3 unidades.",
+   "colores": [],
+   "fotos": [
+    {
+     "archivo": "sillas-de-barra/silla-de-barra-hilary-bipiel.webp",
+     "color": ""
+    }
+   ]
+  },
+  {
+   "nombre": "Silla de Barra Hilary Gamuza (juego de 3)",
+   "codigo": "SB-008",
+   "categoria": "Sillas de barra",
+   "precio": 280,
+   "juego": 3,
+   "agotado": false,
+   "material": "Terciopelo",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "Precio por juego de 3 unidades.",
+   "colores": [],
+   "fotos": [
+    {
+     "archivo": "sillas-de-barra/silla-de-barra-hilary-gamuza.webp",
+     "color": ""
+    }
+   ]
+  },
+  {
+   "nombre": "Silla de Barra Larissa G (juego de 3)",
+   "codigo": "SB-003",
+   "categoria": "Sillas de barra",
+   "precio": 375,
+   "juego": 3,
+   "agotado": false,
+   "material": "Terciopelo",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "Precio por juego de 3 unidades.",
+   "colores": [
+    {
+     "nombre": "Rosado",
+     "hex": "#d18c97"
+    },
+    {
+     "nombre": "Negro",
+     "hex": "#473f35"
+    },
+    {
+     "nombre": "Gris",
+     "hex": "#cfc7ba"
+    }
+   ],
+   "fotos": [
+    {
+     "archivo": "sillas-de-barra/silla-de-barra-larissa-g-rosado.webp",
+     "color": "Rosado"
+    },
+    {
+     "archivo": "sillas-de-barra/silla-de-barra-larissa-g-negro.webp",
+     "color": "Negro"
+    },
+    {
+     "archivo": "sillas-de-barra/silla-de-barra-larissa-g-gris.webp",
+     "color": "Gris"
+    }
+   ]
+  },
+  {
+   "nombre": "Silla de Barra Marsella (juego de 3)",
+   "codigo": "SB-018",
+   "categoria": "Sillas de barra",
+   "precio": 265,
+   "juego": 3,
+   "agotado": false,
+   "material": "Bipiel",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "Precio por juego de 3 unidades.",
+   "colores": [
+    {
+     "nombre": "Negro",
+     "hex": "#2c2c2b"
+    },
+    {
+     "nombre": "Gris",
+     "hex": "#d7d7d6"
+    },
+    {
+     "nombre": "Gris oscuro",
+     "hex": "#696969"
+    }
+   ],
+   "fotos": [
+    {
+     "archivo": "sillas-de-barra/silla-de-barra-marsella-negro.webp",
+     "color": "Negro"
+    },
+    {
+     "archivo": "sillas-de-barra/silla-de-barra-marsella-gris.webp",
+     "color": "Gris"
+    },
+    {
+     "archivo": "sillas-de-barra/silla-de-barra-marsella-gris-oscuro.webp",
+     "color": "Gris oscuro"
+    }
+   ]
+  },
+  {
+   "nombre": "Silla de Barra Marsella Plus (juego de 3)",
+   "codigo": "SB-022",
+   "categoria": "Sillas de barra",
+   "precio": 265,
+   "juego": 3,
+   "agotado": false,
+   "material": "",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "Precio por juego de 3 unidades.",
+   "colores": [
+    {
+     "nombre": "Gris",
+     "hex": "#989897"
+    },
+    {
+     "nombre": "Negro",
+     "hex": "#323032"
+    }
+   ],
+   "fotos": [
+    {
+     "archivo": "sillas-de-barra/silla-de-barra-marsella-plus-gris.webp",
+     "color": "Gris"
+    },
+    {
+     "archivo": "sillas-de-barra/silla-de-barra-marsella-plus-negro.webp",
+     "color": "Negro"
+    }
+   ]
+  },
+  {
+   "nombre": "Silla de Barra Saona (juego de 3)",
+   "codigo": "SB-017",
+   "categoria": "Sillas de barra",
+   "precio": 225,
+   "juego": 3,
+   "agotado": false,
+   "material": "Bipiel",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "Precio por juego de 3 unidades.",
+   "colores": [
+    {
+     "nombre": "Gris",
+     "hex": "#cdcdcc"
+    },
+    {
+     "nombre": "Negro",
+     "hex": "#2e2e2e"
+    }
+   ],
+   "fotos": [
+    {
+     "archivo": "sillas-de-barra/silla-de-barra-saona-gris.webp",
+     "color": "Gris"
+    },
+    {
+     "archivo": "sillas-de-barra/silla-de-barra-saona-negro.webp",
+     "color": "Negro"
+    }
+   ]
+  },
+  {
+   "nombre": "Silla de Barra Texas (juego de 3)",
+   "codigo": "SB-001",
+   "categoria": "Sillas de barra",
+   "precio": 280,
+   "juego": 3,
+   "agotado": false,
+   "material": "Bipiel",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "Precio por juego de 3 unidades.",
+   "colores": [
+    {
+     "nombre": "Camel",
+     "hex": "#a65437"
+    },
+    {
+     "nombre": "Negro",
+     "hex": "#25242a"
+    },
+    {
+     "nombre": "Gris oscuro",
+     "hex": "#7f7f7e"
+    }
+   ],
+   "fotos": [
+    {
+     "archivo": "sillas-de-barra/silla-de-barra-texas-camel.webp",
+     "color": "Camel"
+    },
+    {
+     "archivo": "sillas-de-barra/silla-de-barra-texas-negro.webp",
+     "color": "Negro"
+    },
+    {
+     "archivo": "sillas-de-barra/silla-de-barra-texas-gris-oscuro.webp",
+     "color": "Gris oscuro"
+    }
+   ]
+  },
+  {
+   "nombre": "Silla de Barra Tokio (juego de 3)",
+   "codigo": "SB-002",
+   "categoria": "Sillas de barra",
+   "precio": 280,
+   "juego": 3,
+   "agotado": false,
+   "material": "Bipiel",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "Precio por juego de 3 unidades.",
+   "colores": [],
+   "fotos": [
+    {
+     "archivo": "sillas-de-barra/silla-de-barra-tokio.webp",
+     "color": ""
+    }
+   ]
+  },
+  {
+   "nombre": "Silla de Barra Varena (juego de 3)",
+   "codigo": "SB-025",
+   "categoria": "Sillas de barra",
+   "precio": null,
+   "juego": 3,
+   "agotado": true,
+   "material": "",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "Precio por juego de 3 unidades.",
+   "colores": [],
+   "fotos": [
+    {
+     "archivo": "sillas-de-barra/silla-de-barra-varena.webp",
+     "color": ""
+    }
+   ]
+  },
+  {
+   "nombre": "Silla de Barra Vicky (juego de 3)",
+   "codigo": "SB-012",
+   "categoria": "Sillas de barra",
+   "precio": 265,
+   "juego": 3,
+   "agotado": false,
+   "material": "Bipiel",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "Precio por juego de 3 unidades.",
+   "colores": [
+    {
+     "nombre": "Gris oscuro",
+     "hex": "#6f6a72"
+    },
+    {
+     "nombre": "Negro",
+     "hex": "#323139"
+    }
+   ],
+   "fotos": [
+    {
+     "archivo": "sillas-de-barra/silla-de-barra-vicky-gris-oscuro.webp",
+     "color": "Gris oscuro"
+    },
+    {
+     "archivo": "sillas-de-barra/silla-de-barra-vicky-negro.webp",
+     "color": "Negro"
+    }
+   ]
+  },
+  {
+   "nombre": "Silla de Barra Virginia (juego de 3)",
+   "codigo": "SB-006",
+   "categoria": "Sillas de barra",
+   "precio": null,
+   "juego": 3,
+   "agotado": true,
+   "material": "Bipiel",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "Precio por juego de 3 unidades.",
+   "colores": [
+    {
+     "nombre": "Negro",
+     "hex": "#383839"
+    },
+    {
+     "nombre": "Blanco",
+     "hex": "#e1dfdf"
+    }
+   ],
+   "fotos": [
+    {
+     "archivo": "sillas-de-barra/silla-de-barra-virginia-negro.webp",
+     "color": "Negro"
+    },
+    {
+     "archivo": "sillas-de-barra/silla-de-barra-virginia-blanco.webp",
+     "color": "Blanco"
+    }
+   ]
+  },
+  {
+   "nombre": "Silla de Cajero Active",
+   "codigo": "SC-002",
+   "categoria": "Sillas de cajero",
+   "precio": 150,
+   "juego": 1,
+   "agotado": false,
+   "material": "",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "",
+   "colores": [],
+   "fotos": [
+    {
+     "archivo": "sillas-de-cajero/silla-de-cajero-active.webp",
+     "color": ""
+    }
+   ]
+  },
+  {
+   "nombre": "Silla de Cajero Atlanta",
+   "codigo": "SC-003",
+   "categoria": "Sillas de cajero",
+   "precio": 140,
+   "juego": 1,
+   "agotado": false,
+   "material": "",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "",
+   "colores": [],
+   "fotos": [
+    {
+     "archivo": "sillas-de-cajero/silla-de-cajero-atlanta.webp",
+     "color": ""
+    }
+   ]
+  },
+  {
+   "nombre": "Silla de Cajero Estambul",
+   "codigo": "SC-004",
+   "categoria": "Sillas de cajero",
+   "precio": 115,
+   "juego": 1,
+   "agotado": false,
+   "material": "",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "",
+   "colores": [],
+   "fotos": [
+    {
+     "archivo": "sillas-de-cajero/silla-de-cajero-estambul.webp",
+     "color": ""
+    }
+   ]
+  },
+  {
+   "nombre": "Silla de Cajero Michigan",
+   "codigo": "SC-005",
+   "categoria": "Sillas de cajero",
+   "precio": 100,
+   "juego": 1,
+   "agotado": false,
+   "material": "",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "",
+   "colores": [],
+   "fotos": [
+    {
+     "archivo": "sillas-de-cajero/silla-de-cajero-michigan.webp",
+     "color": ""
+    }
+   ]
+  },
+  {
+   "nombre": "Silla de Cajero Sevilla",
+   "codigo": "SC-006",
+   "categoria": "Sillas de cajero",
+   "precio": 140,
+   "juego": 1,
+   "agotado": false,
+   "material": "",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "",
+   "colores": [],
+   "fotos": [
+    {
+     "archivo": "sillas-de-cajero/silla-de-cajero-sevilla.webp",
+     "color": ""
+    }
+   ]
+  },
+  {
+   "nombre": "Silla de Cajero Trendy",
+   "codigo": "SC-001",
+   "categoria": "Sillas de cajero",
+   "precio": 125,
+   "juego": 1,
+   "agotado": false,
+   "material": "",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "",
+   "colores": [],
+   "fotos": [
+    {
+     "archivo": "sillas-de-cajero/silla-de-cajero-trendy.webp",
+     "color": ""
+    }
+   ]
+  },
+  {
+   "nombre": "Silla de Comedor Alecia",
+   "codigo": "CM-017",
+   "categoria": "Sillas de comedor",
+   "precio": 45,
+   "juego": 1,
+   "agotado": false,
+   "material": "Plástico",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "",
+   "colores": [
+    {
+     "nombre": "Negro",
+     "hex": "#353538"
+    },
+    {
+     "nombre": "Blanco",
+     "hex": "#f6f7f9"
+    },
+    {
+     "nombre": "Rojo",
+     "hex": "#c92315"
+    }
+   ],
+   "fotos": [
+    {
+     "archivo": "sillas-de-comedor/silla-de-comedor-alecia-negro.webp",
+     "color": "Negro"
+    },
+    {
+     "archivo": "sillas-de-comedor/silla-de-comedor-alecia-blanco.webp",
+     "color": "Blanco"
+    },
+    {
+     "archivo": "sillas-de-comedor/silla-de-comedor-alecia-rojo.webp",
+     "color": "Rojo"
+    }
+   ]
+  },
+  {
+   "nombre": "Silla de Comedor Anny",
+   "codigo": "CM-015",
+   "categoria": "Sillas de comedor",
+   "precio": 25,
+   "juego": 1,
+   "agotado": false,
+   "material": "Plástico",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "",
+   "colores": [],
+   "fotos": [
+    {
+     "archivo": "sillas-de-comedor/silla-de-comedor-anny.webp",
+     "color": ""
+    }
+   ]
+  },
+  {
+   "nombre": "Silla de Comedor Arianna",
+   "codigo": "CM-009",
+   "categoria": "Sillas de comedor",
+   "precio": 105,
+   "juego": 1,
+   "agotado": false,
+   "material": "Terciopelo",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "",
+   "colores": [
+    {
+     "nombre": "Negro",
+     "hex": "#0e0d0f"
+    },
+    {
+     "nombre": "Gris oscuro",
+     "hex": "#646369"
+    }
+   ],
+   "fotos": [
+    {
+     "archivo": "sillas-de-comedor/silla-de-comedor-arianna-negro.webp",
+     "color": "Negro"
+    },
+    {
+     "archivo": "sillas-de-comedor/silla-de-comedor-arianna-gris-oscuro.webp",
+     "color": "Gris oscuro"
+    }
+   ]
+  },
+  {
+   "nombre": "Silla de Comedor Arne",
+   "codigo": "CM-014",
+   "categoria": "Sillas de comedor",
+   "precio": 50,
+   "juego": 1,
+   "agotado": false,
+   "material": "Plástico",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "",
+   "colores": [
+    {
+     "nombre": "Gris",
+     "hex": "#a0a1a2"
+    },
+    {
+     "nombre": "Amarillo",
+     "hex": "#dec235"
+    },
+    {
+     "nombre": "Negro",
+     "hex": "#262525"
+    }
+   ],
+   "fotos": [
+    {
+     "archivo": "sillas-de-comedor/silla-de-comedor-arne-gris.webp",
+     "color": "Gris"
+    },
+    {
+     "archivo": "sillas-de-comedor/silla-de-comedor-arne-amarillo.webp",
+     "color": "Amarillo"
+    },
+    {
+     "archivo": "sillas-de-comedor/silla-de-comedor-arne-negro.webp",
+     "color": "Negro"
+    }
+   ]
+  },
+  {
+   "nombre": "Silla de Comedor Aurora",
+   "codigo": "CM-022",
+   "categoria": "Sillas de comedor",
+   "precio": 70,
+   "juego": 1,
+   "agotado": false,
+   "material": "Bipiel",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "",
+   "colores": [
+    {
+     "nombre": "Negro",
+     "hex": "#464445"
+    },
+    {
+     "nombre": "Camel",
+     "hex": "#b2754d"
+    }
+   ],
+   "fotos": [
+    {
+     "archivo": "sillas-de-comedor/silla-de-comedor-aurora-negro.webp",
+     "color": "Negro"
+    },
+    {
+     "archivo": "sillas-de-comedor/silla-de-comedor-aurora-camel.webp",
+     "color": "Camel"
+    }
+   ]
+  },
+  {
+   "nombre": "Silla de Comedor Curve",
+   "codigo": "CM-023",
+   "categoria": "Sillas de comedor",
+   "precio": 70,
+   "juego": 1,
+   "agotado": false,
+   "material": "Plástico",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "",
+   "colores": [
+    {
+     "nombre": "Gris oscuro",
+     "hex": "#504e57"
+    },
+    {
+     "nombre": "Rojo",
+     "hex": "#bc3c25"
+    }
+   ],
+   "fotos": [
+    {
+     "archivo": "sillas-de-comedor/silla-de-comedor-curve-gris-oscuro.webp",
+     "color": "Gris oscuro"
+    },
+    {
+     "archivo": "sillas-de-comedor/silla-de-comedor-curve-rojo.webp",
+     "color": "Rojo"
+    }
+   ]
+  },
+  {
+   "nombre": "Silla de Comedor Eames",
+   "codigo": "CM-021",
+   "categoria": "Sillas de comedor",
+   "precio": 25,
+   "juego": 1,
+   "agotado": false,
+   "material": "Plástico",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "",
+   "colores": [
+    {
+     "nombre": "Negro",
+     "hex": "#2c2c2c"
+    },
+    {
+     "nombre": "Gris oscuro",
+     "hex": "#777877"
+    },
+    {
+     "nombre": "Blanco",
+     "hex": "#e2e3e8"
+    },
+    {
+     "nombre": "Morado",
+     "hex": "#8b4997"
+    },
+    {
+     "nombre": "Rosado",
+     "hex": "#f29baf"
+    }
+   ],
+   "fotos": [
+    {
+     "archivo": "sillas-de-comedor/silla-de-comedor-eames-negro.webp",
+     "color": "Negro"
+    },
+    {
+     "archivo": "sillas-de-comedor/silla-de-comedor-eames-gris-oscuro.webp",
+     "color": "Gris oscuro"
+    },
+    {
+     "archivo": "sillas-de-comedor/silla-de-comedor-eames-blanco.webp",
+     "color": "Blanco"
+    },
+    {
+     "archivo": "sillas-de-comedor/silla-de-comedor-eames-morado.webp",
+     "color": "Morado"
+    },
+    {
+     "archivo": "sillas-de-comedor/silla-de-comedor-eames-rosado.webp",
+     "color": "Rosado"
+    }
+   ]
+  },
+  {
+   "nombre": "Silla de Comedor Eames C/B",
+   "codigo": "CM-019",
+   "categoria": "Sillas de comedor",
+   "precio": 45,
+   "juego": 1,
+   "agotado": false,
+   "material": "Plástico",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "",
+   "colores": [
+    {
+     "nombre": "Gris",
+     "hex": "#a9a9ac"
+    },
+    {
+     "nombre": "Blanco",
+     "hex": "#dddcdc"
+    },
+    {
+     "nombre": "Rosado",
+     "hex": "#e6bacf"
+    }
+   ],
+   "fotos": [
+    {
+     "archivo": "sillas-de-comedor/silla-de-comedor-eames-c-b-gris.webp",
+     "color": "Gris"
+    },
+    {
+     "archivo": "sillas-de-comedor/silla-de-comedor-eames-c-b-blanco.webp",
+     "color": "Blanco"
+    },
+    {
+     "archivo": "sillas-de-comedor/silla-de-comedor-eames-c-b-rosado.webp",
+     "color": "Rosado"
+    }
+   ]
+  },
+  {
+   "nombre": "Silla de Comedor Elsa Bipiel",
+   "codigo": "CM-005",
+   "categoria": "Sillas de comedor",
+   "precio": 105,
+   "juego": 1,
+   "agotado": false,
+   "material": "Bipiel",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "",
+   "colores": [
+    {
+     "nombre": "Gris oscuro",
+     "hex": "#6e6f6e"
+    },
+    {
+     "nombre": "Negro",
+     "hex": "#333334"
+    }
+   ],
+   "fotos": [
+    {
+     "archivo": "sillas-de-comedor/silla-de-comedor-elsa-bipiel-gris-oscuro.webp",
+     "color": "Gris oscuro"
+    },
+    {
+     "archivo": "sillas-de-comedor/silla-de-comedor-elsa-bipiel-negro.webp",
+     "color": "Negro"
+    }
+   ]
+  },
+  {
+   "nombre": "Silla de Comedor Elsa Terciopelo",
+   "codigo": "CM-003",
+   "categoria": "Sillas de comedor",
+   "precio": 115,
+   "juego": 1,
+   "agotado": false,
+   "material": "Terciopelo",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "",
+   "colores": [
+    {
+     "nombre": "Gris oscuro",
+     "hex": "#676869"
+    },
+    {
+     "nombre": "Negro",
+     "hex": "#151517"
+    }
+   ],
+   "fotos": [
+    {
+     "archivo": "sillas-de-comedor/silla-de-comedor-elsa-terciopelo-gris-oscuro.webp",
+     "color": "Gris oscuro"
+    },
+    {
+     "archivo": "sillas-de-comedor/silla-de-comedor-elsa-terciopelo-negro.webp",
+     "color": "Negro"
+    }
+   ]
+  },
+  {
+   "nombre": "Silla de Comedor Estela",
+   "codigo": "CM-016",
+   "categoria": "Sillas de comedor",
+   "precio": 55,
+   "juego": 1,
+   "agotado": false,
+   "material": "Plástico",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "",
+   "colores": [
+    {
+     "nombre": "Negro",
+     "hex": "#535255"
+    },
+    {
+     "nombre": "Rojo",
+     "hex": "#f70a19"
+    }
+   ],
+   "fotos": [
+    {
+     "archivo": "sillas-de-comedor/silla-de-comedor-estela-negro.webp",
+     "color": "Negro"
+    },
+    {
+     "archivo": "sillas-de-comedor/silla-de-comedor-estela-rojo.webp",
+     "color": "Rojo"
+    }
+   ]
+  },
+  {
+   "nombre": "Silla de Comedor Eva",
+   "codigo": "CM-001",
+   "categoria": "Sillas de comedor",
+   "precio": 105,
+   "juego": 1,
+   "agotado": false,
+   "material": "Terciopelo",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "",
+   "colores": [
+    {
+     "nombre": "Negro",
+     "hex": "#18191a"
+    },
+    {
+     "nombre": "Gris",
+     "hex": "#999894"
+    }
+   ],
+   "fotos": [
+    {
+     "archivo": "sillas-de-comedor/silla-de-comedor-eva-negro.webp",
+     "color": "Negro"
+    },
+    {
+     "archivo": "sillas-de-comedor/silla-de-comedor-eva-gris.webp",
+     "color": "Gris"
+    }
+   ]
+  },
+  {
+   "nombre": "Silla de Comedor Hilary",
+   "codigo": "CM-008",
+   "categoria": "Sillas de comedor",
+   "precio": 90,
+   "juego": 1,
+   "agotado": false,
+   "material": "Terciopelo",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "",
+   "colores": [
+    {
+     "nombre": "Negro",
+     "hex": "#29292a"
+    },
+    {
+     "nombre": "Gris",
+     "hex": "#7d8592"
+    }
+   ],
+   "fotos": [
+    {
+     "archivo": "sillas-de-comedor/silla-de-comedor-hilary-negro.webp",
+     "color": "Negro"
+    },
+    {
+     "archivo": "sillas-de-comedor/silla-de-comedor-hilary-gris.webp",
+     "color": "Gris"
+    }
+   ]
+  },
+  {
+   "nombre": "Silla de Comedor Isabel",
+   "codigo": "CM-002",
+   "categoria": "Sillas de comedor",
+   "precio": 105,
+   "juego": 1,
+   "agotado": false,
+   "material": "Bipiel",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "",
+   "colores": [
+    {
+     "nombre": "Negro",
+     "hex": "#3e3e3f"
+    },
+    {
+     "nombre": "Blanco",
+     "hex": "#dddede"
+    },
+    {
+     "nombre": "Gris",
+     "hex": "#8b8d88"
+    }
+   ],
+   "fotos": [
+    {
+     "archivo": "sillas-de-comedor/silla-de-comedor-isabel-negro.webp",
+     "color": "Negro"
+    },
+    {
+     "archivo": "sillas-de-comedor/silla-de-comedor-isabel-blanco.webp",
+     "color": "Blanco"
+    },
+    {
+     "archivo": "sillas-de-comedor/silla-de-comedor-isabel-gris.webp",
+     "color": "Gris"
+    }
+   ]
+  },
+  {
+   "nombre": "Silla de Comedor Kendall",
+   "codigo": "CM-007",
+   "categoria": "Sillas de comedor",
+   "precio": 150,
+   "juego": 1,
+   "agotado": false,
+   "material": "Terciopelo",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "",
+   "colores": [
+    {
+     "nombre": "Gris oscuro",
+     "hex": "#75767c"
+    },
+    {
+     "nombre": "Negro",
+     "hex": "#27252b"
+    }
+   ],
+   "fotos": [
+    {
+     "archivo": "sillas-de-comedor/silla-de-comedor-kendall-gris-oscuro.webp",
+     "color": "Gris oscuro"
+    },
+    {
+     "archivo": "sillas-de-comedor/silla-de-comedor-kendall-negro.webp",
+     "color": "Negro"
+    }
+   ]
+  },
+  {
+   "nombre": "Silla de Comedor Liam",
+   "codigo": "CM-018",
+   "categoria": "Sillas de comedor",
+   "precio": 50,
+   "juego": 1,
+   "agotado": false,
+   "material": "Plástico",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "",
+   "colores": [
+    {
+     "nombre": "Rojo",
+     "hex": "#d6393f"
+    },
+    {
+     "nombre": "Amarillo",
+     "hex": "#ffd540"
+    },
+    {
+     "nombre": "Gris",
+     "hex": "#91908f"
+    },
+    {
+     "nombre": "Negro",
+     "hex": "#403e3e"
+    },
+    {
+     "nombre": "Blanco",
+     "hex": "#f0f0f0"
+    }
+   ],
+   "fotos": [
+    {
+     "archivo": "sillas-de-comedor/silla-de-comedor-liam-rojo.webp",
+     "color": "Rojo"
+    },
+    {
+     "archivo": "sillas-de-comedor/silla-de-comedor-liam-amarillo.webp",
+     "color": "Amarillo"
+    },
+    {
+     "archivo": "sillas-de-comedor/silla-de-comedor-liam-gris.webp",
+     "color": "Gris"
+    },
+    {
+     "archivo": "sillas-de-comedor/silla-de-comedor-liam-negro.webp",
+     "color": "Negro"
+    },
+    {
+     "archivo": "sillas-de-comedor/silla-de-comedor-liam-blanco.webp",
+     "color": "Blanco"
+    }
+   ]
+  },
+  {
+   "nombre": "Silla de Comedor Mia",
+   "codigo": "CM-006",
+   "categoria": "Sillas de comedor",
+   "precio": 90,
+   "juego": 1,
+   "agotado": false,
+   "material": "Terciopelo",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "",
+   "colores": [
+    {
+     "nombre": "Gris",
+     "hex": "#95938d"
+    },
+    {
+     "nombre": "Negro",
+     "hex": "#1a1a1c"
+    }
+   ],
+   "fotos": [
+    {
+     "archivo": "sillas-de-comedor/silla-de-comedor-mia-gris.webp",
+     "color": "Gris"
+    },
+    {
+     "archivo": "sillas-de-comedor/silla-de-comedor-mia-negro.webp",
+     "color": "Negro"
+    }
+   ]
+  },
+  {
+   "nombre": "Silla de Comedor Patchwork",
+   "codigo": "CM-013",
+   "categoria": "Sillas de comedor",
+   "precio": 75,
+   "juego": 1,
+   "agotado": false,
+   "material": "",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "",
+   "colores": [],
+   "fotos": [
+    {
+     "archivo": "sillas-de-comedor/silla-de-comedor-patchwork.webp",
+     "color": ""
+    }
+   ]
+  },
+  {
+   "nombre": "Silla de Comedor Tolix",
+   "codigo": "CM-024",
+   "categoria": "Sillas de comedor",
+   "precio": 50,
+   "juego": 1,
+   "agotado": false,
+   "material": "Metal",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "",
+   "colores": [
+    {
+     "nombre": "Gris oscuro",
+     "hex": "#686667"
+    },
+    {
+     "nombre": "Blanco",
+     "hex": "#efefef"
+    }
+   ],
+   "fotos": [
+    {
+     "archivo": "sillas-de-comedor/silla-de-comedor-tolix-gris-oscuro.webp",
+     "color": "Gris oscuro"
+    },
+    {
+     "archivo": "sillas-de-comedor/silla-de-comedor-tolix-blanco.webp",
+     "color": "Blanco"
+    }
+   ]
+  },
+  {
+   "nombre": "Silla de Comedor Trenzada",
+   "codigo": "CM-004",
+   "categoria": "Sillas de comedor",
+   "precio": 150,
+   "juego": 1,
+   "agotado": false,
+   "material": "Terciopelo",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "",
+   "colores": [
+    {
+     "nombre": "Beige",
+     "hex": "#b8a18c"
+    },
+    {
+     "nombre": "Negro",
+     "hex": "#4d4d4c"
+    }
+   ],
+   "fotos": [
+    {
+     "archivo": "sillas-de-comedor/silla-de-comedor-trenzada-beige.webp",
+     "color": "Beige"
+    },
+    {
+     "archivo": "sillas-de-comedor/silla-de-comedor-trenzada-negro.webp",
+     "color": "Negro"
+    }
+   ]
+  },
+  {
+   "nombre": "Silla de Comedor Tulip",
+   "codigo": "CM-020",
+   "categoria": "Sillas de comedor",
+   "precio": 50,
+   "juego": 1,
+   "agotado": false,
+   "material": "Plástico",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "",
+   "colores": [
+    {
+     "nombre": "Blanco",
+     "hex": "#e1e3e6"
+    },
+    {
+     "nombre": "Negro",
+     "hex": "#3c3b38"
+    }
+   ],
+   "fotos": [
+    {
+     "archivo": "sillas-de-comedor/silla-de-comedor-tulip-blanco.webp",
+     "color": "Blanco"
+    },
+    {
+     "archivo": "sillas-de-comedor/silla-de-comedor-tulip-negro.webp",
+     "color": "Negro"
+    }
+   ]
+  },
+  {
+   "nombre": "Silla de Comedor Velvet",
+   "codigo": "CM-011",
+   "categoria": "Sillas de comedor",
+   "precio": 100,
+   "juego": 1,
+   "agotado": false,
+   "material": "Terciopelo",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "",
+   "colores": [
+    {
+     "nombre": "Negro",
+     "hex": "#2e2e2e"
+    },
+    {
+     "nombre": "Turquesa",
+     "hex": "#1b4a43"
+    },
+    {
+     "nombre": "Gris",
+     "hex": "#797682"
+    },
+    {
+     "nombre": "Rojo",
+     "hex": "#730427"
+    },
+    {
+     "nombre": "Rosado",
+     "hex": "#e6bbb7"
+    }
+   ],
+   "fotos": [
+    {
+     "archivo": "sillas-de-comedor/silla-de-comedor-velvet-negro.webp",
+     "color": "Negro"
+    },
+    {
+     "archivo": "sillas-de-comedor/silla-de-comedor-velvet-turquesa.webp",
+     "color": "Turquesa"
+    },
+    {
+     "archivo": "sillas-de-comedor/silla-de-comedor-velvet-gris.webp",
+     "color": "Gris"
+    },
+    {
+     "archivo": "sillas-de-comedor/silla-de-comedor-velvet-rojo.webp",
+     "color": "Rojo"
+    },
+    {
+     "archivo": "sillas-de-comedor/silla-de-comedor-velvet-rosado.webp",
+     "color": "Rosado"
+    }
+   ],
+   "destacado": true
+  },
+  {
+   "nombre": "Silla de Comedor Velvet Gold",
+   "codigo": "CM-012",
+   "categoria": "Sillas de comedor",
+   "precio": 115,
+   "juego": 1,
+   "agotado": false,
+   "material": "Terciopelo",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "",
+   "colores": [
+    {
+     "nombre": "Rosado",
+     "hex": "#f0b4bb"
+    },
+    {
+     "nombre": "Beige",
+     "hex": "#ecdac8"
+    },
+    {
+     "nombre": "Rojo",
+     "hex": "#b82743"
+    }
+   ],
+   "fotos": [
+    {
+     "archivo": "sillas-de-comedor/silla-de-comedor-velvet-gold-rosado.webp",
+     "color": "Rosado"
+    },
+    {
+     "archivo": "sillas-de-comedor/silla-de-comedor-velvet-gold-beige.webp",
+     "color": "Beige"
+    },
+    {
+     "archivo": "sillas-de-comedor/silla-de-comedor-velvet-gold-rojo.webp",
+     "color": "Rojo"
+    }
+   ]
+  },
+  {
+   "nombre": "Silla de Comedor Velvet Rock",
+   "codigo": "CM-010",
+   "categoria": "Sillas de comedor",
+   "precio": 115,
+   "juego": 1,
+   "agotado": false,
+   "material": "Bipiel",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "",
+   "colores": [
+    {
+     "nombre": "Negro",
+     "hex": "#383738"
+    },
+    {
+     "nombre": "Gris",
+     "hex": "#9b9490"
+    }
+   ],
+   "fotos": [
+    {
+     "archivo": "sillas-de-comedor/silla-de-comedor-velvet-rock-negro.webp",
+     "color": "Negro"
+    },
+    {
+     "archivo": "sillas-de-comedor/silla-de-comedor-velvet-rock-gris.webp",
+     "color": "Gris"
+    }
+   ]
+  },
+  {
+   "nombre": "Silla de Visitante Active",
+   "codigo": "SV-010",
+   "categoria": "Sillas de visitante",
+   "precio": 82,
+   "juego": 1,
+   "agotado": false,
+   "material": "",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "",
+   "colores": [],
+   "fotos": [
+    {
+     "archivo": "sillas-de-visitante/silla-de-visitante-active.webp",
+     "color": ""
+    }
+   ]
+  },
+  {
+   "nombre": "Silla de Visitante Bahamas",
+   "codigo": "SV-008",
+   "categoria": "Sillas de visitante",
+   "precio": 90,
+   "juego": 1,
+   "agotado": false,
+   "material": "",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "",
+   "colores": [],
+   "fotos": [
+    {
+     "archivo": "sillas-de-visitante/silla-de-visitante-bahamas.webp",
+     "color": ""
+    }
+   ]
+  },
+  {
+   "nombre": "Silla de Visitante Firenze",
+   "codigo": "SV-004",
+   "categoria": "Sillas de visitante",
+   "precio": 45,
+   "juego": 1,
+   "agotado": false,
+   "material": "",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "",
+   "colores": [
+    {
+     "nombre": "Azul",
+     "hex": "#105cb5"
+    },
+    {
+     "nombre": "Negro",
+     "hex": "#131927"
+    }
+   ],
+   "fotos": [
+    {
+     "archivo": "sillas-de-visitante/silla-de-visitante-firenze-azul.webp",
+     "color": "Azul"
+    },
+    {
+     "archivo": "sillas-de-visitante/silla-de-visitante-firenze-negro.webp",
+     "color": "Negro"
+    }
+   ]
+  },
+  {
+   "nombre": "Silla de Visitante Genova",
+   "codigo": "SV-002",
+   "categoria": "Sillas de visitante",
+   "precio": 50,
+   "juego": 1,
+   "agotado": false,
+   "material": "",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "",
+   "colores": [],
+   "fotos": [
+    {
+     "archivo": "sillas-de-visitante/silla-de-visitante-genova.webp",
+     "color": ""
+    }
+   ]
+  },
+  {
+   "nombre": "Silla de Visitante Maronti",
+   "codigo": "SV-005",
+   "categoria": "Sillas de visitante",
+   "precio": 70,
+   "juego": 1,
+   "agotado": false,
+   "material": "",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "",
+   "colores": [],
+   "fotos": [
+    {
+     "archivo": "sillas-de-visitante/silla-de-visitante-maronti.webp",
+     "color": ""
+    }
+   ]
+  },
+  {
+   "nombre": "Silla de Visitante Montreal",
+   "codigo": "SV-009",
+   "categoria": "Sillas de visitante",
+   "precio": 90,
+   "juego": 1,
+   "agotado": false,
+   "material": "",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "",
+   "colores": [],
+   "fotos": [
+    {
+     "archivo": "sillas-de-visitante/silla-de-visitante-montreal.webp",
+     "color": ""
+    }
+   ]
+  },
+  {
+   "nombre": "Silla de Visitante Mónaco",
+   "codigo": "SV-011",
+   "categoria": "Sillas de visitante",
+   "precio": 125,
+   "juego": 1,
+   "agotado": false,
+   "material": "",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "",
+   "colores": [
+    {
+     "nombre": "Negro",
+     "hex": "#484847"
+    },
+    {
+     "nombre": "Gris",
+     "hex": "#d3d5d6"
+    }
+   ],
+   "fotos": [
+    {
+     "archivo": "sillas-de-visitante/silla-de-visitante-monaco-negro.webp",
+     "color": "Negro"
+    },
+    {
+     "archivo": "sillas-de-visitante/silla-de-visitante-monaco-gris.webp",
+     "color": "Gris"
+    }
+   ]
+  },
+  {
+   "nombre": "Silla de Visitante Padua",
+   "codigo": "SV-003",
+   "categoria": "Sillas de visitante",
+   "precio": null,
+   "juego": 1,
+   "agotado": true,
+   "material": "",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "",
+   "colores": [],
+   "fotos": [
+    {
+     "archivo": "sillas-de-visitante/silla-de-visitante-padua.webp",
+     "color": ""
+    }
+   ]
+  },
+  {
+   "nombre": "Silla de Visitante Roma",
+   "codigo": "SV-001",
+   "categoria": "Sillas de visitante",
+   "precio": 38,
+   "juego": 1,
+   "agotado": false,
+   "material": "",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "",
+   "colores": [],
+   "fotos": [
+    {
+     "archivo": "sillas-de-visitante/silla-de-visitante-roma.webp",
+     "color": ""
+    }
+   ]
+  },
+  {
+   "nombre": "Silla de Visitante Roma VIP",
+   "codigo": "SV-006",
+   "categoria": "Sillas de visitante",
+   "precio": 75,
+   "juego": 1,
+   "agotado": false,
+   "material": "",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "",
+   "colores": [],
+   "fotos": [
+    {
+     "archivo": "sillas-de-visitante/silla-de-visitante-roma-vip.webp",
+     "color": ""
+    }
+   ]
+  },
+  {
+   "nombre": "Silla de Visitante Stanford",
+   "codigo": "SV-012",
+   "categoria": "Sillas de visitante",
+   "precio": 165,
+   "juego": 1,
+   "agotado": false,
+   "material": "",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "",
+   "colores": [],
+   "fotos": [
+    {
+     "archivo": "sillas-de-visitante/silla-de-visitante-stanford.webp",
+     "color": ""
+    }
+   ]
+  },
+  {
+   "nombre": "Silla de Visitante Trendy",
+   "codigo": "SV-007",
+   "categoria": "Sillas de visitante",
+   "precio": 65,
+   "juego": 1,
+   "agotado": false,
+   "material": "",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "",
+   "colores": [],
+   "fotos": [
+    {
+     "archivo": "sillas-de-visitante/silla-de-visitante-trendy.webp",
+     "color": ""
+    }
+   ]
+  },
+  {
+   "nombre": "Silla Ejecutiva Active",
+   "codigo": "SE-008",
+   "categoria": "Sillas ejecutivas",
+   "precio": 70,
+   "juego": 1,
+   "agotado": false,
+   "material": "",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "",
+   "colores": [],
+   "fotos": [
+    {
+     "archivo": "sillas-ejecutivas/silla-ejecutiva-active.webp",
+     "color": ""
+    }
+   ]
+  },
+  {
+   "nombre": "Silla Ejecutiva Active Blanca",
+   "codigo": "SE-010",
+   "categoria": "Sillas ejecutivas",
+   "precio": 85,
+   "juego": 1,
+   "agotado": false,
+   "material": "",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "",
+   "colores": [],
+   "fotos": [
+    {
+     "archivo": "sillas-ejecutivas/silla-ejecutiva-active-blanca.webp",
+     "color": ""
+    }
+   ]
+  },
+  {
+   "nombre": "Silla Ejecutiva Bossini",
+   "codigo": "SE-007",
+   "categoria": "Sillas ejecutivas",
+   "precio": 100,
+   "juego": 1,
+   "agotado": false,
+   "material": "",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "",
+   "colores": [],
+   "fotos": [
+    {
+     "archivo": "sillas-ejecutivas/silla-ejecutiva-bossini.webp",
+     "color": ""
+    }
+   ]
+  },
+  {
+   "nombre": "Silla Ejecutiva Chicago",
+   "codigo": "SE-003",
+   "categoria": "Sillas ejecutivas",
+   "precio": 70,
+   "juego": 1,
+   "agotado": false,
+   "material": "",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "",
+   "colores": [],
+   "fotos": [
+    {
+     "archivo": "sillas-ejecutivas/silla-ejecutiva-chicago.webp",
+     "color": ""
+    }
+   ]
+  },
+  {
+   "nombre": "Silla Ejecutiva Croacia",
+   "codigo": "SE-009",
+   "categoria": "Sillas ejecutivas",
+   "precio": 165,
+   "juego": 1,
+   "agotado": false,
+   "material": "",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "",
+   "colores": [],
+   "fotos": [
+    {
+     "archivo": "sillas-ejecutivas/silla-ejecutiva-croacia.webp",
+     "color": ""
+    }
+   ]
+  },
+  {
+   "nombre": "Silla Ejecutiva London",
+   "codigo": "SE-002",
+   "categoria": "Sillas ejecutivas",
+   "precio": 65,
+   "juego": 1,
+   "agotado": false,
+   "material": "",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "",
+   "colores": [],
+   "fotos": [
+    {
+     "archivo": "sillas-ejecutivas/silla-ejecutiva-london.webp",
+     "color": ""
+    }
+   ]
+  },
+  {
+   "nombre": "Silla Ejecutiva Madison",
+   "codigo": "SE-004",
+   "categoria": "Sillas ejecutivas",
+   "precio": 75,
+   "juego": 1,
+   "agotado": false,
+   "material": "",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "",
+   "colores": [],
+   "fotos": [
+    {
+     "archivo": "sillas-ejecutivas/silla-ejecutiva-madison.webp",
+     "color": ""
+    }
+   ]
+  },
+  {
+   "nombre": "Silla Ejecutiva Madison Blanca",
+   "codigo": "SE-005",
+   "categoria": "Sillas ejecutivas",
+   "precio": 85,
+   "juego": 1,
+   "agotado": false,
+   "material": "",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "",
+   "colores": [],
+   "fotos": [
+    {
+     "archivo": "sillas-ejecutivas/silla-ejecutiva-madison-blanca.webp",
+     "color": ""
+    }
+   ]
+  },
+  {
+   "nombre": "Silla Ejecutiva Mercedes",
+   "codigo": "SE-006",
+   "categoria": "Sillas ejecutivas",
+   "precio": 70,
+   "juego": 1,
+   "agotado": false,
+   "material": "",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "",
+   "colores": [],
+   "fotos": [
+    {
+     "archivo": "sillas-ejecutivas/silla-ejecutiva-mercedes.webp",
+     "color": ""
+    }
+   ]
+  },
+  {
+   "nombre": "Silla Ejecutiva Trendy",
+   "codigo": "SE-001",
+   "categoria": "Sillas ejecutivas",
+   "precio": 65,
+   "juego": 1,
+   "agotado": false,
+   "material": "",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "",
+   "colores": [],
+   "fotos": [
+    {
+     "archivo": "sillas-ejecutivas/silla-ejecutiva-trendy.webp",
+     "color": ""
+    }
+   ]
+  },
+  {
+   "nombre": "Silla Gamer Bilx",
+   "codigo": "SG-001",
+   "categoria": "Sillas gamer",
+   "precio": 160,
+   "juego": 1,
+   "agotado": false,
+   "material": "",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "",
+   "colores": [
+    {
+     "nombre": "Gris oscuro",
+     "hex": "#4e4b55"
+    },
+    {
+     "nombre": "Negro",
+     "hex": "#4b4b4c"
+    }
+   ],
+   "fotos": [
+    {
+     "archivo": "sillas-gamer/silla-gamer-bilx-gris-oscuro.webp",
+     "color": "Gris oscuro"
+    },
+    {
+     "archivo": "sillas-gamer/silla-gamer-bilx-negro.webp",
+     "color": "Negro"
+    }
+   ]
+  },
+  {
+   "nombre": "Silla Gamer Bilx Malla",
+   "codigo": "SG-003",
+   "categoria": "Sillas gamer",
+   "precio": 160,
+   "juego": 1,
+   "agotado": false,
+   "material": "",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "",
+   "colores": [],
+   "fotos": [
+    {
+     "archivo": "sillas-gamer/silla-gamer-bilx-malla.webp",
+     "color": ""
+    }
+   ]
+  },
+  {
+   "nombre": "Silla Gamer Xdrive",
+   "codigo": "SG-004",
+   "categoria": "Sillas gamer",
+   "precio": 225,
+   "juego": 1,
+   "agotado": false,
+   "material": "",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "",
+   "colores": [],
+   "fotos": [
+    {
+     "archivo": "sillas-gamer/silla-gamer-xdrive.webp",
+     "color": ""
+    }
+   ]
+  },
+  {
+   "nombre": "Silla Gamer Xdrive con Reposapiés",
+   "codigo": "SG-002",
+   "categoria": "Sillas gamer",
+   "precio": 225,
+   "juego": 1,
+   "agotado": false,
+   "material": "",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "",
+   "colores": [
+    {
+     "nombre": "Negro",
+     "hex": "#2e2e30"
+    },
+    {
+     "nombre": "Azul",
+     "hex": "#3d435a"
+    }
+   ],
+   "fotos": [
+    {
+     "archivo": "sillas-gamer/silla-gamer-xdrive-con-reposapies-negro.webp",
+     "color": "Negro"
+    },
+    {
+     "archivo": "sillas-gamer/silla-gamer-xdrive-con-reposapies-azul.webp",
+     "color": "Azul"
+    }
+   ],
+   "destacado": true
+  },
+  {
+   "nombre": "Silla Operativa Alex",
+   "codigo": "SO-010",
+   "categoria": "Sillas operativas",
+   "precio": 50,
+   "juego": 1,
+   "agotado": false,
+   "material": "",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "",
+   "colores": [],
+   "fotos": [
+    {
+     "archivo": "sillas-operativas/silla-operativa-alex.webp",
+     "color": ""
+    }
+   ]
+  },
+  {
+   "nombre": "Silla Operativa Alex G",
+   "codigo": "SO-011",
+   "categoria": "Sillas operativas",
+   "precio": 75,
+   "juego": 1,
+   "agotado": false,
+   "material": "",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "",
+   "colores": [
+    {
+     "nombre": "Gris oscuro",
+     "hex": "#69694b"
+    },
+    {
+     "nombre": "Gris",
+     "hex": "#9e9482"
+    }
+   ],
+   "fotos": [
+    {
+     "archivo": "sillas-operativas/silla-operativa-alex-g-gris-oscuro.webp",
+     "color": "Gris oscuro"
+    },
+    {
+     "archivo": "sillas-operativas/silla-operativa-alex-g-gris.webp",
+     "color": "Gris"
+    }
+   ]
+  },
+  {
+   "nombre": "Silla Operativa Berlin",
+   "codigo": "SO-001",
+   "categoria": "Sillas operativas",
+   "precio": 65,
+   "juego": 1,
+   "agotado": false,
+   "material": "",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "",
+   "colores": [
+    {
+     "nombre": "Negro",
+     "hex": "#424144"
+    },
+    {
+     "nombre": "Rosado",
+     "hex": "#f36097"
+    },
+    {
+     "nombre": "Blanco",
+     "hex": "#e2e1e0"
+    }
+   ],
+   "fotos": [
+    {
+     "archivo": "sillas-operativas/silla-operativa-berlin-negro.webp",
+     "color": "Negro"
+    },
+    {
+     "archivo": "sillas-operativas/silla-operativa-berlin-rosado.webp",
+     "color": "Rosado"
+    },
+    {
+     "archivo": "sillas-operativas/silla-operativa-berlin-blanco.webp",
+     "color": "Blanco"
+    }
+   ]
+  },
+  {
+   "nombre": "Silla Operativa Berlin G",
+   "codigo": "SO-002",
+   "categoria": "Sillas operativas",
+   "precio": 90,
+   "juego": 1,
+   "agotado": false,
+   "material": "",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "",
+   "colores": [],
+   "fotos": [
+    {
+     "archivo": "sillas-operativas/silla-operativa-berlin-g.webp",
+     "color": ""
+    }
+   ]
+  },
+  {
+   "nombre": "Silla Operativa Claritsa",
+   "codigo": "SO-004",
+   "categoria": "Sillas operativas",
+   "precio": 100,
+   "juego": 1,
+   "agotado": false,
+   "material": "",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "",
+   "colores": [
+    {
+     "nombre": "Negro",
+     "hex": "#151618"
+    },
+    {
+     "nombre": "Rosado",
+     "hex": "#d9aca8"
+    }
+   ],
+   "fotos": [
+    {
+     "archivo": "sillas-operativas/silla-operativa-claritsa-negro.webp",
+     "color": "Negro"
+    },
+    {
+     "archivo": "sillas-operativas/silla-operativa-claritsa-rosado.webp",
+     "color": "Rosado"
+    }
+   ]
+  },
+  {
+   "nombre": "Silla Operativa Claritsa G",
+   "codigo": "SO-006",
+   "categoria": "Sillas operativas",
+   "precio": 125,
+   "juego": 1,
+   "agotado": false,
+   "material": "",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "",
+   "colores": [
+    {
+     "nombre": "Rosado",
+     "hex": "#e3b5b0"
+    },
+    {
+     "nombre": "Gris",
+     "hex": "#94938f"
+    }
+   ],
+   "fotos": [
+    {
+     "archivo": "sillas-operativas/silla-operativa-claritsa-g-rosado.webp",
+     "color": "Rosado"
+    },
+    {
+     "archivo": "sillas-operativas/silla-operativa-claritsa-g-gris.webp",
+     "color": "Gris"
+    }
+   ],
+   "destacado": true
+  },
+  {
+   "nombre": "Silla Operativa Dallas",
+   "codigo": "SO-003",
+   "categoria": "Sillas operativas",
+   "precio": 75,
+   "juego": 1,
+   "agotado": false,
+   "material": "",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "",
+   "colores": [
+    {
+     "nombre": "Rosado",
+     "hex": "#f5c0bd"
+    },
+    {
+     "nombre": "Negro",
+     "hex": "#2a2a2a"
+    },
+    {
+     "nombre": "Blanco",
+     "hex": "#efefee"
+    }
+   ],
+   "fotos": [
+    {
+     "archivo": "sillas-operativas/silla-operativa-dallas-rosado.webp",
+     "color": "Rosado"
+    },
+    {
+     "archivo": "sillas-operativas/silla-operativa-dallas-negro.webp",
+     "color": "Negro"
+    },
+    {
+     "archivo": "sillas-operativas/silla-operativa-dallas-blanco.webp",
+     "color": "Blanco"
+    }
+   ]
+  },
+  {
+   "nombre": "Silla Operativa Melissa",
+   "codigo": "SO-005",
+   "categoria": "Sillas operativas",
+   "precio": 100,
+   "juego": 1,
+   "agotado": false,
+   "material": "",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "",
+   "colores": [
+    {
+     "nombre": "Negro",
+     "hex": "#1d1c1d"
+    },
+    {
+     "nombre": "Blanco",
+     "hex": "#fcdad8"
+    }
+   ],
+   "fotos": [
+    {
+     "archivo": "sillas-operativas/silla-operativa-melissa-negro.webp",
+     "color": "Negro"
+    },
+    {
+     "archivo": "sillas-operativas/silla-operativa-melissa-blanco.webp",
+     "color": "Blanco"
+    }
+   ]
+  },
+  {
+   "nombre": "Silla Operativa Orleans",
+   "codigo": "SO-008",
+   "categoria": "Sillas operativas",
+   "precio": 75,
+   "juego": 1,
+   "agotado": false,
+   "material": "",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "",
+   "colores": [
+    {
+     "nombre": "Negro",
+     "hex": "#2a2a2a"
+    },
+    {
+     "nombre": "Rosado",
+     "hex": "#e9b4b2"
+    },
+    {
+     "nombre": "Turquesa",
+     "hex": "#83ccdb"
+    }
+   ],
+   "fotos": [
+    {
+     "archivo": "sillas-operativas/silla-operativa-orleans-negro.webp",
+     "color": "Negro"
+    },
+    {
+     "archivo": "sillas-operativas/silla-operativa-orleans-rosado.webp",
+     "color": "Rosado"
+    },
+    {
+     "archivo": "sillas-operativas/silla-operativa-orleans-turquesa.webp",
+     "color": "Turquesa"
+    }
+   ]
+  },
+  {
+   "nombre": "Silla Operativa Tulip",
+   "codigo": "SO-007",
+   "categoria": "Sillas operativas",
+   "precio": 75,
+   "juego": 1,
+   "agotado": false,
+   "material": "",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "",
+   "colores": [
+    {
+     "nombre": "Blanco",
+     "hex": "#f0f0ef"
+    },
+    {
+     "nombre": "Rosado",
+     "hex": "#ebbccd"
+    },
+    {
+     "nombre": "Gris",
+     "hex": "#acacab"
+    }
+   ],
+   "fotos": [
+    {
+     "archivo": "sillas-operativas/silla-operativa-tulip-blanco.webp",
+     "color": "Blanco"
+    },
+    {
+     "archivo": "sillas-operativas/silla-operativa-tulip-rosado.webp",
+     "color": "Rosado"
+    },
+    {
+     "archivo": "sillas-operativas/silla-operativa-tulip-gris.webp",
+     "color": "Gris"
+    }
+   ]
+  },
+  {
+   "nombre": "Silla Operativa Work",
+   "codigo": "SO-009",
+   "categoria": "Sillas operativas",
+   "precio": 55,
+   "juego": 1,
+   "agotado": false,
+   "material": "",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "",
+   "colores": [
+    {
+     "nombre": "Negro",
+     "hex": "#323232"
+    },
+    {
+     "nombre": "Blanco",
+     "hex": "#f5f5f5"
+    }
+   ],
+   "fotos": [
+    {
+     "archivo": "sillas-operativas/silla-operativa-work-negro.webp",
+     "color": "Negro"
+    },
+    {
+     "archivo": "sillas-operativas/silla-operativa-work-blanco.webp",
+     "color": "Blanco"
+    }
+   ]
+  },
+  {
+   "nombre": "Silla Presidencial Active",
+   "codigo": "SP-018",
+   "categoria": "Sillas presidenciales",
+   "precio": 90,
+   "juego": 1,
+   "agotado": false,
+   "material": "",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "",
+   "colores": [],
+   "fotos": [
+    {
+     "archivo": "sillas-presidenciales/silla-presidencial-active.webp",
+     "color": ""
+    }
+   ]
+  },
+  {
+   "nombre": "Silla Presidencial Amsterdam",
+   "codigo": "SP-008",
+   "categoria": "Sillas presidenciales",
+   "precio": 175,
+   "juego": 1,
+   "agotado": false,
+   "material": "",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "",
+   "colores": [],
+   "fotos": [
+    {
+     "archivo": "sillas-presidenciales/silla-presidencial-amsterdam.webp",
+     "color": ""
+    }
+   ]
+  },
+  {
+   "nombre": "Silla Presidencial Austria",
+   "codigo": "SP-002",
+   "categoria": "Sillas presidenciales",
+   "precio": 190,
+   "juego": 1,
+   "agotado": false,
+   "material": "",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "",
+   "colores": [],
+   "fotos": [
+    {
+     "archivo": "sillas-presidenciales/silla-presidencial-austria.webp",
+     "color": ""
+    }
+   ]
+  },
+  {
+   "nombre": "Silla Presidencial Bahama",
+   "codigo": "SP-011",
+   "categoria": "Sillas presidenciales",
+   "precio": 175,
+   "juego": 1,
+   "agotado": false,
+   "material": "",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "",
+   "colores": [],
+   "fotos": [
+    {
+     "archivo": "sillas-presidenciales/silla-presidencial-bahama.webp",
+     "color": ""
+    }
+   ]
+  },
+  {
+   "nombre": "Silla Presidencial Bugatti",
+   "codigo": "SP-019",
+   "categoria": "Sillas presidenciales",
+   "precio": 240,
+   "juego": 1,
+   "agotado": false,
+   "material": "",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "",
+   "colores": [],
+   "fotos": [
+    {
+     "archivo": "sillas-presidenciales/silla-presidencial-bugatti.webp",
+     "color": ""
+    }
+   ]
+  },
+  {
+   "nombre": "Silla Presidencial Cleveland",
+   "codigo": "SP-016",
+   "categoria": "Sillas presidenciales",
+   "precio": 140,
+   "juego": 1,
+   "agotado": false,
+   "material": "",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "",
+   "colores": [],
+   "fotos": [
+    {
+     "archivo": "sillas-presidenciales/silla-presidencial-cleveland.webp",
+     "color": ""
+    }
+   ]
+  },
+  {
+   "nombre": "Silla Presidencial Cortex",
+   "codigo": "SP-025",
+   "categoria": "Sillas presidenciales",
+   "precio": 175,
+   "juego": 1,
+   "agotado": false,
+   "material": "",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "",
+   "colores": [],
+   "fotos": [
+    {
+     "archivo": "sillas-presidenciales/silla-presidencial-cortex.webp",
+     "color": ""
+    }
+   ]
+  },
+  {
+   "nombre": "Silla Presidencial Ferrari",
+   "codigo": "SP-026",
+   "categoria": "Sillas presidenciales",
+   "precio": 135,
+   "juego": 1,
+   "agotado": false,
+   "material": "",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "",
+   "colores": [],
+   "fotos": [
+    {
+     "archivo": "sillas-presidenciales/silla-presidencial-ferrari.webp",
+     "color": ""
+    }
+   ]
+  },
+  {
+   "nombre": "Silla Presidencial Francia",
+   "codigo": "SP-023",
+   "categoria": "Sillas presidenciales",
+   "precio": 240,
+   "juego": 1,
+   "agotado": false,
+   "material": "",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "",
+   "colores": [],
+   "fotos": [
+    {
+     "archivo": "sillas-presidenciales/silla-presidencial-francia.webp",
+     "color": ""
+    }
+   ]
+  },
+  {
+   "nombre": "Silla Presidencial Frankfurt",
+   "codigo": "SP-014",
+   "categoria": "Sillas presidenciales",
+   "precio": 105,
+   "juego": 1,
+   "agotado": false,
+   "material": "",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "",
+   "colores": [],
+   "fotos": [
+    {
+     "archivo": "sillas-presidenciales/silla-presidencial-frankfurt.webp",
+     "color": ""
+    }
+   ]
+  },
+  {
+   "nombre": "Silla Presidencial Indonesia",
+   "codigo": "SP-005",
+   "categoria": "Sillas presidenciales",
+   "precio": 190,
+   "juego": 1,
+   "agotado": false,
+   "material": "",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "",
+   "colores": [],
+   "fotos": [
+    {
+     "archivo": "sillas-presidenciales/silla-presidencial-indonesia.webp",
+     "color": ""
+    }
+   ]
+  },
+  {
+   "nombre": "Silla Presidencial Kansas",
+   "codigo": "SP-017",
+   "categoria": "Sillas presidenciales",
+   "precio": 150,
+   "juego": 1,
+   "agotado": false,
+   "material": "",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "",
+   "colores": [],
+   "fotos": [
+    {
+     "archivo": "sillas-presidenciales/silla-presidencial-kansas.webp",
+     "color": ""
+    }
+   ]
+  },
+  {
+   "nombre": "Silla Presidencial Lamborghini",
+   "codigo": "SP-010",
+   "categoria": "Sillas presidenciales",
+   "precio": 215,
+   "juego": 1,
+   "agotado": false,
+   "material": "",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "",
+   "colores": [],
+   "fotos": [
+    {
+     "archivo": "sillas-presidenciales/silla-presidencial-lamborghini.webp",
+     "color": ""
+    }
+   ]
+  },
+  {
+   "nombre": "Silla Presidencial Lexus",
+   "codigo": "SP-027",
+   "categoria": "Sillas presidenciales",
+   "precio": 340,
+   "juego": 1,
+   "agotado": false,
+   "material": "",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "",
+   "colores": [],
+   "fotos": [
+    {
+     "archivo": "sillas-presidenciales/silla-presidencial-lexus.webp",
+     "color": ""
+    }
+   ]
+  },
+  {
+   "nombre": "Silla Presidencial London",
+   "codigo": "SP-020",
+   "categoria": "Sillas presidenciales",
+   "precio": 250,
+   "juego": 1,
+   "agotado": false,
+   "material": "",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "",
+   "colores": [],
+   "fotos": [
+    {
+     "archivo": "sillas-presidenciales/silla-presidencial-london.webp",
+     "color": ""
+    }
+   ]
+  },
+  {
+   "nombre": "Silla Presidencial Madison",
+   "codigo": "SP-012",
+   "categoria": "Sillas presidenciales",
+   "precio": 100,
+   "juego": 1,
+   "agotado": false,
+   "material": "",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "",
+   "colores": [],
+   "fotos": [
+    {
+     "archivo": "sillas-presidenciales/silla-presidencial-madison.webp",
+     "color": ""
+    }
+   ]
+  },
+  {
+   "nombre": "Silla Presidencial Miami",
+   "codigo": "SP-003",
+   "categoria": "Sillas presidenciales",
+   "precio": 175,
+   "juego": 1,
+   "agotado": false,
+   "material": "",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "",
+   "colores": [],
+   "fotos": [
+    {
+     "archivo": "sillas-presidenciales/silla-presidencial-miami.webp",
+     "color": ""
+    }
+   ]
+  },
+  {
+   "nombre": "Silla Presidencial Montreal",
+   "codigo": "SP-007",
+   "categoria": "Sillas presidenciales",
+   "precio": 175,
+   "juego": 1,
+   "agotado": false,
+   "material": "",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "",
+   "colores": [],
+   "fotos": [
+    {
+     "archivo": "sillas-presidenciales/silla-presidencial-montreal.webp",
+     "color": ""
+    }
+   ]
+  },
+  {
+   "nombre": "Silla Presidencial Moscow",
+   "codigo": "SP-024",
+   "categoria": "Sillas presidenciales",
+   "precio": 200,
+   "juego": 1,
+   "agotado": false,
+   "material": "",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "",
+   "colores": [],
+   "fotos": [
+    {
+     "archivo": "sillas-presidenciales/silla-presidencial-moscow.webp",
+     "color": ""
+    }
+   ]
+  },
+  {
+   "nombre": "Silla Presidencial Mónaco",
+   "codigo": "SP-004",
+   "categoria": "Sillas presidenciales",
+   "precio": 160,
+   "juego": 1,
+   "agotado": false,
+   "material": "",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "",
+   "colores": [
+    {
+     "nombre": "Negro",
+     "hex": "#444547"
+    },
+    {
+     "nombre": "Blanco",
+     "hex": "#e4e4e4"
+    }
+   ],
+   "fotos": [
+    {
+     "archivo": "sillas-presidenciales/silla-presidencial-monaco-negro.webp",
+     "color": "Negro"
+    },
+    {
+     "archivo": "sillas-presidenciales/silla-presidencial-monaco-blanco.webp",
+     "color": "Blanco"
+    }
+   ]
+  },
+  {
+   "nombre": "Silla Presidencial Noruega",
+   "codigo": "SP-009",
+   "categoria": "Sillas presidenciales",
+   "precio": 215,
+   "juego": 1,
+   "agotado": false,
+   "material": "",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "",
+   "colores": [],
+   "fotos": [
+    {
+     "archivo": "sillas-presidenciales/silla-presidencial-noruega.webp",
+     "color": ""
+    }
+   ]
+  },
+  {
+   "nombre": "Silla Presidencial Oxford",
+   "codigo": "SP-013",
+   "categoria": "Sillas presidenciales",
+   "precio": 115,
+   "juego": 1,
+   "agotado": false,
+   "material": "",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "",
+   "colores": [],
+   "fotos": [
+    {
+     "archivo": "sillas-presidenciales/silla-presidencial-oxford.webp",
+     "color": ""
+    }
+   ]
+  },
+  {
+   "nombre": "Silla Presidencial Oxford Blanca",
+   "codigo": "SP-015",
+   "categoria": "Sillas presidenciales",
+   "precio": 125,
+   "juego": 1,
+   "agotado": false,
+   "material": "",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "",
+   "colores": [],
+   "fotos": [
+    {
+     "archivo": "sillas-presidenciales/silla-presidencial-oxford-blanca.webp",
+     "color": ""
+    }
+   ]
+  },
+  {
+   "nombre": "Silla Presidencial Palermo",
+   "codigo": "SP-021",
+   "categoria": "Sillas presidenciales",
+   "precio": 215,
+   "juego": 1,
+   "agotado": false,
+   "material": "",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "",
+   "colores": [],
+   "fotos": [
+    {
+     "archivo": "sillas-presidenciales/silla-presidencial-palermo.webp",
+     "color": ""
+    }
+   ]
+  },
+  {
+   "nombre": "Silla Presidencial Palermo JR",
+   "codigo": "SP-022",
+   "categoria": "Sillas presidenciales",
+   "precio": 250,
+   "juego": 1,
+   "agotado": false,
+   "material": "",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "",
+   "colores": [],
+   "fotos": [
+    {
+     "archivo": "sillas-presidenciales/silla-presidencial-palermo-jr.webp",
+     "color": ""
+    }
+   ]
+  },
+  {
+   "nombre": "Silla Presidencial Stanford",
+   "codigo": "SP-001",
+   "categoria": "Sillas presidenciales",
+   "precio": 175,
+   "juego": 1,
+   "agotado": false,
+   "material": "",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "",
+   "colores": [
+    {
+     "nombre": "Negro",
+     "hex": "#4a494a"
+    },
+    {
+     "nombre": "Blanco",
+     "hex": "#e6e6e6"
+    }
+   ],
+   "fotos": [
+    {
+     "archivo": "sillas-presidenciales/silla-presidencial-stanford-negro.webp",
+     "color": "Negro"
+    },
+    {
+     "archivo": "sillas-presidenciales/silla-presidencial-stanford-blanco.webp",
+     "color": "Blanco"
+    }
+   ],
+   "destacado": true
+  },
+  {
+   "nombre": "Silla Presidencial Suiza",
+   "codigo": "SP-006",
+   "categoria": "Sillas presidenciales",
+   "precio": 200,
+   "juego": 1,
+   "agotado": false,
+   "material": "",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "",
+   "colores": [],
+   "fotos": [
+    {
+     "archivo": "sillas-presidenciales/silla-presidencial-suiza.webp",
+     "color": ""
+    }
+   ]
+  },
+  {
+   "nombre": "Silla Presidencial Trendy Novo",
+   "codigo": "SP-028",
+   "categoria": "Sillas presidenciales",
+   "precio": null,
+   "juego": 1,
+   "agotado": true,
+   "material": "",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "",
+   "colores": [],
+   "fotos": [
+    {
+     "archivo": "sillas-presidenciales/silla-presidencial-trendy-novo.webp",
+     "color": ""
+    }
+   ]
+  },
+  {
+   "nombre": "Camilla Portátil Camila",
+   "codigo": "SA-012",
+   "categoria": "Spa y salón",
+   "precio": 200,
+   "juego": 1,
+   "agotado": false,
+   "material": "",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "",
+   "colores": [],
+   "fotos": [
+    {
+     "archivo": "spa-y-salon/camilla-portatil-camila.webp",
+     "color": ""
+    }
+   ]
+  },
+  {
+   "nombre": "Camilla Trenex 3 Posiciones",
+   "codigo": "SA-011",
+   "categoria": "Spa y salón",
+   "precio": 315,
+   "juego": 1,
+   "agotado": false,
+   "material": "",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "",
+   "colores": [
+    {
+     "nombre": "Negro",
+     "hex": "#3c3c3c"
+    },
+    {
+     "nombre": "Blanco",
+     "hex": "#e5e1d8"
+    }
+   ],
+   "fotos": [
+    {
+     "archivo": "spa-y-salon/camilla-trenex-3-posiciones-negro.webp",
+     "color": "Negro"
+    },
+    {
+     "archivo": "spa-y-salon/camilla-trenex-3-posiciones-blanco.webp",
+     "color": "Blanco"
+    }
+   ]
+  },
+  {
+   "nombre": "Carrito Auxiliar Metálico",
+   "codigo": "SA-008",
+   "categoria": "Spa y salón",
+   "precio": 75,
+   "juego": 1,
+   "agotado": false,
+   "material": "Metal",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "",
+   "colores": [
+    {
+     "nombre": "Blanco",
+     "hex": "#f7f8f7"
+    },
+    {
+     "nombre": "Negro",
+     "hex": "#2b282a"
+    }
+   ],
+   "fotos": [
+    {
+     "archivo": "spa-y-salon/carrito-auxiliar-metalico-blanco.webp",
+     "color": "Blanco"
+    },
+    {
+     "archivo": "spa-y-salon/carrito-auxiliar-metalico-negro.webp",
+     "color": "Negro"
+    }
+   ]
+  },
+  {
+   "nombre": "Carrito Auxiliar Peluquería",
+   "codigo": "SA-009",
+   "categoria": "Spa y salón",
+   "precio": 85,
+   "juego": 1,
+   "agotado": false,
+   "material": "",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "",
+   "colores": [
+    {
+     "nombre": "Negro",
+     "hex": "#1d1d1d"
+    },
+    {
+     "nombre": "Negro 2",
+     "hex": "#3a362c"
+    }
+   ],
+   "fotos": [
+    {
+     "archivo": "spa-y-salon/carrito-auxiliar-peluqueria-negro.webp",
+     "color": "Negro"
+    },
+    {
+     "archivo": "spa-y-salon/carrito-auxiliar-peluqueria-negro-2.webp",
+     "color": "Negro 2"
+    }
+   ]
+  },
+  {
+   "nombre": "Lámpara Media Luna",
+   "codigo": "SA-010",
+   "categoria": "Spa y salón",
+   "precio": 130,
+   "juego": 1,
+   "agotado": false,
+   "material": "",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "",
+   "colores": [
+    {
+     "nombre": "Negro",
+     "hex": "#130f11"
+    },
+    {
+     "nombre": "Gris oscuro",
+     "hex": "#7b7578"
+    }
+   ],
+   "fotos": [
+    {
+     "archivo": "spa-y-salon/lampara-media-luna-negro.webp",
+     "color": "Negro"
+    },
+    {
+     "archivo": "spa-y-salon/lampara-media-luna-gris-oscuro.webp",
+     "color": "Gris oscuro"
+    }
+   ]
+  },
+  {
+   "nombre": "Manicurista Classic",
+   "codigo": "SA-001",
+   "categoria": "Spa y salón",
+   "precio": 175,
+   "juego": 1,
+   "agotado": false,
+   "material": "",
+   "ancho": "100 cm",
+   "fondo": "40 cm",
+   "alto": "",
+   "descripcion": "",
+   "colores": [],
+   "fotos": [
+    {
+     "archivo": "spa-y-salon/manicurista-classic.webp",
+     "color": ""
+    }
+   ]
+  },
+  {
+   "nombre": "Manicurista Paris",
+   "codigo": "SA-002",
+   "categoria": "Spa y salón",
+   "precio": 190,
+   "juego": 1,
+   "agotado": false,
+   "material": "",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "",
+   "colores": [],
+   "fotos": [
+    {
+     "archivo": "spa-y-salon/manicurista-paris.webp",
+     "color": ""
+    }
+   ]
+  },
+  {
+   "nombre": "Puff Gold Gamuzado",
+   "codigo": "SA-003",
+   "categoria": "Spa y salón",
+   "precio": 80,
+   "juego": 1,
+   "agotado": false,
+   "material": "Gamuza",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "",
+   "colores": [],
+   "fotos": [
+    {
+     "archivo": "spa-y-salon/puff-gold-gamuzado.webp",
+     "color": ""
+    }
+   ]
+  },
+  {
+   "nombre": "Puff Greco Gamuzado",
+   "codigo": "SA-004",
+   "categoria": "Spa y salón",
+   "precio": 80,
+   "juego": 1,
+   "agotado": false,
+   "material": "Gamuza",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "",
+   "colores": [
+    {
+     "nombre": "Gris",
+     "hex": "#c3bdac"
+    },
+    {
+     "nombre": "Negro",
+     "hex": "#2a2a29"
+    }
+   ],
+   "fotos": [
+    {
+     "archivo": "spa-y-salon/puff-greco-gamuzado-gris.webp",
+     "color": "Gris"
+    },
+    {
+     "archivo": "spa-y-salon/puff-greco-gamuzado-negro.webp",
+     "color": "Negro"
+    }
+   ]
+  },
+  {
+   "nombre": "Silla Eames Giratoria",
+   "codigo": "SA-007",
+   "categoria": "Spa y salón",
+   "precio": 65,
+   "juego": 1,
+   "agotado": false,
+   "material": "",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "",
+   "colores": [
+    {
+     "nombre": "Negro",
+     "hex": "#333232"
+    },
+    {
+     "nombre": "Blanco",
+     "hex": "#f2f2f1"
+    },
+    {
+     "nombre": "Gris",
+     "hex": "#aaaaaa"
+    }
+   ],
+   "fotos": [
+    {
+     "archivo": "spa-y-salon/silla-eames-giratoria-negro.webp",
+     "color": "Negro"
+    },
+    {
+     "archivo": "spa-y-salon/silla-eames-giratoria-blanco.webp",
+     "color": "Blanco"
+    },
+    {
+     "archivo": "spa-y-salon/silla-eames-giratoria-gris.webp",
+     "color": "Gris"
+    }
+   ]
+  },
+  {
+   "nombre": "Silla Trenzada",
+   "codigo": "SA-006",
+   "categoria": "Spa y salón",
+   "precio": 115,
+   "juego": 1,
+   "agotado": false,
+   "material": "",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "",
+   "colores": [
+    {
+     "nombre": "Negro",
+     "hex": "#131415"
+    },
+    {
+     "nombre": "Rosado",
+     "hex": "#d79ca2"
+    }
+   ],
+   "fotos": [
+    {
+     "archivo": "spa-y-salon/silla-trenzada-negro.webp",
+     "color": "Negro"
+    },
+    {
+     "archivo": "spa-y-salon/silla-trenzada-rosado.webp",
+     "color": "Rosado"
+    }
+   ]
+  },
+  {
+   "nombre": "Silla de Maquillaje",
+   "codigo": "SA-005",
+   "categoria": "Spa y salón",
+   "precio": 195,
+   "juego": 1,
+   "agotado": false,
+   "material": "",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "",
+   "colores": [],
+   "fotos": [
+    {
+     "archivo": "spa-y-salon/silla-de-maquillaje.webp",
+     "color": ""
+    }
+   ]
+  },
+  {
+   "nombre": "Taburete Anne Lino (juego de 3)",
+   "codigo": "TB-013",
+   "categoria": "Taburetes",
+   "precio": 280,
+   "juego": 3,
+   "agotado": false,
+   "material": "Tela",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "Precio por juego de 3 unidades.",
+   "colores": [],
+   "fotos": [
+    {
+     "archivo": "taburetes/taburete-anne-lino.webp",
+     "color": ""
+    }
+   ]
+  },
+  {
+   "nombre": "Taburete Arianna (juego de 3)",
+   "codigo": "TB-001",
+   "categoria": "Taburetes",
+   "precio": 300,
+   "juego": 3,
+   "agotado": false,
+   "material": "Terciopelo",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "Precio por juego de 3 unidades.",
+   "colores": [
+    {
+     "nombre": "Azul",
+     "hex": "#4a515f"
+    },
+    {
+     "nombre": "Negro",
+     "hex": "#2c2d2f"
+    }
+   ],
+   "fotos": [
+    {
+     "archivo": "taburetes/taburete-arianna-azul.webp",
+     "color": "Azul"
+    },
+    {
+     "archivo": "taburetes/taburete-arianna-negro.webp",
+     "color": "Negro"
+    }
+   ]
+  },
+  {
+   "nombre": "Taburete Arianna G (juego de 3)",
+   "codigo": "TB-003",
+   "categoria": "Taburetes",
+   "precio": 375,
+   "juego": 3,
+   "agotado": false,
+   "material": "Bipiel",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "Precio por juego de 3 unidades.",
+   "colores": [],
+   "fotos": [
+    {
+     "archivo": "taburetes/taburete-arianna-g.webp",
+     "color": ""
+    }
+   ]
+  },
+  {
+   "nombre": "Taburete Camel (juego de 3)",
+   "codigo": "TB-005",
+   "categoria": "Taburetes",
+   "precio": 300,
+   "juego": 3,
+   "agotado": false,
+   "material": "Bipiel",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "Precio por juego de 3 unidades.",
+   "colores": [
+    {
+     "nombre": "Blanco",
+     "hex": "#ffffff"
+    },
+    {
+     "nombre": "Gris",
+     "hex": "#909090"
+    },
+    {
+     "nombre": "Marrón",
+     "hex": "#985713"
+    }
+   ],
+   "fotos": [
+    {
+     "archivo": "taburetes/taburete-camel-blanco.webp",
+     "color": "Blanco"
+    },
+    {
+     "archivo": "taburetes/taburete-camel-gris.webp",
+     "color": "Gris"
+    },
+    {
+     "archivo": "taburetes/taburete-camel-marron.webp",
+     "color": "Marrón"
+    }
+   ]
+  },
+  {
+   "nombre": "Taburete Camel G (juego de 3)",
+   "codigo": "TB-016",
+   "categoria": "Taburetes",
+   "precio": 280,
+   "juego": 3,
+   "agotado": false,
+   "material": "Bipiel",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "Precio por juego de 3 unidades.",
+   "colores": [
+    {
+     "nombre": "Blanco",
+     "hex": "#f6f5f3"
+    },
+    {
+     "nombre": "Blanco 2",
+     "hex": "#ffffff"
+    }
+   ],
+   "fotos": [
+    {
+     "archivo": "taburetes/taburete-camel-g-blanco.webp",
+     "color": "Blanco"
+    },
+    {
+     "archivo": "taburetes/taburete-camel-g-blanco-2.webp",
+     "color": "Blanco 2"
+    }
+   ]
+  },
+  {
+   "nombre": "Taburete Century (juego de 3)",
+   "codigo": "TB-002",
+   "categoria": "Taburetes",
+   "precio": 340,
+   "juego": 3,
+   "agotado": false,
+   "material": "Terciopelo",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "Precio por juego de 3 unidades.",
+   "colores": [
+    {
+     "nombre": "Azul",
+     "hex": "#728793"
+    },
+    {
+     "nombre": "Beige",
+     "hex": "#b69986"
+    }
+   ],
+   "fotos": [
+    {
+     "archivo": "taburetes/taburete-century-azul.webp",
+     "color": "Azul"
+    },
+    {
+     "archivo": "taburetes/taburete-century-beige.webp",
+     "color": "Beige"
+    }
+   ]
+  },
+  {
+   "nombre": "Taburete Dallas (juego de 3)",
+   "codigo": "TB-008",
+   "categoria": "Taburetes",
+   "precio": 300,
+   "juego": 3,
+   "agotado": false,
+   "material": "Terciopelo",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "Precio por juego de 3 unidades.",
+   "colores": [
+    {
+     "nombre": "Negro",
+     "hex": "#282729"
+    },
+    {
+     "nombre": "Gris oscuro",
+     "hex": "#6d6b6d"
+    }
+   ],
+   "fotos": [
+    {
+     "archivo": "taburetes/taburete-dallas-negro.webp",
+     "color": "Negro"
+    },
+    {
+     "archivo": "taburetes/taburete-dallas-gris-oscuro.webp",
+     "color": "Gris oscuro"
+    }
+   ]
+  },
+  {
+   "nombre": "Taburete Elegance (juego de 3)",
+   "codigo": "TB-004",
+   "categoria": "Taburetes",
+   "precio": 300,
+   "juego": 3,
+   "agotado": false,
+   "material": "Terciopelo",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "Precio por juego de 3 unidades.",
+   "colores": [
+    {
+     "nombre": "Gris",
+     "hex": "#acacaa"
+    },
+    {
+     "nombre": "Negro",
+     "hex": "#0b1621"
+    }
+   ],
+   "fotos": [
+    {
+     "archivo": "taburetes/taburete-elegance-gris.webp",
+     "color": "Gris"
+    },
+    {
+     "archivo": "taburetes/taburete-elegance-negro.webp",
+     "color": "Negro"
+    }
+   ]
+  },
+  {
+   "nombre": "Taburete Elegance Gold (juego de 3)",
+   "codigo": "TB-006",
+   "categoria": "Taburetes",
+   "precio": 340,
+   "juego": 3,
+   "agotado": false,
+   "material": "Terciopelo",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "Precio por juego de 3 unidades.",
+   "colores": [
+    {
+     "nombre": "Gris",
+     "hex": "#d1d0c5"
+    },
+    {
+     "nombre": "Verde",
+     "hex": "#34735f"
+    }
+   ],
+   "fotos": [
+    {
+     "archivo": "taburetes/taburete-elegance-gold-gris.webp",
+     "color": "Gris"
+    },
+    {
+     "archivo": "taburetes/taburete-elegance-gold-verde.webp",
+     "color": "Verde"
+    }
+   ],
+   "destacado": true
+  },
+  {
+   "nombre": "Taburete Harry C/E (juego de 3)",
+   "codigo": "TB-012",
+   "categoria": "Taburetes",
+   "precio": 340,
+   "juego": 3,
+   "agotado": false,
+   "material": "Terciopelo",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "Precio por juego de 3 unidades.",
+   "colores": [
+    {
+     "nombre": "Negro",
+     "hex": "#423f40"
+    },
+    {
+     "nombre": "Gris",
+     "hex": "#b5aea7"
+    }
+   ],
+   "fotos": [
+    {
+     "archivo": "taburetes/taburete-harry-c-e-negro.webp",
+     "color": "Negro"
+    },
+    {
+     "archivo": "taburetes/taburete-harry-c-e-gris.webp",
+     "color": "Gris"
+    }
+   ]
+  },
+  {
+   "nombre": "Taburete Harry S/E (juego de 3)",
+   "codigo": "TB-011",
+   "categoria": "Taburetes",
+   "precio": 265,
+   "juego": 3,
+   "agotado": false,
+   "material": "Terciopelo",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "Precio por juego de 3 unidades.",
+   "colores": [
+    {
+     "nombre": "Gris",
+     "hex": "#a6a5a3"
+    },
+    {
+     "nombre": "Negro",
+     "hex": "#474749"
+    }
+   ],
+   "fotos": [
+    {
+     "archivo": "taburetes/taburete-harry-s-e-gris.webp",
+     "color": "Gris"
+    },
+    {
+     "archivo": "taburetes/taburete-harry-s-e-negro.webp",
+     "color": "Negro"
+    }
+   ]
+  },
+  {
+   "nombre": "Taburete Hilary (juego de 3)",
+   "codigo": "TB-007",
+   "categoria": "Taburetes",
+   "precio": 300,
+   "juego": 3,
+   "agotado": false,
+   "material": "Terciopelo",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "Precio por juego de 3 unidades.",
+   "colores": [
+    {
+     "nombre": "Negro",
+     "hex": "#535353"
+    },
+    {
+     "nombre": "Gris oscuro",
+     "hex": "#737378"
+    }
+   ],
+   "fotos": [
+    {
+     "archivo": "taburetes/taburete-hilary-negro.webp",
+     "color": "Negro"
+    },
+    {
+     "archivo": "taburetes/taburete-hilary-gris-oscuro.webp",
+     "color": "Gris oscuro"
+    }
+   ]
+  },
+  {
+   "nombre": "Taburete Knots (juego de 3)",
+   "codigo": "TB-018",
+   "categoria": "Taburetes",
+   "precio": 280,
+   "juego": 3,
+   "agotado": false,
+   "material": "Polipropileno",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "Precio por juego de 3 unidades.",
+   "colores": [
+    {
+     "nombre": "Rojo",
+     "hex": "#c1242d"
+    },
+    {
+     "nombre": "Blanco",
+     "hex": "#ffffff"
+    }
+   ],
+   "fotos": [
+    {
+     "archivo": "taburetes/taburete-knots-rojo.webp",
+     "color": "Rojo"
+    },
+    {
+     "archivo": "taburetes/taburete-knots-blanco.webp",
+     "color": "Blanco"
+    }
+   ]
+  },
+  {
+   "nombre": "Taburete Novo Tepuy (juego de 3)",
+   "codigo": "TB-010",
+   "categoria": "Taburetes",
+   "precio": 170,
+   "juego": 3,
+   "agotado": false,
+   "material": "",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "Precio por juego de 3 unidades.",
+   "colores": [],
+   "fotos": [
+    {
+     "archivo": "taburetes/taburete-novo-tepuy.webp",
+     "color": ""
+    }
+   ]
+  },
+  {
+   "nombre": "Taburete Nórdico (juego de 3)",
+   "codigo": "TB-014",
+   "categoria": "Taburetes",
+   "precio": null,
+   "juego": 3,
+   "agotado": true,
+   "material": "",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "Precio por juego de 3 unidades.",
+   "colores": [],
+   "fotos": [
+    {
+     "archivo": "taburetes/taburete-nordico.webp",
+     "color": ""
+    }
+   ]
+  },
+  {
+   "nombre": "Taburete Siena (juego de 3)",
+   "codigo": "TB-015",
+   "categoria": "Taburetes",
+   "precio": 300,
+   "juego": 3,
+   "agotado": false,
+   "material": "Polipropileno",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "Precio por juego de 3 unidades.",
+   "colores": [
+    {
+     "nombre": "Gris",
+     "hex": "#888890"
+    },
+    {
+     "nombre": "Blanco",
+     "hex": "#e8ebe4"
+    },
+    {
+     "nombre": "Blanco 2",
+     "hex": "#fefefe"
+    }
+   ],
+   "fotos": [
+    {
+     "archivo": "taburetes/taburete-siena-gris.webp",
+     "color": "Gris"
+    },
+    {
+     "archivo": "taburetes/taburete-siena-blanco.webp",
+     "color": "Blanco"
+    },
+    {
+     "archivo": "taburetes/taburete-siena-blanco-2.webp",
+     "color": "Blanco 2"
+    }
+   ]
+  },
+  {
+   "nombre": "Taburete Tepuy (juego de 3)",
+   "codigo": "TB-009",
+   "categoria": "Taburetes",
+   "precio": 190,
+   "juego": 3,
+   "agotado": false,
+   "material": "",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "Precio por juego de 3 unidades.",
+   "colores": [
+    {
+     "nombre": "Gris",
+     "hex": "#d2a279"
+    },
+    {
+     "nombre": "Blanco",
+     "hex": "#ebeaf4"
+    },
+    {
+     "nombre": "Blanco 2",
+     "hex": "#ffffff"
+    }
+   ],
+   "fotos": [
+    {
+     "archivo": "taburetes/taburete-tepuy-gris.webp",
+     "color": "Gris"
+    },
+    {
+     "archivo": "taburetes/taburete-tepuy-blanco.webp",
+     "color": "Blanco"
+    },
+    {
+     "archivo": "taburetes/taburete-tepuy-blanco-2.webp",
+     "color": "Blanco 2"
+    }
+   ]
+  },
+  {
+   "nombre": "Taburete Tolix (juego de 3)",
+   "codigo": "TB-017",
+   "categoria": "Taburetes",
+   "precio": 205,
+   "juego": 3,
+   "agotado": false,
+   "material": "Metal",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "Precio por juego de 3 unidades.",
+   "colores": [
+    {
+     "nombre": "Negro",
+     "hex": "#272527"
+    },
+    {
+     "nombre": "Rojo",
+     "hex": "#e4082c"
+    },
+    {
+     "nombre": "Negro 2",
+     "hex": "#484646"
+    }
+   ],
+   "fotos": [
+    {
+     "archivo": "taburetes/taburete-tolix-negro.webp",
+     "color": "Negro"
+    },
+    {
+     "archivo": "taburetes/taburete-tolix-rojo.webp",
+     "color": "Rojo"
+    },
+    {
+     "archivo": "taburetes/taburete-tolix-negro-2.webp",
+     "color": "Negro 2"
+    }
+   ]
+  },
+  {
+   "nombre": "Tándem New York 3 Puestos",
+   "codigo": "TD-002",
+   "categoria": "Tándem",
+   "precio": null,
+   "juego": 1,
+   "agotado": true,
+   "material": "Metal",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "",
+   "colores": [],
+   "fotos": [
+    {
+     "archivo": "tandem/tandem-new-york-3-puestos.webp",
+     "color": ""
+    }
+   ]
+  },
+  {
+   "nombre": "Tándem Torino 1 Puesto",
+   "codigo": "TD-005",
+   "categoria": "Tándem",
+   "precio": 125,
+   "juego": 1,
+   "agotado": false,
+   "material": "Metal",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "",
+   "colores": [],
+   "fotos": [
+    {
+     "archivo": "tandem/tandem-torino-1-puesto.webp",
+     "color": ""
+    }
+   ]
+  },
+  {
+   "nombre": "Tándem Torino 2 Puestos",
+   "codigo": "TD-004",
+   "categoria": "Tándem",
+   "precio": 135,
+   "juego": 1,
+   "agotado": false,
+   "material": "Metal",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "",
+   "colores": [],
+   "fotos": [
+    {
+     "archivo": "tandem/tandem-torino-2-puestos.webp",
+     "color": ""
+    }
+   ]
+  },
+  {
+   "nombre": "Tándem Torino 3 Puestos",
+   "codigo": "TD-003",
+   "categoria": "Tándem",
+   "precio": 140,
+   "juego": 1,
+   "agotado": false,
+   "material": "Metal",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "",
+   "colores": [
+    {
+     "nombre": "Gris",
+     "hex": "#bac1c8"
+    },
+    {
+     "nombre": "Gris oscuro",
+     "hex": "#5d5959"
+    }
+   ],
+   "fotos": [
+    {
+     "archivo": "tandem/tandem-torino-3-puestos-gris.webp",
+     "color": "Gris"
+    },
+    {
+     "archivo": "tandem/tandem-torino-3-puestos-gris-oscuro.webp",
+     "color": "Gris oscuro"
+    }
+   ]
+  },
+  {
+   "nombre": "Tándem Toronto 3 Puestos",
+   "codigo": "TD-001",
+   "categoria": "Tándem",
+   "precio": 250,
+   "juego": 1,
+   "agotado": false,
+   "material": "Metal",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "",
+   "colores": [],
+   "fotos": [
+    {
+     "archivo": "tandem/tandem-toronto-3-puestos.webp",
+     "color": ""
+    }
+   ]
+  },
+  {
+   "nombre": "Mesa Maquillaje Kendall",
+   "codigo": "VA-007",
+   "categoria": "Vanity",
+   "precio": 250,
+   "juego": 1,
+   "agotado": false,
+   "material": "",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "",
+   "colores": [],
+   "fotos": [
+    {
+     "archivo": "vanity/mesa-maquillaje-kendall.webp",
+     "color": ""
+    }
+   ]
+  },
+  {
+   "nombre": "Peinadora Classic 4 Gavetas",
+   "codigo": "VA-001",
+   "categoria": "Vanity",
+   "precio": 325,
+   "juego": 1,
+   "agotado": false,
+   "material": "",
+   "ancho": "90 cm",
+   "fondo": "40 cm",
+   "alto": "",
+   "descripcion": "",
+   "colores": [],
+   "fotos": [
+    {
+     "archivo": "vanity/peinadora-classic-4-gavetas.webp",
+     "color": ""
+    }
+   ]
+  },
+  {
+   "nombre": "Peinadora Classic AZ 4 Gavetas",
+   "codigo": "VA-008",
+   "categoria": "Vanity",
+   "precio": 325,
+   "juego": 1,
+   "agotado": false,
+   "material": "",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "",
+   "colores": [],
+   "fotos": [
+    {
+     "archivo": "vanity/peinadora-classic-az-4-gavetas.webp",
+     "color": ""
+    }
+   ]
+  },
+  {
+   "nombre": "Peinadora Hawai 1 Gaveta",
+   "codigo": "VA-003",
+   "categoria": "Vanity",
+   "precio": 265,
+   "juego": 1,
+   "agotado": false,
+   "material": "",
+   "ancho": "80 cm",
+   "fondo": "40 cm",
+   "alto": "",
+   "descripcion": "",
+   "colores": [],
+   "fotos": [
+    {
+     "archivo": "vanity/peinadora-hawai-1-gaveta.webp",
+     "color": ""
+    }
+   ]
+  },
+  {
+   "nombre": "Peinadora Letonia 7 Gavetas",
+   "codigo": "VA-002",
+   "categoria": "Vanity",
+   "precio": 375,
+   "juego": 1,
+   "agotado": false,
+   "material": "",
+   "ancho": "110 cm",
+   "fondo": "40 cm",
+   "alto": "",
+   "descripcion": "",
+   "colores": [],
+   "fotos": [
+    {
+     "archivo": "vanity/peinadora-letonia-7-gavetas.webp",
+     "color": ""
+    }
+   ]
+  },
+  {
+   "nombre": "Peinadora Letonia AZ 7 Gavetas",
+   "codigo": "VA-009",
+   "categoria": "Vanity",
+   "precio": 375,
+   "juego": 1,
+   "agotado": false,
+   "material": "",
+   "ancho": "110 cm",
+   "fondo": "40 cm",
+   "alto": "",
+   "descripcion": "",
+   "colores": [],
+   "fotos": [
+    {
+     "archivo": "vanity/peinadora-letonia-az-7-gavetas.webp",
+     "color": ""
+    }
+   ]
+  },
+  {
+   "nombre": "Peinadora Lucia AZ 4 Gavetas",
+   "codigo": "VA-010",
+   "categoria": "Vanity",
+   "precio": 340,
+   "juego": 1,
+   "agotado": false,
+   "material": "",
+   "ancho": "80 cm",
+   "fondo": "40 cm",
+   "alto": "",
+   "descripcion": "",
+   "colores": [],
+   "fotos": [
+    {
+     "archivo": "vanity/peinadora-lucia-az-4-gavetas.webp",
+     "color": ""
+    }
+   ]
+  },
+  {
+   "nombre": "Vanity Aurora",
+   "codigo": "VA-006",
+   "categoria": "Vanity",
+   "precio": null,
+   "juego": 1,
+   "agotado": true,
+   "material": "",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "",
+   "colores": [],
+   "fotos": [
+    {
+     "archivo": "vanity/vanity-aurora.webp",
+     "color": ""
+    }
+   ]
+  },
+  {
+   "nombre": "Vanity Eva",
+   "codigo": "VA-005",
+   "categoria": "Vanity",
+   "precio": 375,
+   "juego": 1,
+   "agotado": false,
+   "material": "",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "",
+   "colores": [],
+   "fotos": [
+    {
+     "archivo": "vanity/vanity-eva.webp",
+     "color": ""
+    }
+   ]
+  },
+  {
+   "nombre": "Vanity Viena",
+   "codigo": "VA-004",
+   "categoria": "Vanity",
+   "precio": 375,
+   "juego": 1,
+   "agotado": false,
+   "material": "",
+   "ancho": "",
+   "fondo": "",
+   "alto": "",
+   "descripcion": "",
+   "colores": [],
+   "fotos": [
+    {
+     "archivo": "vanity/vanity-viena.webp",
+     "color": ""
+    }
+   ],
+   "destacado": true
+  }
+ ]
+}
